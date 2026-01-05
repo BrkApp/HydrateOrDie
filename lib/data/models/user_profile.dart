@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
 
 part 'user_profile.freezed.dart';
 part 'user_profile.g.dart';
@@ -7,20 +6,19 @@ part 'user_profile.g.dart';
 /// Profil utilisateur avec informations personnelles
 /// Utilisé pour calculer l'objectif d'hydratation personnalisé
 @freezed
-@HiveType(typeId: 0)
 class UserProfile with _$UserProfile {
   const factory UserProfile({
-    @HiveField(0) required String id,
-    @HiveField(1) required String name,
-    @HiveField(2) required double weight, // en kg
-    @HiveField(3) required int age,
-    @HiveField(4) required double dailyGoal, // en ml
-    @HiveField(5) required DateTime activeStart, // Heure de début (ex: 7h)
-    @HiveField(6) required DateTime activeEnd, // Heure de fin (ex: 22h)
-    @HiveField(7) required DateTime createdAt,
-    @HiveField(8) @Default(false) bool isPremium,
-    @HiveField(9) @Default('default') String theme,
-    @HiveField(10) @Default('fr') String language,
+    required String id,
+    required String name,
+    required double weight, // en kg
+    required int age,
+    required double dailyGoal, // en ml
+    required DateTime activeStart, // Heure de début (ex: 7h)
+    required DateTime activeEnd, // Heure de fin (ex: 22h)
+    required DateTime createdAt,
+    @Default(false) bool isPremium,
+    @Default('default') String theme,
+    @Default('fr') String language,
   }) = _UserProfile;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
