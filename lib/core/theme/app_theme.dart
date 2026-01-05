@@ -40,7 +40,6 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      brightness: Brightness.light,
 
       // Typographie
       textTheme: _textTheme(colorScheme),
@@ -60,10 +59,10 @@ class AppTheme {
       ),
 
       // Cards
-      cardTheme: CardTheme(
+      cardTheme: const CardThemeData(
         elevation: 2,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         color: cardLight,
       ),
@@ -111,11 +110,10 @@ class AppTheme {
       ),
 
       // Bottom Nav
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         elevation: 8,
         backgroundColor: surfaceLight,
         selectedItemColor: primaryBlue,
-        unselectedItemColor: Colors.grey.shade600,
         type: BottomNavigationBarType.fixed,
       ),
 
@@ -139,7 +137,6 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      brightness: Brightness.dark,
 
       // Typographie
       textTheme: _textTheme(colorScheme),
@@ -159,10 +156,10 @@ class AppTheme {
       ),
 
       // Cards
-      cardTheme: CardTheme(
+      cardTheme: const CardThemeData(
         elevation: 4,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         color: cardDark,
       ),
@@ -210,11 +207,10 @@ class AppTheme {
       ),
 
       // Bottom Nav
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         elevation: 8,
         backgroundColor: surfaceDark,
         selectedItemColor: waterBlue,
-        unselectedItemColor: Colors.grey.shade500,
         type: BottomNavigationBarType.fixed,
       ),
 
