@@ -1,144 +1,73 @@
-# HydrateOrDie 💧
+# React + TypeScript + Vite
 
-**Bois ou souffre** - Application de rappel d'hydratation punitif avec validation par ML Kit.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 📱 Concept
+Currently, two official plugins are available:
 
-HydrateOrDie est une application Flutter qui vous force à boire de l'eau régulièrement en utilisant un système de notifications progressivement agressif. La seule façon de stopper le spam de notifications ? Prouver que vous avez bu en prenant une photo validée par ML Kit !
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-### Features Principales
+## React Compiler
 
-- ✅ **Onboarding personnalisé** : Objectif quotidien calculé selon poids/âge, horaires actives
-- 📊 **Dashboard** : Progression circulaire, bouton caméra central, streak, messages punitifs/motivants
-- 🔔 **Notifications intelligentes** :
-  - Normales toutes les 45-60min
-  - Mode spam toutes les 5min si pas bu
-  - Intensité croissante jusqu'au mode agressif
-  - Messages punitifs personnalisés
-- 📸 **Validation photo (CORE)** :
-  - Caméra → ML Kit détecte verre/bouteille
-  - +250ml et stop du spam si validé
-  - Message "Triche!" si non valide
-- 💾 **Storage local** : Progression, streak, settings avec Hive
-- 💎 **Premium** : RevenueCat paywall, thèmes et messages custom
-- 🎨 **UI moderne** : Material 3, animations fluides, i18n FR/EN
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## 🏗️ Architecture
+## Expanding the ESLint configuration
 
-```
-lib/
-├── core/
-│   ├── config/           # Configuration app
-│   ├── constants/        # Constantes et messages
-│   ├── theme/           # Thèmes Material 3
-│   └── utils/           # Utilities
-├── data/
-│   ├── models/          # Modèles Freezed + Hive
-│   ├── repositories/    # Repositories
-│   └── datasources/     # Local storage
-├── domain/
-│   ├── entities/        # Entities du domaine
-│   ├── repositories/    # Interfaces repositories
-│   └── usecases/        # Use cases
-└── presentation/
-    ├── onboarding/      # Écran onboarding
-    ├── dashboard/       # Écran principal
-    ├── camera/          # Caméra + validation ML
-    ├── settings/        # Paramètres
-    ├── paywall/         # RevenueCat paywall
-    └── widgets/         # Widgets réutilisables
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-### Stack Technique
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-- **Flutter** : 3.27+
-- **Dart** : 3.5+
-- **State Management** : Riverpod
-- **Storage** : Hive + SharedPreferences
-- **ML** : Google ML Kit (Object Detection + Image Labeling)
-- **Camera** : flutter camera
-- **Notifications** : flutter_local_notifications + timezone
-- **Premium** : RevenueCat (purchases_flutter)
-- **UI** : Material 3, Google Fonts, flutter_animate
-- **Code Gen** : Freezed, json_serializable, riverpod_generator
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## 🚀 Getting Started
-
-### Prérequis
-
-- Flutter 3.27.0 ou supérieur
-- Dart 3.5.0 ou supérieur
-- Android SDK (API 26+)
-- Xcode (pour iOS, version 13.0+)
-
-### Installation
-
-1. **Installer les dépendances**
-```bash
-flutter pub get
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-2. **Générer le code**
-```bash
-flutter pub run build_runner build --delete-conflicting-outputs
-```
-
-3. **Lancer l'app**
-```bash
-flutter run
-```
-
-## 📋 Phases de Développement
-
-### ✅ Phase 1 : Setup (TERMINÉ)
-- [x] Architecture clean + structure
-- [x] Configuration pubspec.yaml
-- [x] Modèles de données (Freezed + Hive)
-- [x] Système de storage local
-- [x] Configuration et constantes
-- [x] Thème Material 3
-- [x] Main.dart avec routing basique
-- [x] Configuration Android/iOS
-
-### 📅 Phase 2 : UI Mockée (PROCHAINE)
-- [ ] Écrans onboarding complets
-- [ ] Dashboard avec progression
-- [ ] Écran paramètres
-- [ ] Navigation et routing
-- [ ] Widgets réutilisables
-
-### 📅 Phase 3 : Logique Business
-- [ ] Calculs hydratation
-- [ ] Système de notifications
-- [ ] Scheduler intelligent
-- [ ] Gestion du streak
-- [ ] Intensité progressive
-
-### 📅 Phase 4 : Caméra + ML Kit
-- [ ] Intégration caméra
-- [ ] ML Kit Object Detection
-- [ ] ML Kit Image Labeling
-- [ ] Validation des photos
-- [ ] Messages de feedback
-
-### 📅 Phase 5 : Premium + Polish
-- [ ] Intégration RevenueCat
-- [ ] Paywall design
-- [ ] Tests finaux
-
-## 🛠️ Commandes Utiles
-
-```bash
-# Générer le code
-flutter pub run build_runner build --delete-conflicting-outputs
-
-# Watch mode
-flutter pub run build_runner watch --delete-conflicting-outputs
-
-# Clean
-flutter clean && flutter pub get
-```
-
----
-
-**Rappel** : Bois ou meurs. 💀💧
