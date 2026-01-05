@@ -28,8 +28,6 @@ class NotificationSettings with _$NotificationSettings {
   }
 }
 
-const NotificationSettings _$NotificationSettingsConst = NotificationSettings;
-
 extension NotificationSettingsX on NotificationSettings {
   /// Calcule le prochain intervalle de notification
   int getNextInterval() {

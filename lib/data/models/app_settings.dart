@@ -30,8 +30,6 @@ class AppSettings with _$AppSettings {
   }
 }
 
-const AppSettings _$AppSettingsConst = AppSettings;
-
 extension AppSettingsX on AppSettings {
   /// Vérifie si le premium est actif
   bool get isPremiumActive {

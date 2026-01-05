@@ -68,14 +68,14 @@ void main() async {
               children: [
                 const Icon(Icons.error_outline, size: 64, color: Colors.red),
                 const SizedBox(height: 16),
-                Text(
+                const Text(
                   'Erreur d\'initialisation',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                Text(
+                const Text(
                   'Veuillez redémarrer l\'application',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: TextStyle(fontSize: 14),
                 ),
               ],
             ),

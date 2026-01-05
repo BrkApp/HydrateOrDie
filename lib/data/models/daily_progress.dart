@@ -30,8 +30,6 @@ class DailyProgress with _$DailyProgress {
   }
 }
 
-const DailyProgress _$DailyProgressConst = DailyProgress;
-
 extension DailyProgressX on DailyProgress {
   /// Ajoute une nouvelle entrée d'eau
   DailyProgress addEntry(WaterEntry entry) {
