@@ -1,21 +1,19 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
 
 part 'daily_progress.freezed.dart';
 part 'daily_progress.g.dart';
 
 /// Progression quotidienne d'hydratation
 @freezed
-@HiveType(typeId: 1)
 class DailyProgress with _$DailyProgress {
   const factory DailyProgress({
-    @HiveField(0) required String id,
-    @HiveField(1) required DateTime date,
-    @HiveField(2) @Default(0.0) double totalMl,
-    @HiveField(3) @Default([]) List<WaterEntry> entries,
-    @HiveField(4) @Default(0) int streakCount,
-    @HiveField(5) @Default(false) bool goalReached,
-    @HiveField(6) DateTime? lastDrinkTime,
+    required String id,
+    required DateTime date,
+    @Default(0.0) double totalMl,
+    @Default([]) List<WaterEntry> entries,
+    @Default(0) int streakCount,
+    @Default(false) bool goalReached,
+    DateTime? lastDrinkTime,
   }) = _DailyProgress;
 
   factory DailyProgress.fromJson(Map<String, dynamic> json) =>
@@ -60,15 +58,14 @@ extension DailyProgressX on DailyProgress {
 
 /// Entrée individuelle d'eau
 @freezed
-@HiveType(typeId: 2)
 class WaterEntry with _$WaterEntry {
   const factory WaterEntry({
-    @HiveField(0) required String id,
-    @HiveField(1) required DateTime timestamp,
-    @HiveField(2) required double amount, // en ml
-    @HiveField(3) @Default(WaterSource.photo) WaterSource source,
-    @HiveField(4) String? photoPath,
-    @HiveField(5) @Default(1.0) double confidence, // Confidence ML (0-1)
+    required String id,
+    required DateTime timestamp,
+    required double amount, // en ml
+    @Default(WaterSource.photo) WaterSource source,
+    String? photoPath,
+    @Default(1.0) double confidence, // Confidence ML (0-1)
   }) = _WaterEntry;
 
   factory WaterEntry.fromJson(Map<String, dynamic> json) =>
@@ -93,14 +90,8 @@ class WaterEntry with _$WaterEntry {
 }
 
 /// Source de l'entrée d'eau
-@HiveType(typeId: 3)
 enum WaterSource {
-  @HiveField(0)
   photo, // Validé par photo
-
-  @HiveField(1)
   manual, // Entrée manuelle (premium)
-
-  @HiveField(2)
   quick, // Ajout rapide depuis notification
 }

@@ -60,7 +60,6 @@ dev_dependencies:
   riverpod_generator: ^2.6.2
   freezed: ^2.5.7
   json_serializable: ^6.8.0
-  hive_generator: ^2.0.1
 
 flutter:
   uses-material-design: true

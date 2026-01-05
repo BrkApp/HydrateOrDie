@@ -6,7 +6,7 @@ import '../models/notification_settings.dart';
 import '../models/app_settings.dart';
 
 /// Service de stockage local utilisant Hive
-/// Gère toutes les opérations de persistance des données
+/// Stocke les objets en JSON (pas besoin de TypeAdapters)
 class LocalStorage {
   static final LocalStorage _instance = LocalStorage._internal();
   factory LocalStorage() => _instance;
@@ -20,13 +20,13 @@ class LocalStorage {
   static const String _notificationBox = 'notification_settings';
   static const String _settingsBox = 'app_settings';
 
-  // Boxes
-  late Box<UserProfile> _userProfileBox;
-  late Box<DailyProgress> _progressHistoryBox;
-  late Box<NotificationSettings> _notificationSettingsBox;
-  late Box<AppSettings> _appSettingsBox;
+  // Boxes (stockage JSON)
+  late Box _userProfileBox;
+  late Box _progressHistoryBox;
+  late Box _notificationSettingsBox;
+  late Box _appSettingsBox;
 
-  /// Initialise Hive et enregistre les adapters
+  /// Initialise Hive
   Future<void> init() async {
     try {
       _logger.i('Initializing Hive...');
@@ -34,23 +34,11 @@ class LocalStorage {
       // Initialiser Hive
       await Hive.initFlutter();
 
-      // Enregistrer les adapters (à générer avec build_runner)
-      // Note: Ces adapters seront générés automatiquement
-      // Hive.registerAdapter(UserProfileAdapter());
-      // Hive.registerAdapter(DailyProgressAdapter());
-      // Hive.registerAdapter(WaterEntryAdapter());
-      // Hive.registerAdapter(NotificationSettingsAdapter());
-      // Hive.registerAdapter(AppSettingsAdapter());
-      // Hive.registerAdapter(WaterSourceAdapter());
-      // Hive.registerAdapter(NotificationIntensityAdapter());
-      // Hive.registerAdapter(MessageToneAdapter());
-
-      // Ouvrir les boxes
-      _userProfileBox = await Hive.openBox<UserProfile>(_userBox);
-      _progressHistoryBox = await Hive.openBox<DailyProgress>(_progressBox);
-      _notificationSettingsBox =
-          await Hive.openBox<NotificationSettings>(_notificationBox);
-      _appSettingsBox = await Hive.openBox<AppSettings>(_settingsBox);
+      // Ouvrir les boxes (pas de type spécifique, on stocke en Map)
+      _userProfileBox = await Hive.openBox(_userBox);
+      _progressHistoryBox = await Hive.openBox(_progressBox);
+      _notificationSettingsBox = await Hive.openBox(_notificationBox);
+      _appSettingsBox = await Hive.openBox(_settingsBox);
 
       _logger.i('Hive initialized successfully');
     } catch (e, stackTrace) {
@@ -64,7 +52,9 @@ class LocalStorage {
   /// Récupère le profil utilisateur
   UserProfile? getUserProfile() {
     try {
-      return _userProfileBox.get('current');
+      final json = _userProfileBox.get('current') as Map<dynamic, dynamic>?;
+      if (json == null) return null;
+      return UserProfile.fromJson(Map<String, dynamic>.from(json));
     } catch (e) {
       _logger.e('Error getting user profile: $e');
       return null;
@@ -74,7 +64,7 @@ class LocalStorage {
   /// Sauvegarde le profil utilisateur
   Future<void> saveUserProfile(UserProfile profile) async {
     try {
-      await _userProfileBox.put('current', profile);
+      await _userProfileBox.put('current', profile.toJson());
       _logger.d('User profile saved');
     } catch (e) {
       _logger.e('Error saving user profile: $e');
@@ -84,7 +74,11 @@ class LocalStorage {
 
   /// Stream du profil utilisateur
   Stream<UserProfile?> watchUserProfile() {
-    return _userProfileBox.watch(key: 'current').map((event) => event.value as UserProfile?);
+    return _userProfileBox.watch(key: 'current').map((event) {
+      if (event.value == null) return null;
+      final json = event.value as Map<dynamic, dynamic>;
+      return UserProfile.fromJson(Map<String, dynamic>.from(json));
+    });
   }
 
   // ==================== DAILY PROGRESS ====================
@@ -94,7 +88,9 @@ class LocalStorage {
     try {
       final today = DateTime.now();
       final key = '${today.year}-${today.month}-${today.day}';
-      return _progressHistoryBox.get(key);
+      final json = _progressHistoryBox.get(key) as Map<dynamic, dynamic>?;
+      if (json == null) return null;
+      return DailyProgress.fromJson(Map<String, dynamic>.from(json));
     } catch (e) {
       _logger.e('Error getting today progress: $e');
       return null;
@@ -105,7 +101,9 @@ class LocalStorage {
   DailyProgress? getProgressForDate(DateTime date) {
     try {
       final key = '${date.year}-${date.month}-${date.day}';
-      return _progressHistoryBox.get(key);
+      final json = _progressHistoryBox.get(key) as Map<dynamic, dynamic>?;
+      if (json == null) return null;
+      return DailyProgress.fromJson(Map<String, dynamic>.from(json));
     } catch (e) {
       _logger.e('Error getting progress for date: $e');
       return null;
@@ -115,7 +113,7 @@ class LocalStorage {
   /// Sauvegarde la progression quotidienne
   Future<void> saveDailyProgress(DailyProgress progress) async {
     try {
-      await _progressHistoryBox.put(progress.id, progress);
+      await _progressHistoryBox.put(progress.id, progress.toJson());
       _logger.d('Daily progress saved: ${progress.id}');
     } catch (e) {
       _logger.e('Error saving daily progress: $e');
@@ -148,9 +146,11 @@ class LocalStorage {
   Stream<DailyProgress?> watchTodayProgress() {
     final today = DateTime.now();
     final key = '${today.year}-${today.month}-${today.day}';
-    return _progressHistoryBox
-        .watch(key: key)
-        .map((event) => event.value as DailyProgress?);
+    return _progressHistoryBox.watch(key: key).map((event) {
+      if (event.value == null) return null;
+      final json = event.value as Map<dynamic, dynamic>;
+      return DailyProgress.fromJson(Map<String, dynamic>.from(json));
+    });
   }
 
   /// Calcule le streak actuel
@@ -194,8 +194,9 @@ class LocalStorage {
   /// Récupère les paramètres de notification
   NotificationSettings getNotificationSettings() {
     try {
-      return _notificationSettingsBox.get('current') ??
-          NotificationSettings.createDefault();
+      final json = _notificationSettingsBox.get('current') as Map<dynamic, dynamic>?;
+      if (json == null) return NotificationSettings.createDefault();
+      return NotificationSettings.fromJson(Map<String, dynamic>.from(json));
     } catch (e) {
       _logger.e('Error getting notification settings: $e');
       return NotificationSettings.createDefault();
@@ -205,7 +206,7 @@ class LocalStorage {
   /// Sauvegarde les paramètres de notification
   Future<void> saveNotificationSettings(NotificationSettings settings) async {
     try {
-      await _notificationSettingsBox.put('current', settings);
+      await _notificationSettingsBox.put('current', settings.toJson());
       _logger.d('Notification settings saved');
     } catch (e) {
       _logger.e('Error saving notification settings: $e');
@@ -215,9 +216,11 @@ class LocalStorage {
 
   /// Stream des paramètres de notification
   Stream<NotificationSettings?> watchNotificationSettings() {
-    return _notificationSettingsBox
-        .watch(key: 'current')
-        .map((event) => event.value as NotificationSettings?);
+    return _notificationSettingsBox.watch(key: 'current').map((event) {
+      if (event.value == null) return null;
+      final json = event.value as Map<dynamic, dynamic>;
+      return NotificationSettings.fromJson(Map<String, dynamic>.from(json));
+    });
   }
 
   // ==================== APP SETTINGS ====================
@@ -225,7 +228,9 @@ class LocalStorage {
   /// Récupère les paramètres de l'application
   AppSettings getAppSettings() {
     try {
-      return _appSettingsBox.get('current') ?? AppSettings.createDefault();
+      final json = _appSettingsBox.get('current') as Map<dynamic, dynamic>?;
+      if (json == null) return AppSettings.createDefault();
+      return AppSettings.fromJson(Map<String, dynamic>.from(json));
     } catch (e) {
       _logger.e('Error getting app settings: $e');
       return AppSettings.createDefault();
@@ -235,7 +240,7 @@ class LocalStorage {
   /// Sauvegarde les paramètres de l'application
   Future<void> saveAppSettings(AppSettings settings) async {
     try {
-      await _appSettingsBox.put('current', settings);
+      await _appSettingsBox.put('current', settings.toJson());
       _logger.d('App settings saved');
     } catch (e) {
       _logger.e('Error saving app settings: $e');
@@ -245,9 +250,11 @@ class LocalStorage {
 
   /// Stream des paramètres de l'application
   Stream<AppSettings?> watchAppSettings() {
-    return _appSettingsBox
-        .watch(key: 'current')
-        .map((event) => event.value as AppSettings?);
+    return _appSettingsBox.watch(key: 'current').map((event) {
+      if (event.value == null) return null;
+      final json = event.value as Map<dynamic, dynamic>;
+      return AppSettings.fromJson(Map<String, dynamic>.from(json));
+    });
   }
 
   // ==================== UTILITIES ====================
@@ -269,10 +276,17 @@ class LocalStorage {
   /// Exporte les données pour backup
   Future<Map<String, dynamic>> exportData() async {
     try {
+      final progressHistory = <Map<String, dynamic>>[];
+      for (var key in _progressHistoryBox.keys) {
+        final json = _progressHistoryBox.get(key) as Map<dynamic, dynamic>?;
+        if (json != null) {
+          progressHistory.add(Map<String, dynamic>.from(json));
+        }
+      }
+
       return {
         'user_profile': getUserProfile()?.toJson(),
-        'progress_history':
-            _progressHistoryBox.values.map((p) => p.toJson()).toList(),
+        'progress_history': progressHistory,
         'notification_settings': getNotificationSettings().toJson(),
         'app_settings': getAppSettings().toJson(),
         'export_date': DateTime.now().toIso8601String(),

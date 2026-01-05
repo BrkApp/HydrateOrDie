@@ -1,27 +1,25 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
 
 part 'app_settings.freezed.dart';
 part 'app_settings.g.dart';
 
 /// Paramètres généraux de l'application
 @freezed
-@HiveType(typeId: 7)
 class AppSettings with _$AppSettings {
   const factory AppSettings({
-    @HiveField(0) @Default('fr') String language,
-    @HiveField(1) @Default('default') String theme,
-    @HiveField(2) @Default(true) bool darkMode,
-    @HiveField(3) @Default(250.0) double defaultIntakeAmount, // ml par prise
-    @HiveField(4) @Default(true) bool hapticFeedback,
-    @HiveField(5) @Default(true) bool soundEffects,
-    @HiveField(6) @Default(false) bool onboardingCompleted,
-    @HiveField(7) @Default(false) bool isPremium,
-    @HiveField(8) String? premiumExpiryDate,
-    @HiveField(9) @Default(0.7) double mlConfidenceThreshold, // Seuil ML pour accepter photo
-    @HiveField(10) @Default(true) bool strictMode, // Mode strict: rejette photos suspectes
-    @HiveField(11) DateTime? lastBackupDate,
-    @HiveField(12) @Default(false) bool analyticsEnabled,
+    @Default('fr') String language,
+    @Default('default') String theme,
+    @Default(true) bool darkMode,
+    @Default(250.0) double defaultIntakeAmount, // ml par prise
+    @Default(true) bool hapticFeedback,
+    @Default(true) bool soundEffects,
+    @Default(false) bool onboardingCompleted,
+    @Default(false) bool isPremium,
+    String? premiumExpiryDate,
+    @Default(0.7) double mlConfidenceThreshold, // Seuil ML pour accepter photo
+    @Default(true) bool strictMode, // Mode strict: rejette photos suspectes
+    DateTime? lastBackupDate,
+    @Default(false) bool analyticsEnabled,
   }) = _AppSettings;
 
   factory AppSettings.fromJson(Map<String, dynamic> json) =>
