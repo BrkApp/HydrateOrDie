@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from '../stores/useAppStore';
-import { DehydratedMascot } from '../components/common/DehydratedMascot';
+import { WaterGlass } from '../components/common/WaterGlass';
 import type { DailyProgress } from '../types';
 
 export function DashboardPage() {
@@ -46,41 +46,19 @@ export function DashboardPage() {
     (dailyProgress.totalMl / userProfile.dailyGoal) * 100
   );
 
-  // Determine mascot state based on progress
-  const getMascotState = () => {
-    if (progressPercentage >= 100) return 'happy';
-    if (progressPercentage >= 70) return 'worried';
-    if (progressPercentage >= 30) return 'angry';
-    return 'dying';
-  };
-
-  // Get dramatic message based on state
+  // Get dramatic message based on progress
   const getDramaticMessage = () => {
-    const state = getMascotState();
-    switch (state) {
-      case 'dying':
-        return '💀 TU VAS MOURIR DÉSHYDRATÉ';
-      case 'angry':
-        return '😡 TES CELLULES PLEURENT';
-      case 'worried':
-        return '😰 BOIS AVANT QU\'IL SOIT TROP TARD';
-      case 'happy':
-        return '🎉 OBJECTIF ATTEINT ! TU VIS !';
-    }
+    if (progressPercentage >= 100) return '🎉 OBJECTIF ATTEINT ! TU VIS !';
+    if (progressPercentage >= 70) return '😰 BOIS AVANT QU\'IL SOIT TROP TARD';
+    if (progressPercentage >= 30) return '😡 TES CELLULES PLEURENT';
+    return '💀 TU VAS MOURIR DÉSHYDRATÉ';
   };
 
   const getSubMessage = () => {
-    const state = getMascotState();
-    switch (state) {
-      case 'dying':
-        return 'Ton corps est 60% d\'eau et 40% de déception';
-      case 'angry':
-        return 'Les plantes boivent plus que toi. LES. PLANTES.';
-      case 'worried':
-        return 'Tu es presque hydraté. Presque.';
-      case 'happy':
-        return 'Wow. T\'as réussi à boire de l\'eau. Bravo.';
-    }
+    if (progressPercentage >= 100) return 'Wow. T\'as réussi à boire de l\'eau. Bravo.';
+    if (progressPercentage >= 70) return 'Tu es presque hydraté. Presque.';
+    if (progressPercentage >= 30) return 'Les plantes boivent plus que toi. LES. PLANTES.';
+    return 'Ton corps est 60% d\'eau et 40% de déception';
   };
 
   const handleCameraClick = () => {
@@ -269,9 +247,9 @@ export function DashboardPage() {
               </defs>
             </svg>
 
-            {/* Mascot in center */}
+            {/* Water glass in center */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <DehydratedMascot state={getMascotState()} size={200} />
+              <WaterGlass fillPercentage={progressPercentage} size={250} />
             </div>
 
             {/* Percentage overlay */}
