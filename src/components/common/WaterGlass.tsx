@@ -17,13 +17,6 @@ export function WaterGlass({ fillPercentage, size = 200, className = '' }: Water
     return '#EF476F'; // Danger red
   };
 
-  const getGlowColor = () => {
-    if (fillPercentage >= 100) return 'rgba(6, 255, 165, 0.5)';
-    if (fillPercentage >= 70) return 'rgba(0, 180, 216, 0.5)';
-    if (fillPercentage >= 30) return 'rgba(255, 107, 53, 0.5)';
-    return 'rgba(239, 71, 111, 0.5)';
-  };
-
   return (
     <motion.svg
       width={size}
