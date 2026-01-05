@@ -35,11 +35,6 @@ class AppTheme {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: primaryBlue,
       brightness: Brightness.light,
-      primary: primaryBlue,
-      secondary: accentCyan,
-      error: errorRed,
-      surface: surfaceLight,
-      background: backgroundLight,
     );
 
     return ThemeData(
@@ -139,11 +134,6 @@ class AppTheme {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: primaryBlue,
       brightness: Brightness.dark,
-      primary: waterBlue,
-      secondary: accentCyan,
-      error: errorRed,
-      surface: surfaceDark,
-      background: backgroundDark,
     );
 
     return ThemeData(
