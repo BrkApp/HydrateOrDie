@@ -877,5 +877,186 @@ Avant de soumettre PR, vérifier :
 
 ---
 
+## 📊 Organisation des Rapports de Développement
+
+### Structure des Rapports
+
+**OBLIGATOIRE :** À la fin de chaque story, créer les rapports suivants dans `docs/stories/epic-X/reports/` :
+
+```
+docs/stories/
+└── epic-X/
+    ├── story-X.Y-name.md              (Story tracking - créé par PM)
+    └── reports/
+        ├── story-X.Y-completion-report.md   (Résumé Dev)
+        └── story-X.Y-dod-report.md          (Validation DoD)
+```
+
+---
+
+### 📝 Completion Report (Résumé Exécutif)
+
+**Fichier :** `docs/stories/epic-X/reports/story-X.Y-completion-report.md`
+
+**Contenu requis :**
+1. **Quick Summary** - Status story (Done/Blocked), date, agent
+2. **Deliverables** - Liste ce qui a été créé/modifié
+3. **Acceptance Criteria Validation** - Cocher tous les AC (✅/❌)
+4. **Test Results** - Output `flutter test` et `flutter analyze`
+5. **Files Created/Modified** - Liste complète avec chemins
+6. **Known Issues** - Bugs/limitations temporaires
+7. **Next Steps** - Quelle story suivante
+
+**Template :**
+```markdown
+# 🎉 Story X.Y - COMPLETE!
+
+**Date**: YYYY-MM-DD
+**Agent**: Dev Agent Name
+**Status**: ✅ DONE / 🔄 IN PROGRESS / ❌ BLOCKED
+
+## 📊 Quick Summary
+[1-2 paragraphs résumant ce qui a été fait]
+
+## ✅ Acceptance Criteria (X/Y)
+- [x] AC 1: Description
+- [x] AC 2: Description
+- [ ] AC 3: Description (if incomplete)
+
+## 📂 Files Created/Modified
+- lib/domain/entities/user.dart (CREATED)
+- lib/data/models/user_model.dart (CREATED)
+- test/domain/entities/user_test.dart (CREATED)
+
+## 🧪 Test Results
+\`\`\`bash
+$ flutter test
+00:05 +42: All tests passed!
+\`\`\`
+
+\`\`\`bash
+$ flutter analyze
+No issues found!
+\`\`\`
+
+## 🚀 Next Steps
+Proceed to Story X.Y+1
+```
+
+---
+
+### ✅ Definition of Done Report (Validation Détaillée)
+
+**Fichier :** `docs/stories/epic-X/reports/story-X.Y-dod-report.md`
+
+**Contenu requis :**
+Utiliser la checklist complète de `docs/definition-of-done.md` et cocher TOUS les items.
+
+**Structure :**
+1. **Requirements** - AC validés
+2. **Coding Standards** - Linter, formatage, conventions
+3. **Tests** - Unit, widget, integration + coverage
+4. **Functionality** - Tests manuels iOS/Android
+5. **Story Administration** - Commits, PR, story status
+6. **Dependencies** - Packages approuvés
+7. **Documentation** - README, Dartdoc, comments
+
+**Template :**
+```markdown
+# Definition of Done - Story X.Y
+
+**Story**: X.Y - Story Title
+**Date**: YYYY-MM-DD
+**Validated by**: Dev Agent Name
+**Status**: ✅ ALL DONE / ⚠️ PARTIAL / ❌ FAILED
+
+## 1. Requirements (X/X)
+- [x] AC 1 completed and tested
+- [x] AC 2 completed and tested
+...
+
+## 2. Coding Standards (X/X)
+- [x] `flutter analyze` 0 issues
+- [x] `dart format` applied
+- [x] Naming conventions respected
+...
+
+## 3. Tests (X/X)
+- [x] Unit tests written (42 tests)
+- [x] Coverage ≥80% (actual: 85%)
+...
+
+[... etc pour toutes sections DoD]
+```
+
+---
+
+### 🎯 Workflow Complet
+
+```
+1. Dev implémente Story X.Y
+2. Dev auto-valide avec Definition of Done
+3. Dev crée completion-report.md
+4. Dev crée dod-report.md
+5. Dev met à jour story-X.Y-name.md (status: Draft → Review)
+6. Dev soumet au PM/QA pour validation
+7. PM/QA lit completion-report.md
+8. PM/QA vérifie dod-report.md
+9. PM/QA teste manuellement
+10. PM/QA approuve → Story status: Review → Done
+```
+
+---
+
+### ⚠️ IMPORTANT
+
+**Ne PAS créer de fichiers à la racine du projet !**
+
+❌ **BAD :**
+```
+HydrateOrDie/
+├── STORY-1.1-COMPLETE.md        (À la racine - NON !)
+└── docs/stories/...
+```
+
+✅ **GOOD :**
+```
+HydrateOrDie/
+└── docs/stories/epic-1/
+    ├── story-1.1-flutter-project-setup.md
+    └── reports/
+        ├── story-1.1-completion-report.md
+        └── story-1.1-dod-report.md
+```
+
+---
+
+### 📁 Organisation Multi-Epic
+
+```
+docs/stories/
+├── epic-1/
+│   ├── story-1.1-flutter-project-setup.md
+│   ├── story-1.2-avatar-models.md
+│   └── reports/
+│       ├── story-1.1-completion-report.md
+│       ├── story-1.1-dod-report.md
+│       ├── story-1.2-completion-report.md
+│       └── story-1.2-dod-report.md
+├── epic-2/
+│   ├── story-2.1-user-profile-model.md
+│   └── reports/
+│       └── story-2.1-completion-report.md
+└── epic-3/
+    └── reports/
+```
+
+---
+
+**PM Contact :** Product Manager John (via chat)
+
+---
+
 *Document créé le 2026-01-07 par PM John*
+*Mis à jour le 2026-01-07 - Ajout section rapports de développement*
 *Instructions MANDATORY pour tous agents Claude Code développant Hydrate or Die*
