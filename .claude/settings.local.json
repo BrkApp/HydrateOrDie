@@ -7,7 +7,8 @@
       "Bash(flutter create:*)",
       "Bash(flutter --version:*)",
       "Bash(flutter test:*)",
-      "Bash(dart format:*)"
+      "Bash(dart format:*)",
+      "Bash(flutter pub get:*)"
     ]
   }
 }

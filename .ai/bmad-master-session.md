@@ -22,12 +22,13 @@
 | 8 | master | QA Gates création | ✅ Terminé | 2026-01-07 | 6 fichiers (5 epics + index), critères PASS/FAIL définis |
 | 9 | dev | Story 1.1 (Flutter Setup) | ✅ Terminé | 2026-01-07 | Clean Architecture, CI/CD, tests passing |
 | 10 | master | GitHub Setup + Cleanup | ✅ Terminé | 2026-01-08 | Repo synced, 151 .md files optimisés |
+| 11 | dev | Story 1.2 (Domain Models) | ✅ Terminé | 2026-01-08 | 10 entities, 115 tests, 100% coverage |
 
 ### ⏸️ PHASE EN COURS
 
 | Phase | Agent | Livrable | Statut | Début | Notes |
 |-------|-------|----------|--------|-------|-------|
-| 11 | dev | Story 1.2 (Domain Models) | 🔄 À démarrer | 2026-01-08 | Avatar, User, HydrationGoal, DrinkEntry, Streak entities |
+| 12 | dev | Story 1.3 (Data Models) | 🔄 Prêt | 2026-01-08 | DTOs avec sérialisation JSON |
 
 ### 🔜 PHASES À VENIR
 
@@ -275,6 +276,7 @@ Aucun
 | 2026-01-07 | ✅ Phase 9 complétée (Story 1.1 - Flutter Setup + CI/CD) | Dev Agent |
 | 2026-01-08 | ✅ Phase 10 complétée (GitHub Setup + Cleanup 151 .md) | BMad Master |
 | 2026-01-08 | Ajout section "Moments de Test Manuel" (8 checkpoints) | BMad Master |
+| 2026-01-08 | ✅ Phase 11 complétée (Story 1.2 - 10 entities, 100% coverage) | Dev Agent |
 
 ---
 
@@ -288,8 +290,8 @@ Aucun
 
 ---
 
-**Dernière action:** ✅ GitHub Setup + Documentation cleanup (repo synced, 151 .md optimisés)
-**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.2 (Domain Models)
+**Dernière action:** ✅ Story 1.2 complétée (10 entities, 115 tests, 100% coverage)
+**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.3 (Data Models - DTOs)
 
 ---
 
@@ -420,18 +422,33 @@ flutter doctor
 ```
 
 #### **Lancer Tests:**
+
+**MÉTHODE RECOMMANDÉE - Téléphone Android physique:**
+```bash
+# 1. Active USB Debugging sur téléphone:
+#    Paramètres > À propos > Appuie 7× sur "Numéro de build"
+#    Paramètres > Options développement > Active "Débogage USB"
+
+# 2. Connecte téléphone USB + autorise débogage
+
+# 3. Vérifie détection:
+flutter devices
+
+# 4. Lance app:
+cd c:\Users\hhhh\Desktop\Claude\HydrateOrDie
+flutter run
+# (Choisir le device Android dans la liste)
+
+# Hot Reload: Appuie 'r' dans terminal après modifications code
+```
+
+**Alternative - Émulateur Android Studio:**
 ```bash
 # Démarrer émulateur Android
 # (depuis Android Studio Device Manager)
 
-# OU sur appareil physique (USB Debugging activé)
-# Settings > Developer Options > USB Debugging
-
 # Lancer app
-cd c:\Users\hhhh\Desktop\Claude\HydrateOrDie
 flutter run
-
-# Choisir device dans la liste affichée
 ```
 
 ---
