@@ -20,12 +20,14 @@
 | 6 | po | Validation complète | ✅ Terminé | 2026-01-07 | 92% readiness, 0 blockers, 10/10 quality, APPROUVÉ |
 | 7 | master | Sharding docs | ✅ Terminé | 2026-01-07 | 24 fichiers créés (6 PRD + 14 Architecture + 4 docs) |
 | 8 | master | QA Gates création | ✅ Terminé | 2026-01-07 | 6 fichiers (5 epics + index), critères PASS/FAIL définis |
+| 9 | dev | Story 1.1 (Flutter Setup) | ✅ Terminé | 2026-01-07 | Clean Architecture, CI/CD, tests passing |
+| 10 | master | GitHub Setup + Cleanup | ✅ Terminé | 2026-01-08 | Repo synced, 151 .md files optimisés |
 
 ### ⏸️ PHASE EN COURS
 
 | Phase | Agent | Livrable | Statut | Début | Notes |
 |-------|-------|----------|--------|-------|-------|
-| 9 | dev | Implémentation Story 1.1 | 🔄 Prêt | 2026-01-07 | Flutter Setup + CI/CD (PRÊT À DÉMARRER) |
+| 11 | dev | Story 1.2 (Domain Models) | 🔄 À démarrer | 2026-01-08 | Avatar, User, HydrationGoal, DrinkEntry, Streak entities |
 
 ### 🔜 PHASES À VENIR
 
@@ -270,6 +272,9 @@ Aucun
 | 2026-01-07 | ✅ Phase 6 complétée (PO Validation 92% readiness, APPROUVÉ) | BMad Master |
 | 2026-01-07 | ✅ Phase 7 complétée (Sharding 24 fichiers: 6 PRD + 14 Arch) | BMad Master |
 | 2026-01-07 | ✅ Phase 8 complétée (QA Gates 6 fichiers, critères mesurables) | BMad Master |
+| 2026-01-07 | ✅ Phase 9 complétée (Story 1.1 - Flutter Setup + CI/CD) | Dev Agent |
+| 2026-01-08 | ✅ Phase 10 complétée (GitHub Setup + Cleanup 151 .md) | BMad Master |
+| 2026-01-08 | Ajout section "Moments de Test Manuel" (8 checkpoints) | BMad Master |
 
 ---
 
@@ -283,8 +288,170 @@ Aucun
 
 ---
 
-**Dernière action:** ✅ QA Gates créés (6 fichiers: 5 epics + index, critères PASS/FAIL)
-**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.1 (Flutter Setup)
+**Dernière action:** ✅ GitHub Setup + Documentation cleanup (repo synced, 151 .md optimisés)
+**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.2 (Domain Models)
+
+---
+
+## 🧪 MOMENTS DE TEST MANUEL (User Testing)
+
+### Quand Tester?
+
+| Story | Moment Test | Commandes | Ce qu'il faut vérifier |
+|-------|------------|-----------|------------------------|
+| **1.1** ✅ | MAINTENANT | `flutter run` (iOS/Android) | App lance avec "Hydrate or Die" canary screen |
+| **1.6** | Après Story 1.6 | `flutter run` | Home screen affiche avatar + barre hydratation |
+| **1.8** | Après Story 1.8 | `flutter run` | Sélection avatar fonctionne (4 choix) |
+| **2.10** | Après Story 2.10 | `flutter run` | Onboarding flow complet (poids, âge, sexe, activité) |
+| **3.8** | Après Story 3.8 | `flutter run` | Bouton "Boire" fonctionne, avatar réagit |
+| **3.6** | Après Story 3.6 | `flutter run` + photo | Caméra s'ouvre, photo enregistrée |
+| **4.11** | Après Story 4.11 | `flutter run` + attente | Notifications reçues (autoriser permissions!) |
+| **5.12** | Après Story 5.12 (MVP) | `flutter run` | Test complet E2E du flow utilisateur |
+
+### Démarche de Test Complète
+
+#### 1️⃣ **Test Story 1.1 (MAINTENANT - Flutter Setup)**
+
+```bash
+# Dans le terminal (Windows):
+cd c:\Users\hhhh\Desktop\Claude\HydrateOrDie
+
+# Vérifier que Flutter est installé
+flutter doctor
+
+# Lancer sur simulateur iOS (si macOS) ou émulateur Android
+flutter run
+
+# OU build pour voir s'il n'y a pas d'erreurs
+flutter build apk --debug  # Android
+flutter build ios --debug  # iOS (nécessite macOS)
+```
+
+**✅ Critères de réussite:**
+- App se lance sans crash
+- Écran affiche "Hydrate or Die - Coming Soon" (canary screen)
+- Pas d'erreurs dans la console
+
+#### 2️⃣ **Tests Automatisés (Toujours valables)**
+
+```bash
+# Après chaque story, vérifier:
+flutter test                    # Tests unitaires + widget
+flutter analyze                 # Analyse statique (0 issues)
+flutter test --coverage         # Coverage ≥80%
+```
+
+#### 3️⃣ **Test Story 1.6 (Home Screen avec Avatar)**
+
+```bash
+flutter run
+```
+
+**✅ Critères de réussite:**
+- Avatar s'affiche (emoji placeholder ou vrai asset)
+- Barre d'hydratation visible (0-100%)
+- État avatar change selon hydratation
+- Fantôme s'affiche si mort (hydratation 0%)
+
+#### 4️⃣ **Test Story 3.6 (Photo Validation)**
+
+```bash
+flutter run
+
+# Dans l'app:
+# 1. Appuyer sur bouton "Drink"
+# 2. Autoriser permissions caméra
+# 3. Prendre photo d'un verre
+# 4. Vérifier que l'hydratation augmente
+```
+
+**✅ Critères de réussite:**
+- Caméra s'ouvre (demande permissions)
+- Photo capturée et stockée localement
+- Hydratation +250ml après validation
+- Avatar réagit (animation positive)
+
+#### 5️⃣ **Test Story 4.11 (Notifications)**
+
+```bash
+flutter run
+
+# Dans l'app:
+# 1. Autoriser notifications
+# 2. Ne pas boire pendant 2h
+# 3. Vérifier notifications escalade (4 niveaux)
+```
+
+**✅ Critères de réussite:**
+- Notifications s'affichent (Local Notifications)
+- Messages personnalisés selon avatar choisi
+- Vibrations chaos au niveau 4
+- Pause nocturne fonctionne (22h-8h)
+
+#### 6️⃣ **Test MVP Complet (Story 5.12)**
+
+**Flow E2E complet:**
+1. Onboarding (poids, âge, sexe, activité, localisation)
+2. Sélection avatar (4 choix)
+3. Boire via photo (validation verre)
+4. Vérifier streak (jour 1)
+5. Consulter calendrier (historique)
+6. Modifier profil (settings)
+7. Changer avatar (settings)
+8. Attendre notifications (2h sans boire)
+
+---
+
+### 📱 Setup Environnement de Test
+
+#### **Prérequis:**
+```bash
+# 1. Installer Flutter SDK
+# Télécharge: https://docs.flutter.dev/get-started/install/windows
+
+# 2. Installer Android Studio (pour émulateur Android)
+# Télécharge: https://developer.android.com/studio
+
+# 3. Créer un émulateur Android
+# Android Studio > Device Manager > Create Device > Pixel 5 (Android 13)
+
+# 4. Vérifier setup
+flutter doctor
+```
+
+#### **Lancer Tests:**
+```bash
+# Démarrer émulateur Android
+# (depuis Android Studio Device Manager)
+
+# OU sur appareil physique (USB Debugging activé)
+# Settings > Developer Options > USB Debugging
+
+# Lancer app
+cd c:\Users\hhhh\Desktop\Claude\HydrateOrDie
+flutter run
+
+# Choisir device dans la liste affichée
+```
+
+---
+
+### 🚨 Quand M'Alerter Pour Tests
+
+**Je te dirai explicitement quand tester après:**
+1. ✅ Story 1.1 (MAINTENANT)
+2. Story 1.6 (Home Screen)
+3. Story 1.8 (Avatar Selection)
+4. Story 2.10 (Onboarding complet)
+5. Story 3.6 (Photo + caméra)
+6. Story 3.8 (Bouton Drink)
+7. Story 4.11 (Notifications)
+8. Story 5.12 (MVP complet - test E2E)
+
+**Format alerte:**
+> 🧪 **TEMPS DE TESTER!** Story X.Y complétée.
+> Commandes: `flutter run`
+> Vérifier: [Liste critères]
 
 ---
 
