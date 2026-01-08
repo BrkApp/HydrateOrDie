@@ -23,12 +23,13 @@
 | 9 | dev | Story 1.1 (Flutter Setup) | ✅ Terminé | 2026-01-07 | Clean Architecture, CI/CD, tests passing |
 | 10 | master | GitHub Setup + Cleanup | ✅ Terminé | 2026-01-08 | Repo synced, 151 .md files optimisés |
 | 11 | dev | Story 1.2 (Domain Models) | ✅ Terminé | 2026-01-08 | 10 entities, 115 tests, 100% coverage |
+| 12 | dev | Story 1.3 (Avatar Repository) | ✅ Terminé | 2026-01-08 | SQLite + SharedPrefs, DTOs, 128 tests passing |
 
 ### ⏸️ PHASE EN COURS
 
 | Phase | Agent | Livrable | Statut | Début | Notes |
 |-------|-------|----------|--------|-------|-------|
-| 12 | dev | Story 1.3 (Data Models) | 🔄 Prêt | 2026-01-08 | DTOs avec sérialisation JSON |
+| 13 | dev | Story 1.4 (Avatar Assets) | 🔄 Prêt | 2026-01-08 | Placeholders + Asset management |
 
 ### 🔜 PHASES À VENIR
 
@@ -277,6 +278,7 @@ Aucun
 | 2026-01-08 | ✅ Phase 10 complétée (GitHub Setup + Cleanup 151 .md) | BMad Master |
 | 2026-01-08 | Ajout section "Moments de Test Manuel" (8 checkpoints) | BMad Master |
 | 2026-01-08 | ✅ Phase 11 complétée (Story 1.2 - 10 entities, 100% coverage) | Dev Agent |
+| 2026-01-08 | ✅ Phase 12 complétée (Story 1.3 - Repository + DTOs, SQLite) | Dev Agent |
 
 ---
 
@@ -290,8 +292,8 @@ Aucun
 
 ---
 
-**Dernière action:** ✅ Story 1.2 complétée (10 entities, 115 tests, 100% coverage)
-**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.3 (Data Models - DTOs)
+**Dernière action:** ✅ Story 1.3 complétée (Repository + SQLite + DTOs, 128 tests)
+**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.4 (Avatar Assets + Placeholders)
 
 ---
 
