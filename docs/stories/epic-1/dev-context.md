@@ -326,7 +326,9 @@ flutter pub run build_runner build --delete-conflicting-outputs
 - [ ] `AvatarAssetProvider` - Service pour charger les assets avatar
 - [ ] Placeholders **EMOJIS** pour 4 avatars × 5 états = **20 combinaisons**
 - [ ] Structure `assets/avatars/` prête pour vraies images plus tard
+- [ ] **Widget `AvatarDisplay`** - Affiche l'avatar selon état et personnalité (AC #6)
 - [ ] Tests de validation assets (tous les assets existent)
+- [ ] Widget tests pour `AvatarDisplay` (AC #7)
 
 ### Décisions Importantes
 - **Utiliser EMOJIS comme placeholders** (pas d'images pour l'instant)
@@ -342,6 +344,9 @@ flutter pub run build_runner build --delete-conflicting-outputs
 lib/presentation/providers/
 └── avatar_asset_provider.dart
 
+lib/presentation/widgets/
+└── avatar_display.dart                  - Widget affichage avatar (AC #6)
+
 assets/avatars/
 ├── doctor/
 │   ├── fresh.png (placeholder emoji pour l'instant)
@@ -355,6 +360,9 @@ assets/avatars/
 
 test/presentation/providers/
 └── avatar_asset_provider_test.dart
+
+test/presentation/widgets/
+└── avatar_display_test.dart             - Widget tests (AC #7)
 ```
 
 ---
