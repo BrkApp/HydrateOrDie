@@ -314,56 +314,152 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 ---
 
-## ⏳ PROCHAINE STORY: 1.4 - Avatar Assets
+## ✅ Story 1.4 - Avatar Assets + Display Widget
+
+### Fichiers Clés Créés
+
+#### **Assets (20 placeholders emoji)**
+```
+assets/avatars/
+├── doctor/ (🧑‍⚕️)
+│   ├── fresh.txt (😊), tired.txt (😐), dehydrated.txt (😟)
+│   ├── dead.txt (💀), ghost.txt (👻)
+├── sportsCoach/ (💪) - idem 5 états
+├── authoritarianMother/ (👩) - idem 5 états
+└── sarcasticFriend/ (🤝) - idem 5 états
+```
+
+#### **Presentation Layer**
+```
+lib/presentation/
+├── providers/
+│   └── avatar_asset_provider.dart    - Service chargement assets (145 lignes)
+└── widgets/
+    └── avatar_display.dart           - Widget affichage avatar (102 lignes, ConsumerWidget)
+
+test/presentation/
+├── providers/
+│   └── avatar_asset_provider_test.dart   - 18 unit tests
+└── widgets/
+    └── avatar_display_test.dart          - 33 widget tests
+```
+
+#### **Dependency Injection**
+```
+lib/core/di/injection.dart - AvatarAssetProvider enregistré dans get_it
+```
+
+### Architecture Implémentée
+
+#### **AvatarAssetProvider**
+```dart
+class AvatarAssetProvider {
+  String getAssetPath(AvatarPersonality personality, AvatarState state);
+  // Retourne: assets/avatars/{personality}/{state}.txt
+}
+```
+
+#### **AvatarDisplay Widget**
+```dart
+class AvatarDisplay extends ConsumerWidget {
+  final AvatarPersonality personality;
+  final AvatarState state;
+  final double? size;
+
+  // Utilise AvatarAssetProvider pour charger l'asset correct
+  // Affiche emoji placeholder (Text widget avec fontSize)
+}
+```
+
+### À Savoir pour la Suite
+- ✅ **20 assets emoji créés** - Placeholders .txt dans assets/avatars/
+- ✅ **AvatarDisplay widget prêt** - Peut afficher n'importe quelle combinaison personality + state
+- ✅ **Provider injectable** - `getIt<AvatarAssetProvider>()`
+- ✅ **Mapping personality → nom dossier:**
+  - `doctor` → "doctor"
+  - `coach` → "sportsCoach"
+  - `mother` → "authoritarianMother"
+  - `friend` → "sarcasticFriend"
+- ✅ **Mapping state → nom fichier:**
+  - `fresh` → "fresh.txt"
+  - `slightlyDehydrated` → "tired.txt" (note: pas "slightly_dehydrated")
+  - `dehydrated` → "dehydrated.txt"
+  - `dead` → "dead.txt"
+  - `ghost` → "ghost.txt"
+- ⚠️ **Assets sont des fichiers .txt** avec emojis (pas .png pour l'instant)
+- ⚠️ **Structure prête pour vraies images** - Remplacer .txt par .png plus tard
+
+### Tests Validés
+```bash
+flutter test test/presentation/  # 51/51 tests passent ✅
+# AvatarAssetProvider: 18 tests (100% coverage)
+# AvatarDisplay: 33 tests (toutes combinaisons)
+```
+
+---
+
+## ⏳ PROCHAINE STORY: 1.5 - Dehydration Logic
 
 ### Ce qui EXISTE déjà (NE PAS RECRÉER)
-- ✅ Avatar entity avec `AvatarPersonality` enum (4 avatars)
-- ✅ `AvatarState` enum avec 5 états (fresh → dead → ghost)
-- ✅ AvatarRepository pour sauvegarder/charger avatar sélectionné
-- ✅ DTOs pour sérialisation
+- ✅ `AvatarState` enum avec 5 états + méthode `getNextState()` (Story 1.2)
+- ✅ `AvatarRepository` interface (Story 1.3) avec méthodes:
+  - `updateAvatarState(AvatarState state)`
+  - `getAvatarState()`
+- ✅ `AvatarRepositoryImpl` (Story 1.3) - Implémentation avec SQLite
+- ✅ Dependency Injection configuré (Story 1.3) - `getIt<AvatarRepository>()`
 
 ### Ce qu'il FAUT créer
-- [ ] `AvatarAssetProvider` - Service pour charger les assets avatar
-- [ ] Placeholders **EMOJIS** pour 4 avatars × 5 états = **20 combinaisons**
-- [ ] Structure `assets/avatars/` prête pour vraies images plus tard
-- [ ] **Widget `AvatarDisplay`** - Affiche l'avatar selon état et personnalité (AC #6)
-- [ ] Tests de validation assets (tous les assets existent)
-- [ ] Widget tests pour `AvatarDisplay` (AC #7)
+- [ ] **Use Case `UpdateAvatarStateUseCase`** (AC #1) - Logique calcul état selon temps
+- [ ] **Service Timer Background** (AC #4, #8) - Timer.periodic toutes les 30min
+- [ ] **Logging transitions état** (AC #6) - print() pour debug
+- [ ] **Tests unitaires use case** (AC #7) - Scénarios 0h, 1h, 3h, 5h, 7h
+- [ ] **Tests service timer** - Vérifier timer créé/annulé correctement
+
+### Règles Métier (AC #2)
+**Progression déshydratation:**
+```
+Fresh (0-2h depuis last drink)
+  ↓ après 2h
+Tired (2-4h depuis last drink)
+  ↓ après 4h
+Dehydrated (4-6h depuis last drink)
+  ↓ après 6h
+Dead (6h+ depuis last drink)
+```
+
+**Calcul:**
+- Utiliser `DateTime.now()` comparé à `lastDrinkTime` (stocké en SQLite)
+- Si pas de `lastDrinkTime` → considérer Fresh par défaut
 
 ### Décisions Importantes
-- **Utiliser EMOJIS comme placeholders** (pas d'images pour l'instant)
-  - Docteur: 🧑‍⚕️ (fresh: 😊, slightly: 😐, dehydrated: 😟, dead: 💀, ghost: 👻)
-  - Coach: 💪 (idem 5 états)
-  - Mère: 👩 (idem 5 états)
-  - Pote: 🤝 (idem 5 états)
-- **Préparer structure pour vraies images** - `assets/avatars/{personality}/{state}.png`
-- **Asset provider injectable via get_it**
+- **Use Case dans Domain Layer** - `lib/domain/use_cases/update_avatar_state_use_case.dart`
+- **Service Timer dans Presentation** - `lib/presentation/services/dehydration_timer_service.dart` (ou Core)
+- **Logging simple** - `print()` pour MVP (pas de logger package pour l'instant)
+- **Timer périodique** - `Timer.periodic(Duration(minutes: 30), callback)`
+- **Annulation timer** - Méthode `dispose()` pour cleanup
+- **Appel automatique** - À l'ouverture app (main.dart ou app init) + toutes les 30min
 
 ### Fichiers à Créer
 ```
-lib/presentation/providers/
-└── avatar_asset_provider.dart
+lib/domain/use_cases/
+└── update_avatar_state_use_case.dart    - Use case calcul état (AC #1)
 
-lib/presentation/widgets/
-└── avatar_display.dart                  - Widget affichage avatar (AC #6)
+lib/presentation/services/
+└── dehydration_timer_service.dart       - Timer background 30min (AC #4, #8)
 
-assets/avatars/
-├── doctor/
-│   ├── fresh.png (placeholder emoji pour l'instant)
-│   ├── slightly_dehydrated.png
-│   ├── dehydrated.png
-│   ├── dead.png
-│   └── ghost.png
-├── coach/ (idem 5 états)
-├── mother/ (idem 5 états)
-└── friend/ (idem 5 états)
+test/domain/use_cases/
+└── update_avatar_state_use_case_test.dart  - Tests scénarios temporels (AC #7)
 
-test/presentation/providers/
-└── avatar_asset_provider_test.dart
-
-test/presentation/widgets/
-└── avatar_display_test.dart             - Widget tests (AC #7)
+test/presentation/services/
+└── dehydration_timer_service_test.dart     - Tests timer
 ```
+
+### Points d'Attention
+- ⚠️ **Ne PAS modifier AvatarState enum** - Il existe déjà avec `getNextState()`
+- ⚠️ **Ne PAS recréer AvatarRepository** - Il existe déjà avec `updateAvatarState()`
+- ⚠️ **lastDrinkTime** - Doit être stocké quelque part (peut-être ajouter dans avatar_state table SQLite si pas déjà là)
+- ⚠️ **Timer background** - Doit être annulé proprement (dispose) pour éviter memory leaks
+- ⚠️ **Tests temporels** - Utiliser des timestamps contrôlés (pas DateTime.now() dans tests)
 
 ---
 
