@@ -40,8 +40,9 @@
 | 18 | user | Test Story 1.6 | Story 1.6 complétée | Test manuel Home Screen (premier écran visible) |
 | 19 | qa | QA Gate Epic 1 | Epic 1 complété | Execute docs/qa/gates/epic-1-qa-gate.md |
 | 20 | architect | Review Epic 1 | QA Gate passé | Vérif architecture Clean Architecture |
-| 21 | po | Acceptance Epic 1 | Architect OK | Validation epic prêt pour Epic 2 |
-| 22+ | dev | Epic 2 Onboarding | Epic 1 validé | Stories 2.1-2.10 |
+| 21 | pm | Review Epic 1 | Architect OK | Validation fonctionnelle (AC, specs PRD, comportement) |
+| 22 | po | Acceptance Epic 1 | PM + Architect OK | Validation epic prêt pour Epic 2 |
+| 23+ | dev | Epic 2 Onboarding | Epic 1 validé | Stories 2.1-2.10 |
 
 ---
 
