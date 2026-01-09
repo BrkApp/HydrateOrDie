@@ -4,6 +4,7 @@ import '../../data/data_sources/local/avatar_local_data_source.dart';
 import '../../data/data_sources/local/database_helper.dart';
 import '../../data/repositories/avatar_repository_impl.dart';
 import '../../domain/repositories/avatar_repository.dart';
+import '../../presentation/providers/avatar_asset_provider.dart';
 
 /// Global service locator instance
 final getIt = GetIt.instance;
@@ -45,6 +46,15 @@ Future<void> setupDependencies() async {
   // ========================================
 
   // Use cases will be registered here in future stories
+
+  // ========================================
+  // PROVIDERS (Presentation Layer)
+  // ========================================
+
+  // AvatarAssetProvider - Singleton
+  getIt.registerLazySingleton<AvatarAssetProvider>(
+    () => AvatarAssetProvider(),
+  );
 }
 
 /// Reset all dependencies (for testing)

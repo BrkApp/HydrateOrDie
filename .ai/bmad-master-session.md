@@ -24,12 +24,13 @@
 | 10 | master | GitHub Setup + Cleanup | ✅ Terminé | 2026-01-08 | Repo synced, 151 .md files optimisés |
 | 11 | dev | Story 1.2 (Domain Models) | ✅ Terminé | 2026-01-08 | 10 entities, 115 tests, 100% coverage |
 | 12 | dev | Story 1.3 (Avatar Repository) | ✅ Terminé | 2026-01-08 | SQLite + SharedPrefs, DTOs, 128 tests passing |
+| 13 | dev | Story 1.4 (Avatar Assets) | ✅ Terminé | 2026-01-08 | 20 assets emojis, AvatarDisplay widget, 51 tests |
 
 ### ⏸️ PHASE EN COURS
 
 | Phase | Agent | Livrable | Statut | Début | Notes |
 |-------|-------|----------|--------|-------|-------|
-| 13 | dev | Story 1.4 (Avatar Assets) | 🔄 Prêt | 2026-01-08 | Placeholders + Asset management |
+| 14 | dev | Story 1.5 (Dehydration Logic) | 🔄 Prêt | 2026-01-08 | Calcul hydratation + transitions état |
 
 ### 🔜 PHASES À VENIR
 
@@ -279,6 +280,8 @@ Aucun
 | 2026-01-08 | Ajout section "Moments de Test Manuel" (8 checkpoints) | BMad Master |
 | 2026-01-08 | ✅ Phase 11 complétée (Story 1.2 - 10 entities, 100% coverage) | Dev Agent |
 | 2026-01-08 | ✅ Phase 12 complétée (Story 1.3 - Repository + DTOs, SQLite) | Dev Agent |
+| 2026-01-08 | Correction dev-context.md + création prompt-template | BMad Master |
+| 2026-01-08 | ✅ Phase 13 complétée (Story 1.4 - Assets + AvatarDisplay) | Dev Agent |
 
 ---
 
@@ -292,8 +295,8 @@ Aucun
 
 ---
 
-**Dernière action:** ✅ Story 1.3 complétée (Repository + SQLite + DTOs, 128 tests)
-**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.4 (Avatar Assets + Placeholders)
+**Dernière action:** ✅ Story 1.4 complétée (20 assets + AvatarDisplay widget, 51 tests)
+**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.5 (Dehydration Logic)
 
 ---
 
