@@ -2,21 +2,21 @@
 
 > **Objectif:** Ce fichier maintient le contexte de développement pour tous les agents @dev travaillant sur Epic 1. Il est mis à jour après chaque story complétée pour éviter les duplications et assurer la cohérence.
 
-**Dernière mise à jour:** 2026-01-08 (après Story 1.3)
+**Dernière mise à jour:** 2026-01-09 (après Story 1.4)
 
 ---
 
 ## 📊 Vue d'Ensemble Epic 1
 
 **Epic:** Foundation & Avatar Core System
-**Progression:** 3/8 stories complétées (37.5%)
+**Progression:** 4/8 stories complétées (50%)
 
 ```
 ✅ Story 1.1 - Flutter Setup + CI/CD
 ✅ Story 1.2 - Domain Models (10 entities)
 ✅ Story 1.3 - Avatar Repository (SQLite + DTOs)
-⏳ Story 1.4 - Avatar Assets (PROCHAINE)
-⏳ Story 1.5 - Dehydration Logic
+✅ Story 1.4 - Avatar Assets (20 emojis + AvatarDisplay widget)
+🔄 Story 1.5 - Dehydration Logic (EN COURS)
 ⏳ Story 1.6 - Home Screen
 ⏳ Story 1.7 - Ghost System
 ⏳ Story 1.8 - Avatar Selection
@@ -398,7 +398,113 @@ flutter test test/presentation/  # 51/51 tests passent ✅
 
 ---
 
-## ⏳ PROCHAINE STORY: 1.5 - Dehydration Logic
+## ✅ Story 1.4 - Avatar Assets + Display Widget
+
+### Fichiers Clés Créés
+
+#### **Assets (20 placeholders emoji)**
+```
+assets/avatars/
+├── doctor/ (🧑‍⚕️)
+│   ├── fresh.txt (😊), tired.txt (😐), dehydrated.txt (😟)
+│   ├── dead.txt (💀), ghost.txt (👻)
+├── sportsCoach/ (💪) - idem 5 états
+├── authoritarianMother/ (👩) - idem 5 états
+└── sarcasticFriend/ (🤝) - idem 5 états
+```
+
+#### **Presentation Layer**
+```
+lib/presentation/
+├── providers/
+│   └── avatar_asset_provider.dart    - Service chargement assets (145 lignes)
+└── widgets/
+    └── avatar_display.dart           - Widget affichage avatar (102 lignes, ConsumerWidget)
+
+test/presentation/
+├── providers/
+│   └── avatar_asset_provider_test.dart   - 18 unit tests
+└── widgets/
+    └── avatar_display_test.dart          - 33 widget tests
+```
+
+#### **Dependency Injection**
+```
+lib/core/di/injection.dart - AvatarAssetProvider enregistré dans get_it
+```
+
+### Architecture Implémentée
+
+#### **AvatarAssetProvider**
+```dart
+class AvatarAssetProvider {
+  String getEmojiAsset(AvatarPersonality personality, AvatarState state);
+  String getAssetPath(AvatarPersonality personality, AvatarState state);
+  bool validateAllAssetsExist();
+  int get totalAssetCount; // Returns 20
+  // Retourne: assets/avatars/{personality}/{state}.txt
+}
+```
+
+#### **AvatarDisplay Widget**
+```dart
+class AvatarDisplay extends ConsumerWidget {
+  final AvatarPersonality personality;
+  final AvatarState state;
+  final double? size;
+
+  // Utilise AvatarAssetProvider pour charger l'asset correct
+  // Affiche emoji placeholder (Text widget avec fontSize)
+  // Background coloré selon état (vert/jaune/orange/rouge/gris)
+}
+```
+
+### À Savoir pour la Suite
+- ✅ **20 assets emoji créés** - Placeholders .txt dans assets/avatars/
+- ✅ **AvatarDisplay widget prêt** - Peut afficher n'importe quelle combinaison personality + state
+- ✅ **Provider injectable** - `getIt<AvatarAssetProvider>()`
+- ✅ **Mapping personality → nom dossier:**
+  - `doctor` → "doctor"
+  - `coach` → "sportsCoach"
+  - `mother` → "authoritarianMother"
+  - `friend` → "sarcasticFriend"
+- ✅ **Mapping state → nom fichier:**
+  - `fresh` → "fresh.txt"
+  - `slightlyDehydrated` → "tired.txt" (note: pas "slightly_dehydrated")
+  - `dehydrated` → "dehydrated.txt"
+  - `dead` → "dead.txt"
+  - `ghost` → "ghost.txt"
+- ✅ **Background colors par état:**
+  - Fresh: Light green `#E8F5E9`
+  - Tired: Light yellow `#FFF9C4`
+  - Dehydrated: Light orange `#FFE0B2`
+  - Dead: Light red `#FFCDD2`
+  - Ghost: Light gray `#EEEEEE`
+- ⚠️ **Assets sont des fichiers .txt** avec emojis (pas .png pour l'instant)
+- ⚠️ **Structure prête pour vraies images** - Remplacer .txt par .png plus tard
+
+### Tests Validés
+```bash
+flutter test test/presentation/  # 51/51 tests passent ✅
+# AvatarAssetProvider: 18 tests (100% coverage)
+# AvatarDisplay: 33 tests (toutes combinaisons personality × state)
+```
+
+### Usage pour Story 1.6 (Home Screen)
+```dart
+import 'package:hydrate_or_die/presentation/widgets/avatar_display.dart';
+
+// Dans HomeScreen build method:
+AvatarDisplay(
+  personality: selectedPersonality, // from AvatarRepository
+  state: currentState,              // calculated from dehydration logic
+  size: 200.0,                      // optional (default: 150.0)
+)
+```
+
+---
+
+## ⏳ STORY EN COURS: 1.5 - Dehydration Logic
 
 ### Ce qui EXISTE déjà (NE PAS RECRÉER)
 - ✅ `AvatarState` enum avec 5 états + méthode `getNextState()` (Story 1.2)
@@ -521,8 +627,8 @@ flutter devices                 # Liste devices disponibles
 
 ---
 
-**Dernière mise à jour:** 2026-01-08 après Story 1.3
-**Prochaine mise à jour:** Après Story 1.4 (Avatar Assets)
+**Dernière mise à jour:** 2026-01-09 après Story 1.4
+**Prochaine mise à jour:** Après Story 1.5 (Dehydration Logic)
 
 ---
 
