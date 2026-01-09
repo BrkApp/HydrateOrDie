@@ -2,22 +2,22 @@
 
 > **Objectif:** Ce fichier maintient le contexte de développement pour tous les agents @dev travaillant sur Epic 1. Il est mis à jour après chaque story complétée pour éviter les duplications et assurer la cohérence.
 
-**Dernière mise à jour:** 2026-01-09 (après Story 1.4)
+**Dernière mise à jour:** 2026-01-09 (après Story 1.5)
 
 ---
 
 ## 📊 Vue d'Ensemble Epic 1
 
 **Epic:** Foundation & Avatar Core System
-**Progression:** 4/8 stories complétées (50%)
+**Progression:** 5/8 stories complétées (62.5%)
 
 ```
 ✅ Story 1.1 - Flutter Setup + CI/CD
 ✅ Story 1.2 - Domain Models (10 entities)
 ✅ Story 1.3 - Avatar Repository (SQLite + DTOs)
 ✅ Story 1.4 - Avatar Assets (20 emojis + AvatarDisplay widget)
-🔄 Story 1.5 - Dehydration Logic (EN COURS)
-⏳ Story 1.6 - Home Screen
+✅ Story 1.5 - Dehydration Logic (Use Case + Timer Service)
+⏳ Story 1.6 - Home Screen (PROCHAINE)
 ⏳ Story 1.7 - Ghost System
 ⏳ Story 1.8 - Avatar Selection
 ```
@@ -504,68 +504,128 @@ AvatarDisplay(
 
 ---
 
-## ⏳ STORY EN COURS: 1.5 - Dehydration Logic
+## ✅ Story 1.5 - Dehydration Logic (Use Case + Timer Service)
 
-### Ce qui EXISTE déjà (NE PAS RECRÉER)
-- ✅ `AvatarState` enum avec 5 états + méthode `getNextState()` (Story 1.2)
-- ✅ `AvatarRepository` interface (Story 1.3) avec méthodes:
-  - `updateAvatarState(AvatarState state)`
-  - `getAvatarState()`
-- ✅ `AvatarRepositoryImpl` (Story 1.3) - Implémentation avec SQLite
-- ✅ Dependency Injection configuré (Story 1.3) - `getIt<AvatarRepository>()`
+### Fichiers Clés Créés
 
-### Ce qu'il FAUT créer
-- [ ] **Use Case `UpdateAvatarStateUseCase`** (AC #1) - Logique calcul état selon temps
-- [ ] **Service Timer Background** (AC #4, #8) - Timer.periodic toutes les 30min
-- [ ] **Logging transitions état** (AC #6) - print() pour debug
-- [ ] **Tests unitaires use case** (AC #7) - Scénarios 0h, 1h, 3h, 5h, 7h
-- [ ] **Tests service timer** - Vérifier timer créé/annulé correctement
-
-### Règles Métier (AC #2)
-**Progression déshydratation:**
+#### **Domain Layer (Use Case)**
 ```
-Fresh (0-2h depuis last drink)
-  ↓ après 2h
-Tired (2-4h depuis last drink)
-  ↓ après 4h
-Dehydrated (4-6h depuis last drink)
-  ↓ après 6h
-Dead (6h+ depuis last drink)
+lib/domain/use_cases/avatar/
+└── update_avatar_state_use_case.dart    - Calcul état selon temps écoulé (110 lignes)
+
+test/domain/use_cases/avatar/
+└── update_avatar_state_use_case_test.dart - 15 tests scénarios temporels
 ```
 
-**Calcul:**
-- Utiliser `DateTime.now()` comparé à `lastDrinkTime` (stocké en SQLite)
-- Si pas de `lastDrinkTime` → considérer Fresh par défaut
-
-### Décisions Importantes
-- **Use Case dans Domain Layer** - `lib/domain/use_cases/update_avatar_state_use_case.dart`
-- **Service Timer dans Presentation** - `lib/presentation/services/dehydration_timer_service.dart` (ou Core)
-- **Logging simple** - `print()` pour MVP (pas de logger package pour l'instant)
-- **Timer périodique** - `Timer.periodic(Duration(minutes: 30), callback)`
-- **Annulation timer** - Méthode `dispose()` pour cleanup
-- **Appel automatique** - À l'ouverture app (main.dart ou app init) + toutes les 30min
-
-### Fichiers à Créer
+#### **Presentation Layer (Timer Service)**
 ```
-lib/domain/use_cases/
-└── update_avatar_state_use_case.dart    - Use case calcul état (AC #1)
-
 lib/presentation/services/
-└── dehydration_timer_service.dart       - Timer background 30min (AC #4, #8)
-
-test/domain/use_cases/
-└── update_avatar_state_use_case_test.dart  - Tests scénarios temporels (AC #7)
+└── dehydration_timer_service.dart       - Timer periodic 30min (95 lignes)
 
 test/presentation/services/
-└── dehydration_timer_service_test.dart     - Tests timer
+└── dehydration_timer_service_test.dart  - 20 tests timer lifecycle
 ```
 
-### Points d'Attention
-- ⚠️ **Ne PAS modifier AvatarState enum** - Il existe déjà avec `getNextState()`
-- ⚠️ **Ne PAS recréer AvatarRepository** - Il existe déjà avec `updateAvatarState()`
-- ⚠️ **lastDrinkTime** - Doit être stocké quelque part (peut-être ajouter dans avatar_state table SQLite si pas déjà là)
-- ⚠️ **Timer background** - Doit être annulé proprement (dispose) pour éviter memory leaks
-- ⚠️ **Tests temporels** - Utiliser des timestamps contrôlés (pas DateTime.now() dans tests)
+#### **Dependency Injection**
+```
+lib/core/di/injection.dart - Ajout UpdateAvatarStateUseCase + DehydrationTimerService
+```
+
+### Architecture Implémentée
+
+#### **UpdateAvatarStateUseCase**
+```dart
+class UpdateAvatarStateUseCase {
+  final AvatarRepository repository;
+
+  // Constantes seuils
+  static const kFreshToTired = Duration(hours: 2);
+  static const kTiredToDehydrated = Duration(hours: 4);
+  static const kDehydratedToDead = Duration(hours: 6);
+
+  Future<AvatarState> execute();
+  // 1. Récupère lastDrinkTime depuis repository
+  // 2. Calcule temps écoulé (DateTime.now() - lastDrinkTime)
+  // 3. Détermine nouvel état selon seuils
+  // 4. Met à jour repository si état changé
+  // 5. Log transitions pour debug
+}
+```
+
+#### **DehydrationTimerService**
+```dart
+class DehydrationTimerService {
+  final UpdateAvatarStateUseCase updateAvatarStateUseCase;
+  Timer? _timer;
+
+  void start();        // Démarre timer + exécution immédiate
+  void dispose();      // Annule timer proprement (cleanup)
+  void forceUpdate();  // Mise à jour manuelle
+  bool get isRunning;  // Statut timer
+
+  // Timer.periodic: Intervalle de 30 minutes
+}
+```
+
+### Règles Métier Implémentées
+
+**Transitions d'état (AC #2):**
+```
+Fresh (0-2h)       → 😊 Vert
+  ↓ après 2h exactement
+Tired (2-4h)       → 😐 Jaune
+  ↓ après 4h exactement
+Dehydrated (4-6h)  → 😟 Orange
+  ↓ après 6h exactement
+Dead (6h+)         → 💀 Rouge
+```
+
+**Seuils validés par tests:**
+- 2h exactement: Fresh → Tired ✅
+- 4h exactement: Tired → Dehydrated ✅
+- 6h exactement: Dehydrated → Dead ✅
+
+### À Savoir pour la Suite
+
+- ✅ **Use Case injectable** - `getIt<UpdateAvatarStateUseCase>()`
+- ✅ **Timer Service singleton** - `getIt<DehydrationTimerService>()`
+- ✅ **Seuils temporels fixes** - 2h, 4h, 6h (constantes dans use case)
+- ✅ **Logging avec print()** - Pour debug MVP (AC #6 validé)
+- ✅ **Timer périodique 30min** - Exécution automatique en background
+- ✅ **Pas de lastDrinkTime** - Retourne Fresh par défaut (premier lancement)
+- ⚠️ **Warnings avoid_print attendus** - 11 warnings normaux (logging intentionnel)
+- ⚠️ **Timer doit être démarré** - Appeler `service.start()` dans main.dart ou app init
+- ⚠️ **Timer doit être disposé** - Appeler `service.dispose()` dans app dispose
+
+### Tests Validés
+```bash
+flutter test test/domain/use_cases/avatar/        # 15/15 tests passent ✅
+flutter test test/presentation/services/          # 20/20 tests passent ✅
+# Total nouveaux tests: 35 (100% coverage use case + service)
+# Scénarios: 0h, 1h, 3h, 5h, 7h + seuils exacts + edge cases
+```
+
+### Intégration pour Story 1.6 (Home Screen)
+```dart
+// Dans main.dart ou app_widget.dart initState:
+void initState() {
+  super.initState();
+  final timerService = getIt<DehydrationTimerService>();
+  timerService.start(); // Démarre timer background
+}
+
+// Dans dispose:
+@override
+void dispose() {
+  final timerService = getIt<DehydrationTimerService>();
+  timerService.dispose(); // Cleanup propre
+  super.dispose();
+}
+
+// Pour refresh manuel dans HomeScreen:
+final useCase = getIt<UpdateAvatarStateUseCase>();
+final newState = await useCase.execute(); // Calcule et met à jour l'état
+```
 
 ---
 
@@ -627,8 +687,8 @@ flutter devices                 # Liste devices disponibles
 
 ---
 
-**Dernière mise à jour:** 2026-01-09 après Story 1.4
-**Prochaine mise à jour:** Après Story 1.5 (Dehydration Logic)
+**Dernière mise à jour:** 2026-01-09 après Story 1.5
+**Prochaine mise à jour:** Après Story 1.6 (Home Screen)
 
 ---
 

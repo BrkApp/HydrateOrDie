@@ -4,7 +4,9 @@ import '../../data/data_sources/local/avatar_local_data_source.dart';
 import '../../data/data_sources/local/database_helper.dart';
 import '../../data/repositories/avatar_repository_impl.dart';
 import '../../domain/repositories/avatar_repository.dart';
+import '../../domain/use_cases/avatar/update_avatar_state_use_case.dart';
 import '../../presentation/providers/avatar_asset_provider.dart';
+import '../../presentation/services/dehydration_timer_service.dart';
 
 /// Global service locator instance
 final getIt = GetIt.instance;
@@ -42,10 +44,22 @@ Future<void> setupDependencies() async {
   );
 
   // ========================================
-  // USE CASES (Future stories)
+  // USE CASES
   // ========================================
 
-  // Use cases will be registered here in future stories
+  // UpdateAvatarStateUseCase - Factory (Story 1.5)
+  getIt.registerFactory<UpdateAvatarStateUseCase>(
+    () => UpdateAvatarStateUseCase(getIt<AvatarRepository>()),
+  );
+
+  // ========================================
+  // SERVICES (Presentation Layer)
+  // ========================================
+
+  // DehydrationTimerService - Singleton (Story 1.5)
+  getIt.registerLazySingleton<DehydrationTimerService>(
+    () => DehydrationTimerService(getIt<UpdateAvatarStateUseCase>()),
+  );
 
   // ========================================
   // PROVIDERS (Presentation Layer)

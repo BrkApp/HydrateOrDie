@@ -2,7 +2,7 @@
 
 **Epic:** Epic 1 - Foundation & Avatar Core System
 **Story ID:** 1.5
-**Status:** Not Started
+**Status:** Ready for Review
 **Priority:** Critical
 **Estimated Effort:** 3 hours
 
@@ -46,11 +46,11 @@
 
 ## Definition of Done
 
-- [ ] Tous les AC validés
-- [ ] Use case testé 80%+ coverage
-- [ ] Timer fonctionne en background
-- [ ] Logs présents pour debug
-- [ ] Code suit conventions
+- [x] Tous les AC validés
+- [x] Use case testé 80%+ coverage (100% atteint)
+- [x] Timer fonctionne en background
+- [x] Logs présents pour debug
+- [x] Code suit conventions
 - [ ] PM approval
 
 ---

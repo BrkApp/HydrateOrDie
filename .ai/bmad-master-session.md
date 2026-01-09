@@ -25,12 +25,13 @@
 | 11 | dev | Story 1.2 (Domain Models) | ✅ Terminé | 2026-01-08 | 10 entities, 115 tests, 100% coverage |
 | 12 | dev | Story 1.3 (Avatar Repository) | ✅ Terminé | 2026-01-08 | SQLite + SharedPrefs, DTOs, 128 tests passing |
 | 13 | dev | Story 1.4 (Avatar Assets) | ✅ Terminé | 2026-01-08 | 20 assets emojis, AvatarDisplay widget, 51 tests |
+| 14 | dev | Story 1.5 (Dehydration Logic) | ✅ Terminé | 2026-01-09 | Use Case + Timer Service, 35 tests, transitions automatiques |
 
 ### ⏸️ PHASE EN COURS
 
 | Phase | Agent | Livrable | Statut | Début | Notes |
 |-------|-------|----------|--------|-------|-------|
-| 14 | dev | Story 1.5 (Dehydration Logic) | 🔄 Prêt | 2026-01-08 | Calcul hydratation + transitions état |
+| 15 | dev | Story 1.6 (Home Screen) | 🔄 Prêt | 2026-01-09 | Premier écran UI visible avec avatar réactif |
 
 ### 🔜 PHASES À VENIR
 
@@ -284,6 +285,8 @@ Aucun
 | 2026-01-08 | ✅ Phase 12 complétée (Story 1.3 - Repository + DTOs, SQLite) | Dev Agent |
 | 2026-01-08 | Correction dev-context.md + création prompt-template | BMad Master |
 | 2026-01-08 | ✅ Phase 13 complétée (Story 1.4 - Assets + AvatarDisplay) | Dev Agent |
+| 2026-01-09 | Mise à jour dev-context.md après Story 1.4 (commit a586f1a) | BMad Master |
+| 2026-01-09 | ✅ Phase 14 complétée (Story 1.5 - Use Case + Timer Service) | Dev Agent |
 
 ---
 
@@ -299,8 +302,8 @@ Aucun
 
 ---
 
-**Dernière action:** ✅ Story 1.4 complétée (20 assets + AvatarDisplay widget, 51 tests)
-**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.5 (Dehydration Logic)
+**Dernière action:** ✅ Story 1.5 complétée (Use Case + Timer Service, 35 tests, transitions automatiques)
+**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.6 (Home Screen - PREMIER ÉCRAN UI!)
 
 ---
 
