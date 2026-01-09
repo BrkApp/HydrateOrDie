@@ -36,11 +36,12 @@
 
 | Phase | Agent | Livrable | Dépendances | Notes |
 |-------|-------|----------|-------------|-------|
-| 6 | po | Validation complète | front-end-spec.md | Checklist po-master-checklist |
-| 7 | po | Sharding docs | Validation OK | Crée docs/prd/ et docs/architecture/ |
-| 8 | sm | Stories individuelles | Docs shardés | Cycle itératif, 1 story à la fois |
-| 9 | dev | Implémentation | Stories approuvées | Commence par Story 1.1 |
-| 10 | qa | Review code | Implémentation | Optionnel mais recommandé |
+| 15-17 | dev | Stories 1.5-1.8 | Stories 1.1-1.4 | Suite Epic 1 |
+| 18 | user | Test Story 1.6 | Story 1.6 complétée | Test manuel Home Screen (premier écran visible) |
+| 19 | qa | QA Gate Epic 1 | Epic 1 complété | Execute docs/qa/gates/epic-1-qa-gate.md |
+| 20 | architect | Review Epic 1 | QA Gate passé | Vérif architecture Clean Architecture |
+| 21 | po | Acceptance Epic 1 | Architect OK | Validation epic prêt pour Epic 2 |
+| 22+ | dev | Epic 2 Onboarding | Epic 1 validé | Stories 2.1-2.10 |
 
 ---
 
@@ -292,6 +293,8 @@ Aucun
 3. **Stratégie assets:** Ne PAS bloquer dev, utiliser placeholders puis remplacer
 4. **Conversations agents:** Master = persistent, autres = nouveau chat par tâche
 5. **Ce fichier doit être MAJ après chaque décision/phase importante**
+6. **Stratégie Git:** Epic 1 direct sur master (foundation), Epic 2+ branches feature/epic-X
+7. **Validations:** Par EPIC (pas par story) - QA Gate + Architect + PO après chaque epic
 
 ---
 
