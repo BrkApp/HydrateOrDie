@@ -55,7 +55,17 @@ docs/stories/**/reports/
 docs/assets/
 
 # --- Redundant Docs (Handled by .CLAUDE.md) ---
+# Ces fichiers sont utiles pour les humains ou l'Architecte, mais trop lourds pour le Dev au quotidien
 docs/instructions-claude.md
+docs/architecture.md
+docs/brief.md
+docs/brainstorming-session-results.md
+docs/prd.md
+docs/roadmap.md
+
+# --- Epics (Handled by individual stories) ---
+# On ne veut pas que Claude lise tout l'Epic (toutes les stories) quand il bosse sur une seule
+docs/epics/
 
 # --- Heavy Specs & Future Features ---
 # Ignoré pour économiser les tokens (25k+ mots).
@@ -63,3 +73,7 @@ docs/instructions-claude.md
 docs/front-end-spec.md
 # Idée UI Fallout (Phase future/expérimentale)
 docs/gemini-ui_fallout-idea.md
+
+# --- AI & Master Agent Files ---
+# L'agent Dev ne doit JAMAIS lire la session du Master (historique complet du projet)
+.ai/

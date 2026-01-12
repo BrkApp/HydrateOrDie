@@ -3,6 +3,7 @@
 > **Objectif:** Template standardisé pour générer les prompts @dev sans erreurs ni omissions.
 
 **Usage BMad Master:** Avant de donner un prompt au user, TOUJOURS:
+0. **INITIALISATION:** Charger la mémoire Master avec `/add .ai/bmad-master-session.md` (car ignoré par défaut).
 1. Lire la story complète (`docs/stories/epic-X/story-X.Y-*.md`)
 2. Extraire TOUS les Acceptance Criteria
 3. Vérifier cohérence avec `dev-context.md`
