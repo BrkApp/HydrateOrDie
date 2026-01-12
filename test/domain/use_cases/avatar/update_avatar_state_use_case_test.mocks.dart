@@ -76,4 +76,21 @@ class MockAvatarRepository extends _i1.Mock implements _i2.AvatarRepository {
             returnValue: _i3.Future<DateTime?>.value(),
           )
           as _i3.Future<DateTime?>);
+
+  @override
+  _i3.Future<DateTime?> getDeathTime() =>
+      (super.noSuchMethod(
+            Invocation.method(#getDeathTime, []),
+            returnValue: _i3.Future<DateTime?>.value(),
+          )
+          as _i3.Future<DateTime?>);
+
+  @override
+  _i3.Future<void> updateDeathTime(DateTime? timestamp) =>
+      (super.noSuchMethod(
+            Invocation.method(#updateDeathTime, [timestamp]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 }

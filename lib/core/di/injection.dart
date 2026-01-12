@@ -4,9 +4,11 @@ import '../../data/data_sources/local/avatar_local_data_source.dart';
 import '../../data/data_sources/local/database_helper.dart';
 import '../../data/repositories/avatar_repository_impl.dart';
 import '../../domain/repositories/avatar_repository.dart';
+import '../../domain/use_cases/avatar/check_and_resurrect_avatar_use_case.dart';
 import '../../domain/use_cases/avatar/update_avatar_state_use_case.dart';
 import '../../presentation/providers/avatar_asset_provider.dart';
 import '../../presentation/services/dehydration_timer_service.dart';
+import '../../presentation/services/resurrection_timer_service.dart';
 
 /// Global service locator instance
 final getIt = GetIt.instance;
@@ -52,6 +54,11 @@ Future<void> setupDependencies() async {
     () => UpdateAvatarStateUseCase(getIt<AvatarRepository>()),
   );
 
+  // CheckAndResurrectAvatarUseCase - Factory (Story 1.7)
+  getIt.registerFactory<CheckAndResurrectAvatarUseCase>(
+    () => CheckAndResurrectAvatarUseCase(getIt<AvatarRepository>()),
+  );
+
   // ========================================
   // SERVICES (Presentation Layer)
   // ========================================
@@ -59,6 +66,11 @@ Future<void> setupDependencies() async {
   // DehydrationTimerService - Singleton (Story 1.5)
   getIt.registerLazySingleton<DehydrationTimerService>(
     () => DehydrationTimerService(getIt<UpdateAvatarStateUseCase>()),
+  );
+
+  // ResurrectionTimerService - Singleton (Story 1.7)
+  getIt.registerLazySingleton<ResurrectionTimerService>(
+    () => ResurrectionTimerService(getIt<CheckAndResurrectAvatarUseCase>()),
   );
 
   // ========================================

@@ -261,6 +261,7 @@ void main() {
 
       test('Retourne Fresh par défaut si aucun lastDrinkTime', () async {
         // Arrange - Pas de lastDrinkTime (premier lancement)
+        when(mockRepository.getAvatar()).thenAnswer((_) async => null);
         when(mockRepository.getLastDrinkTime()).thenAnswer((_) async => null);
 
         // Act
@@ -327,6 +328,7 @@ void main() {
     group('Gestion des erreurs', () {
       test('Propage StorageException si getLastDrinkTime échoue', () async {
         // Arrange
+        when(mockRepository.getAvatar()).thenAnswer((_) async => null);
         when(mockRepository.getLastDrinkTime())
             .thenThrow(StorageException('Database error'));
 
@@ -364,12 +366,186 @@ void main() {
       });
     });
 
+    group('Story 1.7 - Transition Dead → Ghost (AC #2)', () {
+      test('AC #2 - Dead reste dead si < 10 secondes écoulées', () async {
+        // Arrange - Avatar dead depuis seulement 5 secondes
+        final now = DateTime.now();
+        final lastDrinkTime = now.subtract(const Duration(hours: 7));
+        final deathTime = now.subtract(const Duration(seconds: 5));
+
+        final currentAvatar = Avatar(
+          id: 'avatar_singleton',
+          name: 'Docteur',
+          personality: AvatarPersonality.doctor,
+          currentState: AvatarState.dead,
+          lastDrinkTime: lastDrinkTime,
+          lastUpdated: now,
+        );
+
+        when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
+        when(mockRepository.getDeathTime()).thenAnswer((_) async => deathTime);
+
+        // Act
+        final result = await useCase.execute();
+
+        // Assert
+        expect(result, AvatarState.dead);
+        verifyNever(mockRepository.updateAvatarState(any));
+      });
+
+      test('AC #2 - Dead → Ghost après exactement 10 secondes', () async {
+        // Arrange - Avatar dead depuis exactement 10 secondes
+        final now = DateTime.now();
+        final lastDrinkTime = now.subtract(const Duration(hours: 7));
+        final deathTime = now.subtract(const Duration(seconds: 10));
+
+        final currentAvatar = Avatar(
+          id: 'avatar_singleton',
+          name: 'Coach',
+          personality: AvatarPersonality.sportsCoach,
+          currentState: AvatarState.dead,
+          lastDrinkTime: lastDrinkTime,
+          lastUpdated: now,
+        );
+
+        when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
+        when(mockRepository.getDeathTime()).thenAnswer((_) async => deathTime);
+        when(mockRepository.updateAvatarState(AvatarState.ghost))
+            .thenAnswer((_) async => {});
+
+        // Act
+        final result = await useCase.execute();
+
+        // Assert
+        expect(result, AvatarState.ghost);
+        verify(mockRepository.updateAvatarState(AvatarState.ghost)).called(1);
+      });
+
+      test('AC #2 - Dead → Ghost après 15 secondes', () async {
+        // Arrange - Avatar dead depuis 15 secondes
+        final now = DateTime.now();
+        final lastDrinkTime = now.subtract(const Duration(hours: 7));
+        final deathTime = now.subtract(const Duration(seconds: 15));
+
+        final currentAvatar = Avatar(
+          id: 'avatar_singleton',
+          name: 'Maman',
+          personality: AvatarPersonality.authoritarianMother,
+          currentState: AvatarState.dead,
+          lastDrinkTime: lastDrinkTime,
+          lastUpdated: now,
+        );
+
+        when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
+        when(mockRepository.getDeathTime()).thenAnswer((_) async => deathTime);
+        when(mockRepository.updateAvatarState(AvatarState.ghost))
+            .thenAnswer((_) async => {});
+
+        // Act
+        final result = await useCase.execute();
+
+        // Assert
+        expect(result, AvatarState.ghost);
+        verify(mockRepository.updateAvatarState(AvatarState.ghost)).called(1);
+      });
+
+      test('AC #2 - Ghost reste ghost (pas de régression)', () async {
+        // Arrange - Avatar déjà en état ghost
+        final now = DateTime.now();
+        final lastDrinkTime = now.subtract(const Duration(hours: 8));
+
+        final currentAvatar = Avatar(
+          id: 'avatar_singleton',
+          name: 'Ami',
+          personality: AvatarPersonality.sarcasticFriend,
+          currentState: AvatarState.ghost,
+          lastDrinkTime: lastDrinkTime,
+          lastUpdated: now,
+        );
+
+        when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
+
+        // Act
+        final result = await useCase.execute();
+
+        // Assert
+        expect(result, AvatarState.ghost);
+        // Ghost doit rester ghost jusqu'à résurrection à minuit
+        verifyNever(mockRepository.updateAvatarState(any));
+      });
+
+      test('AC #2 - Transition vers dead enregistre deathTime', () async {
+        // Arrange - Transition fresh → dead (7h+ sans boire)
+        final now = DateTime.now();
+        final lastDrinkTime = now.subtract(const Duration(hours: 7));
+
+        final currentAvatar = Avatar(
+          id: 'avatar_singleton',
+          name: 'Docteur',
+          personality: AvatarPersonality.doctor,
+          currentState: AvatarState.dehydrated,
+          lastDrinkTime: lastDrinkTime,
+          lastUpdated: now,
+        );
+
+        when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
+        when(mockRepository.getLastDrinkTime())
+            .thenAnswer((_) async => lastDrinkTime);
+        when(mockRepository.updateAvatarState(AvatarState.dead))
+            .thenAnswer((_) async => {});
+        when(mockRepository.updateDeathTime(any)).thenAnswer((_) async => {});
+
+        // Act
+        final result = await useCase.execute();
+
+        // Assert
+        expect(result, AvatarState.dead);
+        verify(mockRepository.updateAvatarState(AvatarState.dead)).called(1);
+        verify(mockRepository.updateDeathTime(any)).called(1);
+      });
+
+      test('AC #2 - Dead sans deathTime reste dead (edge case)', () async {
+        // Arrange - Avatar dead mais deathTime null (données corrompues?)
+        final now = DateTime.now();
+        final lastDrinkTime = now.subtract(const Duration(hours: 7));
+
+        final currentAvatar = Avatar(
+          id: 'avatar_singleton',
+          name: 'Coach',
+          personality: AvatarPersonality.sportsCoach,
+          currentState: AvatarState.dead,
+          lastDrinkTime: lastDrinkTime,
+          lastUpdated: now,
+        );
+
+        when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
+        when(mockRepository.getDeathTime())
+            .thenAnswer((_) async => null); // Pas de deathTime
+        when(mockRepository.getLastDrinkTime())
+            .thenAnswer((_) async => lastDrinkTime);
+
+        // Act
+        final result = await useCase.execute();
+
+        // Assert
+        expect(result, AvatarState.dead);
+        // Pas de transition vers ghost si deathTime manquant
+        verifyNever(mockRepository.updateAvatarState(any));
+      });
+    });
+
     group('Constantes de seuil', () {
       test('Constantes définies correctement selon AC #2', () {
         // Assert
         expect(UpdateAvatarStateUseCase.kFreshToTired, 2);
         expect(UpdateAvatarStateUseCase.kTiredToDehydrated, 4);
         expect(UpdateAvatarStateUseCase.kDehydratedToDead, 6);
+      });
+
+      test('Story 1.7 - Constante kDeadToGhostDelay définie', () {
+        // Assert
+        expect(
+            UpdateAvatarStateUseCase.kDeadToGhostDelay, const Duration(seconds: 10));
       });
     });
   });

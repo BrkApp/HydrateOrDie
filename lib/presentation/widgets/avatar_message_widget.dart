@@ -45,7 +45,7 @@ class AvatarMessageWidget extends StatelessWidget {
           case AvatarState.dead:
             return 'Décès par déshydratation... 💀';
           case AvatarState.ghost:
-            return 'État fantomatique... 👻';
+            return 'Le patient est décédé... Résurrection prévue demain. 👻';
         }
       case AvatarPersonality.sportsCoach:
         switch (state) {
@@ -58,7 +58,7 @@ class AvatarMessageWidget extends StatelessWidget {
           case AvatarState.dead:
             return 'K.O. technique... 💀';
           case AvatarState.ghost:
-            return 'Même un fantôme peut rebondir ! 👻';
+            return 'Repos forcé... On reprend l\'entraînement demain! 👻';
         }
       case AvatarPersonality.authoritarianMother:
         switch (state) {
@@ -71,7 +71,7 @@ class AvatarMessageWidget extends StatelessWidget {
           case AvatarState.dead:
             return 'Je te l\'avais dit... 💀';
           case AvatarState.ghost:
-            return 'Mon pauvre petit fantôme... 👻';
+            return 'Tu vois ce que tu as fait ?! Demain, tu fais mieux. 👻';
         }
       case AvatarPersonality.sarcasticFriend:
         switch (state) {
@@ -84,7 +84,7 @@ class AvatarMessageWidget extends StatelessWidget {
           case AvatarState.dead:
             return 'Mec, j\'ai crevé... 💀';
           case AvatarState.ghost:
-            return 'Fantôme stylé par contre ! 👻';
+            return 'GG, t\'es mort... Respawn demain mec. 👻';
         }
     }
   }

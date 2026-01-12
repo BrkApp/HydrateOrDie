@@ -137,6 +137,36 @@ class AvatarRepositoryImpl implements AvatarRepository {
     }
   }
 
+  @override
+  Future<DateTime?> getDeathTime() async {
+    try {
+      final deathTimeString = await _localDataSource.getDeathTime();
+      if (deathTimeString == null) {
+        return null;
+      }
+      return DateTime.parse(deathTimeString);
+    } catch (e) {
+      throw StorageException(
+        'Failed to get death time',
+        code: 'GET_DEATH_TIME_FAILED',
+        originalError: e,
+      );
+    }
+  }
+
+  @override
+  Future<void> updateDeathTime(DateTime? timestamp) async {
+    try {
+      await _localDataSource.updateDeathTime(timestamp);
+    } catch (e) {
+      throw StorageException(
+        'Failed to update death time',
+        code: 'UPDATE_DEATH_TIME_FAILED',
+        originalError: e,
+      );
+    }
+  }
+
   /// Get avatar display name from ID
   String _getAvatarName(String avatarId) {
     return _avatarNames[avatarId] ?? 'Avatar';

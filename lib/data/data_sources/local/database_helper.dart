@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart';
 /// Implements singleton pattern for single database instance.
 class DatabaseHelper {
   static const String _databaseName = 'hydrate_or_die.db';
-  static const int _databaseVersion = 1;
+  static const int _databaseVersion = 2;
 
   static Database? _database;
 
@@ -55,6 +55,7 @@ class DatabaseHelper {
         selected_avatar_id TEXT NOT NULL,
         current_state TEXT NOT NULL,
         last_drink_time TEXT NOT NULL,
+        death_time TEXT,
         last_updated TEXT NOT NULL
       )
     ''');
@@ -105,11 +106,12 @@ class DatabaseHelper {
 
   /// Handle database migrations for future versions
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    // Future migrations will be added here
-    // Example for V2:
-    // if (oldVersion < 2) {
-    //   await db.execute('ALTER TABLE user_profile ADD COLUMN new_field TEXT');
-    // }
+    // Migration V1 → V2: Add death_time column to avatar_state (Story 1.7)
+    if (oldVersion < 2) {
+      await db.execute(
+          'ALTER TABLE avatar_state ADD COLUMN death_time TEXT');
+      print('[DatabaseHelper] Migration V1→V2: Added death_time column');
+    }
   }
 
   /// Close database connection

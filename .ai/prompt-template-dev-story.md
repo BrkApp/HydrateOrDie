@@ -7,6 +7,7 @@
 2. Extraire TOUS les Acceptance Criteria
 3. Vérifier cohérence avec `dev-context.md`
 4. Utiliser ce template
+   > **Note:** `.CLAUDE.md` est chargé auto. `front-end-spec.md` est ignoré (trop gros).
 
 ---
 
@@ -21,10 +22,16 @@ docs/stories/epic-X/story-X.Y-[name].md
 **Extraire:**
 - [ ] Tous les Acceptance Criteria (AC #1, #2, ...)
 - [ ] Technical Notes (fichiers, technologies)
-- [ ] Dependencies (stories précédentes requises)
-- [ ] Definition of Done
 
-### Étape 2: Vérifier dev-context.md
+### Étape 2: Injection Chirurgicale (Token Saver) ⚡
+> **CRITIQUE:** `docs/front-end-spec.md` est ignoré par Claude.
+
+- [ ] **Action (MASTER):** Lire `docs/front-end-spec-toc.md` pour identifier la section pertinente.
+- [ ] **Action (USER):** Ouvrir manuellement `front-end-spec.md` (car ignoré par Claude).
+- [ ] **Action (USER):** Copier la section identifiée (ex: "4.2 Écran Sélection") DANS `story-X.Y.md`.
+- [ ] **Résultat:** Claude a tout dans un seul fichier léger.
+
+### Étape 3: Vérifier dev-context.md
 ```bash
 # Lire:
 docs/stories/epic-X/dev-context.md
@@ -42,6 +49,7 @@ docs/stories/epic-X/dev-context.md
 - Fichiers test (`test/`)
 - Assets si applicable
 - Config si applicable
+  > **Optimisation:** Ciblez les dossiers spécifiques (ex: `lib/presentation/home/`) pour éviter de charger tout `lib/`.
 
 ### Étape 4: Générer le Prompt
 
@@ -60,17 +68,14 @@ Je dois implémenter Story X.Y - [NOM] pour le projet HydrateOrDie.
    → **ÉTAT ACTUEL** - Ce qui existe, ce qui est déjà fait
    → **NE PAS RECRÉER** ce qui est listé dans "Ce qui EXISTE déjà"
 
-2. docs/instructions-claude.md
-   → **MANDATORY** - Conventions, standards, règles projet
-
 ═══════════════════════════════════════════════════════════
 📚 FICHIERS À LIRE (DANS CET ORDRE):
 ═══════════════════════════════════════════════════════════
 
-3. docs/stories/epic-X/story-X.Y-[name].md
+2. docs/stories/epic-X/story-X.Y-[name].md
    → Story complète avec TOUS les Acceptance Criteria
 
-4. [Autres fichiers pertinents selon la story]
+3. [Autres fichiers pertinents selon la story]
    → Contracts, architecture, specs UI/UX
    → Fichiers existants à consulter
 

@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'core/di/injection.dart';
+import 'presentation/screens/avatar_selection/avatar_selection_screen.dart';
+import 'presentation/screens/home/home_screen.dart';
+import 'domain/repositories/avatar_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,97 +13,70 @@ void main() async {
   // Initialize Firebase with mock config
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  // Setup dependency injection
+  await setupDependencies();
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends ConsumerWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Hydrate or Die',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        primaryColor: const Color(0xFF2196F3),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF2196F3),
+        ),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Hydrate or Die - MVP'),
+      home: const SplashScreen(), // Détermine où aller
+      routes: {
+        '/home': (_) => const HomeScreen(),
+        '/avatar-selection': (_) => const AvatarSelectionScreen(),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class SplashScreen extends ConsumerStatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _SplashScreenState extends ConsumerState<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _checkAvatarAndNavigate();
+  }
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  Future<void> _checkAvatarAndNavigate() async {
+    final repository = getIt<AvatarRepository>();
+    final selectedAvatar = await repository.getAvatar();
+
+    if (!mounted) return;
+
+    // AC #1 - Navigation conditionnelle
+    if (selectedAvatar == null) {
+      // Premier lancement → Avatar Selection
+      Navigator.of(context).pushReplacementNamed('/avatar-selection');
+    } else {
+      // Avatar déjà sauvegardé → Home Screen
+      Navigator.of(context).pushReplacementNamed('/home');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
+    return const Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              '💧 Welcome to Hydrate or Die!',
-              style: TextStyle(fontSize: 24),
-            ),
-            const SizedBox(height: 20),
-            const Text('Flutter project initialized with:'),
-            const Text(
-              '✅ Clean Architecture structure',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const Text(
-              '✅ Riverpod state management',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const Text(
-              '✅ Firebase mock configuration',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const Text(
-              '✅ All MVP dependencies installed',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 40),
-            Text(
-              'Counter: $_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: CircularProgressIndicator(),
       ),
     );
   }

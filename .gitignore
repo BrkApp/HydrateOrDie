@@ -58,6 +58,14 @@ coverage/
 .claude/settings.local.json
 .claude/commands/
 
+# DevTools Options (Flutter)
+devtools_options.yaml
+
+# Temporary/Working Documents (Not part of source)
+front-end-spec-toc.md
+docs/front-end-spec-v2.md
+docs/gemini-ui_fallout-idea.md
+
 # Old expo stuff (legacy)
 node_modules/
 .expo/

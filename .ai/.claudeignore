@@ -1,0 +1,36 @@
+ # --- FRAMEWORK BMAD (LOGIQUE INTERNE) ---
+# L'IA connaît déjà ces rôles, inutile de lui redonner les définitions
+.bmad-core/agents/
+.bmad-core/checklists/
+.bmad-core/data/
+.bmad-core/tasks/
+.bmad-core/templates/
+.bmad-core/install-manifest.yaml
+.bmad-core/user-guide.md
+
+# --- DOCUMENTATION GLOBALE (SAUF INDEX) ---
+# On garde bmad-master-session.md pour le pilotage, on ignore le reste
+docs/brief.md
+docs/prd.md
+docs/architecture.md
+docs/governance.md
+docs/roadmap.md
+
+# --- EPICS FUTURES ---
+# Masquer les stories qui ne sont pas l'Epic 1
+docs/stories/epic-2/
+docs/stories/epic-3/
+docs/stories/epic-4/
+docs/stories/epic-5/
+docs/qa/gates/epic-2*
+docs/qa/gates/epic-3*
+docs/qa/gates/epic-4*
+docs/qa/gates/epic-5*
+
+# --- FLUTTER & TECHNIQUES ---
+.metadata
+.flutter-plugins-dependencies
+.dart_tool/
+pubspec.lock
+*.iml
+nul

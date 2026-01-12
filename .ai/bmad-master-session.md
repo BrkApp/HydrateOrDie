@@ -1,8 +1,8 @@
 # 🧙 BMad Master - Session de Pilotage
 **Projet:** HydrateOrDie
 **Date Début:** 2026-01-07
-**Dernière MAJ:** 2026-01-07
-**Phase Actuelle:** Planification (Pré-Développement)
+**Dernière MAJ:** 2026-01-11
+**Phase Actuelle:** Développement (Epic 1 - Core Avatar System)
 
 ---
 
@@ -26,24 +26,26 @@
 | 12 | dev | Story 1.3 (Avatar Repository) | ✅ Terminé | 2026-01-08 | SQLite + SharedPrefs, DTOs, 128 tests passing |
 | 13 | dev | Story 1.4 (Avatar Assets) | ✅ Terminé | 2026-01-08 | 20 assets emojis, AvatarDisplay widget, 51 tests |
 | 14 | dev | Story 1.5 (Dehydration Logic) | ✅ Terminé | 2026-01-09 | Use Case + Timer Service, 35 tests, transitions automatiques |
+| 15 | dev | Story 1.6 (Home Screen) | ✅ Terminé | 2026-01-09 | PREMIER ÉCRAN UI! 65 tests, 4 widgets, auto-refresh 60s |
+| 16 | dev | Story 1.7 (Ghost System) | ✅ Terminé | 2026-01-11 | Résurrection + dead→ghost transition, 13 tests, 62/62 DOD |
 
 ### ⏸️ PHASE EN COURS
 
 | Phase | Agent | Livrable | Statut | Début | Notes |
 |-------|-------|----------|--------|-------|-------|
-| 15 | dev | Story 1.6 (Home Screen) | 🔄 Prêt | 2026-01-09 | Premier écran UI visible avec avatar réactif |
+| 17 | dev | Story 1.8 (Avatar Selection) | 🔄 Prêt | 2026-01-11 | Screen sélection 4 avatars + persistence |
 
 ### 🔜 PHASES À VENIR
 
 | Phase | Agent | Livrable | Dépendances | Notes |
 |-------|-------|----------|-------------|-------|
-| 15-17 | dev | Stories 1.5-1.8 | Stories 1.1-1.4 | Suite Epic 1 |
-| 18 | user | Test Story 1.6 | Story 1.6 complétée | Test manuel Home Screen (premier écran visible) |
-| 19 | qa | QA Gate Epic 1 | Epic 1 complété | Execute docs/qa/gates/epic-1-qa-gate.md |
-| 20 | architect | Review Epic 1 | QA Gate passé | Vérif architecture Clean Architecture |
-| 21 | pm | Review Epic 1 | Architect OK | Validation fonctionnelle (AC, specs PRD, comportement) |
-| 22 | po | Acceptance Epic 1 | PM + Architect OK | Validation epic prêt pour Epic 2 |
-| 23+ | dev | Epic 2 Onboarding | Epic 1 validé | Stories 2.1-2.10 |
+| 18 | dev | Story 1.8 (Avatar Selection) | Story 1.7 complétée | Dernière story Epic 1 |
+| 19 | user | Test Epic 1 Manuel | Story 1.8 complétée | Test Home Screen + Avatar Selection + Ghost |
+| 20 | qa | QA Gate Epic 1 | Tests manuels OK | Execute docs/qa/gates/epic-1-qa-gate.md |
+| 21 | architect | Review Epic 1 | QA Gate passé | Vérif architecture Clean Architecture |
+| 22 | pm | Review Epic 1 | Architect OK | Validation fonctionnelle (AC, specs PRD, comportement) |
+| 23 | po | Acceptance Epic 1 | PM + Architect OK | Validation epic prêt pour Epic 2 |
+| 24+ | dev | Epic 2 Onboarding | Epic 1 validé | Stories 2.1-2.10 |
 
 ---
 
@@ -147,24 +149,29 @@ Master (persistent) → Guide général
 
 ## 🗺️ ROADMAP WORKFLOW BMAD
 
-### PHASE DE PLANIFICATION (Actuelle)
+### PHASE DE PLANIFICATION (Complétée ✅)
 ```
 ├─ ✅ analyst → brief.md
 ├─ ✅ pm → prd.md
-├─ ❌ ux-expert → front-end-spec.md (MANQUÉE initialement, EN COURS maintenant)
+├─ ✅ ux-expert → front-end-spec.md
 ├─ ✅ architect → architecture.md
 ├─ ✅ pm → review architect suggestions
-├─ ⏸️  po → validate all docs with po-master-checklist
-├─ ⏸️  Fix issues if PO finds any (conditionnel)
-└─ ⏸️  po → shard documents
+├─ ✅ po → validate all docs with po-master-checklist (92% readiness)
+├─ ✅ master → shard documents (24 fichiers)
+└─ ✅ master → create QA gates (6 fichiers)
 ```
 
-### PHASE DE DÉVELOPPEMENT (À venir)
+### PHASE DE DÉVELOPPEMENT (En cours 🔄)
 ```
-├─ sm → create stories (répété 51×)
-├─ dev → implement story
-├─ qa → review implementation (optionnel)
-└─ Repeat for all epics
+Epic 1: Core Avatar System (7/8 stories complétées)
+├─ ✅ Story 1.1 → Flutter Setup
+├─ ✅ Story 1.2 → Domain Models
+├─ ✅ Story 1.3 → Avatar Repository
+├─ ✅ Story 1.4 → Avatar Assets
+├─ ✅ Story 1.5 → Dehydration Logic
+├─ ✅ Story 1.6 → Home Screen
+├─ ✅ Story 1.7 → Ghost System
+└─ 🔄 Story 1.8 → Avatar Selection (EN COURS)
 ```
 
 ---
@@ -172,54 +179,50 @@ Master (persistent) → Guide général
 ## 📝 PROCHAINES ÉTAPES
 
 ### Étape Immédiate
-**[EN COURS]** UX-Expert termine docs/front-end-spec.md
+**[EN COURS]** Story 1.8 - Avatar Selection Screen
 
-### Après UX-Expert
-1. **PO Validation** (Étape 3/5)
-   - Lance @po avec po-master-checklist
-   - Valide: brief, prd, front-end-spec, architecture
-   - Identifie problèmes éventuels
+### Après Story 1.8 (Fin Epic 1)
+1. **Test Manuel Epic 1**
+   - User teste `flutter run`
+   - Vérifie: Home Screen + Avatar Selection + Ghost System
+   - Valide transitions dead → ghost → fresh (minuit)
 
-2. **Fix Issues** (Conditionnel)
-   - Si PO trouve problèmes → Retour agents concernés
-   - Re-validation PO
+2. **QA Gate Epic 1**
+   - Lance @qa avec docs/qa/gates/epic-1-qa-gate.md
+   - Vérifie 100% AC remplis (8 stories)
+   - Génère rapport QA
 
-3. **Sharding Docs** (Étape 4/5)
-   - PO shard docs/prd.md → docs/prd/
-   - PO shard docs/architecture.md → docs/architecture/
-   - Facilite navigation pour agents Dev
+3. **Review Epic 1**
+   - @architect → Vérifie Clean Architecture respectée
+   - @pm → Valide comportements vs PRD specs
 
-4. **Story Creation** (Étape 5/5)
-   - SM crée stories une par une
-   - Commence par Story 1.1 (Flutter Project Setup)
+4. **Acceptance Epic 1**
+   - @po → Validation finale epic
+   - Si OK → Débute Epic 2 (Onboarding)
 
-5. **Développement**
-   - Dev implémente Story 1.1
-   - Story 1.1 crée TOUS les docs techniques manquants:
-     * README.md
-     * Firebase Setup Guide
-     * CI/CD configuration
-     * docs/dependencies.md
+5. **Epic 2 - User Onboarding**
+   - Stories 2.1 à 2.10
+   - Configuration profil utilisateur complète
 
 ---
 
 ## 🚧 BLOCKERS & RISQUES IDENTIFIÉS
 
 ### Blockers Actuels
-Aucun
+Aucun - Epic 1 en excellente progression (87.5%)
 
 ### Risques Surveillés
-1. **Front-end-spec trop vague** → Risque: Dev ne sait pas quoi implémenter
-   - Mitigation: Prompt détaillé fourni à UX-Expert avec specs précises
-   - Status: 🟢 Sous contrôle
+1. **Tests manuels Epic 1** → Risque: Bugs UI non détectés par tests unitaires
+   - Mitigation: Test manuel complet après Story 1.8
+   - Status: 🟡 À faire (après Story 1.8)
 
-2. **Assets avatars retardent dev UI** → Risque: Stories 1.6, 1.8 bloquées
-   - Mitigation: Stratégie placeholders émojis → génération Midjourney → remplacement
-   - Status: 🟢 Plan établi
+2. **Database migration V1→V2** → Risque: Perte données utilisateur
+   - Mitigation: Tester migration sur DB existante (PM review)
+   - Status: 🟡 À valider manuellement
 
-3. **QA Gates manquants** → Risque: Validation stories inconsistante
-   - Mitigation: PO créera templates avant Epic 1
-   - Status: 🟡 À surveiller
+3. **Résurrection minuit** → Risque: Timer ne déclenche pas correctement
+   - Mitigation: Test manuel simulation minuit requis
+   - Status: 🟡 À valider manuellement
 
 ---
 
@@ -287,6 +290,9 @@ Aucun
 | 2026-01-08 | ✅ Phase 13 complétée (Story 1.4 - Assets + AvatarDisplay) | Dev Agent |
 | 2026-01-09 | Mise à jour dev-context.md après Story 1.4 (commit a586f1a) | BMad Master |
 | 2026-01-09 | ✅ Phase 14 complétée (Story 1.5 - Use Case + Timer Service) | Dev Agent |
+| 2026-01-09 | ✅ Phase 15 complétée (Story 1.6 - Home Screen, PREMIER ÉCRAN UI!) | Dev Agent |
+| 2026-01-11 | ✅ Phase 16 complétée (Story 1.7 - Ghost System, 62/62 DOD) | Dev Agent |
+| 2026-01-11 | Mise à jour session: Epic 1 87.5% complété (7/8 stories) | BMad Master |
 
 ---
 
@@ -302,8 +308,8 @@ Aucun
 
 ---
 
-**Dernière action:** ✅ Story 1.5 complétée (Use Case + Timer Service, 35 tests, transitions automatiques)
-**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.6 (Home Screen - PREMIER ÉCRAN UI!)
+**Dernière action:** ✅ Story 1.7 complétée (Ghost System - Résurrection + dead→ghost, 13 tests, 62/62 DOD)
+**Prochaine action:** DÉVELOPPEMENT - @dev implémente Story 1.8 (Avatar Selection Screen) - DERNIÈRE STORY EPIC 1!
 
 ---
 
@@ -313,9 +319,10 @@ Aucun
 
 | Story | Moment Test | Commandes | Ce qu'il faut vérifier |
 |-------|------------|-----------|------------------------|
-| **1.1** ✅ | MAINTENANT | `flutter run` (iOS/Android) | App lance avec "Hydrate or Die" canary screen |
-| **1.6** | Après Story 1.6 | `flutter run` | Home screen affiche avatar + barre hydratation |
-| **1.8** | Après Story 1.8 | `flutter run` | Sélection avatar fonctionne (4 choix) |
+| **1.1** ✅ | ~~FAIT~~ | `flutter run` (iOS/Android) | App lance avec "Hydrate or Die" canary screen |
+| **1.6** ✅ | ~~FAIT~~ | `flutter run` | Home screen affiche avatar + barre hydratation |
+| **1.7** ✅ | ~~FAIT~~ | `flutter run` + attente 10s | Dead → Ghost transition + messages dramatiques |
+| **1.8** | 🚨 APRÈS STORY 1.8 | `flutter run` | Sélection avatar fonctionne (4 choix) + persistence |
 | **2.10** | Après Story 2.10 | `flutter run` | Onboarding flow complet (poids, âge, sexe, activité) |
 | **3.8** | Après Story 3.8 | `flutter run` | Bouton "Boire" fonctionne, avatar réagit |
 | **3.6** | Après Story 3.6 | `flutter run` + photo | Caméra s'ouvre, photo enregistrée |
@@ -468,14 +475,15 @@ flutter run
 ### 🚨 Quand M'Alerter Pour Tests
 
 **Je te dirai explicitement quand tester après:**
-1. ✅ Story 1.1 (MAINTENANT)
-2. Story 1.6 (Home Screen)
-3. Story 1.8 (Avatar Selection)
-4. Story 2.10 (Onboarding complet)
-5. Story 3.6 (Photo + caméra)
-6. Story 3.8 (Bouton Drink)
-7. Story 4.11 (Notifications)
-8. Story 5.12 (MVP complet - test E2E)
+1. ✅ Story 1.1 (FAIT)
+2. ✅ Story 1.6 (FAIT - Home Screen)
+3. ✅ Story 1.7 (FAIT - Ghost System)
+4. 🚨 Story 1.8 (PROCHAIN - Avatar Selection) ← **FIN EPIC 1**
+5. Story 2.10 (Onboarding complet)
+6. Story 3.6 (Photo + caméra)
+7. Story 3.8 (Bouton Drink)
+8. Story 4.11 (Notifications)
+9. Story 5.12 (MVP complet - test E2E)
 
 **Format alerte:**
 > 🧪 **TEMPS DE TESTER!** Story X.Y complétée.

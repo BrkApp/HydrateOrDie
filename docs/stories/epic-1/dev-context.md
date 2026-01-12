@@ -2,14 +2,17 @@
 
 > **Objectif:** Ce fichier maintient le contexte de développement pour tous les agents @dev travaillant sur Epic 1. Il est mis à jour après chaque story complétée pour éviter les duplications et assurer la cohérence.
 
-**Dernière mise à jour:** 2026-01-09 (après Story 1.5)
+**Dernière mise à jour:** 2026-01-09 (après Story 1.6)
 
+
+RAPPEL IMPORTANT : tout reports et Dod vont dans le dossier de l'épic en cours 
+exemple pour l'épic 1 : docs/stories/epic-1/reports/
 ---
 
 ## 📊 Vue d'Ensemble Epic 1
 
 **Epic:** Foundation & Avatar Core System
-**Progression:** 5/8 stories complétées (62.5%)
+**Progression:** 6/8 stories complétées (75%)
 
 ```
 ✅ Story 1.1 - Flutter Setup + CI/CD
@@ -17,8 +20,8 @@
 ✅ Story 1.3 - Avatar Repository (SQLite + DTOs)
 ✅ Story 1.4 - Avatar Assets (20 emojis + AvatarDisplay widget)
 ✅ Story 1.5 - Dehydration Logic (Use Case + Timer Service)
-⏳ Story 1.6 - Home Screen (PROCHAINE)
-⏳ Story 1.7 - Ghost System
+✅ Story 1.6 - Home Screen (PREMIER ÉCRAN UI VISIBLE!)
+⏳ Story 1.7 - Ghost System (PROCHAINE)
 ⏳ Story 1.8 - Avatar Selection
 ```
 
@@ -629,6 +632,149 @@ final newState = await useCase.execute(); // Calcule et met à jour l'état
 
 ---
 
+## ✅ Story 1.6 - Home Screen (Premier Écran UI Visible!)
+
+### Fichiers Clés Créés
+
+#### **Presentation Layer (Screens)**
+```
+lib/presentation/screens/home/
+└── home_screen.dart                - Écran principal complet (200+ lignes)
+
+test/presentation/screens/home/
+└── home_screen_test.dart           - 18 widget tests
+```
+
+#### **Presentation Layer (Providers)**
+```
+lib/presentation/providers/
+└── home_provider.dart              - Provider Riverpod + auto-refresh 60s (150+ lignes)
+
+test/presentation/providers/
+├── home_provider_test.dart         - 10 unit tests
+└── home_provider_test.mocks.dart   - Mocks générés
+```
+
+#### **Presentation Layer (Widgets)**
+```
+lib/presentation/widgets/
+├── hydration_progress_bar.dart     - Progress bar animée (80+ lignes)
+└── avatar_message_widget.dart      - Messages personnalisés (120+ lignes)
+
+test/presentation/widgets/
+├── hydration_progress_bar_test.dart     - 12 widget tests
+└── avatar_message_widget_test.dart      - 25 widget tests
+```
+
+### Architecture Implémentée
+
+#### **HomeScreen (ConsumerWidget)**
+Layout complet selon wireframe (front-end-spec lignes 1206-1236):
+- Header: Logo + heure + streak (placeholder "0 jours") + settings
+- Avatar Display: 200×200px centré, état réactif
+- Message Widget: Personnalisé selon personality + state
+- Progress Bar: 0.0L / 2.5L (0%) placeholder
+- Temps écoulé: "il y a Xh Ymin" ou "Jamais encore bu aujourd'hui"
+- Bouton "💧 JE BOIS 💧": UI uniquement, `onPressed: null`
+- Bottom Nav: 3 items (Calendrier/Home/Profil) - UI uniquement
+
+#### **HomeProvider (Riverpod StateNotifier)**
+```dart
+class HomeState {
+  final AvatarPersonality personality;
+  final AvatarState state;
+  final DateTime? lastDrinkTime;
+  final bool isLoading;
+  final String? error;
+}
+
+class HomeNotifier extends StateNotifier<HomeState> {
+  // Timer.periodic(Duration(seconds: 60)) auto-refresh
+  // Integration UpdateAvatarStateUseCase + AvatarRepository
+  void startAutoRefresh();  // Démarre timer 60s
+  void dispose();           // Annule timer proprement
+}
+```
+
+#### **HydrationProgressBar Widget**
+- Affichage: "1.5L / 2.5L (60%)" ou "0.0L / 2.5L (0%)"
+- Animation smooth fill 500ms (AnimatedContainer)
+- Dégradé bleu hydratation (LinearGradient)
+- Support > 100% (overflow display)
+- Height 40px, radius 8px
+
+#### **AvatarMessageWidget**
+**20 messages uniques (4 personnalités × 5 états):**
+
+**Doctor (Professionnel):**
+- Fresh: "Votre hydratation est optimale 💙"
+- Tired: "Je constate une légère déshydratation 💧"
+- Dehydrated: "Hydratation critique, buvez immédiatement! 🚨"
+- Dead: "Décès par déshydratation... 💀"
+- Ghost: "👻"
+
+**Coach (Motivant):**
+- Fresh: "En pleine forme champion ! 💪"
+- Tired: "Allez champion, bois maintenant ! 💪"
+- Dehydrated: "C'EST MAINTENANT OU JAMAIS ! 💪🔥"
+- Dead: "Game over... on repart demain 💀"
+- Ghost: "👻"
+
+**Mother (Autoritaire):**
+- Fresh: "Très bien mon petit 😊"
+- Tired: "Tu devrais boire maintenant..."
+- Dehydrated: "Tu veux que je m'inquiète ?! 😟"
+- Dead: "Je suis très déçue... 💀"
+- Ghost: "👻"
+
+**Friend (Sarcastique):**
+- Fresh: "Nickel poto ! 😎"
+- Tired: "T'as soif ou quoi ? 🤔"
+- Dehydrated: "Mec, sérieux là... 😰"
+- Dead: "Mec, j'ai crevé... 💀"
+- Ghost: "👻"
+
+**Couleurs selon état:**
+- Fresh: Vert `#4CAF50`
+- Tired: Orange `#FF9800`
+- Dehydrated: Rouge `#F44336`
+- Ghost: Gris `#9E9E9E`
+
+### À Savoir pour la Suite
+
+- ✅ **HomeScreen complet** - Premier écran UI visible de l'app!
+- ✅ **Auto-refresh 60s** - Timer periodic dans HomeProvider
+- ✅ **Messages personnalisés** - 20 messages (4 perso × 5 états)
+- ✅ **Progress bar placeholder** - 0.0L / 2.5L (sera implémenté Story 3.8)
+- ✅ **Streak placeholder** - "0 jours" hardcodé (sera implémenté Epic 4)
+- ✅ **Bouton non fonctionnel** - `onPressed: null` (sera implémenté Story 3.8)
+- ✅ **Bottom nav UI uniquement** - Pas de routing pour l'instant
+- ⚠️ **Temps écoulé formaté** - "il y a Xh Ymin" calculé depuis lastDrinkTime
+- ⚠️ **Default personality** - AvatarPersonality.doctor si getSelectedAvatar() retourne null
+
+### Tests Validés
+```bash
+flutter test test/presentation/  # 129/129 tests passent ✅
+# Nouveaux tests Story 1.6: 65 tests
+# - HomeProvider: 10 unit tests (auto-refresh, state management)
+# - HomeScreen: 18 widget tests (4 états minimum)
+# - HydrationProgressBar: 12 widget tests (0%, 50%, 100%, >100%)
+# - AvatarMessageWidget: 25 widget tests (4 perso × 5 états)
+```
+
+### Intégration pour Story 1.7 (Ghost System)
+Le HomeScreen est déjà prêt pour afficher l'état `ghost`:
+- Avatar affiche emoji 👻 (AvatarDisplay widget)
+- Message affiche "👻" (AvatarMessageWidget)
+- Couleur grise #9E9E9E
+
+Story 1.7 devra implémenter:
+- Logique transition Dead → Ghost (automatique le jour suivant)
+- Logique résurrection Ghost → Fresh (minuit)
+- Streak non incrémenté si mode ghost actif
+
+---
+
 ## 📚 Références Importantes
 
 ### Documentation à Consulter
@@ -687,8 +833,8 @@ flutter devices                 # Liste devices disponibles
 
 ---
 
-**Dernière mise à jour:** 2026-01-09 après Story 1.5
-**Prochaine mise à jour:** Après Story 1.6 (Home Screen)
+**Dernière mise à jour:** 2026-01-09 après Story 1.6
+**Prochaine mise à jour:** Après Story 1.7 (Ghost System)
 
 ---
 

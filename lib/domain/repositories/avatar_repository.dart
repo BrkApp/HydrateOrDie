@@ -41,6 +41,20 @@ abstract class AvatarRepository {
   /// Returns null if no hydration recorded yet (first launch).
   /// Used for calculating time-based state transitions.
   Future<DateTime?> getLastDrinkTime();
+
+  /// Get death time timestamp (when avatar entered dead state)
+  ///
+  /// Returns null if avatar never died or has been resurrected.
+  /// Used for calculating dead → ghost transition (10 seconds delay).
+  Future<DateTime?> getDeathTime();
+
+  /// Update death time when avatar transitions to dead state
+  ///
+  /// Stores timestamp when avatar entered dead state.
+  /// Set to null when avatar is resurrected or drinks water.
+  ///
+  /// Throws [StorageException] if update fails.
+  Future<void> updateDeathTime(DateTime? timestamp);
 }
 
 /// Exception thrown when avatar storage operations fail

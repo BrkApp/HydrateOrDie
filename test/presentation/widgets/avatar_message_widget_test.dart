@@ -91,7 +91,7 @@ void main() {
           ),
         );
 
-        expect(find.text('État fantomatique... 👻'), findsOneWidget);
+        expect(find.text('Le patient est décédé... Résurrection prévue demain. 👻'), findsOneWidget);
 
         final textWidget = tester.widget<Text>(find.byType(Text));
         expect(textWidget.style?.color, const Color(0xFF9E9E9E)); // Gray

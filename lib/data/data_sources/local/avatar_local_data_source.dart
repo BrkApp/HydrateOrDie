@@ -33,6 +33,16 @@ abstract class AvatarLocalDataSource {
   /// Update only the last_drink_time field
   Future<void> updateLastDrinkTime(DateTime timestamp);
 
+  /// Get death time from SQLite
+  ///
+  /// Returns null if avatar never died or has been resurrected.
+  Future<String?> getDeathTime();
+
+  /// Update death time field in SQLite
+  ///
+  /// Set to null to clear death time (on resurrection or drink).
+  Future<void> updateDeathTime(DateTime? timestamp);
+
   /// Delete avatar data (for account deletion)
   Future<void> deleteAvatarData();
 }
@@ -157,6 +167,7 @@ class AvatarLocalDataSourceImpl implements AvatarLocalDataSource {
         {
           'last_drink_time': timestampStr,
           'current_state': 'fresh', // Reset to fresh after drink
+          'death_time': null, // Clear death time on drink
           'last_updated': now,
         },
         where: 'id = ?',
@@ -166,6 +177,57 @@ class AvatarLocalDataSourceImpl implements AvatarLocalDataSource {
       throw DataSourceException(
         'Failed to update last drink time',
         code: 'UPDATE_LAST_DRINK_TIME_FAILED',
+        originalError: e,
+      );
+    }
+  }
+
+  @override
+  Future<String?> getDeathTime() async {
+    try {
+      final db = await _databaseHelper.database;
+      final results = await db.query(
+        _avatarStateTable,
+        columns: ['death_time'],
+        where: 'id = ?',
+        whereArgs: [_avatarStateSingletonId],
+        limit: 1,
+      );
+
+      if (results.isEmpty) {
+        return null;
+      }
+
+      return results.first['death_time'] as String?;
+    } catch (e) {
+      throw DataSourceException(
+        'Failed to get death time',
+        code: 'GET_DEATH_TIME_FAILED',
+        originalError: e,
+      );
+    }
+  }
+
+  @override
+  Future<void> updateDeathTime(DateTime? timestamp) async {
+    try {
+      final db = await _databaseHelper.database;
+      final now = DateTime.now().toUtc().toIso8601String();
+      final timestampStr = timestamp?.toUtc().toIso8601String();
+
+      await db.update(
+        _avatarStateTable,
+        {
+          'death_time': timestampStr,
+          'last_updated': now,
+        },
+        where: 'id = ?',
+        whereArgs: [_avatarStateSingletonId],
+      );
+    } catch (e) {
+      throw DataSourceException(
+        'Failed to update death time',
+        code: 'UPDATE_DEATH_TIME_FAILED',
         originalError: e,
       );
     }

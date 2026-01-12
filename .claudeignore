@@ -1,0 +1,65 @@
+# --- Flutter & Dart ---
+.dart_tool/
+build/
+.pub-cache/
+.packages
+pubspec.lock
+coverage/
+
+# --- Generated Code (Riverpod/Freezed/JsonSerializable) ---
+# Ces fichiers consomment énormément de tokens et ne doivent pas être édités manuellement
+**/*.g.dart
+**/*.freezed.dart
+**/*.config.dart
+
+# --- Assets & Media ---
+# Claude ne peut pas "voir" les images, inutile de charger les paths
+assets/
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.webp
+**/*.svg
+**/*.ico
+**/*.ttf
+**/*.otf
+
+# --- Platform Specific (Build artifacts) ---
+android/.gradle/
+android/app/build/
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework/
+macos/Flutter/ephemeral/
+windows/flutter/ephemeral/
+linux/flutter/ephemeral/
+
+# --- Xcode & Gradle Noise ---
+ios/**/*.xcodeproj/
+ios/**/*.xcworkspace/
+android/gradlew
+android/gradlew.bat
+
+# --- IDE & Git ---
+.idea/
+.vscode/
+*.iml
+.git/
+.gitignore
+
+# --- Documentation Archives ---
+# On ignore les rapports passés pour ne pas polluer le contexte
+docs/stories/**/reports/
+# On ignore les assets de doc
+docs/assets/
+
+# --- Redundant Docs (Handled by .CLAUDE.md) ---
+docs/instructions-claude.md
+
+# --- Heavy Specs & Future Features ---
+# Ignoré pour économiser les tokens (25k+ mots).
+# Copier les sections pertinentes dans la Story active si nécessaire.
+docs/front-end-spec.md
+# Idée UI Fallout (Phase future/expérimentale)
+docs/gemini-ui_fallout-idea.md
