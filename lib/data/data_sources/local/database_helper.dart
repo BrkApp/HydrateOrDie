@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart';
 /// Implements singleton pattern for single database instance.
 class DatabaseHelper {
   static const String _databaseName = 'hydrate_or_die.db';
-  static const int _databaseVersion = 2;
+  static const int _databaseVersion = 3;
 
   static Database? _database;
 
@@ -52,11 +52,12 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE avatar_state (
         id TEXT PRIMARY KEY NOT NULL DEFAULT 'avatar_singleton',
-        selected_avatar_id TEXT NOT NULL,
-        current_state TEXT NOT NULL,
-        last_drink_time TEXT NOT NULL,
+        name TEXT NOT NULL,
+        personality TEXT NOT NULL,
+        currentState TEXT NOT NULL,
+        lastDrinkTime TEXT NOT NULL,
         death_time TEXT,
-        last_updated TEXT NOT NULL
+        lastUpdated TEXT NOT NULL
       )
     ''');
 
@@ -111,6 +112,45 @@ class DatabaseHelper {
       await db.execute(
           'ALTER TABLE avatar_state ADD COLUMN death_time TEXT');
       print('[DatabaseHelper] Migration V1→V2: Added death_time column');
+    }
+
+    // Migration V2 → V3: Rebuild avatar_state table with correct JSON schema (Story 1.8 bugfix)
+    if (oldVersion < 3) {
+      print('[DatabaseHelper] Migration V2→V3: Rebuilding avatar_state table');
+
+      // Step 1: Create backup of existing data (if any)
+      final existingData = await db.query('avatar_state');
+
+      // Step 2: Drop old table
+      await db.execute('DROP TABLE IF EXISTS avatar_state');
+
+      // Step 3: Create new table with correct JSON column names
+      await db.execute('''
+        CREATE TABLE avatar_state (
+          id TEXT PRIMARY KEY NOT NULL DEFAULT 'avatar_singleton',
+          name TEXT NOT NULL,
+          personality TEXT NOT NULL,
+          currentState TEXT NOT NULL,
+          lastDrinkTime TEXT NOT NULL,
+          death_time TEXT,
+          lastUpdated TEXT NOT NULL
+        )
+      ''');
+
+      // Step 4: Migrate existing data if any (map old columns to new)
+      if (existingData.isNotEmpty) {
+        final oldRow = existingData.first;
+        await db.insert('avatar_state', {
+          'id': oldRow['id'],
+          'name': oldRow['name'] ?? 'Avatar', // Default if missing
+          'personality': oldRow['selected_avatar_id'] ?? 'doctor', // Map old column
+          'currentState': oldRow['current_state'] ?? 'fresh',
+          'lastDrinkTime': oldRow['last_drink_time'] ?? DateTime.now().toUtc().toIso8601String(),
+          'death_time': oldRow['death_time'],
+          'lastUpdated': oldRow['last_updated'] ?? DateTime.now().toUtc().toIso8601String(),
+        });
+        print('[DatabaseHelper] Migration V2→V3: Migrated existing avatar data');
+      }
     }
   }
 
