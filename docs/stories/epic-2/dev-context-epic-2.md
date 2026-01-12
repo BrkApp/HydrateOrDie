@@ -224,7 +224,7 @@ Goal final: 2800 ml (arrondi au 100ml près)
 ### Avant de démarrer Story 2.1
 
 1. ✅ Créer branche `epic-2-user-onboarding`
-2. ✅ Archiver `dev-context.md` → `dev-context-epic-1.md` (fait)
+2. ✅ Archiver `dev-context-epic-1.md` → `dev-context-epic-1-archived.md` (fait)
 3. ✅ Créer `dev-context-epic-2.md` (ce fichier)
 4. ⏭️ Mettre à jour `database_helper.dart` (préparer migration V4)
 5. ⏭️ Créer dossier `lib/presentation/screens/onboarding/`
@@ -296,7 +296,7 @@ Goal final: 2800 ml (arrondi au 100ml près)
 
 - [Epic 2 PRD](../../prd/epic-2-user-onboarding.md)
 - [Epic 1 QA Gate Report](../../qa/reports/epic-1-qa-gate-report.md)
-- [Epic 1 Dev Context (archived)](./epic-1/dev-context-epic-1.md)
+- [Epic 1 Dev Context (archived)](../epic-1/dev-context-epic-1-archived.md)
 
 ---
 
