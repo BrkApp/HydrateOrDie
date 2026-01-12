@@ -55,7 +55,7 @@ lib/
 ## BMad Workflow
 
 ### Starting a Story
-1. **ALWAYS read first:** `docs/stories/epic-X/dev-context.md`
+1. **ALWAYS read first:** `docs/stories/epic-X/dev-context*`
    - Shows current state, what exists, what's been completed
    - **CRITICAL:** Prevents recreating existing code
 2. **Read assigned story:** `docs/stories/epic-X/story-X.Y-*.md`
