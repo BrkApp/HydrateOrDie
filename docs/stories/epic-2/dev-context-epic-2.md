@@ -1,10 +1,10 @@
 # Dev Context - Epic 2: User Onboarding & Personnalisation
 
 **Epic:** 2 - User Onboarding & Personnalisation
-**Status:** 🟡 IN PROGRESS (Story 2.2)
+**Status:** 🟡 IN PROGRESS (Story 2.3)
 **Date Début:** 2026-01-12
 **Stories:** 2.1 à 2.10 (10 stories)
-**Branche actuelle:** `feature/epic-2-story-2-hydration-calculation`
+**Branche actuelle:** `feature/epic-2-story-3-user-profile-repository`
 
 ---
 
@@ -29,8 +29,8 @@
 | Story | Titre | Status | Date | Notes |
 |-------|-------|--------|------|-------|
 | 2.1 | User Profile Model | ✅ COMPLETE | 2026-01-12 | 43/43 tests passing, 100% coverage |
-| 2.2 | Hydration Calculation | 🟡 IN PROGRESS | 2026-01-12 | Use Case calcul besoins basé profil |
-| 2.3 | User Profile Repository | 🔴 Not Started | - | CRUD User dans SQLite |
+| 2.2 | Hydration Calculation | ✅ COMPLETE | 2026-01-12 | Use Case + tests edge cases complets |
+| 2.3 | User Profile Repository | 🟡 IN PROGRESS | 2026-01-12 | CRUD User dans SQLite |
 | 2.4 | Onboarding Weight Screen | 🔴 Not Started | - | Slider 30-200kg avec unités kg/lbs |
 | 2.5 | Onboarding Age Screen | 🔴 Not Started | - | Slider 13-100 ans |
 | 2.6 | Onboarding Gender Screen | 🔴 Not Started | - | 3 boutons (Male/Female/Other) |
@@ -39,7 +39,7 @@
 | 2.9 | Onboarding Summary Screen | 🔴 Not Started | - | Récap profil + goal calculé affiché |
 | 2.10 | Onboarding Flow Integration | 🔴 Not Started | - | Navigation multi-screen + routing conditionnel |
 
-**Progression:** 1/10 stories complètes (10%) - Story 2.2 EN COURS
+**Progression:** 2/10 stories complètes (20%) - Story 2.3 EN COURS
 
 ---
 
@@ -302,6 +302,6 @@ Goal final: 2800 ml (arrondi au 100ml près)
 ---
 
 **Dernière mise à jour:** 2026-01-12
-**Status Epic 2:** 🟡 IN PROGRESS (1/10 stories complètes, Story 2.2 en cours)
-**Branche actuelle:** `feature/epic-2-story-2-hydration-calculation`
-**Prochain milestone:** Story 2.2 - Hydration Calculation Logic (EN COURS)
+**Status Epic 2:** 🟡 IN PROGRESS (2/10 stories complètes, Story 2.3 en cours)
+**Branche actuelle:** `feature/epic-2-story-3-user-profile-repository`
+**Prochain milestone:** Story 2.3 - User Profile Repository (EN COURS)
