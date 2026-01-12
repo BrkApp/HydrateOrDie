@@ -136,6 +136,10 @@ void main() {
       when(mockRepository.saveSelectedAvatar(any))
           .thenAnswer((_) async => Future.value());
 
+      // Mock getAvatar() pour retourner null (vérification après sauvegarde sera gérée)
+      when(mockRepository.getAvatar())
+          .thenAnswer((_) async => null);
+
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
 
@@ -149,6 +153,9 @@ void main() {
 
       // Vérifie sauvegarde appelée avec le bon ID (sportsCoach)
       verify(mockRepository.saveSelectedAvatar('sportsCoach')).called(1);
+
+      // Vérifie que getAvatar() a été appelé pour vérification
+      verify(mockRepository.getAvatar()).called(1);
 
       // Vérifie navigation vers home
       expect(find.text('Home Screen'), findsOneWidget);
@@ -197,6 +204,8 @@ void main() {
     testWidgets('Should save correct avatar ID for doctor', (tester) async {
       when(mockRepository.saveSelectedAvatar(any))
           .thenAnswer((_) async => Future.value());
+      when(mockRepository.getAvatar())
+          .thenAnswer((_) async => null);
 
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
@@ -213,6 +222,8 @@ void main() {
     testWidgets('Should save correct avatar ID for coach', (tester) async {
       when(mockRepository.saveSelectedAvatar(any))
           .thenAnswer((_) async => Future.value());
+      when(mockRepository.getAvatar())
+          .thenAnswer((_) async => null);
 
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();

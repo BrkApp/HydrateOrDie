@@ -36,15 +36,34 @@ class _AvatarSelectionScreenState
   Future<void> _confirmSelection() async {
     if (_selectedPersonality == null) return;
 
-    final repository = getIt<AvatarRepository>();
-    // Convert enum to string ID for repository
-    final avatarId = _selectedPersonality!.name;
-    await repository.saveSelectedAvatar(avatarId);
+    try {
+      final repository = getIt<AvatarRepository>();
+      // Convert enum to string ID for repository
+      final avatarId = _selectedPersonality!.name;
 
-    if (!mounted) return;
+      // Sauvegarde de l'avatar sélectionné
+      await repository.saveSelectedAvatar(avatarId);
 
-    // Navigation vers HomeScreen (AC #6)
-    Navigator.of(context).pushReplacementNamed('/home');
+      // Vérification que la sauvegarde a réussi
+      final savedAvatar = await repository.getAvatar();
+      print('DEBUG: Avatar saved: ${savedAvatar?.personality}');
+
+      if (!mounted) return;
+
+      // Navigation vers HomeScreen (AC #6)
+      Navigator.of(context).pushReplacementNamed('/home');
+    } catch (e) {
+      print('ERROR: Failed to save avatar: $e');
+      if (!mounted) return;
+
+      // Afficher erreur à l'utilisateur
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Erreur lors de la sauvegarde: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   @override
@@ -140,39 +159,42 @@ class _AvatarSelectionScreenState
           borderRadius: BorderRadius.circular(16),
           color: Colors.white,
         ),
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             // Preview avatar état fresh (AC #3)
             AvatarDisplay(
               personality: personality,
               state: AvatarState.fresh,
-              size: 80,
+              size: 70,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 6),
 
             // Nom (AC #3)
             Text(
               _getAvatarName(personality),
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 2),
 
-            // Description (AC #3)
-            Text(
-              _getAvatarDescription(personality),
-              style: TextStyle(
-                fontSize: 11,
-                color: Colors.grey[600],
+            // Description (AC #3) - Flexible pour absorber overflow
+            Flexible(
+              child: Text(
+                _getAvatarDescription(personality),
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey[600],
+                ),
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
