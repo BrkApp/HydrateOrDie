@@ -1,8 +1,8 @@
 # 🧙 BMad Master - Session de Pilotage
 **Projet:** HydrateOrDie
 **Date Début:** 2026-01-07
-**Dernière MAJ:** 2026-01-11
-**Phase Actuelle:** Développement (Epic 1 - Core Avatar System)
+**Dernière MAJ:** 2026-01-12
+**Phase Actuelle:** Tests Manuels (Epic 1 - COMPLETE, Debugging Phase)
 
 ---
 
@@ -28,19 +28,22 @@
 | 14 | dev | Story 1.5 (Dehydration Logic) | ✅ Terminé | 2026-01-09 | Use Case + Timer Service, 35 tests, transitions automatiques |
 | 15 | dev | Story 1.6 (Home Screen) | ✅ Terminé | 2026-01-09 | PREMIER ÉCRAN UI! 65 tests, 4 widgets, auto-refresh 60s |
 | 16 | dev | Story 1.7 (Ghost System) | ✅ Terminé | 2026-01-11 | Résurrection + dead→ghost transition, 13 tests, 62/62 DOD |
+| 17 | dev | Story 1.8 (Avatar Selection) | ✅ Terminé | 2026-01-12 | **EPIC 1 COMPLETE!** Grid 2×2, 4 avatars, 11 tests |
+| 18 | master | Token Optimization | ✅ Terminé | 2026-01-12 | .claudeignore, .CLAUDE.md, ~10-15K tokens économisés |
+| 19 | dev | Bugfix 1.8 UI Overflow | ✅ Terminé | 2026-01-12 | Fix 2.6-6.6px overflow, Flexible widget, padding/size adjusted |
+| 20 | dev | Bugfix 1.8 DB Schema | ✅ Terminé | 2026-01-12 | **CRITICAL FIX:** Migration V2→V3, snake_case→camelCase columns |
 
 ### ⏸️ PHASE EN COURS
 
 | Phase | Agent | Livrable | Statut | Début | Notes |
 |-------|-------|----------|--------|-------|-------|
-| 17 | dev | Story 1.8 (Avatar Selection) | 🔄 Prêt | 2026-01-11 | Screen sélection 4 avatars + persistence |
+| 21 | user | Test Epic 1 Manuel | 🧪 En test | 2026-01-12 | APK v3 (10:04), test sur téléphone Android |
 
 ### 🔜 PHASES À VENIR
 
 | Phase | Agent | Livrable | Dépendances | Notes |
 |-------|-------|----------|-------------|-------|
-| 18 | dev | Story 1.8 (Avatar Selection) | Story 1.7 complétée | Dernière story Epic 1 |
-| 19 | user | Test Epic 1 Manuel | Story 1.8 complétée | Test Home Screen + Avatar Selection + Ghost |
+| 22 | user | Validation Bugfixes | Test manuel OK | Confirmer navigation Home Screen fonctionne |
 | 20 | qa | QA Gate Epic 1 | Tests manuels OK | Execute docs/qa/gates/epic-1-qa-gate.md |
 | 21 | architect | Review Epic 1 | QA Gate passé | Vérif architecture Clean Architecture |
 | 22 | pm | Review Epic 1 | Architect OK | Validation fonctionnelle (AC, specs PRD, comportement) |
@@ -161,9 +164,9 @@ Master (persistent) → Guide général
 └─ ✅ master → create QA gates (6 fichiers)
 ```
 
-### PHASE DE DÉVELOPPEMENT (En cours 🔄)
+### PHASE DE DÉVELOPPEMENT (Epic 1 Complete ✅)
 ```
-Epic 1: Core Avatar System (7/8 stories complétées)
+Epic 1: Core Avatar System (8/8 stories ✅ + 2 bugfixes critiques)
 ├─ ✅ Story 1.1 → Flutter Setup
 ├─ ✅ Story 1.2 → Domain Models
 ├─ ✅ Story 1.3 → Avatar Repository
@@ -171,7 +174,9 @@ Epic 1: Core Avatar System (7/8 stories complétées)
 ├─ ✅ Story 1.5 → Dehydration Logic
 ├─ ✅ Story 1.6 → Home Screen
 ├─ ✅ Story 1.7 → Ghost System
-└─ 🔄 Story 1.8 → Avatar Selection (EN COURS)
+├─ ✅ Story 1.8 → Avatar Selection (COMPLETE - 2026-01-12)
+├─ ✅ Bugfix 1.8a → UI Overflow (2.6-6.6px overflow descriptions)
+└─ ✅ Bugfix 1.8b → DB Schema (StorageException: snake_case→camelCase migration)
 ```
 
 ---
@@ -179,9 +184,19 @@ Epic 1: Core Avatar System (7/8 stories complétées)
 ## 📝 PROCHAINES ÉTAPES
 
 ### Étape Immédiate
-**[EN COURS]** Story 1.8 - Avatar Selection Screen
+**[EN COURS]** Test Manuel APK v3 (2026-01-12 10:04) - Validation bugfixes critiques
 
-### Après Story 1.8 (Fin Epic 1)
+**Action utilisateur:**
+1. Désinstaller ancienne app du téléphone
+2. Installer APK v3: `build/app/outputs/flutter-apk/app-debug.apk` (169 MB)
+3. Tester:
+   - ✅ Overflow UI fixé (descriptions avatars visibles)
+   - ❓ Navigation vers Home Screen (CRITICAL - StorageException était bloquante)
+   - ✅ Sélection avatars fonctionne (bordure bleue)
+
+**Si navigation échoue encore:** Copier logs Logcat Android Studio (filtre: DEBUG/ERROR)
+
+### Après Tests Manuels OK (Fin Epic 1)
 1. **Test Manuel Epic 1**
    - User teste `flutter run`
    - Vérifie: Home Screen + Avatar Selection + Ghost System
@@ -214,13 +229,17 @@ Aucun - Epic 1 en excellente progression (87.5%)
 ### Risques Surveillés
 1. **Tests manuels Epic 1** → Risque: Bugs UI non détectés par tests unitaires
    - Mitigation: Test manuel complet après Story 1.8
-   - Status: 🟡 À faire (après Story 1.8)
+   - Status: 🟡 EN COURS (APK v3 en test)
 
-2. **Database migration V1→V2** → Risque: Perte données utilisateur
-   - Mitigation: Tester migration sur DB existante (PM review)
-   - Status: 🟡 À valider manuellement
+2. **Database migration V2→V3** → Risque: Perte données utilisateur après bugfix
+   - Mitigation: Migration automatique preserve les données (selected_avatar_id→personality mapping)
+   - Status: 🟢 RÉSOLU (code testé, à valider manuellement sur APK)
 
-3. **Résurrection minuit** → Risque: Timer ne déclenche pas correctement
+3. **StorageException navigation** → Risque: Bug critique bloquant sélection avatar
+   - Mitigation: Schéma DB corrigé (snake_case→camelCase), tests passent
+   - Status: 🟡 CORRIGÉ (à valider sur device réel)
+
+4. **Résurrection minuit** → Risque: Timer ne déclenche pas correctement
    - Mitigation: Test manuel simulation minuit requis
    - Status: 🟡 À valider manuellement
 
