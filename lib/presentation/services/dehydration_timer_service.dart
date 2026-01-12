@@ -23,8 +23,8 @@ import '../../domain/use_cases/avatar/update_avatar_state_use_case.dart';
 class DehydrationTimerService {
   final UpdateAvatarStateUseCase _updateAvatarStateUseCase;
 
-  /// Intervalle de mise à jour (30 minutes)
-  static const Duration kUpdateInterval = Duration(minutes: 30);
+  /// Intervalle de mise à jour (30 secondes pour tests Epic 1, sera 30 minutes en prod)
+  static const Duration kUpdateInterval = Duration(seconds: 30);
 
   /// Timer periodic interne
   Timer? _timer;
@@ -47,7 +47,7 @@ class DehydrationTimerService {
       return;
     }
 
-    print('[DehydrationTimer] Démarrage du timer (intervalle: ${kUpdateInterval.inMinutes}min)');
+    print('[DehydrationTimer] Démarrage du timer (intervalle: ${kUpdateInterval.inSeconds}s)');
 
     // Exécuter une première mise à jour immédiatement
     _updateAvatarState();

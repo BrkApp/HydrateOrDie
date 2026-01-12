@@ -6,6 +6,7 @@ import 'core/di/injection.dart';
 import 'presentation/screens/avatar_selection/avatar_selection_screen.dart';
 import 'presentation/screens/home/home_screen.dart';
 import 'domain/repositories/avatar_repository.dart';
+import 'presentation/services/dehydration_timer_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,11 @@ void main() async {
 
   // Setup dependency injection
   await setupDependencies();
+
+  // Start dehydration timer service (Epic 1 - Story 1.5)
+  final dehydrationTimer = getIt<DehydrationTimerService>();
+  dehydrationTimer.start();
+  print('[Main] DehydrationTimerService started');
 
   runApp(const ProviderScope(child: MyApp()));
 }
