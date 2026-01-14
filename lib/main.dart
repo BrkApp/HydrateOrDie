@@ -8,6 +8,7 @@ import 'presentation/screens/home/home_screen.dart';
 import 'presentation/screens/onboarding/onboarding_weight_screen.dart';
 import 'presentation/screens/onboarding/onboarding_age_screen.dart';
 import 'domain/repositories/avatar_repository.dart';
+import 'domain/repositories/user_repository.dart'; // Import User Repo
 import 'presentation/services/dehydration_timer_service.dart';
 
 void main() async {
@@ -63,22 +64,34 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _checkAvatarAndNavigate();
+    _initializeAppAndNavigate();
   }
 
-  Future<void> _checkAvatarAndNavigate() async {
-    final repository = getIt<AvatarRepository>();
-    final selectedAvatar = await repository.getAvatar();
+  Future<void> _initializeAppAndNavigate() async {
+    // Get both repositories
+    final userProfileRepository = getIt<UserRepository>();
+    final avatarRepository = getIt<AvatarRepository>();
+
+    // Check for user profile first (Epic 2 logic)
+    final userProfile = await userProfileRepository.getUser();
 
     if (!mounted) return;
 
-    // AC #1 - Navigation conditionnelle
-    if (selectedAvatar == null) {
-      // Premier lancement → Avatar Selection
-      Navigator.of(context).pushReplacementNamed('/avatar-selection');
+    if (userProfile == null) {
+      // If no profile, user is new -> start onboarding
+      Navigator.of(context).pushReplacementNamed('/onboarding_weight');
     } else {
-      // Avatar déjà sauvegardé → Home Screen
-      Navigator.of(context).pushReplacementNamed('/home');
+      // If profile exists, check for avatar (Epic 1 logic)
+      final selectedAvatar = await avatarRepository.getAvatar();
+      if (!mounted) return;
+
+      if (selectedAvatar == null) {
+        // Profile exists but no avatar -> Avatar Selection
+        Navigator.of(context).pushReplacementNamed('/avatar-selection');
+      } else {
+        // Profile and avatar exist -> Home Screen
+        Navigator.of(context).pushReplacementNamed('/home');
+      }
     }
   }
 
