@@ -9,6 +9,7 @@ import 'presentation/screens/onboarding/onboarding_weight_screen.dart';
 import 'presentation/screens/onboarding/onboarding_age_screen.dart';
 import 'presentation/screens/onboarding/onboarding_gender_screen.dart';
 import 'domain/repositories/avatar_repository.dart';
+import 'domain/repositories/user_repository.dart';
 import 'presentation/services/dehydration_timer_service.dart';
 
 void main() async {
@@ -69,18 +70,30 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   Future<void> _checkAvatarAndNavigate() async {
-    final repository = getIt<AvatarRepository>();
-    final selectedAvatar = await repository.getAvatar();
+    final userRepository = getIt<UserRepository>();
+    final avatarRepository = getIt<AvatarRepository>();
+
+    // Check for user profile first (Epic 2 - Onboarding)
+    final userProfile = await userRepository.getProfile();
 
     if (!mounted) return;
 
-    // AC #1 - Navigation conditionnelle
-    if (selectedAvatar == null) {
-      // Premier lancement → Avatar Selection
-      Navigator.of(context).pushReplacementNamed('/avatar-selection');
+    if (userProfile == null) {
+      // No profile → Start onboarding
+      Navigator.of(context).pushReplacementNamed('/onboarding_weight');
     } else {
-      // Avatar déjà sauvegardé → Home Screen
-      Navigator.of(context).pushReplacementNamed('/home');
+      // Profile exists → Check avatar (Epic 1)
+      final selectedAvatar = await avatarRepository.getAvatar();
+
+      if (!mounted) return;
+
+      if (selectedAvatar == null) {
+        // Profile exists but no avatar → Avatar Selection
+        Navigator.of(context).pushReplacementNamed('/avatar-selection');
+      } else {
+        // Profile and avatar exist → Home Screen
+        Navigator.of(context).pushReplacementNamed('/home');
+      }
     }
   }
 
