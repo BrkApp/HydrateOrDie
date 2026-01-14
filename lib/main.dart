@@ -7,6 +7,7 @@ import 'presentation/screens/avatar_selection/avatar_selection_screen.dart';
 import 'presentation/screens/home/home_screen.dart';
 import 'presentation/screens/onboarding/onboarding_weight_screen.dart';
 import 'presentation/screens/onboarding/onboarding_age_screen.dart';
+import 'presentation/screens/onboarding/onboarding_gender_screen.dart';
 import 'domain/repositories/avatar_repository.dart';
 import 'presentation/services/dehydration_timer_service.dart';
 
@@ -47,6 +48,7 @@ class MyApp extends ConsumerWidget {
         '/avatar-selection': (_) => const AvatarSelectionScreen(),
         '/onboarding_weight': (_) => const OnboardingWeightScreen(),
         '/onboarding_age': (_) => const OnboardingAgeScreen(),
+        '/onboarding_gender': (_) => const OnboardingGenderScreen(),
       },
     );
   }
