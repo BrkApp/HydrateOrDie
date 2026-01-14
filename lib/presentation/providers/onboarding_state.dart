@@ -75,7 +75,7 @@ class OnboardingState extends Equatable {
   bool get isWeightValid => weight != null && weight! >= 30 && weight! <= 300;
 
   /// Check if age step is complete
-  bool get isAgeValid => age != null && age! >= 13 && age! <= 100;
+  bool get isAgeValid => age != null && age! >= 10 && age! <= 120;
 
   /// Check if gender step is complete
   bool get isGenderValid => gender != null;

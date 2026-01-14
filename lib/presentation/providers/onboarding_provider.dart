@@ -35,11 +35,11 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
 
   /// Update age (Step 2)
   ///
-  /// [age] must be between 13 and 100 years
+  /// [age] must be between 10 and 120 years
   void updateAge(int age) {
-    if (age < 13 || age > 100) {
+    if (age < 10 || age > 120) {
       state = state.copyWith(
-        errorMessage: 'L\'âge doit être entre 13 et 100 ans',
+        errorMessage: 'L\'âge doit être entre 10 et 120 ans',
       );
       return;
     }

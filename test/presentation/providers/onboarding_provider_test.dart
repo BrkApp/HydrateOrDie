@@ -76,40 +76,40 @@ void main() {
         expect(notifier.state.errorMessage, isNull);
       });
 
-      test('should update age with min valid value (13)', () {
+      test('should update age with min valid value (10)', () {
         // Act
-        notifier.updateAge(13);
+        notifier.updateAge(10);
 
         // Assert
-        expect(notifier.state.age, 13);
+        expect(notifier.state.age, 10);
         expect(notifier.state.errorMessage, isNull);
       });
 
-      test('should update age with max valid value (100)', () {
+      test('should update age with max valid value (120)', () {
         // Act
-        notifier.updateAge(100);
+        notifier.updateAge(120);
 
         // Assert
-        expect(notifier.state.age, 100);
+        expect(notifier.state.age, 120);
         expect(notifier.state.errorMessage, isNull);
       });
 
-      test('should set error when age is below min (12)', () {
+      test('should set error when age is below min (9)', () {
         // Act
-        notifier.updateAge(12);
+        notifier.updateAge(9);
 
         // Assert
         expect(notifier.state.age, isNull);
-        expect(notifier.state.errorMessage, 'L\'âge doit être entre 13 et 100 ans');
+        expect(notifier.state.errorMessage, 'L\'âge doit être entre 10 et 120 ans');
       });
 
-      test('should set error when age is above max (101)', () {
+      test('should set error when age is above max (121)', () {
         // Act
-        notifier.updateAge(101);
+        notifier.updateAge(121);
 
         // Assert
         expect(notifier.state.age, isNull);
-        expect(notifier.state.errorMessage, 'L\'âge doit être entre 13 et 100 ans');
+        expect(notifier.state.errorMessage, 'L\'âge doit être entre 10 et 120 ans');
       });
     });
 

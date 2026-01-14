@@ -192,33 +192,33 @@ void main() {
         expect(state.isAgeValid, true);
       });
 
-      test('isAgeValid should return true for min age (13)', () {
+      test('isAgeValid should return true for min age (10)', () {
         // Arrange
-        const state = OnboardingState(age: 13);
+        const state = OnboardingState(age: 10);
 
         // Act & Assert
         expect(state.isAgeValid, true);
       });
 
-      test('isAgeValid should return true for max age (100)', () {
+      test('isAgeValid should return true for max age (120)', () {
         // Arrange
-        const state = OnboardingState(age: 100);
+        const state = OnboardingState(age: 120);
 
         // Act & Assert
         expect(state.isAgeValid, true);
       });
 
-      test('isAgeValid should return false for age below min (12)', () {
+      test('isAgeValid should return false for age below min (9)', () {
         // Arrange
-        const state = OnboardingState(age: 12);
+        const state = OnboardingState(age: 9);
 
         // Act & Assert
         expect(state.isAgeValid, false);
       });
 
-      test('isAgeValid should return false for age above max (101)', () {
+      test('isAgeValid should return false for age above max (121)', () {
         // Arrange
-        const state = OnboardingState(age: 101);
+        const state = OnboardingState(age: 121);
 
         // Act & Assert
         expect(state.isAgeValid, false);
