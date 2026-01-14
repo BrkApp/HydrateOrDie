@@ -139,8 +139,7 @@ class _OnboardingWeightScreenState
     }
 
     // Navigate to next screen (Age screen - Story 2.5)
-    // TODO: Implement navigation when Age screen is ready
-    // Navigator.of(context).pushNamed('/onboarding/age');
+    Navigator.of(context).pushNamed('/onboarding_age');
   }
 
   @override
