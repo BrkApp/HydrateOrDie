@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hydrate_or_die/domain/entities/gender.dart';
-import 'package:hydrate_or_die/presentation/providers/onboarding_provider.dart';
 import 'package:hydrate_or_die/presentation/screens/onboarding/onboarding_gender_screen.dart';
 
 void main() {

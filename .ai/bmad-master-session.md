@@ -1,16 +1,17 @@
 # 🧙 BMad Master - Session de Pilotage
 **Projet:** HydrateOrDie
 **Date Début:** 2026-01-07
-**Dernière MAJ:** 2026-01-12
-**Phase:** Epic 2 - Story 2.3 IN PROGRESS
+**Dernière MAJ:** 2026-01-14
+**Phase:** Epic 2 - Story 2.6 COMPLETE ✅
 
 ---
 
 ## 📍 ÉTAT ACTUEL
 
 **Epic 1:** ✅ COMPLETE (8/8 stories + 2 bugfixes + QA Gate validé)
-**Epic 2:** 🚀 IN PROGRESS (2/10 stories, Story 2.3 en cours)
-**Branche:** `feature/epic-2-story-3-user-profile-repository`
+**Epic 2:** 🚀 IN PROGRESS (6/10 stories, 60% complete)
+**Branche:** `feature/epic-2-story-6-onboarding-gender-screen`
+**APK Release:** ✅ Créé (54MB, 2026-01-14)
 
 ### Phase en Cours
 | Phase | Agent | Livrable | Statut | Début | Notes |
@@ -47,13 +48,17 @@
 
 **Total:** 250+ tests, Coverage 98%, 0 flutter analyze errors
 
-### Epic 2 - User Onboarding 🚀 (20%)
+### Epic 2 - User Onboarding 🚀 (60%)
 | Story | Status | Tests | Notes |
 |-------|--------|-------|-------|
-| 2.1 User Profile Model | ✅ | 43 (100%) | Fichiers préexistants |
+| 2.1 User Profile Model | ✅ | 43 (100%) | Entity + Enums |
 | 2.2 Hydration Calculation | ✅ | 584 (100%) | Use Case + edge cases |
-| 2.3 User Profile Repository | 🚀 | - | CRUD SQLite + DI |
-| 2.4-2.8 Onboarding Screens | ⏸️ | - | 5 screens UI |
+| 2.3 User Profile Repository | ✅ | Pass | CRUD SQLite + DB V4 |
+| 2.4 Weight Screen | ✅ | Pass | Slider 30-200kg |
+| 2.5 Age Screen | ✅ | Pass | Slider 13-100 ans |
+| 2.6 Gender Screen | ✅ | Pass | 3 options (M/F/Other) |
+| 2.7 Activity Screen | ⏸️ | - | 4 niveaux activité |
+| 2.8 Location Screen | ⏸️ | - | Géoloc + fallback |
 | 2.9 Summary Screen | ⏸️ | - | Récap + goal |
 | 2.10 Flow Integration | ⏸️ | - | Navigation |
 
@@ -156,9 +161,9 @@
 
 ---
 
-**Dernière action:** ✅ Story 2.2 COMPLETE (584/584 tests, 100% coverage) → Merged to master
-**Action en cours:** 🚀 Story 2.3 - User Profile Repository (CRUD SQLite + DB migration V4)
-**Prochaine étape:** Story 2.4 - Onboarding Weight Screen (UI)
+**Dernière action:** ✅ Story 2.6 COMPLETE (Gender Screen) + APK Release créé (54MB)
+**Stats Tests:** 521 tests pass, 18 timeouts (widget_test.dart - problème connu Epic 1)
+**Prochaine étape:** Story 2.7 - Onboarding Activity Screen (4 niveaux)
 
 ---
 
