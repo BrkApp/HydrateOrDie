@@ -2,8 +2,11 @@ import 'package:get_it/get_it.dart';
 
 import '../../data/data_sources/local/avatar_local_data_source.dart';
 import '../../data/data_sources/local/database_helper.dart';
+import '../../data/data_sources/local/user_local_data_source.dart';
 import '../../data/repositories/avatar_repository_impl.dart';
+import '../../data/repositories/user_repository_impl.dart';
 import '../../domain/repositories/avatar_repository.dart';
+import '../../domain/repositories/user_repository.dart';
 import '../../domain/use_cases/avatar/check_and_resurrect_avatar_use_case.dart';
 import '../../domain/use_cases/avatar/update_avatar_state_use_case.dart';
 import '../../presentation/providers/avatar_asset_provider.dart';
@@ -36,6 +39,11 @@ Future<void> setupDependencies() async {
     () => AvatarLocalDataSourceImpl(getIt<DatabaseHelper>()),
   );
 
+  // UserLocalDataSource - Singleton
+  getIt.registerLazySingleton<UserLocalDataSource>(
+    () => UserLocalDataSourceImpl(getIt<DatabaseHelper>()),
+  );
+
   // ========================================
   // REPOSITORIES
   // ========================================
@@ -43,6 +51,11 @@ Future<void> setupDependencies() async {
   // AvatarRepository - Singleton
   getIt.registerLazySingleton<AvatarRepository>(
     () => AvatarRepositoryImpl(getIt<AvatarLocalDataSource>()),
+  );
+
+  // UserRepository - Singleton (Story 2.3)
+  getIt.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(getIt<UserLocalDataSource>()),
   );
 
   // ========================================

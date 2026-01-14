@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart';
 /// Implements singleton pattern for single database instance.
 class DatabaseHelper {
   static const String _databaseName = 'hydrate_or_die.db';
-  static const int _databaseVersion = 3;
+  static const int _databaseVersion = 4;
 
   static Database? _database;
 
@@ -37,6 +37,7 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE user_profile (
         id TEXT PRIMARY KEY NOT NULL,
+        user_id TEXT NOT NULL,
         weight REAL NOT NULL CHECK(weight >= 30.0 AND weight <= 300.0),
         age INTEGER NOT NULL CHECK(age >= 10 AND age <= 120),
         gender TEXT NOT NULL CHECK(gender IN ('male', 'female', 'other')),
@@ -151,6 +152,28 @@ class DatabaseHelper {
         });
         print('[DatabaseHelper] Migration V2→V3: Migrated existing avatar data');
       }
+    }
+
+    // Migration V3 → V4: Add user_profile table (Story 2.3)
+    if (oldVersion < 4) {
+      print('[DatabaseHelper] Migration V3→V4: Adding user_profile table');
+
+      await db.execute('''
+        CREATE TABLE user_profile (
+          id TEXT PRIMARY KEY NOT NULL,
+          user_id TEXT NOT NULL,
+          weight REAL NOT NULL CHECK(weight >= 30.0 AND weight <= 300.0),
+          age INTEGER NOT NULL CHECK(age >= 10 AND age <= 120),
+          gender TEXT NOT NULL CHECK(gender IN ('male', 'female', 'other')),
+          activity_level TEXT NOT NULL,
+          location_permission_granted INTEGER NOT NULL DEFAULT 0,
+          daily_goal_liters REAL NOT NULL CHECK(daily_goal_liters >= 1.5 AND daily_goal_liters <= 5.0),
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        )
+      ''');
+
+      print('[DatabaseHelper] Migration V3→V4: user_profile table created successfully');
     }
   }
 

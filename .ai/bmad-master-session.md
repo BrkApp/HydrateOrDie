@@ -2,20 +2,20 @@
 **Projet:** HydrateOrDie
 **Date Début:** 2026-01-07
 **Dernière MAJ:** 2026-01-12
-**Phase:** Epic 2 - Story 2.2 IN PROGRESS
+**Phase:** Epic 2 - Story 2.3 IN PROGRESS
 
 ---
 
 ## 📍 ÉTAT ACTUEL
 
 **Epic 1:** ✅ COMPLETE (8/8 stories + 2 bugfixes + QA Gate validé)
-**Epic 2:** 🚀 IN PROGRESS (1/10 stories, Story 2.2 en cours)
-**Branche:** `feature/epic-2-story-2-hydration-calculation`
+**Epic 2:** 🚀 IN PROGRESS (2/10 stories, Story 2.3 en cours)
+**Branche:** `feature/epic-2-story-3-user-profile-repository`
 
 ### Phase en Cours
 | Phase | Agent | Livrable | Statut | Début | Notes |
 |-------|-------|----------|--------|-------|-------|
-| 26 | dev | Story 2.2 (Hydration Calculation) | 🚀 IN PROGRESS | 2026-01-12 | Use Case calcul besoins hydriques |
+| 27 | dev | Story 2.3 (User Profile Repository) | 🚀 IN PROGRESS | 2026-01-12 | CRUD User SQLite + DB migration V4 |
 
 ### Prochaines Phases
 | Phase | Livrable | Dépendances |
@@ -47,12 +47,12 @@
 
 **Total:** 250+ tests, Coverage 98%, 0 flutter analyze errors
 
-### Epic 2 - User Onboarding 🚀 (10%)
+### Epic 2 - User Onboarding 🚀 (20%)
 | Story | Status | Tests | Notes |
 |-------|--------|-------|-------|
 | 2.1 User Profile Model | ✅ | 43 (100%) | Fichiers préexistants |
-| 2.2 Hydration Calculation | 🚀 | - | Use Case formule |
-| 2.3 User Profile Repository | ⏸️ | - | CRUD SQLite |
+| 2.2 Hydration Calculation | ✅ | 584 (100%) | Use Case + edge cases |
+| 2.3 User Profile Repository | 🚀 | - | CRUD SQLite + DI |
 | 2.4-2.8 Onboarding Screens | ⏸️ | - | 5 screens UI |
 | 2.9 Summary Screen | ⏸️ | - | Récap + goal |
 | 2.10 Flow Integration | ⏸️ | - | Navigation |
@@ -156,9 +156,9 @@
 
 ---
 
-**Dernière action:** ✅ Story 2.1 COMPLETE (43/43 tests, 100% coverage)
-**Action en cours:** 🚀 Story 2.2 - Hydration Calculation Logic (Use Case)
-**Prochaine étape:** Story 2.3 - User Profile Repository (SQLite)
+**Dernière action:** ✅ Story 2.2 COMPLETE (584/584 tests, 100% coverage) → Merged to master
+**Action en cours:** 🚀 Story 2.3 - User Profile Repository (CRUD SQLite + DB migration V4)
+**Prochaine étape:** Story 2.4 - Onboarding Weight Screen (UI)
 
 ---
 
