@@ -2,7 +2,7 @@
 
 **Epic:** Epic 2 - Onboarding & Personnalisation
 **Story ID:** 2.8
-**Status:** Not Started
+**Status:** Ready for Review
 **Priority:** Medium
 **Estimated Effort:** 3 hours
 
@@ -46,11 +46,11 @@
 
 ## Definition of Done
 
-- [ ] Tous les AC validés
-- [ ] Widget tests passent
-- [ ] Permission handling fonctionne
-- [ ] Code suit conventions
-- [ ] Les deux flows testés
+- [x] Tous les AC validés
+- [x] Widget tests passent
+- [x] Permission handling fonctionne
+- [x] Code suit conventions
+- [x] Les deux flows testés
 - [ ] PM approval
 
 ---
