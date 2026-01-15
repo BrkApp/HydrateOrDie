@@ -9,6 +9,7 @@ import '../../domain/repositories/avatar_repository.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../../domain/use_cases/avatar/check_and_resurrect_avatar_use_case.dart';
 import '../../domain/use_cases/avatar/update_avatar_state_use_case.dart';
+import '../../domain/use_cases/user/calculate_hydration_goal_use_case.dart';
 import '../../presentation/providers/avatar_asset_provider.dart';
 import '../../presentation/services/dehydration_timer_service.dart';
 import '../../presentation/services/resurrection_timer_service.dart';
@@ -70,6 +71,11 @@ Future<void> setupDependencies() async {
   // CheckAndResurrectAvatarUseCase - Factory (Story 1.7)
   getIt.registerFactory<CheckAndResurrectAvatarUseCase>(
     () => CheckAndResurrectAvatarUseCase(getIt<AvatarRepository>()),
+  );
+
+  // CalculateHydrationGoalUseCase - Factory (Story 2.2)
+  getIt.registerFactory<CalculateHydrationGoalUseCase>(
+    () => CalculateHydrationGoalUseCase(),
   );
 
   // ========================================
