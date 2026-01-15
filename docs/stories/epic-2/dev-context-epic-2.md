@@ -1,10 +1,11 @@
 # Dev Context - Epic 2: User Onboarding & Personnalisation
 
 **Epic:** 2 - User Onboarding & Personnalisation
-**Status:** 🟡 IN PROGRESS (Story 2.9)
+**Status:** ✅ COMPLETE
 **Date Début:** 2026-01-12
+**Date Fin:** 2026-01-15
 **Stories:** 2.1 à 2.10 (10 stories)
-**Branche actuelle:** `feature/epic-2-story-9-onboarding-summary-screen`
+**Branche actuelle:** `feature/epic-2-story-10-onboarding-flow-integration`
 
 ---
 
@@ -36,10 +37,10 @@
 | 2.6 | Onboarding Gender Screen | ✅ COMPLETE | 2026-01-13 | 3 boutons (Male/Female/Other) |
 | 2.7 | Onboarding Activity Screen | ✅ COMPLETE | 2026-01-14 | 5 niveaux activité (Sedentary/Light/Moderate/VeryActive/ExtremelyActive) |
 | 2.8 | Onboarding Location Screen | ✅ COMPLETE | 2026-01-15 | Mock permission (MVP), pas de géoloc réelle |
-| 2.9 | Onboarding Summary Screen | 🟡 IN PROGRESS | 2026-01-15 | Récap profil + goal calculé affiché |
-| 2.10 | Onboarding Flow Integration | 🔴 Not Started | - | Navigation multi-screen + routing conditionnel |
+| 2.9 | Onboarding Summary Screen | ✅ COMPLETE | 2026-01-15 | Récap profil + goal calculé affiché |
+| 2.10 | Onboarding Flow Integration | ✅ COMPLETE | 2026-01-15 | OnboardingFlowScreen avec PageView, stepper, routing conditionnel |
 
-**Progression:** 8/10 stories complètes (80%) - Story 2.9 EN COURS
+**Progression:** 10/10 stories complètes (100%) - Epic 2 TERMINÉ ✅
 
 ---
 
@@ -302,6 +303,6 @@ Goal final: 2800 ml (arrondi au 100ml près)
 ---
 
 **Dernière mise à jour:** 2026-01-15
-**Status Epic 2:** 🟡 IN PROGRESS (8/10 stories complètes, Story 2.9 en cours)
-**Branche actuelle:** `feature/epic-2-story-9-onboarding-summary-screen`
-**Prochain milestone:** Story 2.9 - Onboarding Summary Screen (EN COURS)
+**Status Epic 2:** ✅ COMPLETE (10/10 stories complètes)
+**Branche actuelle:** `feature/epic-2-story-10-onboarding-flow-integration`
+**Prochain milestone:** Epic 3 - Hydration Logging & Tracking

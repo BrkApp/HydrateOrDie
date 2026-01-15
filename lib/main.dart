@@ -5,12 +5,7 @@ import 'firebase_options.dart';
 import 'core/di/injection.dart';
 import 'presentation/screens/avatar_selection/avatar_selection_screen.dart';
 import 'presentation/screens/home/home_screen.dart';
-import 'presentation/screens/onboarding/onboarding_weight_screen.dart';
-import 'presentation/screens/onboarding/onboarding_age_screen.dart';
-import 'presentation/screens/onboarding/onboarding_gender_screen.dart';
-import 'presentation/screens/onboarding/onboarding_activity_screen.dart';
-import 'presentation/screens/onboarding/onboarding_location_screen.dart';
-import 'presentation/screens/onboarding/onboarding_summary_screen.dart';
+import 'presentation/screens/onboarding/onboarding_flow_screen.dart';
 import 'domain/repositories/avatar_repository.dart';
 import 'domain/repositories/user_repository.dart';
 import 'presentation/services/dehydration_timer_service.dart';
@@ -50,12 +45,7 @@ class MyApp extends ConsumerWidget {
       routes: {
         '/home': (_) => const HomeScreen(),
         '/avatar-selection': (_) => const AvatarSelectionScreen(),
-        '/onboarding_weight': (_) => const OnboardingWeightScreen(),
-        '/onboarding_age': (_) => const OnboardingAgeScreen(),
-        '/onboarding_gender': (_) => const OnboardingGenderScreen(),
-        '/onboarding_activity': (_) => const OnboardingActivityScreen(),
-        '/onboarding_location': (_) => const OnboardingLocationScreen(),
-        '/onboarding_summary': (_) => const OnboardingSummaryScreen(),
+        '/onboarding': (_) => const OnboardingFlowScreen(),
       },
     );
   }
@@ -85,8 +75,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     if (!mounted) return;
 
     if (userProfile == null) {
-      // No profile → Start onboarding
-      Navigator.of(context).pushReplacementNamed('/onboarding_weight');
+      // No profile → Start onboarding flow
+      Navigator.of(context).pushReplacementNamed('/onboarding');
     } else {
       // Profile exists → Check avatar (Epic 1)
       final selectedAvatar = await avatarRepository.getAvatar();
