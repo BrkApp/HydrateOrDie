@@ -85,7 +85,8 @@ class _OnboardingFlowScreenState extends ConsumerState<OnboardingFlowScreen> {
 
   /// Check if current step can proceed to next
   bool _canProceed() {
-    final onboardingState = ref.read(onboardingProvider);
+    // Use ref.watch() to rebuild when provider state changes
+    final onboardingState = ref.watch(onboardingProvider);
 
     switch (_currentPage) {
       case 0: // Weight
