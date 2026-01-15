@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hydrate_or_die/domain/entities/avatar_personality.dart';
 import 'package:hydrate_or_die/domain/entities/avatar_state.dart';
@@ -81,7 +82,9 @@ class HomeNotifier extends StateNotifier<HomeState> {
         errorMessage: null,
       );
     } catch (e) {
-      print('[HomeProvider] Error refreshing state: $e');
+      if (kDebugMode) {
+        debugPrint('[HomeProvider] Error refreshing state: $e');
+      }
       state = state.copyWith(
         isLoading: false,
         errorMessage: e.toString(),
@@ -96,19 +99,25 @@ class HomeNotifier extends StateNotifier<HomeState> {
     _refreshTimer = Timer.periodic(
       const Duration(seconds: 60),
       (_) async {
-        print('[HomeProvider] Auto-refresh triggered (60s interval)');
+        if (kDebugMode) {
+          debugPrint('[HomeProvider] Auto-refresh triggered (60s interval)');
+        }
         await refresh();
       },
     );
 
-    print('[HomeProvider] Auto-refresh timer started (60s interval)');
+    if (kDebugMode) {
+      debugPrint('[HomeProvider] Auto-refresh timer started (60s interval)');
+    }
   }
 
   /// Stop automatic refresh timer - called on dispose
   void _stopAutoRefresh() {
     _refreshTimer?.cancel();
     _refreshTimer = null;
-    print('[HomeProvider] Auto-refresh timer stopped');
+    if (kDebugMode) {
+      debugPrint('[HomeProvider] Auto-refresh timer stopped');
+    }
   }
 
   @override

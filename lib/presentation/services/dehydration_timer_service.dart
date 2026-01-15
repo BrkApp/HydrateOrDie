@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import '../../domain/use_cases/avatar/update_avatar_state_use_case.dart';
 
 /// Service gérant le timer de déshydratation en background
@@ -43,11 +45,15 @@ class DehydrationTimerService {
   void start() {
     // Si le timer est déjà actif, ne pas en créer un nouveau
     if (isRunning) {
-      print('[DehydrationTimer] Timer déjà actif - pas de redémarrage');
+      if (kDebugMode) {
+        debugPrint('[DehydrationTimer] Timer déjà actif - pas de redémarrage');
+      }
       return;
     }
 
-    print('[DehydrationTimer] Démarrage du timer (intervalle: ${kUpdateInterval.inSeconds}s)');
+    if (kDebugMode) {
+      debugPrint('[DehydrationTimer] Démarrage du timer (intervalle: ${kUpdateInterval.inSeconds}s)');
+    }
 
     // Exécuter une première mise à jour immédiatement
     _updateAvatarState();
@@ -66,7 +72,9 @@ class DehydrationTimerService {
   /// Après dispose(), le service peut être redémarré avec start().
   void dispose() {
     if (_timer != null) {
-      print('[DehydrationTimer] Arrêt du timer');
+      if (kDebugMode) {
+        debugPrint('[DehydrationTimer] Arrêt du timer');
+      }
       _timer!.cancel();
       _timer = null;
     }
@@ -78,12 +86,18 @@ class DehydrationTimerService {
   /// Les erreurs ne font pas crasher l'app - elles sont simplement loggées.
   Future<void> _updateAvatarState() async {
     try {
-      print('[DehydrationTimer] Exécution de la mise à jour de l\'état avatar');
+      if (kDebugMode) {
+        debugPrint('[DehydrationTimer] Exécution de la mise à jour de l\'état avatar');
+      }
       final newState = await _updateAvatarStateUseCase.execute();
-      print('[DehydrationTimer] État avatar mis à jour: $newState');
+      if (kDebugMode) {
+        debugPrint('[DehydrationTimer] État avatar mis à jour: $newState');
+      }
     } catch (e) {
       // Log l'erreur mais ne fait pas crasher l'app
-      print('[DehydrationTimer] Erreur lors de la mise à jour: $e');
+      if (kDebugMode) {
+        debugPrint('[DehydrationTimer] Erreur lors de la mise à jour: $e');
+      }
     }
   }
 
@@ -92,7 +106,9 @@ class DehydrationTimerService {
   /// Utile pour forcer une mise à jour en dehors du cycle periodic
   /// (par exemple, à l'ouverture de l'application).
   Future<void> forceUpdate() async {
-    print('[DehydrationTimer] Mise à jour forcée demandée');
+    if (kDebugMode) {
+      debugPrint('[DehydrationTimer] Mise à jour forcée demandée');
+    }
     await _updateAvatarState();
   }
 }

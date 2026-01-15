@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hydrate_or_die/domain/entities/avatar_personality.dart';
@@ -22,7 +23,7 @@ import 'package:hydrate_or_die/core/di/injection.dart';
 /// );
 /// ```
 class AvatarSelectionScreen extends ConsumerStatefulWidget {
-  const AvatarSelectionScreen({Key? key}) : super(key: key);
+  const AvatarSelectionScreen({super.key});
 
   @override
   ConsumerState<AvatarSelectionScreen> createState() =>
@@ -46,14 +47,18 @@ class _AvatarSelectionScreenState
 
       // Vérification que la sauvegarde a réussi
       final savedAvatar = await repository.getAvatar();
-      print('DEBUG: Avatar saved: ${savedAvatar?.personality}');
+      if (kDebugMode) {
+        debugPrint('DEBUG: Avatar saved: ${savedAvatar?.personality}');
+      }
 
       if (!mounted) return;
 
       // Navigation vers HomeScreen (AC #6)
       Navigator.of(context).pushReplacementNamed('/home');
     } catch (e) {
-      print('ERROR: Failed to save avatar: $e');
+      if (kDebugMode) {
+        debugPrint('ERROR: Failed to save avatar: $e');
+      }
       if (!mounted) return;
 
       // Afficher erreur à l'utilisateur

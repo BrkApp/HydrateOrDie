@@ -17,7 +17,7 @@ import '../../providers/onboarding_provider.dart';
 /// - Motivational message with avatar icon
 /// - "C'est parti!" button to save profile and navigate to Home
 class OnboardingSummaryScreen extends ConsumerStatefulWidget {
-  const OnboardingSummaryScreen({Key? key}) : super(key: key);
+  const OnboardingSummaryScreen({super.key});
 
   @override
   ConsumerState<OnboardingSummaryScreen> createState() =>

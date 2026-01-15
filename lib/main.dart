@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,13 +23,15 @@ void main() async {
   // Start dehydration timer service (Epic 1 - Story 1.5)
   final dehydrationTimer = getIt<DehydrationTimerService>();
   dehydrationTimer.start();
-  print('[Main] DehydrationTimerService started');
+  if (kDebugMode) {
+    debugPrint('[Main] DehydrationTimerService started');
+  }
 
   runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -52,7 +55,7 @@ class MyApp extends ConsumerWidget {
 }
 
 class SplashScreen extends ConsumerStatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   ConsumerState<SplashScreen> createState() => _SplashScreenState();

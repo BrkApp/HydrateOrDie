@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../../entities/avatar_state.dart';
 import '../../repositories/avatar_repository.dart';
 
@@ -45,7 +47,9 @@ class CheckAndResurrectAvatarUseCase {
 
       // 2. Vérifier si l'avatar est en état ghost
       if (currentState != AvatarState.ghost) {
-        print('[CheckAndResurrect] Avatar not ghost (état: $currentState) - Aucune résurrection');
+        if (kDebugMode) {
+        debugPrint('[CheckAndResurrect] Avatar not ghost (état: $currentState) - Aucune résurrection');
+      }
         return false;
       }
 
@@ -61,10 +65,14 @@ class CheckAndResurrectAvatarUseCase {
       // 3c. Effacer deathTime
       await _avatarRepository.updateDeathTime(null);
 
-      print('[CheckAndResurrect] ✨ Résurrection réussie! ghost → fresh (lastDrinkTime: $now)');
+      if (kDebugMode) {
+        debugPrint('[CheckAndResurrect] ✨ Résurrection réussie! ghost → fresh (lastDrinkTime: $now)');
+      }
       return true;
     } catch (e) {
-      print('[CheckAndResurrect] Erreur lors de la résurrection: $e');
+      if (kDebugMode) {
+        debugPrint('[CheckAndResurrect] Erreur lors de la résurrection: $e');
+      }
       rethrow;
     }
   }

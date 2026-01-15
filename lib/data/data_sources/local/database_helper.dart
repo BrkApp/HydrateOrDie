@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -112,12 +113,16 @@ class DatabaseHelper {
     if (oldVersion < 2) {
       await db.execute(
           'ALTER TABLE avatar_state ADD COLUMN death_time TEXT');
-      print('[DatabaseHelper] Migration V1→V2: Added death_time column');
+      if (kDebugMode) {
+        debugPrint('[DatabaseHelper] Migration V1→V2: Added death_time column');
+      }
     }
 
     // Migration V2 → V3: Rebuild avatar_state table with correct JSON schema (Story 1.8 bugfix)
     if (oldVersion < 3) {
-      print('[DatabaseHelper] Migration V2→V3: Rebuilding avatar_state table');
+      if (kDebugMode) {
+        debugPrint('[DatabaseHelper] Migration V2→V3: Rebuilding avatar_state table');
+      }
 
       // Step 1: Create backup of existing data (if any)
       final existingData = await db.query('avatar_state');
@@ -150,13 +155,17 @@ class DatabaseHelper {
           'death_time': oldRow['death_time'],
           'lastUpdated': oldRow['last_updated'] ?? DateTime.now().toUtc().toIso8601String(),
         });
-        print('[DatabaseHelper] Migration V2→V3: Migrated existing avatar data');
+        if (kDebugMode) {
+          debugPrint('[DatabaseHelper] Migration V2→V3: Migrated existing avatar data');
+        }
       }
     }
 
     // Migration V3 → V4: Add user_profile table (Story 2.3)
     if (oldVersion < 4) {
-      print('[DatabaseHelper] Migration V3→V4: Adding user_profile table');
+      if (kDebugMode) {
+        debugPrint('[DatabaseHelper] Migration V3→V4: Adding user_profile table');
+      }
 
       await db.execute('''
         CREATE TABLE user_profile (
@@ -173,7 +182,9 @@ class DatabaseHelper {
         )
       ''');
 
-      print('[DatabaseHelper] Migration V3→V4: user_profile table created successfully');
+      if (kDebugMode) {
+        debugPrint('[DatabaseHelper] Migration V3→V4: user_profile table created successfully');
+      }
     }
   }
 
