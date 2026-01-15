@@ -2,7 +2,7 @@
 
 **Epic:** Epic 2 - Onboarding & Personnalisation
 **Story ID:** 2.2
-**Status:** Ready for Review
+**Status:** Approved
 **Priority:** Critical
 **Estimated Effort:** 4 hours
 

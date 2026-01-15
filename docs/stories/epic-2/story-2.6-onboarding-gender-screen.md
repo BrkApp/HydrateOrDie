@@ -2,7 +2,7 @@
 
 **Epic:** Epic 2 - Onboarding & Personnalisation
 **Story ID:** 2.6
-**Status:** Not Started
+**Status:** Approved
 **Priority:** High
 **Estimated Effort:** 3 hours
 
