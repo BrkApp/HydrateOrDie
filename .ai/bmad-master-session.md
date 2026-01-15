@@ -9,10 +9,10 @@
 ## 📍 ÉTAT ACTUEL
 
 **Epic 1:** ✅ COMPLETE & MERGED (8/8 stories + 2 bugfixes + QA Gate validé)
-**Epic 2:** ✅ COMPLETE & MERGED (10/10 stories, QA Gate PASSED, APK 48.9MB)
+**Epic 2:** ✅ COMPLETE & MERGED (10/10 stories + 1 hotfix, QA Gate PASSED)
 **Epic 3:** 🚀 PLANNING (Hydration Logging & Tracking)
 **Branche:** `main`
-**Tag:** `epic-2-complete`
+**Tag:** `epic-2-hotfix-1` (latest)
 
 ### Phase en Cours
 | Phase | Agent | Livrable | Statut | Début | Notes |
@@ -27,6 +27,8 @@
 | 38 | PM Reports (All Stories) | ✅ | 2026-01-15 |
 | 39 | Merge to main + Tag | ✅ | 2026-01-15 |
 | 40 | APK Release Build | ✅ | 2026-01-15 |
+| 41 | Hotfix Double Button (Critical) | ✅ | 2026-01-15 |
+| 42 | APK Hotfix Build | 🔄 | 2026-01-15 |
 
 ---
 
