@@ -36,17 +36,17 @@ class _OnboardingActivityScreenState
     setState(() {
       _selectedActivity = activity;
     });
+
+    // Update provider in real-time for embedded flow validation
+    ref.read(onboardingProvider.notifier).updateActivityLevel(activity);
   }
 
   /// Handle next button press
   void _handleNext() {
     if (_selectedActivity == null) return;
 
-    // Update state via provider
-    ref.read(onboardingProvider.notifier).updateActivityLevel(_selectedActivity!);
-
+    // Provider already updated in _selectActivity() for real-time validation
     // Navigate to next screen (Location screen - Story 2.8)
-    // Note: This will fail silently if Story 2.8 is not yet implemented
     Navigator.of(context).pushNamed('/onboarding_location');
   }
 

@@ -36,15 +36,16 @@ class _OnboardingGenderScreenState
     setState(() {
       _selectedGender = gender;
     });
+
+    // Update provider in real-time for embedded flow validation
+    ref.read(onboardingProvider.notifier).updateGender(gender);
   }
 
   /// Handle next button press
   void _handleNext() {
     if (_selectedGender == null) return;
 
-    // Update state via provider
-    ref.read(onboardingProvider.notifier).updateGender(_selectedGender!);
-
+    // Provider already updated in _selectGender() for real-time validation
     // Navigate to next screen (Activity level screen - Story 2.7)
     Navigator.of(context).pushNamed('/onboarding_activity');
   }

@@ -226,12 +226,24 @@ class _OnboardingWeightScreenState
                   ),
                   filled: true,
                 ),
-                onChanged: (_) {
+                onChanged: (value) {
                   // Clear error when user starts typing
                   if (_errorMessage != null) {
                     setState(() {
                       _errorMessage = null;
                     });
+                  }
+
+                  // Update provider in real-time for embedded flow validation
+                  if (embeddedContext.isEmbedded) {
+                    final weight = double.tryParse(value.trim());
+                    if (weight != null) {
+                      final weightInKg = _isKg ? weight : _lbsToKg(weight);
+                      // Validate range before updating
+                      if (weightInKg >= 30 && weightInKg <= 300) {
+                        ref.read(onboardingProvider.notifier).updateWeight(weightInKg);
+                      }
+                    }
                   }
                 },
               ),

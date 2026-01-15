@@ -154,12 +154,23 @@ class _OnboardingAgeScreenState extends ConsumerState<OnboardingAgeScreen> {
               ),
               filled: true,
             ),
-            onChanged: (_) {
+            onChanged: (value) {
               // Clear error when user starts typing
               if (_errorMessage != null) {
                 setState(() {
                   _errorMessage = null;
                 });
+              }
+
+              // Update provider in real-time for embedded flow validation
+              if (embeddedContext.isEmbedded) {
+                final age = int.tryParse(value.trim());
+                if (age != null) {
+                  // Validate range before updating (10-120 years)
+                  if (age >= 10 && age <= 120) {
+                    ref.read(onboardingProvider.notifier).updateAge(age);
+                  }
+                }
               }
             },
           ),
