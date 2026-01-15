@@ -8,6 +8,7 @@ import '../../../domain/entities/user.dart';
 import '../../../domain/repositories/user_repository.dart';
 import '../../../domain/use_cases/user/calculate_hydration_goal_use_case.dart';
 import '../../providers/onboarding_provider.dart';
+import '../../widgets/embedded_onboarding_context.dart';
 
 /// Onboarding Summary Screen - Displays calculated hydration goal and profile recap
 ///
@@ -32,6 +33,8 @@ class _OnboardingSummaryScreenState
   Widget build(BuildContext context) {
     final state = ref.watch(onboardingProvider);
     final theme = Theme.of(context);
+    final embeddedContext = EmbeddedOnboardingContext.of(context);
+    final isEmbedded = embeddedContext.isEmbedded;
 
     // Validate that all required data is present
     if (!state.canComplete) {
@@ -63,113 +66,107 @@ class _OnboardingSummaryScreenState
     // Create the final user with calculated goal
     final user = tempUser.copyWith(dailyGoal: hydrationGoal);
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-              const SizedBox(height: 20),
+    // Build the main content
+    final content = SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 20),
 
-              // Title
-              Text(
-                'Ton objectif quotidien',
-                style: theme.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                ),
-                textAlign: TextAlign.center,
+            // Title
+            Text(
+              'Ton objectif quotidien',
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 28,
               ),
+              textAlign: TextAlign.center,
+            ),
 
-              const SizedBox(height: 30),
+            const SizedBox(height: 30),
 
-              // Goal Display (Large)
-              Text(
-                '${goalInLiters.toStringAsFixed(1)} L',
-                style: theme.textTheme.displayLarge?.copyWith(
-                  color: theme.primaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 64,
-                ),
+            // Goal Display (Large)
+            Text(
+              '${goalInLiters.toStringAsFixed(1)} L',
+              style: theme.textTheme.displayLarge?.copyWith(
+                color: theme.primaryColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 64,
               ),
+            ),
 
-              const SizedBox(height: 10),
+            const SizedBox(height: 10),
 
-              // Subtitle
-              Text(
-                'Basé sur ton profil personnel',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontSize: 16,
-                  color: Colors.grey[600],
-                ),
-                textAlign: TextAlign.center,
+            // Subtitle
+            Text(
+              'Basé sur ton profil personnel',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontSize: 16,
+                color: Colors.grey[600],
               ),
+              textAlign: TextAlign.center,
+            ),
 
-              const SizedBox(height: 40),
+            const SizedBox(height: 40),
 
-              // Profile Recap Card
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.blue[50],
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.blue[100]!),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Récapitulatif:',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    _buildRecapItem('Genre', _getGenderLabel(state.gender!)),
-                    _buildRecapItem('Âge', '${state.age} ans'),
-                    _buildRecapItem('Poids', '${state.weight} kg'),
-                    _buildRecapItem(
-                        'Activité', _getActivityLabel(state.activityLevel!)),
-                    if (state.location != null && state.location!.isNotEmpty)
-                      _buildRecapItem('Localisation', state.location!),
-                  ],
-                ),
+            // Profile Recap Card
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.blue[50],
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.blue[100]!),
               ),
-
-              const SizedBox(height: 30),
-
-              // Avatar Icon & Motivational Message
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '💧',
-                    style: const TextStyle(fontSize: 48),
-                  ),
-                  const SizedBox(width: 12),
-                  Flexible(
-                    child: Text(
-                      'Prêt à commencer ton challenge hydratation ?',
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
-                      textAlign: TextAlign.center,
+                    'Récapitulatif:',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
+                  const SizedBox(height: 12),
+                  _buildRecapItem('Genre', _getGenderLabel(state.gender!)),
+                  _buildRecapItem('Âge', '${state.age} ans'),
+                  _buildRecapItem('Poids', '${state.weight} kg'),
+                  _buildRecapItem(
+                      'Activité', _getActivityLabel(state.activityLevel!)),
+                  if (state.location != null && state.location!.isNotEmpty)
+                    _buildRecapItem('Localisation', state.location!),
                 ],
               ),
+            ),
 
-              const SizedBox(height: 40),
+            const SizedBox(height: 30),
 
-              // "C'est parti!" Button
+            // Avatar Icon & Motivational Message
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '💧',
+                  style: const TextStyle(fontSize: 48),
+                ),
+                const SizedBox(width: 12),
+                Flexible(
+                  child: Text(
+                    'Prêt à commencer ton challenge hydratation ?',
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 40),
+
+            // "C'est parti!" Button (only show if NOT embedded in flow)
+            if (!isEmbedded) ...[
               SizedBox(
                 width: double.infinity,
                 height: 56,
@@ -210,13 +207,27 @@ class _OnboardingSummaryScreenState
                         ),
                 ),
               ),
-
               const SizedBox(height: 20),
-              ],
-            ),
-          ),
+            ],
+          ],
         ),
       ),
+    );
+
+    // If embedded in flow, return content without Scaffold
+    if (isEmbedded) {
+      return SafeArea(child: content);
+    }
+
+    // If standalone, wrap in Scaffold with AppBar
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+      ),
+      body: SafeArea(child: content),
     );
   }
 

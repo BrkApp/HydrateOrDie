@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hydrate_or_die/presentation/providers/onboarding_provider.dart';
+import 'package:hydrate_or_die/presentation/widgets/embedded_onboarding_context.dart';
 
 /// Onboarding Screen - Step 5: Location Permission (Optional)
 ///
@@ -50,7 +51,101 @@ class OnboardingLocationScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final embeddedContext = EmbeddedOnboardingContext.of(context);
+    final isEmbedded = embeddedContext.isEmbedded;
 
+    // Build the main content
+    final content = Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Progress indicator
+          Text(
+            'Étape 5 sur 5',
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 32),
+
+          // Icon
+          Icon(
+            Icons.location_on,
+            size: 80,
+            color: theme.colorScheme.primary,
+          ),
+          const SizedBox(height: 24),
+
+          // Title
+          Text(
+            'Autoriser la localisation ?',
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+
+          // Subtitle
+          Text(
+            'Optionnel : permettra d\'ajuster les rappels en fonction de la météo (canicule)',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 48),
+
+          // Authorize button (primary) - only show if NOT embedded in flow
+          if (!isEmbedded) ...[
+            ElevatedButton(
+              onPressed: () => _handleAuthorize(context, ref),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text(
+                'Autoriser',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // Skip button (secondary)
+            OutlinedButton(
+              onPressed: () => _handleSkip(context, ref),
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Text(
+                'Pas maintenant',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                ),
+              ),
+            ),
+          ],
+
+          const Spacer(),
+        ],
+      ),
+    );
+
+    // If embedded in flow, return content without Scaffold
+    if (isEmbedded) {
+      return SafeArea(child: content);
+    }
+
+    // If standalone, wrap in Scaffold with AppBar
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -60,90 +155,7 @@ class OnboardingLocationScreen extends ConsumerWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Progress indicator
-              Text(
-                'Étape 5 sur 5',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 32),
-
-              // Icon
-              Icon(
-                Icons.location_on,
-                size: 80,
-                color: theme.colorScheme.primary,
-              ),
-              const SizedBox(height: 24),
-
-              // Title
-              Text(
-                'Autoriser la localisation ?',
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 12),
-
-              // Subtitle
-              Text(
-                'Optionnel : permettra d\'ajuster les rappels en fonction de la météo (canicule)',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 48),
-
-              // Authorize button (primary)
-              ElevatedButton(
-                onPressed: () => _handleAuthorize(context, ref),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text(
-                  'Autoriser',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Skip button (secondary)
-              OutlinedButton(
-                onPressed: () => _handleSkip(context, ref),
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: Text(
-                  'Pas maintenant',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                  ),
-                ),
-              ),
-
-              const Spacer(),
-            ],
-          ),
-        ),
-      ),
+      body: SafeArea(child: content),
     );
   }
 }
