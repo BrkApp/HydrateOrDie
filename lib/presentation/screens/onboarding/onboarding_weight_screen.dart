@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hydrate_or_die/presentation/providers/onboarding_provider.dart';
+import 'package:hydrate_or_die/presentation/widgets/embedded_onboarding_context.dart';
 
 /// Onboarding Screen - Step 1: Weight Input
 ///
@@ -145,22 +146,15 @@ class _OnboardingWeightScreenState
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final embeddedContext = EmbeddedOnboardingContext.of(context);
+    final isEmbedded = embeddedContext.isEmbedded;
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+    // Build the main content
+    final content = Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
               // Progress indicator
               Text(
                 'Étape 1 sur 5',
@@ -243,28 +237,46 @@ class _OnboardingWeightScreenState
               ),
               const Spacer(),
 
-              // Next button
-              ElevatedButton(
-                onPressed: _handleNext,
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+              // Next button (only show if NOT embedded in flow)
+              if (!isEmbedded) ...[
+                ElevatedButton(
+                  onPressed: _handleNext,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    'Suivant',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                child: const Text(
-                  'Suivant',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
+                const SizedBox(height: 16),
+              ],
+        ],
+      ),
+    );
+
+    // If embedded in flow, return content without Scaffold
+    if (isEmbedded) {
+      return SafeArea(child: content);
+    }
+
+    // If standalone, wrap in Scaffold with AppBar
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
         ),
       ),
+      body: SafeArea(child: content),
     );
   }
 }
