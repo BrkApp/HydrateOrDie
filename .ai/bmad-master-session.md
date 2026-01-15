@@ -2,29 +2,31 @@
 **Projet:** HydrateOrDie
 **Date Début:** 2026-01-07
 **Dernière MAJ:** 2026-01-15
-**Phase:** Epic 2 - COMPLETE ✅ (QA Gate PASSED)
+**Phase:** Epic 2 - MERGED TO MAIN ✅ | Epic 3 Planning 🚀
 
 ---
 
 ## 📍 ÉTAT ACTUEL
 
-**Epic 1:** ✅ COMPLETE (8/8 stories + 2 bugfixes + QA Gate validé)
-**Epic 2:** ✅ COMPLETE (10/10 stories, 100% complete + QA Gate PASSED)
-**Branche:** `feature/epic-2-story-10-onboarding-flow-integration`
-**APK Release:** ✅ Créé (54MB, 2026-01-14)
+**Epic 1:** ✅ COMPLETE & MERGED (8/8 stories + 2 bugfixes + QA Gate validé)
+**Epic 2:** ✅ COMPLETE & MERGED (10/10 stories, QA Gate PASSED, APK 48.9MB)
+**Epic 3:** 🚀 PLANNING (Hydration Logging & Tracking)
+**Branche:** `main`
+**Tag:** `epic-2-complete`
 
 ### Phase en Cours
 | Phase | Agent | Livrable | Statut | Début | Notes |
 |-------|-------|----------|--------|-------|-------|
-| 36 | bmad-master | Epic 2 Review & Validation | ✅ COMPLETE | 2026-01-15 | QA Gate PASSED + Coverage 86.9% |
+| 37 | bmad-master | Epic 3 Planning | 🚀 IN PROGRESS | 2026-01-15 | Architecture + Story breakdown |
 
-### Prochaines Phases
-| Phase | Livrable | Dépendances |
-|-------|----------|-------------|
-| 37 | Epic 2 Completion Report | Epic 2 QA Gate OK |
-| 38 | Merge Epic 2 vers main/develop | Reports complets |
-| 39 | Epic 3 Planning | Epic 2 merged |
-| 40 | Epic 3 - Hydration Logging | Epic 2 OK |
+### Phases Complétées (Epic 2)
+| Phase | Livrable | Status | Date |
+|-------|----------|--------|------|
+| 36 | Epic 2 Review & Validation | ✅ | 2026-01-15 |
+| 37 | Epic 2 Completion Report | ✅ | 2026-01-15 |
+| 38 | PM Reports (All Stories) | ✅ | 2026-01-15 |
+| 39 | Merge to main + Tag | ✅ | 2026-01-15 |
+| 40 | APK Release Build | ✅ | 2026-01-15 |
 
 ---
 
@@ -110,18 +112,19 @@
 
 ## 🚀 PROCHAINES ÉTAPES
 
-### Immédiat (Story 2.2)
-1. @dev implémente CalculateHydrationGoalUseCase
-2. Formule: Base = weight × 0.033L + factors (activity/gender/age)
-3. Tests edge cases: tous profils
-4. Commit: [EPIC-2.2] Add hydration goal calculation
+### Immédiat (Epic 3 Planning)
+1. @architect créer architecture Epic 3 (Camera + Hydration Logging)
+2. @po breakdown Epic 3 en stories (8-12 stories estimées)
+3. @dev Story 3.1 - HydrationLog entity
+4. Story 3.2 - Camera integration
 
-### Après Story 2.2
-1. Story 2.3: User Profile Repository (SQLite CRUD)
-2. Stories 2.4-2.8: Onboarding screens (Weight/Age/Gender/Activity/Location)
-3. Story 2.9: Summary Screen (récap + goal)
-4. Story 2.10: Flow Integration (navigation complète)
-5. QA Gate Epic 2
+### Epic 3 - Hydration Logging & Tracking
+1. Photo validation (Camera integration)
+2. Hydration log persistence (SQLite logs table)
+3. Daily progress tracking (goal % completion)
+4. Streak mechanics (consecutive days)
+5. Avatar state updates based on hydration
+6. Notifications (reminders + achievements)
 
 ---
 
@@ -163,9 +166,9 @@
 
 ---
 
-**Dernière action:** ✅ Epic 2 COMPLETE + QA Gate PASSED (Coverage 86.9%)
-**Stats Tests:** 549/576 tests pass (95.3%), 0 linter warnings, 0 analyze errors
-**Prochaine étape:** Epic 2 Completion Report + Merge vers main/develop
+**Dernière action:** ✅ Epic 2 MERGED TO MAIN + Tag `epic-2-complete` + APK Build (48.9MB)
+**Stats Epic 2:** 549/576 tests (95.3%), Coverage 86.9%, 0 linter warnings, 0 analyze errors
+**Prochaine étape:** Epic 3 Planning - Hydration Logging & Tracking 🚀
 
 ---
 
