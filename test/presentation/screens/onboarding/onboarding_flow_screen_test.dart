@@ -118,10 +118,17 @@ void main() {
       // Wait for postFrameCallback to complete (state reset)
       await tester.pumpAndSettle();
 
-      // Should start at step 1
+      // Should start at step 1 (Avatar Selection)
       expect(find.text('Étape 1/7'), findsOneWidget);
 
-      // Enter weight to make first step valid
+      // Step 1: Select an avatar (Doctor)
+      await tester.tap(find.text('Doctor'));
+      await tester.pumpAndSettle();
+
+      // Should now be at step 2 (Weight)
+      expect(find.text('Étape 2/7'), findsOneWidget);
+
+      // Step 2: Enter weight to make second step valid
       final textField = find.byType(TextField);
       await tester.enterText(textField, '70');
       await tester.pumpAndSettle();
@@ -141,8 +148,8 @@ void main() {
       await tester.tap(nextButton);
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
-      // Should now be at step 2
-      expect(find.text('Étape 2/7'), findsOneWidget);
+      // Should now be at step 3 (Age)
+      expect(find.text('Étape 3/7'), findsOneWidget);
     });
 
     testWidgets('Next button should be disabled when step data is invalid', (
@@ -158,12 +165,12 @@ void main() {
       final nextButton = find.widgetWithText(ElevatedButton, 'Suivant');
       expect(nextButton, findsOneWidget);
 
-      // Button should be disabled (no weight entered yet)
+      // Button should be disabled (no avatar selected yet)
       final button = tester.widget<ElevatedButton>(nextButton);
       expect(
         button.onPressed,
         isNull,
-        reason: 'Next button should be disabled when no weight is entered',
+        reason: 'Next button should be disabled when no avatar is selected',
       );
     });
 
@@ -182,16 +189,11 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      // Enter weight to make first step valid
-      final textField = find.byType(TextField);
-      await tester.enterText(textField, '70');
+      // Step 1: Select avatar
+      await tester.tap(find.text('Doctor'));
       await tester.pumpAndSettle();
 
-      // Navigate to step 2
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
-      await tester.pumpAndSettle(const Duration(milliseconds: 500));
-
-      // Should now show Back button
+      // Should now show Back button on step 2
       expect(find.byIcon(Icons.arrow_back), findsOneWidget);
     });
 
@@ -210,14 +212,9 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      // Enter weight to make first step valid
-      final weightField = find.byType(TextField);
-      await tester.enterText(weightField, '70');
+      // Step 1: Select avatar
+      await tester.tap(find.text('Doctor'));
       await tester.pumpAndSettle();
-
-      // Navigate to step 2
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
-      await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
       expect(find.text('Étape 2/7'), findsOneWidget);
 
@@ -225,7 +222,7 @@ void main() {
       await tester.tap(find.byIcon(Icons.arrow_back));
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
-      // Should be back at step 1
+      // Should be back at step 1 (Avatar Selection)
       expect(find.text('Étape 1/7'), findsOneWidget);
     });
 
@@ -246,31 +243,35 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      // Step 1: Enter weight
+      // Step 1: Select avatar
+      await tester.tap(find.text('Doctor'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+      // Step 2: Enter weight
       await tester.enterText(find.byType(TextField), '70');
       await tester.pumpAndSettle();
       await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
-      // Step 2: Enter age
+      // Step 3: Enter age
       await tester.enterText(find.byType(TextField), '30');
       await tester.pumpAndSettle();
       await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
-      // Step 3: Select gender
+      // Step 4: Select gender
       await tester.tap(find.text('Homme'));
       await tester.pumpAndSettle();
       await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
-      // Step 4: Select activity level
+      // Step 5: Select activity level
       await tester.tap(find.text('Modéré'));
       await tester.pumpAndSettle();
       await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
-      // Should be at step 5 (Location)
+      // Should be at step 6 (Location)
       expect(find.text('Étape 6/7'), findsOneWidget);
 
       // Should show Skip button
