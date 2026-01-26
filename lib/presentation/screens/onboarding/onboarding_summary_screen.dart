@@ -41,9 +41,7 @@ class _OnboardingSummaryScreenState
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushReplacementNamed('/onboarding_weight');
       });
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     // Calculate hydration goal first (we need it to create the User)
@@ -133,7 +131,9 @@ class _OnboardingSummaryScreenState
                   _buildRecapItem('Âge', '${state.age} ans'),
                   _buildRecapItem('Poids', '${state.weight} kg'),
                   _buildRecapItem(
-                      'Activité', _getActivityLabel(state.activityLevel!)),
+                    'Activité',
+                    _getActivityLabel(state.activityLevel!),
+                  ),
                   if (state.location != null && state.location!.isNotEmpty)
                     _buildRecapItem('Localisation', state.location!),
                 ],
@@ -146,10 +146,7 @@ class _OnboardingSummaryScreenState
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  '💧',
-                  style: const TextStyle(fontSize: 48),
-                ),
+                Text('💧', style: const TextStyle(fontSize: 48)),
                 const SizedBox(width: 12),
                 Flexible(
                   child: Text(
@@ -171,7 +168,9 @@ class _OnboardingSummaryScreenState
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: _isSaving ? null : () => _saveProfileAndNavigate(user, goalInLiters),
+                  onPressed: _isSaving
+                      ? null
+                      : () => _saveProfileAndNavigate(user, goalInLiters),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: theme.primaryColor,
                     shape: RoundedRectangleBorder(
@@ -199,10 +198,7 @@ class _OnboardingSummaryScreenState
                               ),
                             ),
                             const SizedBox(width: 8),
-                            const Text(
-                              '🚀',
-                              style: TextStyle(fontSize: 24),
-                            ),
+                            const Text('🚀', style: TextStyle(fontSize: 24)),
                           ],
                         ),
                 ),
@@ -245,10 +241,7 @@ class _OnboardingSummaryScreenState
             '$label: ',
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
-          Text(
-            value,
-            style: const TextStyle(fontSize: 16),
-          ),
+          Text(value, style: const TextStyle(fontSize: 16)),
         ],
       ),
     );

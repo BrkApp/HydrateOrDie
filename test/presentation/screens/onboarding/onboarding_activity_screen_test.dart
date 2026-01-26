@@ -7,20 +7,22 @@ import 'package:hydrate_or_die/presentation/providers/onboarding_provider.dart';
 
 void main() {
   group('OnboardingActivityScreen', () {
-    testWidgets('should display activity level selection screen',
-        (tester) async {
+    testWidgets('should display activity level selection screen', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingActivityScreen(),
-          ),
+          child: MaterialApp(home: const OnboardingActivityScreen()),
         ),
       );
       await tester.pumpAndSettle();
 
       // Check title and subtitle
       expect(find.text('Niveau d\'activité physique'), findsOneWidget);
-      expect(find.text('À quelle fréquence fais-tu du sport ?'), findsOneWidget);
+      expect(
+        find.text('À quelle fréquence fais-tu du sport ?'),
+        findsOneWidget,
+      );
 
       // Check progress indicator
       expect(find.text('Étape 4 sur 5'), findsOneWidget);
@@ -43,13 +45,12 @@ void main() {
       expect(find.text('Suivant'), findsOneWidget);
     });
 
-    testWidgets('next button should be disabled when no activity selected',
-        (tester) async {
+    testWidgets('next button should be disabled when no activity selected', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingActivityScreen(),
-          ),
+          child: MaterialApp(home: const OnboardingActivityScreen()),
         ),
       );
       await tester.pumpAndSettle();
@@ -63,13 +64,12 @@ void main() {
       expect(button.onPressed, isNull);
     });
 
-    testWidgets('should enable next button when activity is selected',
-        (tester) async {
+    testWidgets('should enable next button when activity is selected', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingActivityScreen(),
-          ),
+          child: MaterialApp(home: const OnboardingActivityScreen()),
         ),
       );
       await tester.pumpAndSettle();
@@ -90,9 +90,7 @@ void main() {
     testWidgets('should highlight selected activity card', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingActivityScreen(),
-          ),
+          child: MaterialApp(home: const OnboardingActivityScreen()),
         ),
       );
       await tester.pumpAndSettle();
@@ -116,8 +114,9 @@ void main() {
       expect(card, findsOneWidget);
     });
 
-    testWidgets('should update provider state when activity is selected',
-        (tester) async {
+    testWidgets('should update provider state when activity is selected', (
+      tester,
+    ) async {
       final container = ProviderContainer();
       addTearDown(container.dispose);
 
@@ -127,9 +126,8 @@ void main() {
           child: MaterialApp(
             home: const OnboardingActivityScreen(),
             routes: {
-              '/onboarding_location': (_) => const Scaffold(
-                    body: Center(child: Text('Location Screen')),
-                  ),
+              '/onboarding_location': (_) =>
+                  const Scaffold(body: Center(child: Text('Location Screen'))),
             },
           ),
         ),
@@ -161,9 +159,7 @@ void main() {
     testWidgets('should display all activity icons', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingActivityScreen(),
-          ),
+          child: MaterialApp(home: const OnboardingActivityScreen()),
         ),
       );
       await tester.pumpAndSettle();
@@ -176,13 +172,12 @@ void main() {
       expect(icons.evaluate().length, greaterThan(5));
     });
 
-    testWidgets('should navigate back when back button is pressed',
-        (tester) async {
+    testWidgets('should navigate back when back button is pressed', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingActivityScreen(),
-          ),
+          child: MaterialApp(home: const OnboardingActivityScreen()),
         ),
       );
       await tester.pumpAndSettle();

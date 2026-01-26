@@ -102,11 +102,15 @@ void main() {
       test('should return false when state is not dead', () {
         expect(testAvatar.shouldBecomeGhost(), false);
         expect(
-          testAvatar.copyWith(currentState: AvatarState.tired).shouldBecomeGhost(),
+          testAvatar
+              .copyWith(currentState: AvatarState.tired)
+              .shouldBecomeGhost(),
           false,
         );
         expect(
-          testAvatar.copyWith(currentState: AvatarState.ghost).shouldBecomeGhost(),
+          testAvatar
+              .copyWith(currentState: AvatarState.ghost)
+              .shouldBecomeGhost(),
           false,
         );
       });
@@ -114,7 +118,9 @@ void main() {
 
     group('shouldResurrect', () {
       test('should return true when state is ghost', () {
-        final ghostAvatar = testAvatar.copyWith(currentState: AvatarState.ghost);
+        final ghostAvatar = testAvatar.copyWith(
+          currentState: AvatarState.ghost,
+        );
         expect(ghostAvatar.shouldResurrect(), true);
       });
 

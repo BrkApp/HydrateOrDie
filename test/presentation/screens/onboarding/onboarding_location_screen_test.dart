@@ -9,9 +9,7 @@ void main() {
     testWidgets('should display location permission screen', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingLocationScreen(),
-          ),
+          child: MaterialApp(home: const OnboardingLocationScreen()),
         ),
       );
       await tester.pumpAndSettle();
@@ -20,7 +18,8 @@ void main() {
       expect(find.text('Autoriser la localisation ?'), findsOneWidget);
       expect(
         find.text(
-            'Optionnel : permettra d\'ajuster les rappels en fonction de la météo (canicule)'),
+          'Optionnel : permettra d\'ajuster les rappels en fonction de la météo (canicule)',
+        ),
         findsOneWidget,
       );
 
@@ -38,9 +37,7 @@ void main() {
     testWidgets('should display both buttons as enabled', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingLocationScreen(),
-          ),
+          child: MaterialApp(home: const OnboardingLocationScreen()),
         ),
       );
       await tester.pumpAndSettle();
@@ -61,42 +58,41 @@ void main() {
       expect(outlinedBtn.onPressed, isNotNull);
     });
 
-    testWidgets('should update provider with mock_granted when authorize pressed',
-        (tester) async {
-      final container = ProviderContainer();
-      addTearDown(container.dispose);
+    testWidgets(
+      'should update provider with mock_granted when authorize pressed',
+      (tester) async {
+        final container = ProviderContainer();
+        addTearDown(container.dispose);
 
-      await tester.pumpWidget(
-        UncontrolledProviderScope(
-          container: container,
-          child: MaterialApp(
-            home: const OnboardingLocationScreen(),
-            routes: {
-              '/onboarding_summary': (_) => const Scaffold(
-                    body: Center(child: Text('Summary Screen')),
-                  ),
-            },
+        await tester.pumpWidget(
+          UncontrolledProviderScope(
+            container: container,
+            child: MaterialApp(
+              home: const OnboardingLocationScreen(),
+              routes: {
+                '/onboarding_summary': (_) =>
+                    const Scaffold(body: Center(child: Text('Summary Screen'))),
+              },
+            ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Initial state should have no location
-      expect(container.read(onboardingProvider).location, isNull);
+        // Initial state should have no location
+        expect(container.read(onboardingProvider).location, isNull);
 
-      // Tap authorize button
-      await tester.tap(find.text('Autoriser'));
-      await tester.pumpAndSettle();
+        // Tap authorize button
+        await tester.tap(find.text('Autoriser'));
+        await tester.pumpAndSettle();
 
-      // Verify provider state was updated with mock_granted
-      expect(
-        container.read(onboardingProvider).location,
-        'mock_granted',
-      );
-    });
+        // Verify provider state was updated with mock_granted
+        expect(container.read(onboardingProvider).location, 'mock_granted');
+      },
+    );
 
-    testWidgets('should update provider with null when skip pressed',
-        (tester) async {
+    testWidgets('should update provider with null when skip pressed', (
+      tester,
+    ) async {
       final container = ProviderContainer();
       addTearDown(container.dispose);
 
@@ -106,9 +102,8 @@ void main() {
           child: MaterialApp(
             home: const OnboardingLocationScreen(),
             routes: {
-              '/onboarding_summary': (_) => const Scaffold(
-                    body: Center(child: Text('Summary Screen')),
-                  ),
+              '/onboarding_summary': (_) =>
+                  const Scaffold(body: Center(child: Text('Summary Screen'))),
             },
           ),
         ),
@@ -126,16 +121,16 @@ void main() {
       expect(container.read(onboardingProvider).location, isNull);
     });
 
-    testWidgets('should show snackbar when authorize is pressed',
-        (tester) async {
+    testWidgets('should show snackbar when authorize is pressed', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
           child: MaterialApp(
             home: const OnboardingLocationScreen(),
             routes: {
-              '/onboarding_summary': (_) => const Scaffold(
-                    body: Center(child: Text('Summary Screen')),
-                  ),
+              '/onboarding_summary': (_) =>
+                  const Scaffold(body: Center(child: Text('Summary Screen'))),
             },
           ),
         ),
@@ -153,13 +148,12 @@ void main() {
       );
     });
 
-    testWidgets('should navigate back when back button is pressed',
-        (tester) async {
+    testWidgets('should navigate back when back button is pressed', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingLocationScreen(),
-          ),
+          child: MaterialApp(home: const OnboardingLocationScreen()),
         ),
       );
       await tester.pumpAndSettle();
@@ -178,9 +172,7 @@ void main() {
     testWidgets('should have correct button styles', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingLocationScreen(),
-          ),
+          child: MaterialApp(home: const OnboardingLocationScreen()),
         ),
       );
       await tester.pumpAndSettle();
@@ -192,13 +184,12 @@ void main() {
       expect(find.byType(OutlinedButton), findsOneWidget);
     });
 
-    testWidgets('should display icon with correct size and color',
-        (tester) async {
+    testWidgets('should display icon with correct size and color', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingLocationScreen(),
-          ),
+          child: MaterialApp(home: const OnboardingLocationScreen()),
         ),
       );
       await tester.pumpAndSettle();

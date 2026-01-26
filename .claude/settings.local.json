@@ -19,7 +19,10 @@
       "Bash(ls:*)",
       "Bash(git checkout:*)",
       "Bash(dart analyze:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(tee:*)",
+      "Bash(git reset:*)",
+      "Bash(powershell -Command:*)"
     ]
   }
 }

@@ -142,9 +142,7 @@ class _OnboardingAgeScreenState extends ConsumerState<OnboardingAgeScreen> {
           TextField(
             controller: _ageController,
             keyboardType: TextInputType.number,
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-            ],
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             decoration: InputDecoration(
               labelText: 'Âge',
               suffixText: 'ans',
@@ -188,10 +186,7 @@ class _OnboardingAgeScreenState extends ConsumerState<OnboardingAgeScreen> {
               ),
               child: const Text(
                 'Suivant',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 16),

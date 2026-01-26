@@ -88,8 +88,7 @@ class HydrationLogDto {
   HydrationLog toEntity() {
     final glassSize = GlassSize.values.firstWhere(
       (e) => e.name == glassSizeString,
-      orElse: () =>
-          throw ArgumentError('Invalid glass size: $glassSizeString'),
+      orElse: () => throw ArgumentError('Invalid glass size: $glassSizeString'),
     );
 
     return HydrationLog(

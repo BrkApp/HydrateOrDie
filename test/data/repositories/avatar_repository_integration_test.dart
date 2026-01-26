@@ -110,35 +110,37 @@ void main() {
       expect(lastDrink!.toUtc(), equals(newDrinkTime));
     });
 
-    test('should handle state transitions: fresh → tired → dehydrated → dead',
-        () async {
-      // Arrange
-      await repository.saveSelectedAvatar('doctor');
+    test(
+      'should handle state transitions: fresh → tired → dehydrated → dead',
+      () async {
+        // Arrange
+        await repository.saveSelectedAvatar('doctor');
 
-      // Act & Assert - Fresh
-      var avatar = await repository.getAvatar();
-      expect(avatar!.currentState, equals(AvatarState.fresh));
+        // Act & Assert - Fresh
+        var avatar = await repository.getAvatar();
+        expect(avatar!.currentState, equals(AvatarState.fresh));
 
-      // Act & Assert - Tired
-      await repository.updateAvatarState(AvatarState.tired);
-      avatar = await repository.getAvatar();
-      expect(avatar!.currentState, equals(AvatarState.tired));
+        // Act & Assert - Tired
+        await repository.updateAvatarState(AvatarState.tired);
+        avatar = await repository.getAvatar();
+        expect(avatar!.currentState, equals(AvatarState.tired));
 
-      // Act & Assert - Dehydrated
-      await repository.updateAvatarState(AvatarState.dehydrated);
-      avatar = await repository.getAvatar();
-      expect(avatar!.currentState, equals(AvatarState.dehydrated));
+        // Act & Assert - Dehydrated
+        await repository.updateAvatarState(AvatarState.dehydrated);
+        avatar = await repository.getAvatar();
+        expect(avatar!.currentState, equals(AvatarState.dehydrated));
 
-      // Act & Assert - Dead
-      await repository.updateAvatarState(AvatarState.dead);
-      avatar = await repository.getAvatar();
-      expect(avatar!.currentState, equals(AvatarState.dead));
+        // Act & Assert - Dead
+        await repository.updateAvatarState(AvatarState.dead);
+        avatar = await repository.getAvatar();
+        expect(avatar!.currentState, equals(AvatarState.dead));
 
-      // Act & Assert - Ghost
-      await repository.updateAvatarState(AvatarState.ghost);
-      avatar = await repository.getAvatar();
-      expect(avatar!.currentState, equals(AvatarState.ghost));
-    });
+        // Act & Assert - Ghost
+        await repository.updateAvatarState(AvatarState.ghost);
+        avatar = await repository.getAvatar();
+        expect(avatar!.currentState, equals(AvatarState.ghost));
+      },
+    );
 
     test('should return null for getAvatar when nothing saved yet', () async {
       // Act
@@ -148,14 +150,16 @@ void main() {
       expect(avatar, isNull);
     });
 
-    test('should return null for getLastDrinkTime when no avatar exists',
-        () async {
-      // Act
-      final lastDrink = await repository.getLastDrinkTime();
+    test(
+      'should return null for getLastDrinkTime when no avatar exists',
+      () async {
+        // Act
+        final lastDrink = await repository.getLastDrinkTime();
 
-      // Assert
-      expect(lastDrink, isNull);
-    });
+        // Assert
+        expect(lastDrink, isNull);
+      },
+    );
 
     test('should handle switching between different avatars', () async {
       // Save first avatar
@@ -185,7 +189,7 @@ void main() {
       final results = await db.query('avatar_state');
 
       expect(results.length, equals(1));
-      expect(results.first['selected_avatar_id'], equals('authoritarianMother'));
+      expect(results.first['personality'], equals('authoritarianMother'));
     });
 
     test('should handle timestamps in UTC correctly', () async {

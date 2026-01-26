@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hydrate_or_die/domain/entities/activity_level.dart';
+import 'package:hydrate_or_die/domain/entities/avatar_personality.dart';
 import 'package:hydrate_or_die/domain/entities/gender.dart';
 import 'package:hydrate_or_die/presentation/providers/onboarding_provider.dart';
 import 'package:hydrate_or_die/presentation/providers/onboarding_state.dart';
@@ -53,7 +54,10 @@ void main() {
 
         // Assert
         expect(notifier.state.weight, isNull);
-        expect(notifier.state.errorMessage, 'Le poids doit être entre 30 et 300 kg');
+        expect(
+          notifier.state.errorMessage,
+          'Le poids doit être entre 30 et 300 kg',
+        );
       });
 
       test('should set error when weight is above max (301kg)', () {
@@ -62,7 +66,10 @@ void main() {
 
         // Assert
         expect(notifier.state.weight, isNull);
-        expect(notifier.state.errorMessage, 'Le poids doit être entre 30 et 300 kg');
+        expect(
+          notifier.state.errorMessage,
+          'Le poids doit être entre 30 et 300 kg',
+        );
       });
     });
 
@@ -100,7 +107,10 @@ void main() {
 
         // Assert
         expect(notifier.state.age, isNull);
-        expect(notifier.state.errorMessage, 'L\'âge doit être entre 10 et 120 ans');
+        expect(
+          notifier.state.errorMessage,
+          'L\'âge doit être entre 10 et 120 ans',
+        );
       });
 
       test('should set error when age is above max (121)', () {
@@ -109,7 +119,10 @@ void main() {
 
         // Assert
         expect(notifier.state.age, isNull);
-        expect(notifier.state.errorMessage, 'L\'âge doit être entre 10 et 120 ans');
+        expect(
+          notifier.state.errorMessage,
+          'L\'âge doit être entre 10 et 120 ans',
+        );
       });
     });
 
@@ -224,18 +237,19 @@ void main() {
         expect(notifier.state.currentStep, 2);
       });
 
-      test('nextStep should not exceed step 5', () {
+      test('nextStep should not exceed step 6', () {
         // Arrange
         notifier.nextStep(); // 2
         notifier.nextStep(); // 3
         notifier.nextStep(); // 4
         notifier.nextStep(); // 5
+        notifier.nextStep(); // 6
 
         // Act
-        notifier.nextStep(); // Should stay at 5
+        notifier.nextStep(); // Should stay at 6
 
         // Assert
-        expect(notifier.state.currentStep, 5);
+        expect(notifier.state.currentStep, 6);
       });
 
       test('previousStep should decrement currentStep', () {
@@ -260,37 +274,42 @@ void main() {
         expect(notifier.state.currentStep, 1);
       });
 
-      test('skipStep should call nextStep for step 5 (location)', () {
+      test('skipStep should call nextStep for step 6 (location)', () {
         // Arrange
         notifier.nextStep(); // 2
         notifier.nextStep(); // 3
         notifier.nextStep(); // 4
         notifier.nextStep(); // 5
+        notifier.nextStep(); // 6
 
         // Act
         notifier.skipStep();
 
         // Assert
-        expect(notifier.state.currentStep, 5); // Stays at 5 as max
+        expect(notifier.state.currentStep, 6); // Stays at 6 as max
       });
     });
 
     group('complete', () {
-      test('should complete onboarding when all required fields are filled', () {
-        // Arrange
-        notifier.updateWeight(70.0);
-        notifier.updateAge(25);
-        notifier.updateGender(Gender.male);
-        notifier.updateActivityLevel(ActivityLevel.moderate);
+      test(
+        'should complete onboarding when all required fields are filled',
+        () {
+          // Arrange
+          notifier.updateSelectedAvatar(AvatarPersonality.doctor);
+          notifier.updateWeight(70.0);
+          notifier.updateAge(25);
+          notifier.updateGender(Gender.male);
+          notifier.updateActivityLevel(ActivityLevel.moderate);
 
-        // Act
-        final result = notifier.complete();
+          // Act
+          final result = notifier.complete();
 
-        // Assert
-        expect(result, true);
-        expect(notifier.state.isComplete, true);
-        expect(notifier.state.errorMessage, isNull);
-      });
+          // Assert
+          expect(result, true);
+          expect(notifier.state.isComplete, true);
+          expect(notifier.state.errorMessage, isNull);
+        },
+      );
 
       test('should not complete when weight is missing', () {
         // Arrange
@@ -304,7 +323,10 @@ void main() {
         // Assert
         expect(result, false);
         expect(notifier.state.isComplete, false);
-        expect(notifier.state.errorMessage, 'Veuillez remplir tous les champs requis');
+        expect(
+          notifier.state.errorMessage,
+          'Veuillez remplir tous les champs requis',
+        );
       });
 
       test('should not complete when age is missing', () {
@@ -319,7 +341,10 @@ void main() {
         // Assert
         expect(result, false);
         expect(notifier.state.isComplete, false);
-        expect(notifier.state.errorMessage, 'Veuillez remplir tous les champs requis');
+        expect(
+          notifier.state.errorMessage,
+          'Veuillez remplir tous les champs requis',
+        );
       });
 
       test('should not complete when gender is missing', () {
@@ -334,7 +359,10 @@ void main() {
         // Assert
         expect(result, false);
         expect(notifier.state.isComplete, false);
-        expect(notifier.state.errorMessage, 'Veuillez remplir tous les champs requis');
+        expect(
+          notifier.state.errorMessage,
+          'Veuillez remplir tous les champs requis',
+        );
       });
 
       test('should not complete when activity level is missing', () {
@@ -349,11 +377,15 @@ void main() {
         // Assert
         expect(result, false);
         expect(notifier.state.isComplete, false);
-        expect(notifier.state.errorMessage, 'Veuillez remplir tous les champs requis');
+        expect(
+          notifier.state.errorMessage,
+          'Veuillez remplir tous les champs requis',
+        );
       });
 
       test('should complete even when location is missing (optional)', () {
         // Arrange
+        notifier.updateSelectedAvatar(AvatarPersonality.doctor);
         notifier.updateWeight(70.0);
         notifier.updateAge(25);
         notifier.updateGender(Gender.male);
@@ -410,32 +442,38 @@ void main() {
 
     group('Multi-step Flow', () {
       test('should handle complete onboarding flow', () {
-        // Step 1: Weight
+        // Step 1: Avatar Selection
         expect(notifier.state.currentStep, 1);
+        notifier.updateSelectedAvatar(AvatarPersonality.doctor);
+        expect(notifier.state.selectedAvatar, AvatarPersonality.doctor);
+        notifier.nextStep();
+
+        // Step 2: Weight
+        expect(notifier.state.currentStep, 2);
         notifier.updateWeight(70.0);
         expect(notifier.state.weight, 70.0);
         notifier.nextStep();
 
-        // Step 2: Age
-        expect(notifier.state.currentStep, 2);
+        // Step 3: Age
+        expect(notifier.state.currentStep, 3);
         notifier.updateAge(25);
         expect(notifier.state.age, 25);
         notifier.nextStep();
 
-        // Step 3: Gender
-        expect(notifier.state.currentStep, 3);
+        // Step 4: Gender
+        expect(notifier.state.currentStep, 4);
         notifier.updateGender(Gender.male);
         expect(notifier.state.gender, Gender.male);
         notifier.nextStep();
 
-        // Step 4: Activity Level
-        expect(notifier.state.currentStep, 4);
+        // Step 5: Activity Level
+        expect(notifier.state.currentStep, 5);
         notifier.updateActivityLevel(ActivityLevel.moderate);
         expect(notifier.state.activityLevel, ActivityLevel.moderate);
         notifier.nextStep();
 
-        // Step 5: Location (optional)
-        expect(notifier.state.currentStep, 5);
+        // Step 6: Location (optional)
+        expect(notifier.state.currentStep, 6);
         notifier.updateLocation('France');
         expect(notifier.state.location, 'France');
 

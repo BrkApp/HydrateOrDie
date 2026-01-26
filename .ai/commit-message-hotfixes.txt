@@ -1,0 +1,29 @@
+[EPIC-3-HOTFIX] Fix avatar selection missing + Remove glass pre-selection
+
+**Bug #1 - Avatar Selection Manquant:**
+- Add AvatarSelectionScreen to onboarding flow as first step
+- Update onboarding from 6 to 7 steps (Avatar → Weight → Age → Gender → Activity → Location → Summary)
+- Fix _canProceed() switch cases to handle avatar selection validation
+- Update skip button index from 4 to 5 (Location step)
+
+**Bug #2 - Glass Size Pré-sélection:**
+- Change _selectedSize from GlassSize.medium to nullable GlassSize?
+- Remove default pre-selection (no blue border on load)
+- Update instructions text: "Tape pour sélectionner et enregistrer"
+- Improve UX: user must explicitly tap to select glass size
+
+**Test Fixes:**
+- Update glass_size_selection_screen_test.dart:
+  - AC4 test: expect no checkmark by default (findsNothing)
+  - Instructions test: update expected text
+
+**Files Modified:**
+- lib/presentation/screens/onboarding/onboarding_flow_screen.dart
+- lib/presentation/screens/photo/glass_size_selection_screen.dart
+- test/presentation/screens/photo/glass_size_selection_screen_test.dart
+- docs/stories/epic-3/reports/epic-3-completion-report.md
+
+**Discovered In:** Manual APK testing (2026-01-26)
+**Impact:** Critical UX bugs fixed, onboarding flow now complete
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>

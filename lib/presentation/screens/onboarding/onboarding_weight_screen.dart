@@ -155,120 +155,115 @@ class _OnboardingWeightScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-              // Progress indicator
-              Text(
-                'Étape 1 sur 5',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 32),
+          // Progress indicator
+          Text(
+            'Étape 1 sur 5',
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 32),
 
-              // Title
-              Text(
-                'Quel est ton poids ?',
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 12),
+          // Title
+          Text(
+            'Quel est ton poids ?',
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
 
-              // Subtitle
-              Text(
-                'Nécessaire pour calculer ton objectif d\'hydratation',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 48),
+          // Subtitle
+          Text(
+            'Nécessaire pour calculer ton objectif d\'hydratation',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 48),
 
-              // Unit toggle (kg/lbs)
-              ToggleButtons(
-                isSelected: [_isKg, !_isKg],
-                onPressed: (index) {
-                  _toggleUnit(index == 0);
-                },
-                borderRadius: BorderRadius.circular(8),
-                constraints: const BoxConstraints(
-                  minWidth: 100,
-                  minHeight: 48,
-                ),
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: Text('kg'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: Text('lbs'),
-                  ),
-                ],
+          // Unit toggle (kg/lbs)
+          ToggleButtons(
+            isSelected: [_isKg, !_isKg],
+            onPressed: (index) {
+              _toggleUnit(index == 0);
+            },
+            borderRadius: BorderRadius.circular(8),
+            constraints: const BoxConstraints(minWidth: 100, minHeight: 48),
+            children: const [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Text('kg'),
               ),
-              const SizedBox(height: 24),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Text('lbs'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
 
-              // Weight input field
-              TextField(
-                controller: _weightController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
-                ],
-                decoration: InputDecoration(
-                  labelText: 'Poids',
-                  suffixText: _isKg ? 'kg' : 'lbs',
-                  errorText: _errorMessage,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  filled: true,
-                ),
-                onChanged: (value) {
-                  // Clear error when user starts typing
-                  if (_errorMessage != null) {
-                    setState(() {
-                      _errorMessage = null;
-                    });
+          // Weight input field
+          TextField(
+            controller: _weightController,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+            ],
+            decoration: InputDecoration(
+              labelText: 'Poids',
+              suffixText: _isKg ? 'kg' : 'lbs',
+              errorText: _errorMessage,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              filled: true,
+            ),
+            onChanged: (value) {
+              // Clear error when user starts typing
+              if (_errorMessage != null) {
+                setState(() {
+                  _errorMessage = null;
+                });
+              }
+
+              // Update provider in real-time for embedded flow validation
+              if (embeddedContext.isEmbedded) {
+                final weight = double.tryParse(value.trim());
+                if (weight != null) {
+                  final weightInKg = _isKg ? weight : _lbsToKg(weight);
+                  // Validate range before updating
+                  if (weightInKg >= 30 && weightInKg <= 300) {
+                    ref
+                        .read(onboardingProvider.notifier)
+                        .updateWeight(weightInKg);
                   }
+                }
+              }
+            },
+          ),
+          const Spacer(),
 
-                  // Update provider in real-time for embedded flow validation
-                  if (embeddedContext.isEmbedded) {
-                    final weight = double.tryParse(value.trim());
-                    if (weight != null) {
-                      final weightInKg = _isKg ? weight : _lbsToKg(weight);
-                      // Validate range before updating
-                      if (weightInKg >= 30 && weightInKg <= 300) {
-                        ref.read(onboardingProvider.notifier).updateWeight(weightInKg);
-                      }
-                    }
-                  }
-                },
-              ),
-              const Spacer(),
-
-              // Next button (only show if NOT embedded in flow)
-              if (!isEmbedded) ...[
-                ElevatedButton(
-                  onPressed: _handleNext,
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'Suivant',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+          // Next button (only show if NOT embedded in flow)
+          if (!isEmbedded) ...[
+            ElevatedButton(
+              onPressed: _handleNext,
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                const SizedBox(height: 16),
-              ],
+              ),
+              child: const Text(
+                'Suivant',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
         ],
       ),
     );

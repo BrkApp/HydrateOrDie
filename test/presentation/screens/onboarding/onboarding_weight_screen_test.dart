@@ -8,9 +8,13 @@ import 'package:hydrate_or_die/presentation/screens/onboarding/onboarding_weight
 void main() {
   group('OnboardingWeightScreen', () {
     Widget createWeightScreen() {
-      return const ProviderScope(
+      return ProviderScope(
         child: MaterialApp(
-          home: OnboardingWeightScreen(),
+          home: const OnboardingWeightScreen(),
+          routes: {
+            '/onboarding_age': (context) =>
+                const Scaffold(body: Text('Age Screen')),
+          },
         ),
       );
     }
@@ -31,7 +35,10 @@ void main() {
       ); // AC #2
 
       // Assert - Unit toggle
-      expect(find.text('kg'), findsWidgets); // AC #4 (appears in toggle and suffix)
+      expect(
+        find.text('kg'),
+        findsWidgets,
+      ); // AC #4 (appears in toggle and suffix)
       expect(find.text('lbs'), findsOneWidget); // AC #4
 
       // Assert - TextField
@@ -59,8 +66,15 @@ void main() {
       await tester.pumpWidget(createWeightScreen());
       await tester.pumpAndSettle();
 
-      // Act - Tap on lbs toggle
-      await tester.tap(find.text('lbs'));
+      // Act - Tap on lbs toggle button (find within ToggleButtons to avoid suffix text)
+      final toggleButtons = find.byType(ToggleButtons);
+      expect(toggleButtons, findsOneWidget);
+
+      final lbsButton = find.descendant(
+        of: toggleButtons,
+        matching: find.text('lbs'),
+      );
+      await tester.tap(lbsButton);
       await tester.pumpAndSettle();
 
       // Assert - TextField should show lbs suffix
@@ -77,8 +91,13 @@ void main() {
       await tester.enterText(find.byType(TextField), '70');
       await tester.pumpAndSettle();
 
-      // Act - Switch to lbs
-      await tester.tap(find.text('lbs'));
+      // Act - Switch to lbs (find within ToggleButtons)
+      final toggleButtons = find.byType(ToggleButtons);
+      final lbsButton = find.descendant(
+        of: toggleButtons,
+        matching: find.text('lbs'),
+      );
+      await tester.tap(lbsButton);
       await tester.pumpAndSettle();
 
       // Assert - Should convert to ~154.3 lbs
@@ -105,7 +124,9 @@ void main() {
       expect(find.text('Le poids doit être entre 30 et 300 kg'), findsNothing);
     });
 
-    testWidgets('should accept minimum valid weight (30kg) (AC #5)', (tester) async {
+    testWidgets('should accept minimum valid weight (30kg) (AC #5)', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(createWeightScreen());
       await tester.pumpAndSettle();
@@ -120,7 +141,9 @@ void main() {
       expect(find.text('Le poids doit être entre 30 et 300 kg'), findsNothing);
     });
 
-    testWidgets('should accept maximum valid weight (300kg) (AC #5)', (tester) async {
+    testWidgets('should accept maximum valid weight (300kg) (AC #5)', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(createWeightScreen());
       await tester.pumpAndSettle();
@@ -135,7 +158,9 @@ void main() {
       expect(find.text('Le poids doit être entre 30 et 300 kg'), findsNothing);
     });
 
-    testWidgets('should show error for weight below minimum (AC #5, #6)', (tester) async {
+    testWidgets('should show error for weight below minimum (AC #5, #6)', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(createWeightScreen());
       await tester.pumpAndSettle();
@@ -154,7 +179,9 @@ void main() {
       ); // AC #6
     });
 
-    testWidgets('should show error for weight above maximum (AC #5, #6)', (tester) async {
+    testWidgets('should show error for weight above maximum (AC #5, #6)', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(createWeightScreen());
       await tester.pumpAndSettle();
@@ -173,7 +200,9 @@ void main() {
       ); // AC #6
     });
 
-    testWidgets('should show error for empty weight (AC #5, #6)', (tester) async {
+    testWidgets('should show error for empty weight (AC #5, #6)', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(createWeightScreen());
       await tester.pumpAndSettle();
@@ -186,7 +215,9 @@ void main() {
       expect(find.text('Veuillez entrer votre poids'), findsOneWidget); // AC #6
     });
 
-    testWidgets('should show error for invalid format (AC #5, #6)', (tester) async {
+    testWidgets('should show error for invalid format (AC #5, #6)', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(createWeightScreen());
       await tester.pumpAndSettle();
@@ -199,7 +230,10 @@ void main() {
       await tester.pumpAndSettle();
 
       // Assert - Error message should appear
-      expect(find.text('Veuillez entrer un nombre valide'), findsOneWidget); // AC #6
+      expect(
+        find.text('Veuillez entrer un nombre valide'),
+        findsOneWidget,
+      ); // AC #6
     });
 
     testWidgets('should validate lbs range (66-661) (AC #5)', (tester) async {
@@ -207,8 +241,13 @@ void main() {
       await tester.pumpWidget(createWeightScreen());
       await tester.pumpAndSettle();
 
-      // Switch to lbs
-      await tester.tap(find.text('lbs'));
+      // Switch to lbs (find within ToggleButtons)
+      final toggleButtons = find.byType(ToggleButtons);
+      final lbsButton = find.descendant(
+        of: toggleButtons,
+        matching: find.text('lbs'),
+      );
+      await tester.tap(lbsButton);
       await tester.pumpAndSettle();
 
       // Act - Enter weight below min lbs (65)
@@ -256,7 +295,9 @@ void main() {
       ); // AC #3
     });
 
-    testWidgets('should update provider state when valid weight entered', (tester) async {
+    testWidgets('should update provider state when valid weight entered', (
+      tester,
+    ) async {
       // Arrange
       late OnboardingState capturedState;
 
@@ -269,6 +310,10 @@ void main() {
                 return const OnboardingWeightScreen();
               },
             ),
+            routes: {
+              '/onboarding_age': (context) =>
+                  const Scaffold(body: Text('Age Screen')),
+            },
           ),
         ),
       );
@@ -285,7 +330,9 @@ void main() {
       expect(capturedState.weight, 70.0);
     });
 
-    testWidgets('should convert lbs to kg when updating provider', (tester) async {
+    testWidgets('should convert lbs to kg when updating provider', (
+      tester,
+    ) async {
       // Arrange
       late OnboardingState capturedState;
 
@@ -298,13 +345,22 @@ void main() {
                 return const OnboardingWeightScreen();
               },
             ),
+            routes: {
+              '/onboarding_age': (context) =>
+                  const Scaffold(body: Text('Age Screen')),
+            },
           ),
         ),
       );
       await tester.pumpAndSettle();
 
-      // Switch to lbs
-      await tester.tap(find.text('lbs'));
+      // Switch to lbs (find within ToggleButtons)
+      final toggleButtons = find.byType(ToggleButtons);
+      final lbsButton = find.descendant(
+        of: toggleButtons,
+        matching: find.text('lbs'),
+      );
+      await tester.tap(lbsButton);
       await tester.pumpAndSettle();
 
       // Act - Enter weight in lbs
@@ -318,19 +374,17 @@ void main() {
       expect(capturedState.weight, closeTo(70.0, 1.0)); // ~70kg
     });
 
-    testWidgets('should pre-fill weight if already set in state', (tester) async {
+    testWidgets('should pre-fill weight if already set in state', (
+      tester,
+    ) async {
       // Arrange - Create a test notifier with pre-filled weight
       final testNotifier = OnboardingNotifier();
       testNotifier.updateWeight(75.0);
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [
-            onboardingProvider.overrideWith((ref) => testNotifier),
-          ],
-          child: const MaterialApp(
-            home: OnboardingWeightScreen(),
-          ),
+          overrides: [onboardingProvider.overrideWith((ref) => testNotifier)],
+          child: const MaterialApp(home: OnboardingWeightScreen()),
         ),
       );
       await tester.pumpAndSettle();

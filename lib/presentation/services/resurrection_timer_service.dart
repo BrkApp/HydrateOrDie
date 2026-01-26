@@ -60,7 +60,9 @@ class ResurrectionTimerService {
     }
 
     if (kDebugMode) {
-      debugPrint('[ResurrectionTimer] Démarrage du timer (vérification toutes les ${kCheckInterval.inMinutes} minute)');
+      debugPrint(
+        '[ResurrectionTimer] Démarrage du timer (vérification toutes les ${kCheckInterval.inMinutes} minute)',
+      );
     }
 
     // Vérifier immédiatement au démarrage (cas rare: app ouverte à minuit)
@@ -102,7 +104,9 @@ class ResurrectionTimerService {
     // Reset du flag si on a quitté la fenêtre minuit (hour != 0)
     if (currentHour != 0 && _hasResurrectedToday) {
       if (kDebugMode) {
-        debugPrint('[ResurrectionTimer] Nouvelle journée - Reset flag résurrection');
+        debugPrint(
+          '[ResurrectionTimer] Nouvelle journée - Reset flag résurrection',
+        );
       }
       _hasResurrectedToday = false;
     }
@@ -112,13 +116,17 @@ class ResurrectionTimerService {
       // Éviter de ressusciter plusieurs fois dans la même minute
       if (_hasResurrectedToday) {
         if (kDebugMode) {
-          debugPrint('[ResurrectionTimer] Minuit détecté mais déjà ressuscité - Skip');
+          debugPrint(
+            '[ResurrectionTimer] Minuit détecté mais déjà ressuscité - Skip',
+          );
         }
         return;
       }
 
       if (kDebugMode) {
-        debugPrint('[ResurrectionTimer] 🌙 Minuit détecté! Tentative de résurrection...');
+        debugPrint(
+          '[ResurrectionTimer] 🌙 Minuit détecté! Tentative de résurrection...',
+        );
       }
 
       try {
@@ -130,7 +138,9 @@ class ResurrectionTimerService {
           _hasResurrectedToday = true;
         } else {
           if (kDebugMode) {
-            debugPrint('[ResurrectionTimer] Avatar pas en état ghost - Pas de résurrection');
+            debugPrint(
+              '[ResurrectionTimer] Avatar pas en état ghost - Pas de résurrection',
+            );
           }
         }
       } catch (e) {

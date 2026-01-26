@@ -79,9 +79,11 @@ class DatabaseHelper {
 
     // Indexes for hydration_logs
     await db.execute(
-        'CREATE INDEX idx_hydration_logs_timestamp ON hydration_logs(timestamp)');
+      'CREATE INDEX idx_hydration_logs_timestamp ON hydration_logs(timestamp)',
+    );
     await db.execute(
-        'CREATE INDEX idx_hydration_logs_synced ON hydration_logs(synced_to_cloud)');
+      'CREATE INDEX idx_hydration_logs_synced ON hydration_logs(synced_to_cloud)',
+    );
 
     // Table: streak_data (singleton)
     await db.execute('''
@@ -111,8 +113,7 @@ class DatabaseHelper {
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
     // Migration V1 → V2: Add death_time column to avatar_state (Story 1.7)
     if (oldVersion < 2) {
-      await db.execute(
-          'ALTER TABLE avatar_state ADD COLUMN death_time TEXT');
+      await db.execute('ALTER TABLE avatar_state ADD COLUMN death_time TEXT');
       if (kDebugMode) {
         debugPrint('[DatabaseHelper] Migration V1→V2: Added death_time column');
       }
@@ -121,7 +122,9 @@ class DatabaseHelper {
     // Migration V2 → V3: Rebuild avatar_state table with correct JSON schema (Story 1.8 bugfix)
     if (oldVersion < 3) {
       if (kDebugMode) {
-        debugPrint('[DatabaseHelper] Migration V2→V3: Rebuilding avatar_state table');
+        debugPrint(
+          '[DatabaseHelper] Migration V2→V3: Rebuilding avatar_state table',
+        );
       }
 
       // Step 1: Create backup of existing data (if any)
@@ -149,14 +152,21 @@ class DatabaseHelper {
         await db.insert('avatar_state', {
           'id': oldRow['id'],
           'name': oldRow['name'] ?? 'Avatar', // Default if missing
-          'personality': oldRow['selected_avatar_id'] ?? 'doctor', // Map old column
+          'personality':
+              oldRow['selected_avatar_id'] ?? 'doctor', // Map old column
           'currentState': oldRow['current_state'] ?? 'fresh',
-          'lastDrinkTime': oldRow['last_drink_time'] ?? DateTime.now().toUtc().toIso8601String(),
+          'lastDrinkTime':
+              oldRow['last_drink_time'] ??
+              DateTime.now().toUtc().toIso8601String(),
           'death_time': oldRow['death_time'],
-          'lastUpdated': oldRow['last_updated'] ?? DateTime.now().toUtc().toIso8601String(),
+          'lastUpdated':
+              oldRow['last_updated'] ??
+              DateTime.now().toUtc().toIso8601String(),
         });
         if (kDebugMode) {
-          debugPrint('[DatabaseHelper] Migration V2→V3: Migrated existing avatar data');
+          debugPrint(
+            '[DatabaseHelper] Migration V2→V3: Migrated existing avatar data',
+          );
         }
       }
     }
@@ -164,7 +174,9 @@ class DatabaseHelper {
     // Migration V3 → V4: Add user_profile table (Story 2.3)
     if (oldVersion < 4) {
       if (kDebugMode) {
-        debugPrint('[DatabaseHelper] Migration V3→V4: Adding user_profile table');
+        debugPrint(
+          '[DatabaseHelper] Migration V3→V4: Adding user_profile table',
+        );
       }
 
       await db.execute('''
@@ -183,7 +195,9 @@ class DatabaseHelper {
       ''');
 
       if (kDebugMode) {
-        debugPrint('[DatabaseHelper] Migration V3→V4: user_profile table created successfully');
+        debugPrint(
+          '[DatabaseHelper] Migration V3→V4: user_profile table created successfully',
+        );
       }
     }
   }

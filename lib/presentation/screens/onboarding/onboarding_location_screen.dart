@@ -71,11 +71,7 @@ class OnboardingLocationScreen extends ConsumerWidget {
           const SizedBox(height: 32),
 
           // Icon
-          Icon(
-            Icons.location_on,
-            size: 80,
-            color: theme.colorScheme.primary,
-          ),
+          Icon(Icons.location_on, size: 80, color: theme.colorScheme.primary),
           const SizedBox(height: 24),
 
           // Title

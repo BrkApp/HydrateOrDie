@@ -185,10 +185,7 @@ class _OnboardingGenderScreenState
                 ),
                 child: const Text(
                   'Suivant',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 16),

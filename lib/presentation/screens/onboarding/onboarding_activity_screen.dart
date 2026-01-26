@@ -99,8 +99,9 @@ class _OnboardingActivityScreenState
                     Text(
                       label,
                       style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight:
-                            isSelected ? FontWeight.bold : FontWeight.normal,
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
                         color: isSelected
                             ? theme.colorScheme.primary
                             : theme.colorScheme.onSurface,
@@ -110,8 +111,9 @@ class _OnboardingActivityScreenState
                     Text(
                       description,
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color:
-                            theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                        color: theme.colorScheme.onSurface.withValues(
+                          alpha: 0.7,
+                        ),
                       ),
                     ),
                   ],
@@ -217,10 +219,7 @@ class _OnboardingActivityScreenState
                 ),
                 child: const Text(
                   'Suivant',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 16),

@@ -79,14 +79,13 @@ class AvatarDto {
   Avatar toEntity() {
     final personality = AvatarPersonality.values.firstWhere(
       (e) => e.name == personalityString,
-      orElse: () => throw ArgumentError(
-          'Invalid personality: $personalityString'),
+      orElse: () =>
+          throw ArgumentError('Invalid personality: $personalityString'),
     );
 
     final currentState = AvatarState.values.firstWhere(
       (e) => e.name == currentStateString,
-      orElse: () =>
-          throw ArgumentError('Invalid state: $currentStateString'),
+      orElse: () => throw ArgumentError('Invalid state: $currentStateString'),
     );
 
     return Avatar(

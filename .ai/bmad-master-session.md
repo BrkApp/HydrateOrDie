@@ -1,25 +1,25 @@
 # 🧙 BMad Master - Session de Pilotage
 **Projet:** HydrateOrDie
 **Date Début:** 2026-01-07
-**Dernière MAJ:** 2026-01-15
-**Phase:** Epic 2 - MERGED TO MAIN ✅ | Epic 3 Planning 🚀
+**Dernière MAJ:** 2026-01-19
+**Phase:** Epic 3 - Development 🚀
 
 ---
 
 ## 📍 ÉTAT ACTUEL
 
 **Epic 1:** ✅ COMPLETE & MERGED (8/8 stories + 2 bugfixes + QA Gate validé)
-**Epic 2:** ✅ COMPLETE & MERGED (10/10 stories + 1 hotfix, QA Gate PASSED)
-**Epic 3:** 🚀 PLANNING (Hydration Logging & Tracking)
-**Branche:** `main`
-**Tag:** `epic-2-hotfix-1` (latest)
+**Epic 2:** ✅ COMPLETE & MERGED (10/10 stories + 4 hotfixes, QA Gate PASSED)
+**Epic 3:** 🚀 IN PROGRESS (6/10 stories complètes)
+**Branche:** `feature/epic-3-hydration-logging`
+**Tag:** `epic-2-hotfix-4` (latest sur main)
 
 ### Phase en Cours
 | Phase | Agent | Livrable | Statut | Début | Notes |
 |-------|-------|----------|--------|-------|-------|
-| 37 | bmad-master | Epic 3 Planning | 🚀 IN PROGRESS | 2026-01-15 | Architecture + Story breakdown |
+| 46 | dev (James) | Epic 3 Development | 🚀 IN PROGRESS | 2026-01-16 | 6/10 stories complètes, Story 3.6 en cours |
 
-### Phases Complétées (Epic 2)
+### Phases Complétées (Epic 2 + Hotfixes)
 | Phase | Livrable | Status | Date |
 |-------|----------|--------|------|
 | 36 | Epic 2 Review & Validation | ✅ | 2026-01-15 |
@@ -27,8 +27,11 @@
 | 38 | PM Reports (All Stories) | ✅ | 2026-01-15 |
 | 39 | Merge to main + Tag | ✅ | 2026-01-15 |
 | 40 | APK Release Build | ✅ | 2026-01-15 |
-| 41 | Hotfix Double Button (Critical) | ✅ | 2026-01-15 |
-| 42 | APK Hotfix Build | 🔄 | 2026-01-15 |
+| 41 | Hotfix #1 - Double Button Bug | ✅ | 2026-01-15 |
+| 42 | Hotfix #2 - Button Grayed Out Bug | ✅ | 2026-01-15 |
+| 43 | Hotfix #3 - Button Reactivity Bug | ✅ | 2026-01-15 |
+| 44 | Hotfix #4 - Missing Final Navigation | ✅ | 2026-01-15 |
+| 45 | APK Hotfix-4 Build | ✅ | 2026-01-16 |
 
 ---
 
@@ -114,19 +117,29 @@
 
 ## 🚀 PROCHAINES ÉTAPES
 
-### Immédiat (Epic 3 Planning)
-1. @architect créer architecture Epic 3 (Camera + Hydration Logging)
-2. @po breakdown Epic 3 en stories (8-12 stories estimées)
-3. @dev Story 3.1 - HydrationLog entity
-4. Story 3.2 - Camera integration
+### Epic 3 - Progress (6/10 complètes)
+✅ Story 3.1 - HydrationLog Model (Entity + DTO) - sur main
+✅ Story 3.2 - HydrationLog Repository (SQLite + CRUD) - sur main
+✅ Story 3.3 - Camera Interface (UI capture photo) - sur main
+✅ Story 3.4 - Photo Capture Storage (CapturePhotoUseCase + cleanup) - sur feature branch
+✅ Story 3.8 - HomeScreen & Drink Button (Navigation activée) - sur main
+✅ Story 3.10 - Camera Permissions (Service + Tests) - sur main
 
-### Epic 3 - Hydration Logging & Tracking
-1. Photo validation (Camera integration)
-2. Hydration log persistence (SQLite logs table)
-3. Daily progress tracking (goal % completion)
-4. Streak mechanics (consecutive days)
-5. Avatar state updates based on hydration
-6. Notifications (reminders + achievements)
+### Stories en Cours (Sur Feature Branch)
+🚀 **Story 3.6** - Record Hydration (RecordHydrationUseCase) - EN COURS
+
+### Prochaines Stories (Ordre Recommandé)
+1. 🔜 **Story 3.9** - Glass Size Selection (Modal 250-500ml)
+2. 🔜 **Story 3.7** - Avatar Feedback Animation (Réaction positive)
+3. 🔜 **Story 3.5** - Glass Detection (Mock ML - optionnelle MVP)
+
+### Epic 3 - Vue d'Ensemble
+- Photo validation (Camera integration) - EN COURS
+- Hydration log persistence (SQLite) - ✅ DONE
+- Daily progress tracking (goal % completion)
+- Streak mechanics (consecutive days)
+- Avatar state updates based on hydration
+- Notifications (reminders + achievements)
 
 ---
 
@@ -168,9 +181,14 @@
 
 ---
 
-**Dernière action:** ✅ Epic 2 MERGED TO MAIN + Tag `epic-2-complete` + APK Build (48.9MB)
-**Stats Epic 2:** 549/576 tests (95.3%), Coverage 86.9%, 0 linter warnings, 0 analyze errors
-**Prochaine étape:** Epic 3 Planning - Hydration Logging & Tracking 🚀
+**Dernière action:** ✅ Epic 3 VALIDATION COMPLÈTE - 100% prêt pour merge
+**Stats Epic 3:** 9/10 stories (90%), Story 3.5 skipped (optionnelle MVP)
+**Résultats validation:**
+- flutter test: 732/732 (100%) ✅
+- flutter analyze: 0 errors ✅
+- Build APK: SUCCESS (53.2MB) ✅
+- Rapports: completion + DoD générés ✅
+**Prochaine étape:** Merge vers develop/main + Tag epic-3-complete
 
 ---
 

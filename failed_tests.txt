@@ -1,0 +1,677 @@
+00:17 +138 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/avatar_repository_integration_test.dart: AvatarRepository Integration Tests should maintain singleton pattern for avatar_state table [E]
+00:17 +138 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/avatar_repository_integration_test.dart: AvatarRepository Integration Tests should handle timestamps in UTC correctly
+00:17 +139 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/avatar_repository_integration_test.dart: (tearDownAll)
+00:17 +139 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart
+00:19 +139 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - addLog should add log successfully
+00:19 +140 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - addLog should convert entity to DTO correctly
+00:19 +141 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - addLog should throw StorageException when add fails
+00:19 +142 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - addLog should throw StorageException with correct error code
+00:19 +143 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - getLogsForDate should get logs for specific date
+00:19 +144 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - getLogsForDate should call data source with correct date range
+00:19 +145 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - getLogsForDate should return empty list when no logs for date
+00:19 +146 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - getLogsForDate should throw StorageException when get fails
+00:19 +147 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - getTodayLogs should get today logs successfully
+00:19 +148 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - getTodayLogs should call getLogsForDate with current date
+00:19 +149 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - getTodayLogs should throw StorageException when get fails
+00:19 +150 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - getTotalVolumeForDate should get total volume for date
+00:19 +151 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - getTotalVolumeForDate should call data source with correct date range
+00:19 +152 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - getTotalVolumeForDate should return 0.0 when no logs for date
+00:19 +153 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - getTotalVolumeForDate should throw StorageException when get fails
+00:19 +154 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - deleteOldLogs should delete old logs successfully
+00:19 +155 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - deleteOldLogs should call data source with cutoff date 90 days ago
+00:19 +156 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - deleteOldLogs should return 0 when no logs to delete
+00:19 +157 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - deleteOldLogs should throw StorageException when delete fails
+00:19 +158 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_impl_test.dart: HydrationLogRepositoryImpl - deleteOldLogs should throw StorageException with correct error code
+00:19 +159 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart
+00:21 +159 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: (setUpAll)
+00:21 +159 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - Full Flow should add and retrieve log successfully
+00:21 +160 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - Full Flow should handle multiple logs for same day
+00:21 +161 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - Full Flow should separate logs by date
+00:21 +162 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - getTodayLogs should get today logs correctly
+00:21 +163 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - getTodayLogs should return empty list when no logs today
+00:21 +164 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - getTotalVolumeForDate should calculate total volume correctly
+00:21 +165 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - getTotalVolumeForDate should return 0 when no logs for date
+00:21 +166 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - getTotalVolumeForDate should only count validated logs
+00:21 +167 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - getTotalVolumeForDate should not include logs from other dates
+00:22 +168 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - deleteOldLogs should delete logs older than 90 days
+00:22 +169 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - deleteOldLogs should return 0 when no old logs to delete
+00:22 +170 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - deleteOldLogs should handle edge case at 90 day boundary
+00:22 +171 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - Edge Cases should handle log with null photoPath
+00:22 +172 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - Edge Cases should handle all glass sizes correctly
+00:22 +173 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: HydrationLogRepository Integration Tests - Edge Cases should handle empty database
+00:22 +174 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/hydration_log_repository_integration_test.dart: (tearDownAll)
+00:22 +174 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart
+00:24 +174 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - getProfile should return null when no profile exists
+00:24 +175 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - getProfile should return User entity when profile exists
+00:24 +176 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - getProfile should throw StorageException when data source fails
+00:24 +177 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - getProfile should throw StorageException with correct error code
+00:24 +178 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - saveProfile should save user profile successfully
+00:24 +179 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - saveProfile should convert entity to DTO correctly
+00:24 +180 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - saveProfile should throw StorageException when save fails
+00:24 +181 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - saveProfile should throw StorageException with correct error code on failure
+00:24 +182 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - updateProfile should update profile successfully when profile exists
+00:24 +183 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - updateProfile should throw ProfileNotFoundException when profile does not exist
+00:24 +184 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - updateProfile should convert entity to DTO correctly for update
+00:24 +185 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - updateProfile should throw StorageException when update fails
+00:24 +186 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - updateProfile should throw StorageException with correct error code on failure
+00:24 +187 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - updateProfile should rethrow ProfileNotFoundException without wrapping
+00:24 +188 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - deleteProfile should delete profile successfully
+00:24 +189 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - deleteProfile should throw StorageException when delete fails
+00:24 +190 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - deleteProfile should throw StorageException with correct error code on failure
+00:24 +191 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - hasProfile should return true when profile exists
+00:24 +192 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - hasProfile should return false when profile does not exist
+00:24 +193 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - hasProfile should throw StorageException when check fails
+00:24 +194 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/data/repositories/user_repository_impl_test.dart: UserRepositoryImpl - hasProfile should throw StorageException with correct error code on failure
+00:24 +195 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_personality_test.dart
+00:25 +195 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_personality_test.dart: AvatarPersonality displayName should return correct display name for authoritarianMother
+00:25 +196 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_personality_test.dart: AvatarPersonality displayName should return correct display name for sportsCoach
+00:25 +197 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_personality_test.dart: AvatarPersonality displayName should return correct display name for doctor
+00:25 +198 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_personality_test.dart: AvatarPersonality displayName should return correct display name for sarcasticFriend
+00:26 +199 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_personality_test.dart: AvatarPersonality description should return description for authoritarianMother
+00:26 +200 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_personality_test.dart: AvatarPersonality description should return description for sportsCoach
+00:26 +201 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_personality_test.dart: AvatarPersonality description should return description for doctor
+00:26 +202 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_personality_test.dart: AvatarPersonality description should return description for sarcasticFriend
+00:26 +203 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_personality_test.dart: AvatarPersonality should have 4 personality types
+00:26 +204 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart
+00:27 +204 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState getNextState should transition fresh to tired
+00:27 +205 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState getNextState should transition tired to dehydrated
+00:27 +206 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState getNextState should transition dehydrated to dead
+00:27 +207 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState getNextState should transition dead to ghost
+00:27 +208 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState getNextState should transition ghost to fresh (resurrection)
+00:27 +209 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState shouldDie should return false if time < 6 hours
+00:27 +210 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState shouldDie should return true if time >= 6 hours
+00:27 +211 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState shouldBecomeGhost should return true only for dead state
+00:27 +212 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState getAssetPath should return correct path for sports coach fresh
+00:27 +213 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState getAssetPath should return correct path for doctor tired
+00:27 +214 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState getAssetPath should return correct path for authoritarian mother dead
+00:27 +215 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_state_test.dart: AvatarState getAssetPath should return correct path for sarcastic friend ghost
+00:27 +216 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart
+00:28 +216 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar constructor should create avatar with all fields
+00:28 +217 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar calculateState should return fresh for 0-2 hours
+00:28 +218 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar calculateState should return tired for 2-4 hours
+00:28 +219 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar calculateState should return dehydrated for 4-6 hours
+00:28 +220 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar calculateState should return dead for 6+ hours
+00:28 +221 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar shouldBecomeGhost should return true when state is dead
+00:28 +222 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar shouldBecomeGhost should return false when state is not dead
+00:28 +223 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar shouldResurrect should return true when state is ghost
+00:28 +224 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar shouldResurrect should return false when state is not ghost
+00:28 +225 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar copyWith should create copy with updated state
+00:28 +226 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar copyWith should create copy with updated lastDrinkTime
+00:28 +227 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar copyWith should keep original values when no params provided
+00:29 +228 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar equality should be equal when all fields match
+00:29 +229 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar equality should not be equal when fields differ
+00:29 +230 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/avatar_test.dart: Avatar toString should return string representation
+00:29 +231 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/glass_size_test.dart
+00:30 +231 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/glass_size_test.dart: GlassSize volumeLiters should return 0.2 liters for small glass
+00:30 +232 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/glass_size_test.dart: GlassSize volumeLiters should return 0.25 liters for medium glass
+00:30 +233 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/glass_size_test.dart: GlassSize volumeLiters should return 0.4 liters for large glass
+00:30 +234 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/glass_size_test.dart: GlassSize displayName should return correct display name for small
+00:30 +235 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/glass_size_test.dart: GlassSize displayName should return correct display name for medium
+00:30 +236 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/glass_size_test.dart: GlassSize displayName should return correct display name for large
+00:30 +237 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/glass_size_test.dart: GlassSize should have 3 glass sizes
+00:30 +238 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart
+00:32 +238 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal constructor should create goal with valid target
+00:32 +239 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal constructor should accept minimum goal of 1.5L
+00:32 +240 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal constructor should accept maximum goal of 5.0L
+00:32 +241 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal constructor should throw ArgumentError if goal < minimum
+00:32 +242 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal constructor should throw ArgumentError if goal > maximum
+00:32 +243 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal constructor should throw ArgumentError if goal is 0
+00:32 +244 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal constructor should throw ArgumentError if goal is negative
+00:32 +245 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal isAchieved should return true when current volume equals target
+00:32 +246 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal isAchieved should return true when current volume exceeds target
+00:32 +247 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal isAchieved should return false when current volume is below target
+00:32 +248 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal isAchieved should return false when current volume is 0
+00:32 +249 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal getProgressPercentage should return 0.0 when no volume consumed
+00:32 +250 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal getProgressPercentage should return 0.5 when half consumed
+00:32 +251 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal getProgressPercentage should return 1.0 when exactly achieved
+00:32 +252 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal getProgressPercentage should return > 1.0 when exceeding goal
+00:32 +253 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal getProgressPercentage should calculate correct percentage for various values
+00:32 +254 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal equality should be equal when target is the same
+00:32 +255 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal equality should not be equal when target is different
+00:32 +256 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal equality should have same hashCode for equal goals
+00:32 +257 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_goal_test.dart: HydrationGoal toString should return string representation
+00:32 +258 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart
+00:33 +258 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog constructor should create log with all fields
+00:33 +259 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog constructor should allow null photoPath
+00:33 +260 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog constructor should default validated to true
+00:33 +261 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog volumeLiters should return correct volume for small glass
+00:33 +262 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog volumeLiters should return correct volume for medium glass
+00:33 +263 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog volumeLiters should return correct volume for large glass
+00:33 +264 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog isToday should return true for today's date
+00:33 +265 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog isToday should return false for yesterday
+00:33 +266 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog isToday should return false for tomorrow
+00:33 +267 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog isToday should ignore time when checking date
+00:33 +268 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog copyWith should create copy with updated glass size
+00:33 +269 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog copyWith should create copy with updated photoPath
+00:33 +270 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog copyWith should keep original values when no params provided
+00:33 +271 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog equality should be equal when all fields match
+00:33 +272 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog equality should not be equal when fields differ
+00:33 +273 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/hydration_log_test.dart: HydrationLog toString should return string representation
+00:33 +274 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart
+00:35 +274 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak constructor should create streak with all fields
+00:35 +275 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak incrementStreak should increment current streak
+00:35 +276 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak incrementStreak should not update longest if current is still lower
+00:35 +277 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak incrementStreak should update longest if current exceeds it
+00:35 +278 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak incrementStreak should update longest when current equals it
+00:35 +279 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak breakStreak should reset current streak to 0
+00:35 +280 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak breakStreak should preserve longest streak
+00:35 +281 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak breakStreak should preserve last streak date
+00:35 +282 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak isStreakActiveToday should return true if streak is active and date is today
+00:35 +283 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak isStreakActiveToday should return false if streak is inactive
+00:35 +284 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak isStreakActiveToday should return false if last date is not today
+00:35 +285 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak shouldIncrementToday should return true if last streak was yesterday
+00:35 +286 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak shouldIncrementToday should return false if last streak was today
+00:35 +287 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak shouldIncrementToday should return false if last streak was 2 days ago
+00:35 +288 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak copyWith should create copy with updated currentStreak
+00:35 +289 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak copyWith should create copy with updated streakActive
+00:35 +290 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak copyWith should keep original values when no params provided
+00:35 +291 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak equality should be equal when all fields match
+00:35 +292 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak equality should not be equal when fields differ
+00:35 +293 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/streak_test.dart: Streak toString should return string representation
+00:35 +294 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart
+00:37 +294 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User constructor should create user with all fields
+00:37 +295 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User needsGoalRecalculation should return true when weight changes
+00:37 +296 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User needsGoalRecalculation should return true when age changes
+00:37 +297 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User needsGoalRecalculation should return true when gender changes
+00:37 +298 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User needsGoalRecalculation should return true when activity level changes
+00:37 +299 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User needsGoalRecalculation should return false when only goal changes
+00:37 +300 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User needsGoalRecalculation should return false when nothing changes
+00:37 +301 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User copyWith should create copy with updated weight
+00:37 +302 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User copyWith should create copy with updated activity level
+00:37 +303 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User copyWith should keep original values when no params provided
+00:37 +304 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User equality should be equal when all fields match
+00:37 +305 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User equality should not be equal when fields differ
+00:37 +306 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/entities/user_test.dart: User toString should return string representation
+00:37 +307 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/check_and_resurrect_avatar_use_case_test.dart
+00:38 +307 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/check_and_resurrect_avatar_use_case_test.dart: CheckAndResurrectAvatarUseCase execute() AC #6 - Should resurrect avatar when state is ghost
+00:38 +308 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/check_and_resurrect_avatar_use_case_test.dart: CheckAndResurrectAvatarUseCase execute() Should return false when state is not ghost (fresh)
+00:38 +309 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/check_and_resurrect_avatar_use_case_test.dart: CheckAndResurrectAvatarUseCase execute() Should return false when state is dead
+00:38 +310 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/check_and_resurrect_avatar_use_case_test.dart: CheckAndResurrectAvatarUseCase execute() Should return false when avatar is null
+00:38 +311 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/check_and_resurrect_avatar_use_case_test.dart: CheckAndResurrectAvatarUseCase execute() AC #6 - Should reset lastDrinkTime to current time on resurrection
+00:38 +312 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/check_and_resurrect_avatar_use_case_test.dart: CheckAndResurrectAvatarUseCase execute() AC #6 - Should clear deathTime (set to null) on resurrection
+00:38 +313 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/check_and_resurrect_avatar_use_case_test.dart: CheckAndResurrectAvatarUseCase execute() Should throw StorageException when repository fails
+00:38 +314 -1: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart
+00:40 +314 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - État Fresh (0h depuis dernier verre)
+00:40 +315 -1: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - État Fresh (1h depuis dernier verre)
+00:40 +315 -2: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - État Fresh (1h depuis dernier verre) [E]
+00:40 +315 -2: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - Transition Fresh → Tired (3h depuis dernier verre)
+00:40 +315 -3: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - Transition Fresh → Tired (3h depuis dernier verre) [E]
+00:40 +315 -3: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - Transition Tired → Dehydrated (5h depuis dernier verre)
+00:40 +315 -4: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - Transition Tired → Dehydrated (5h depuis dernier verre) [E]
+00:40 +315 -4: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - Transition Dehydrated → Dead (7h depuis dernier verre)
+00:40 +316 -4: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - Seuil exact 2h (Fresh → Tired)
+00:40 +316 -5: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - Seuil exact 2h (Fresh → Tired) [E]
+00:40 +316 -5: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - Seuil exact 4h (Tired → Dehydrated)
+00:40 +316 -6: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - Seuil exact 4h (Tired → Dehydrated) [E]
+00:40 +316 -6: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Calcul d'état basé sur le temps écoulé AC #2 - Seuil exact 6h (Dehydrated → Dead)
+00:40 +317 -6: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase AC #1, #3 - Calcul basé sur DateTime.now() et lastDrinkTime Utilise DateTime.now() pour calculer temps écoulé
+00:40 +317 -7: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase AC #1, #3 - Calcul basé sur DateTime.now() et lastDrinkTime Utilise DateTime.now() pour calculer temps écoulé [E]
+00:40 +317 -7: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase AC #1, #3 - Calcul basé sur DateTime.now() et lastDrinkTime Retourne Fresh par défaut si aucun lastDrinkTime
+00:40 +318 -7: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase AC #5 - Mise à jour dans le repository Met à jour le repository après calcul si état changé
+00:40 +318 -8: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase AC #5 - Mise à jour dans le repository Met à jour le repository après calcul si état changé [E]
+00:40 +318 -8: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase AC #5 - Mise à jour dans le repository Ne met pas à jour le repository si état inchangé
+00:40 +318 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase AC #5 - Mise à jour dans le repository Ne met pas à jour le repository si état inchangé [E]
+00:40 +318 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Gestion des erreurs Propage StorageException si getLastDrinkTime échoue
+00:40 +319 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Gestion des erreurs Propage StorageException si updateAvatarState échoue
+00:40 +320 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Story 1.7 - Transition Dead → Ghost (AC #2) AC #2 - Dead reste dead si < 10 secondes écoulées
+00:40 +321 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Story 1.7 - Transition Dead → Ghost (AC #2) AC #2 - Dead → Ghost après exactement 10 secondes
+00:40 +322 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Story 1.7 - Transition Dead → Ghost (AC #2) AC #2 - Dead → Ghost après 15 secondes
+00:40 +323 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Story 1.7 - Transition Dead → Ghost (AC #2) AC #2 - Ghost reste ghost (pas de régression)
+00:40 +324 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Story 1.7 - Transition Dead → Ghost (AC #2) AC #2 - Transition vers dead enregistre deathTime
+00:40 +325 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Story 1.7 - Transition Dead → Ghost (AC #2) AC #2 - Dead sans deathTime reste dead (edge case)
+00:40 +326 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Constantes de seuil Constantes définies correctement selon AC #2
+00:40 +327 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/avatar/update_avatar_state_use_case_test.dart: UpdateAvatarStateUseCase Constantes de seuil Story 1.7 - Constante kDeadToGhostDelay définie
+00:40 +328 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart
+00:41 +328 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase AC1: Crée un HydrationLog avec photoPath, glassSize, validated=true
+00:41 +329 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase AC2: Sauvegarde le log via HydrationLogRepository.addLog()
+00:41 +330 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase AC3: Met à jour lastDrinkTime via AvatarRepository.updateLastDrinkTime()
+00:41 +331 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase AC4: Recalcule l'état avatar via UpdateAvatarStateUseCase.execute()
+00:41 +332 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase AC5: Récupère volume total du jour via getTotalVolumeForDate(DateTime.now())
+00:41 +333 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase AC6: Calcule progression (volumeToday / dailyGoal) × 100%
+00:42 +334 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase AC6: Plafonne la progression à 100% (1.0) si objectif dépassé
+00:42 +335 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase AC7: Analytics event skip gracefully si Firebase indisponible
+00:42 +336 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase AC7: Analytics event skip gracefully si Firebase indisponible
+00:42 +336 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase AC8: Séquence complète - save log → update avatar → recalcul progression
+00:42 +337 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase Throw RecordHydrationException si addLog() échoue
+00:42 +338 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase Throw RecordHydrationException si updateLastDrinkTime() échoue
+00:42 +339 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase Throw RecordHydrationException si profil utilisateur introuvable
+00:42 +340 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase Edge case: Progression avec dailyGoal = 0 retourne 0%
+00:42 +341 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase RecordHydrationResult.isGoalAchieved retourne true si progression >= 1.0
+00:42 +342 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/hydration/record_hydration_use_case_test.dart: RecordHydrationUseCase Test avec différentes tailles de verre (small, medium, large)
+00:42 +343 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart
+00:43 +343 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase _generateFileName devrait générer un nom de fichier avec le format correct
+00:43 +344 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase _generateFileName devrait utiliser le format yyyyMMdd_HHmmss exact
+00:43 +345 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase _generateFileName devrait toujours avoir l'extension .jpg
+00:43 +346 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase _generateFileName devrait toujours commencer par "hydration_"
+00:43 +347 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase _generateFileName devrait avoir exactement un underscore entre date et heure
+00:43 +348 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase Compression Quality devrait utiliser quality parameter = 80
+00:43 +349 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase Compression Quality quality parameter devrait être entre 0 et 100
+00:43 +350 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase Exception Handling CapturePhotoException devrait contenir un message user-friendly
+00:43 +351 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase Exception Handling CapturePhotoException devrait pouvoir contenir une exception originale
+00:43 +352 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase File Path Generation devrait générer un chemin valide avec nom de fichier correct
+00:43 +353 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase File Path Generation devrait utiliser le séparateur de chemin correct
+00:43 +354 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/photo/capture_photo_use_case_test.dart: CapturePhotoUseCase Error Messages message d'erreur storage plein devrait être user-friendly
+00:43 +355 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart
+00:45 +355 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Base calculation should calculate correct goal for 75kg male 30 years sedentary
+00:45 +356 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Base calculation should round result to nearest 0.1 liter
+00:45 +357 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Activity level multipliers should apply sedentary multiplier (1.0)
+00:45 +358 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Activity level multipliers should apply light activity multiplier (1.1)
+00:45 +359 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Activity level multipliers should apply moderate activity multiplier (1.2)
+00:45 +360 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Activity level multipliers should apply very active multiplier (1.3)
+00:45 +361 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Activity level multipliers should apply extremely active multiplier (1.5)
+00:45 +362 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Gender multipliers should apply male multiplier (1.0)
+00:45 +363 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Gender multipliers should apply female multiplier (0.95)
+00:45 +364 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Gender multipliers should apply other gender multiplier (1.0)
+00:45 +365 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Age multipliers should apply under 30 multiplier (1.0)
+00:45 +366 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Age multipliers should apply 30-55 age multiplier (0.95)
+00:45 +367 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Age multipliers should apply over 55 multiplier (0.9)
+00:45 +368 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Age multipliers should handle edge age 30 (first day of 30-55 range)
+00:45 +369 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Age multipliers should handle edge age 55 (last day of 30-55 range)
+00:45 +370 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Age multipliers should handle edge age 56 (first day of >55 range)
+00:45 +371 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Safety bounds should enforce minimum goal of 1.5L
+00:45 +372 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Safety bounds should enforce maximum goal of 5.0L
+00:45 +373 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Safety bounds should not clamp values within bounds
+00:45 +374 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Edge cases - extreme weights should handle very light weight (30kg)
+00:45 +375 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Edge cases - extreme weights should handle heavy weight (100kg)
+00:45 +376 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Edge cases - extreme weights should handle very heavy weight (150kg)
+00:45 +377 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Edge cases - extreme ages should handle young age (15 years)
+00:45 +378 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Edge cases - extreme ages should handle elderly age (80 years)
+00:45 +379 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Complex scenarios - multiple adjustments should correctly combine all adjustments - young active male
+00:45 +380 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Complex scenarios - multiple adjustments should correctly combine all adjustments - older female moderate
+00:45 +381 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Complex scenarios - multiple adjustments should correctly combine all adjustments - middle-aged other extreme activity
+00:45 +382 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Rounding precision should round 2.34 to 2.3L
+00:45 +383 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Rounding precision should round 2.36 to 2.4L
+00:45 +384 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/domain/use_cases/user/calculate_hydration_goal_use_case_test.dart: CalculateHydrationGoalUseCase Rounding precision should round 2.45 to 2.5L (round half up)
+00:45 +385 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/photo_storage_integration_test.dart
+00:47 +385 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/photo_storage_integration_test.dart: Photo Storage Integration Tests devrait créer et lire un fichier photo avec succès
+00:47 +386 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/photo_storage_integration_test.dart: Photo Storage Integration Tests devrait créer le répertoire photos s'il n'existe pas
+00:47 +387 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/photo_storage_integration_test.dart: Photo Storage Integration Tests devrait sauvegarder plusieurs photos successivement
+00:50 +388 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/photo_storage_integration_test.dart: Photo Storage Integration Tests devrait gérer l'erreur si espace de stockage insuffisant
+00:50 +389 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/photo_storage_integration_test.dart: Photo Cleanup Integration Tests deleteOldPhotos devrait s'exécuter sans crasher
+00:50 +390 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/record_hydration_integration_test.dart
+00:51 +390 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/record_hydration_integration_test.dart: (setUpAll)
+00:51 +390 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/record_hydration_integration_test.dart: RecordHydrationUseCase - Integration Tests (AC9) AC9: Flow end-to-end avec persistence réelle SQLite
+00:52 +391 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/record_hydration_integration_test.dart: RecordHydrationUseCase - Integration Tests (AC9) Integration: Multiple logs sur plusieurs jours (SQLite)
+00:52 +392 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/record_hydration_integration_test.dart: RecordHydrationUseCase - Integration Tests (AC9) Integration: Vérifier séquence des appels aux dépendances
+00:52 +393 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/record_hydration_integration_test.dart: RecordHydrationUseCase - Integration Tests (AC9) Integration: Throw exception si profil utilisateur manquant
+00:52 +394 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/integration/record_hydration_integration_test.dart: (tearDownAll)
+00:52 +394 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart
+00:54 +394 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider getEmojiAsset() should return correct emoji for authoritarianMother fresh
+00:54 +395 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider getEmojiAsset() should return correct emoji for sportsCoach tired
+00:54 +396 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider getEmojiAsset() should return correct emoji for doctor dehydrated
+00:54 +397 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider getEmojiAsset() should return correct emoji for sarcasticFriend dead
+00:54 +398 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider getEmojiAsset() should return ghost emoji for any personality in ghost state
+00:54 +399 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider getEmojiAsset() should return emoji for all 20 combinations
+00:54 +400 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider getAssetPath() should return correct path for doctor fresh
+00:54 +401 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider getAssetPath() should return correct path for sportsCoach ghost
+00:54 +402 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider getAssetPath() should return correct path for authoritarianMother dehydrated
+00:54 +403 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider getAssetPath() should return correct path for sarcasticFriend tired
+00:54 +404 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider getAssetPath() should follow naming convention for all combinations
+00:54 +405 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider validateAllAssetsExist() should return true when all 20 assets are mapped
+00:54 +406 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider validateAllAssetsExist() should validate all personalities have all states
+00:54 +407 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider totalAssetCount should return 20 (4 personalities × 5 states)
+00:54 +408 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider Edge cases getEmojiAsset should handle all personality/state combinations
+00:54 +409 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider Edge cases should have unique emojis for each personality (except ghost)
+00:54 +410 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider Edge cases ghost state should use same emoji for all personalities
+00:54 +411 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/avatar_asset_provider_test.dart: AvatarAssetProvider Asset path structure should maintain consistent directory structure
+00:54 +412 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart
+00:56 +412 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart: HomeProvider should initialize with default state
+00:56 +413 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart: HomeProvider should load avatar data on init (AC #1, #2, #4)
+00:56 +414 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart: HomeProvider should use default personality when avatar is null
+00:56 +415 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart: HomeProvider should refresh state correctly (AC #2)
+00:57 +416 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart: HomeProvider should handle different personality types (AC #3)
+00:57 +417 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart: HomeProvider should handle different avatar states (AC #2)
+00:58 +418 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart: HomeProvider should handle null lastDrinkTime (AC #4)
+00:58 +419 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart: HomeProvider should handle errors gracefully
+00:58 +420 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart: HomeProvider should call updateAvatarStateUseCase on refresh
+00:58 +421 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart: HomeState should create state with required fields
+00:58 +422 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/home_provider_test.dart: HomeState should copyWith correctly
+00:58 +423 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart
+00:59 +423 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier should initialize with default state
+00:59 +424 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateWeight should update weight with valid value (50kg)
+00:59 +425 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateWeight should update weight with min valid value (30kg)
+00:59 +426 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateWeight should update weight with max valid value (300kg)
+00:59 +427 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateWeight should set error when weight is below min (29kg)
+00:59 +428 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateWeight should set error when weight is above max (301kg)
+00:59 +429 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateAge should update age with valid value (25)
+00:59 +430 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateAge should update age with min valid value (10)
+00:59 +431 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateAge should update age with max valid value (120)
+00:59 +432 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateAge should set error when age is below min (9)
+00:59 +433 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateAge should set error when age is above max (121)
+00:59 +434 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateGender should update gender to male
+00:59 +435 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateGender should update gender to female
+00:59 +436 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateGender should update gender to other
+00:59 +437 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateActivityLevel should update activity level to sedentary
+00:59 +438 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateActivityLevel should update activity level to light
+00:59 +439 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateActivityLevel should update activity level to moderate
+00:59 +440 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateActivityLevel should update activity level to veryActive
+01:00 +441 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateActivityLevel should update activity level to extremelyActive
+01:00 +442 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateLocation should update location
+01:00 +443 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier updateLocation should allow null location (optional field)
+01:00 +444 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier Step Navigation nextStep should increment currentStep
+01:00 +445 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier Step Navigation nextStep should not exceed step 5
+01:00 +446 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier Step Navigation previousStep should decrement currentStep
+01:00 +447 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier Step Navigation previousStep should not go below step 1
+01:00 +448 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier Step Navigation skipStep should call nextStep for step 5 (location)
+01:00 +449 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier complete should complete onboarding when all required fields are filled
+01:00 +450 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier complete should not complete when weight is missing
+01:00 +451 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier complete should not complete when age is missing
+01:00 +452 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier complete should not complete when gender is missing
+01:00 +453 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier complete should not complete when activity level is missing
+01:00 +454 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier complete should complete even when location is missing (optional)
+01:00 +455 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier reset should reset state to initial values
+01:00 +456 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier clearError should clear error message
+01:00 +457 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier Multi-step Flow should handle complete onboarding flow
+01:00 +458 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_provider_test.dart: OnboardingNotifier Multi-step Flow should allow going back and changing values
+01:00 +459 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart
+01:01 +459 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState should initialize with default values
+01:01 +460 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState should create state with all fields populated
+01:01 +461 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState should copy state with updated weight
+01:01 +462 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState should copy state with updated age
+01:01 +463 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState should copy state with updated gender
+01:01 +464 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState should copy state with updated activity level
+01:01 +465 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState should copy state with updated location
+01:01 +466 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState should copy state with updated currentStep
+01:01 +467 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState should copy state with updated isComplete
+01:01 +468 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState should copy state with error message
+01:01 +469 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isWeightValid should return true for valid weight (50kg)
+01:01 +470 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isWeightValid should return true for min weight (30kg)
+01:01 +471 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isWeightValid should return true for max weight (300kg)
+01:01 +472 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isWeightValid should return false for weight below min (29kg)
+01:01 +473 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isWeightValid should return false for weight above max (301kg)
+01:01 +474 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isWeightValid should return false when weight is null
+01:01 +475 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isAgeValid should return true for valid age (25)
+01:01 +476 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isAgeValid should return true for min age (10)
+01:01 +477 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isAgeValid should return true for max age (120)
+01:01 +478 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isAgeValid should return false for age below min (9)
+01:01 +479 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isAgeValid should return false for age above max (121)
+01:01 +480 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isAgeValid should return false when age is null
+01:01 +481 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isGenderValid should return true when gender is set
+01:01 +482 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isGenderValid should return false when gender is null
+01:01 +483 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isActivityLevelValid should return true when activityLevel is set
+01:01 +484 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters isActivityLevelValid should return false when activityLevel is null
+01:01 +485 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters canComplete should return true when all required fields are valid
+01:01 +486 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters canComplete should return false when weight is missing
+01:01 +487 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters canComplete should return false when age is missing
+01:01 +488 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters canComplete should return false when gender is missing
+01:01 +489 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters canComplete should return false when activityLevel is missing
+01:01 +490 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Validation Getters canComplete should return true even when location is missing (optional)
+01:01 +491 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Equality should be equal for same values
+01:01 +492 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Equality should not be equal for different weight
+01:01 +493 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Equality should not be equal for different age
+01:01 +494 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState Equality should not be equal for different gender
+01:01 +495 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/providers/onboarding_state_test.dart: OnboardingState toString should return string representation
+01:01 +496 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart
+01:03 +496 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: (setUpAll)
+01:03 +496 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: AvatarSelectionScreen AC #2 - Should display 4 avatars in grid
+01:04 +497 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: AvatarSelectionScreen AC #3 - Each avatar shows name and description
+01:05 +498 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: AvatarSelectionScreen AC #4 - Tapping avatar should update selection
+01:05 +499 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: AvatarSelectionScreen AC #5 - Confirm button disabled when no selection
+01:05 +500 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: AvatarSelectionScreen AC #5 - Confirm button enabled after selection
+01:05 +501 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: AvatarSelectionScreen AC #6 - Confirming should save and navigate to home
+01:05 +502 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: AvatarSelectionScreen AC #8 - Only one avatar can be selected at a time
+01:05 +503 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: AvatarSelectionScreen Should display title and instructions
+01:05 +504 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: AvatarSelectionScreen Should save correct avatar ID for doctor
+01:05 +505 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: AvatarSelectionScreen Should save correct avatar ID for coach
+01:06 +506 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: AvatarSelectionScreen Should not navigate if save fails
+01:06 +507 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/avatar_selection/avatar_selection_screen_test.dart: (tearDownAll)
+01:06 +507 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/feedback/feedback_screen_test.dart
+01:08 +507 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/feedback/feedback_screen_test.dart: FeedbackScreen Widget Tests AC #2: Avatar is displayed with animation
+01:09 +508 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/feedback/feedback_screen_test.dart: FeedbackScreen Widget Tests AC #3: Personalized message is displayed correctly
+01:09 +509 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/feedback/feedback_screen_test.dart: FeedbackScreen Widget Tests AC #5: Hydration progress is displayed with correct format
+01:09 +510 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/feedback/feedback_screen_test.dart: FeedbackScreen Widget Tests AC #5: Progress bar color changes when goal reached
+01:09 +511 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/feedback/feedback_screen_test.dart: FeedbackScreen Widget Tests AC #6: Auto-dismiss timer navigates back after 4 seconds
+01:10 +512 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/feedback/feedback_screen_test.dart: FeedbackScreen Widget Tests AC #7: "Continuer" button dismisses screen immediately
+01:10 +513 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/feedback/feedback_screen_test.dart: FeedbackScreen Widget Tests AC #8: Animations are active on screen
+01:10 +514 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/feedback/feedback_screen_test.dart: FeedbackScreen Widget Tests Widget disposes cleanly without memory leaks
+01:10 +515 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/feedback/feedback_screen_test.dart: FeedbackScreen Widget Tests Handles null user gracefully
+01:10 +516 -9: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart
+01:12 +516 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display all main UI components (AC #1)
+01:13 +517 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display avatar with fresh state (AC #2, #8)
+01:13 +518 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display avatar with tired state (AC #2, #8)
+01:14 +519 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display avatar with dehydrated state (AC #2, #8)
+01:14 +520 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display avatar with dead state (AC #2, #8)
+01:14 +521 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display elapsed time correctly (AC #4)
+01:14 +522 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display "Jamais encore bu" when lastDrinkTime is null (AC #4)
+01:14 +523 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display progress bar with placeholder values (AC #3)
+01:14 +524 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display "JE BOIS" button when goal not reached (Story 3.8 AC #1, #5)
+01:14 +525 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display header with logo, time, streak, settings
+01:14 +526 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display bottom navigation (AC #6)
+01:14 +527 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should display "JE BOIS" button with correct styling (spec lignes 1267-1274)
+01:14 +528 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should format elapsed time for minutes only
+01:14 +529 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen should handle different personalities correctly
+01:15 +530 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen Story 3.8 AC #2: Button has correct height and color
+01:15 +531 -9: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen Story 3.8 AC #3: Button navigates to PhotoValidationScreen
+01:15 +531 -10: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen Story 3.8 AC #3: Button navigates to PhotoValidationScreen [E]
+01:15 +531 -10: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen Story 3.8 AC #4: Button accessible when avatar is dead
+01:15 +531 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen Story 3.8 AC #4: Button accessible when avatar is dead [E]
+01:15 +531 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen Story 3.8 AC #4: Button accessible when avatar is ghost
+01:15 +532 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/home/home_screen_test.dart: HomeScreen Story 3.8 AC #5: Button text changes based on goal status
+01:16 +533 -11: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_activity_screen_test.dart
+01:17 +533 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_activity_screen_test.dart: OnboardingActivityScreen should display activity level selection screen
+01:18 +534 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_activity_screen_test.dart: OnboardingActivityScreen next button should be disabled when no activity selected
+01:18 +535 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_activity_screen_test.dart: OnboardingActivityScreen should enable next button when activity is selected
+01:19 +536 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_activity_screen_test.dart: OnboardingActivityScreen should highlight selected activity card
+01:19 +537 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_activity_screen_test.dart: OnboardingActivityScreen should update provider state when activity is selected
+01:19 +538 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_activity_screen_test.dart: OnboardingActivityScreen should display all activity icons
+01:19 +539 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_activity_screen_test.dart: OnboardingActivityScreen should navigate back when back button is pressed
+01:19 +540 -11: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart
+01:21 +540 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should display all UI components (AC #2, #7)
+01:22 +541 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should use numeric keyboard (AC #3)
+01:22 +542 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should show "ans" suffix in TextField
+01:22 +543 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should accept valid age (AC #4)
+01:23 +544 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should accept minimum valid age (10) (AC #4)
+01:23 +545 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should accept maximum valid age (120) (AC #4)
+01:23 +546 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should show error for age below minimum (AC #4, #5)
+01:23 +547 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should show error for age above maximum (AC #4, #5)
+01:23 +548 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should show error for empty age (AC #5)
+01:23 +549 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should show error for invalid format (AC #5)
+01:24 +550 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should not proceed when age is invalid on Next button press (AC #6)
+01:24 +551 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should proceed when age is valid on Next button press (AC #6)
+01:24 +552 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should clear error when user starts typing
+01:24 +553 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should update provider state when valid age entered
+01:24 +554 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should pre-fill age if already set in state
+01:24 +555 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should navigate to gender screen when Next pressed (AC #1, #8)
+01:24 +556 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_age_screen_test.dart: OnboardingAgeScreen should allow back navigation
+01:25 +557 -11: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart
+01:26 +557 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should create OnboardingFlowScreen widget
+01:27 +558 -11: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should display step counter
+01:28 +558 -12: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should display step counter [E]
+01:28 +558 -12: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should have PageView with 6 screens
+01:28 +559 -12: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should have Next button
+01:28 +560 -12: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should reset onboarding state on init
+01:28 +561 -12: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should show progress indicator
+01:28 +562 -12: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should not show Back button on first step
+01:28 +563 -12: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should navigate to next page when data is valid
+01:28 +563 -13: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should navigate to next page when data is valid [E]
+01:28 +563 -13: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen Next button should be disabled when step data is invalid
+01:28 +564 -13: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should show Back button after navigating forward
+01:29 +564 -14: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should show Back button after navigating forward [E]
+01:29 +564 -14: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should navigate back when Back button is tapped
+01:29 +564 -15: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should navigate back when Back button is tapped [E]
+01:29 +564 -15: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should enable Skip button on Location step
+01:29 +564 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_flow_screen_test.dart: OnboardingFlowScreen should enable Skip button on Location step [E]
+01:29 +564 -16: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_gender_screen_test.dart
+01:31 +564 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_gender_screen_test.dart: OnboardingGenderScreen should display gender selection screen
+01:32 +565 -16: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_location_screen_test.dart
+01:33 +565 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_location_screen_test.dart: OnboardingLocationScreen should display location permission screen
+01:34 +566 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_location_screen_test.dart: OnboardingLocationScreen should display both buttons as enabled
+01:34 +567 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_location_screen_test.dart: OnboardingLocationScreen should update provider with mock_granted when authorize pressed
+01:35 +568 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_location_screen_test.dart: OnboardingLocationScreen should update provider with null when skip pressed
+01:35 +569 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_location_screen_test.dart: OnboardingLocationScreen should show snackbar when authorize is pressed
+01:35 +570 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_location_screen_test.dart: OnboardingLocationScreen should navigate back when back button is pressed
+01:35 +571 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_location_screen_test.dart: OnboardingLocationScreen should have correct button styles
+01:35 +572 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_location_screen_test.dart: OnboardingLocationScreen should display icon with correct size and color
+01:35 +573 -16: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart
+01:37 +573 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should display title "Ton objectif quotidien" (AC #2)
+01:38 +574 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should display calculated hydration goal in liters (AC #2)
+01:38 +575 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should display subtitle "Basé sur ton profil personnel" (AC #2)
+01:38 +576 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should display profile recap with all fields (AC #3)
+01:38 +577 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should display motivational message with avatar icon (AC #4)
+01:38 +578 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should display "C'est parti!" button (AC #5)
+01:38 +579 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should save profile and navigate to home when button is tapped (AC #5, #6)
+01:38 +580 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should show error SnackBar when save fails
+01:39 +581 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should redirect to weight screen if state is incomplete
+01:39 +582 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should display correct goal for female user
+01:39 +583 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should not display location if not provided
+01:39 +584 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should translate all activity levels correctly
+01:39 +585 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_summary_screen_test.dart: OnboardingSummaryScreen should show loading indicator while saving
+01:39 +586 -16: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart
+01:41 +586 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should display all UI components (AC #2, #8)
+01:42 +587 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should default to kg unit (AC #4)
+01:42 +588 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should allow switching to lbs unit (AC #4)
+01:42 +589 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should convert weight when switching units
+01:43 +590 -16: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should accept valid weight in kg (AC #5)
+01:43 +590 -17: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should accept valid weight in kg (AC #5) [E]
+01:43 +590 -17: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should accept minimum valid weight (30kg) (AC #5)
+01:43 +590 -18: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should accept minimum valid weight (30kg) (AC #5) [E]
+01:43 +590 -18: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should accept maximum valid weight (300kg) (AC #5)
+01:43 +590 -19: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should accept maximum valid weight (300kg) (AC #5) [E]
+01:43 +590 -19: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should show error for weight below minimum (AC #5, #6)
+01:43 +591 -19: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should show error for weight above maximum (AC #5, #6)
+01:43 +592 -19: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should show error for empty weight (AC #5, #6)
+01:43 +593 -19: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should show error for invalid format (AC #5, #6)
+01:44 +594 -19: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should validate lbs range (66-661) (AC #5)
+01:44 +595 -19: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should clear error when user starts typing
+01:44 +596 -19: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should use numeric keyboard (AC #3)
+01:44 +597 -19: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should update provider state when valid weight entered
+01:44 +597 -20: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should update provider state when valid weight entered [E]
+01:44 +597 -20: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should convert lbs to kg when updating provider
+01:44 +597 -21: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should convert lbs to kg when updating provider [E]
+01:44 +597 -21: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should pre-fill weight if already set in state
+01:44 +598 -21: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/onboarding/onboarding_weight_screen_test.dart: OnboardingWeightScreen should allow back navigation
+01:44 +599 -21: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart
+01:46 +599 -21: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - UI AC2: affiche 3 options avec labels corrects
+01:47 +600 -21: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - UI AC3: affiche icons proportionnels à la taille
+01:47 +601 -21: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - UI AC4: medium pré-sélectionné par défaut
+01:47 +602 -21: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - UI affiche instructions claires en haut
+01:47 +603 -21: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - Interactions AC5: tap sur option appelle RecordHydrationUseCase
+01:48 +604 -21: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - Interactions AC5: navigation vers HomeScreen après enregistrement
+01:48 +604 -22: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - Interactions AC5: navigation vers HomeScreen après enregistrement [E]
+01:48 +604 -22: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - Interactions AC6: passe le bon glassSize au use case (small)
+01:48 +605 -22: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - Interactions AC6: passe le bon glassSize au use case (medium)
+01:48 +606 -22: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - Interactions affiche loading pendant enregistrement
+01:48 +607 -22: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - Gestion Erreurs affiche erreur si RecordHydrationUseCase échoue
+01:49 +608 -22: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - Gestion Erreurs bouton close désactivé pendant enregistrement
+01:49 +609 -22: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo/glass_size_selection_screen_test.dart: GlassSizeSelectionScreen - Widget Rendering cards ont les bons styles visuels
+01:49 +610 -22: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart
+01:50 +610 -22: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should display loading state initially
+01:51 +610 -23: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should display loading state initially [E]
+01:51 +610 -23: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should attempt to initialize camera when permission granted
+01:51 +610 -24: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should attempt to initialize camera when permission granted [E]
+01:51 +610 -24: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should display permission denied state when denied
+01:51 +610 -25: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should display permission denied state when denied [E]
+01:51 +610 -25: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should display permanently denied state when permanently denied
+01:52 +610 -26: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should display permanently denied state when permanently denied [E]
+01:52 +610 -26: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should display permanently denied state when restricted (iOS)
+01:52 +610 -27: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should display permanently denied state when restricted (iOS) [E]
+01:52 +610 -27: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should navigate back when close button is tapped
+01:52 +610 -28: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should navigate back when close button is tapped [E]
+01:52 +610 -28: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should navigate back when Annuler button is tapped (denied)
+01:52 +610 -29: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should navigate back when Annuler button is tapped (denied) [E]
+01:52 +610 -29: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should call openSettings when Ouvrir Paramètres is tapped
+01:52 +610 -30: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should call openSettings when Ouvrir Paramètres is tapped [E]
+01:52 +610 -30: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should request permission again when Autoriser la caméra is tapped
+01:52 +610 -31: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should request permission again when Autoriser la caméra is tapped [E]
+01:52 +610 -31: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should display AppBar with title and close button
+01:52 +610 -32: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should display AppBar with title and close button [E]
+01:52 +610 -32: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should show error snackbar when openSettings fails
+01:52 +610 -33: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen should show error snackbar when openSettings fails [E]
+01:52 +610 -33: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen - Camera Interface (Story 3.3) should show loading state during camera initialization
+01:52 +610 -34: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen - Camera Interface (Story 3.3) should show loading state during camera initialization [E]
+01:52 +610 -34: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen - Camera Interface (Story 3.3) should display instructions text in camera interface placeholder
+01:52 +610 -35: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen - Camera Interface (Story 3.3) should display instructions text in camera interface placeholder [E]
+01:52 +610 -35: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen - Camera Interface (Story 3.3) should handle camera initialization error gracefully
+01:52 +610 -36: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/screens/photo_validation/photo_validation_screen_test.dart: PhotoValidationScreen - Camera Interface (Story 3.3) should handle camera initialization error gracefully [E]
+01:52 +610 -36: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart
+01:53 +610 -36: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService AC #4 - Timer periodic (30 minutes) start() démarre le timer avec intervalle de 30 minutes
+01:54 +610 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService AC #4 - Timer periodic (30 minutes) start() démarre le timer avec intervalle de 30 minutes [E]
+01:54 +610 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService AC #4 - Timer periodic (30 minutes) start() exécute immédiatement une première mise à jour
+01:54 +611 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService AC #4 - Timer periodic (30 minutes) start() est idempotent (ne crée pas plusieurs timers)
+01:54 +612 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService AC #4 - Timer periodic (30 minutes) Timer s'exécute périodiquement
+01:54 +613 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService AC #8 - Dispose() annule le timer proprement dispose() annule le timer actif
+01:54 +614 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService AC #8 - Dispose() annule le timer proprement dispose() peut être appelé même si le timer n'est pas démarré
+01:54 +615 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService AC #8 - Dispose() annule le timer proprement dispose() peut être appelé plusieurs fois
+01:54 +616 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService AC #8 - Dispose() annule le timer proprement Le service peut être redémarré après dispose()
+01:55 +617 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService AC #6 - Logging des transitions Les transitions d'état sont loggées (via print)
+01:55 +618 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService AC #6 - Logging des transitions Les erreurs sont loggées mais ne font pas crasher le service
+01:55 +619 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService forceUpdate() forceUpdate() exécute immédiatement une mise à jour
+01:55 +620 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService forceUpdate() forceUpdate() peut être appelé sans avoir démarré le timer
+01:55 +621 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService forceUpdate() forceUpdate() gère les erreurs gracieusement
+01:55 +622 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService isRunning getter isRunning retourne false avant start()
+01:55 +623 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService isRunning getter isRunning retourne true après start()
+01:55 +624 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService isRunning getter isRunning retourne false après dispose()
+01:55 +625 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService Intégration avec différents états d'avatar Gère transition vers Fresh
+01:55 +626 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService Intégration avec différents états d'avatar Gère transition vers Tired
+01:55 +627 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService Intégration avec différents états d'avatar Gère transition vers Dehydrated
+01:55 +628 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/services/dehydration_timer_service_test.dart: DehydrationTimerService Intégration avec différents états d'avatar Gère transition vers Dead
+01:55 +629 -37: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart
+01:57 +629 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget should display widget with default size
+01:58 +630 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget should display widget with custom size
+01:58 +631 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Doctor Avatar should display doctor fresh emoji
+01:58 +632 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Doctor Avatar should display doctor tired emoji
+01:58 +633 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Doctor Avatar should display doctor dehydrated emoji
+01:58 +634 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Doctor Avatar should display doctor dead emoji
+01:58 +635 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Doctor Avatar should display doctor ghost emoji
+01:58 +636 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Sports Coach Avatar should display coach fresh emoji
+01:58 +637 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Sports Coach Avatar should display coach tired emoji
+01:58 +638 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Sports Coach Avatar should display coach dehydrated emoji
+01:58 +639 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Sports Coach Avatar should display coach dead emoji
+01:58 +640 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Sports Coach Avatar should display coach ghost emoji
+01:58 +641 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Authoritarian Mother Avatar should display mother fresh emoji
+01:58 +642 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Authoritarian Mother Avatar should display mother tired emoji
+01:58 +643 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Authoritarian Mother Avatar should display mother dehydrated emoji
+01:58 +644 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Authoritarian Mother Avatar should display mother dead emoji
+01:58 +645 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Authoritarian Mother Avatar should display mother ghost emoji
+01:58 +646 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Sarcastic Friend Avatar should display friend fresh emoji
+01:58 +647 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Sarcastic Friend Avatar should display friend tired emoji
+01:58 +648 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Sarcastic Friend Avatar should display friend dehydrated emoji
+01:58 +649 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Sarcastic Friend Avatar should display friend dead emoji
+01:58 +650 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Sarcastic Friend Avatar should display friend ghost emoji
+01:58 +651 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Background Colors should have green background for fresh state
+01:58 +652 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Background Colors should have yellow background for tired state
+01:58 +653 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Background Colors should have orange background for dehydrated state
+01:58 +654 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Background Colors should have red background for dead state
+01:58 +655 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Background Colors should have gray background for ghost state
+01:58 +656 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Background Colors should use custom background color when provided
+01:58 +657 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Visual Properties should have circular shape
+01:58 +658 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Visual Properties should have shadow
+01:58 +659 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Visual Properties should center emoji text
+01:59 +660 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget Visual Properties emoji font size should be 50% of container size
+01:59 +661 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_display_test.dart: AvatarDisplay Widget All 20 Combinations should render all 4 personalities × 5 states
+01:59 +662 -37: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart
+02:00 +662 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Doctor Personality should display fresh message for doctor
+02:01 +663 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Doctor Personality should display tired message for doctor
+02:01 +664 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Doctor Personality should display dehydrated message for doctor
+02:01 +665 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Doctor Personality should display dead message for doctor
+02:01 +666 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Doctor Personality should display ghost message for doctor
+02:01 +667 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Sports Coach Personality should display fresh message for coach
+02:01 +668 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Sports Coach Personality should display tired message for coach (AC #3 example)
+02:01 +669 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Sports Coach Personality should display dehydrated message for coach
+02:01 +670 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Authoritarian Mother Personality should display fresh message for mother
+02:01 +671 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Authoritarian Mother Personality should display dehydrated message for mother (AC #3 example)
+02:01 +672 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Sarcastic Friend Personality should display fresh message for friend
+02:01 +673 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Sarcastic Friend Personality should display dead message for friend (AC #3 example)
+02:01 +674 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Text Styling should use correct font size (16px default)
+02:01 +675 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Text Styling should use custom font size
+02:01 +676 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Text Styling should center text
+02:01 +677 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Text Styling should use medium font weight
+02:01 +678 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Color Coding (AC #3, spec lignes 1253-1258) should use green for fresh state
+02:01 +679 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Color Coding (AC #3, spec lignes 1253-1258) should use orange for tired state
+02:02 +680 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Color Coding (AC #3, spec lignes 1253-1258) should use red for dehydrated state
+02:02 +681 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Color Coding (AC #3, spec lignes 1253-1258) should use red for dead state
+02:02 +682 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/avatar_message_widget_test.dart: AvatarMessageWidget Color Coding (AC #3, spec lignes 1253-1258) should use gray for ghost state
+02:02 +683 -37: loading c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart
+02:03 +683 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should display progress bar with 0% progress
+02:04 +684 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should display progress bar with 50% progress
+02:04 +685 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should display progress bar with 100% progress
+02:04 +686 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should display progress bar with over 100% progress
+02:04 +687 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should display custom height
+02:04 +688 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should handle zero goal volume
+02:04 +689 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should format volume correctly in liters
+02:04 +690 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should have gradient background for fill bar
+02:04 +691 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should have rounded corners (8px radius)
+02:04 +692 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should animate fill smoothly (500ms)
+02:04 +693 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should display gray background (0xFFE0E0E0)
+02:04 +694 -37: c:/Users/hhhh/Desktop/Claude/HydrateOrDie/test/presentation/widgets/hydration_progress_bar_test.dart: HydrationProgressBar should display percentage and volume text
+02:04 +695 -37: Some tests failed.

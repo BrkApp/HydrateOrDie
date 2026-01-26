@@ -7,14 +7,10 @@ void main() {
   group('OnboardingGenderScreen', () {
     testWidgets('should display gender selection screen', (tester) async {
       await tester.pumpWidget(
-        ProviderScope(
-          child: MaterialApp(
-            home: const OnboardingGenderScreen(),
-          ),
-        ),
+        ProviderScope(child: MaterialApp(home: const OnboardingGenderScreen())),
       );
       await tester.pumpAndSettle();
-      
+
       expect(find.text('Sexe biologique'), findsOneWidget);
       expect(find.text('Homme'), findsOneWidget);
       expect(find.text('Femme'), findsOneWidget);

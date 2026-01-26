@@ -14,8 +14,7 @@ void main() {
 
   group('CalculateHydrationGoalUseCase', () {
     group('Base calculation', () {
-      test('should calculate correct goal for 75kg male 30 years sedentary',
-          () {
+      test('should calculate correct goal for 75kg male 30 years sedentary', () {
         // Given
         final user = User(
           id: '1',
@@ -485,44 +484,47 @@ void main() {
         expect(result.targetLiters, 3.4);
       });
 
-      test('should correctly combine all adjustments - older female moderate',
-          () {
-        // Given
-        final user = User(
-          id: '1',
-          weight: 65.0,
-          age: 60,
-          gender: Gender.female,
-          activityLevel: ActivityLevel.moderate,
-          dailyGoal: HydrationGoal(2.0),
-        );
+      test(
+        'should correctly combine all adjustments - older female moderate',
+        () {
+          // Given
+          final user = User(
+            id: '1',
+            weight: 65.0,
+            age: 60,
+            gender: Gender.female,
+            activityLevel: ActivityLevel.moderate,
+            dailyGoal: HydrationGoal(2.0),
+          );
 
-        // When
-        final result = useCase.execute(user);
+          // When
+          final result = useCase.execute(user);
 
-        // Then: 65 × 0.033 × 1.2 × 0.95 × 0.9 = 2.19321 → 2.2L
-        expect(result.targetLiters, 2.2);
-      });
+          // Then: 65 × 0.033 × 1.2 × 0.95 × 0.9 = 2.19321 → 2.2L
+          expect(result.targetLiters, 2.2);
+        },
+      );
 
       test(
-          'should correctly combine all adjustments - middle-aged other extreme activity',
-          () {
-        // Given
-        final user = User(
-          id: '1',
-          weight: 90.0,
-          age: 45,
-          gender: Gender.other,
-          activityLevel: ActivityLevel.extremelyActive,
-          dailyGoal: HydrationGoal(2.0),
-        );
+        'should correctly combine all adjustments - middle-aged other extreme activity',
+        () {
+          // Given
+          final user = User(
+            id: '1',
+            weight: 90.0,
+            age: 45,
+            gender: Gender.other,
+            activityLevel: ActivityLevel.extremelyActive,
+            dailyGoal: HydrationGoal(2.0),
+          );
 
-        // When
-        final result = useCase.execute(user);
+          // When
+          final result = useCase.execute(user);
 
-        // Then: 90 × 0.033 × 1.5 × 1.0 × 0.95 = 4.23225 → 4.2L
-        expect(result.targetLiters, 4.2);
-      });
+          // Then: 90 × 0.033 × 1.5 × 1.0 × 0.95 = 4.23225 → 4.2L
+          expect(result.targetLiters, 4.2);
+        },
+      );
     });
 
     group('Rounding precision', () {

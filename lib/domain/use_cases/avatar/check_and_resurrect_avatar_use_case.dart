@@ -48,8 +48,10 @@ class CheckAndResurrectAvatarUseCase {
       // 2. Vérifier si l'avatar est en état ghost
       if (currentState != AvatarState.ghost) {
         if (kDebugMode) {
-        debugPrint('[CheckAndResurrect] Avatar not ghost (état: $currentState) - Aucune résurrection');
-      }
+          debugPrint(
+            '[CheckAndResurrect] Avatar not ghost (état: $currentState) - Aucune résurrection',
+          );
+        }
         return false;
       }
 
@@ -66,7 +68,9 @@ class CheckAndResurrectAvatarUseCase {
       await _avatarRepository.updateDeathTime(null);
 
       if (kDebugMode) {
-        debugPrint('[CheckAndResurrect] ✨ Résurrection réussie! ghost → fresh (lastDrinkTime: $now)');
+        debugPrint(
+          '[CheckAndResurrect] ✨ Résurrection réussie! ghost → fresh (lastDrinkTime: $now)',
+        );
       }
       return true;
     } catch (e) {

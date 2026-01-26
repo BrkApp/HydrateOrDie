@@ -27,8 +27,7 @@ void main() {
     group('AC #4 - Timer periodic (30 minutes)', () {
       test('start() démarre le timer avec intervalle de 30 minutes', () {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.fresh);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
 
         // Act
         service.start();
@@ -43,8 +42,7 @@ void main() {
 
       test('start() exécute immédiatement une première mise à jour', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.fresh);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
 
         // Act
         service.start();
@@ -58,8 +56,7 @@ void main() {
 
       test('start() est idempotent (ne crée pas plusieurs timers)', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.fresh);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
 
         // Act - Appeler start() deux fois
         service.start();
@@ -73,8 +70,7 @@ void main() {
 
       test('Timer s\'exécute périodiquement', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.fresh);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
 
         // Act
         service.start();
@@ -95,8 +91,7 @@ void main() {
     group('AC #8 - Dispose() annule le timer proprement', () {
       test('dispose() annule le timer actif', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.fresh);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
         service.start();
         await Future.delayed(const Duration(milliseconds: 100));
 
@@ -109,17 +104,18 @@ void main() {
         expect(service.isRunning, false);
       });
 
-      test('dispose() peut être appelé même si le timer n\'est pas démarré',
-          () {
-        // Act & Assert - Ne doit pas crasher
-        expect(() => service.dispose(), returnsNormally);
-        expect(service.isRunning, false);
-      });
+      test(
+        'dispose() peut être appelé même si le timer n\'est pas démarré',
+        () {
+          // Act & Assert - Ne doit pas crasher
+          expect(() => service.dispose(), returnsNormally);
+          expect(service.isRunning, false);
+        },
+      );
 
       test('dispose() peut être appelé plusieurs fois', () {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.fresh);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
         service.start();
 
         // Act & Assert - Ne doit pas crasher
@@ -132,8 +128,7 @@ void main() {
 
       test('Le service peut être redémarré après dispose()', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.fresh);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
 
         // Act - Start, dispose, restart
         service.start();
@@ -152,8 +147,7 @@ void main() {
     group('AC #6 - Logging des transitions', () {
       test('Les transitions d\'état sont loggées (via print)', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.tired);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.tired);
 
         // Act
         service.start();
@@ -163,26 +157,28 @@ void main() {
         verify(mockUseCase.execute()).called(1);
       });
 
-      test('Les erreurs sont loggées mais ne font pas crasher le service',
-          () async {
-        // Arrange
-        when(mockUseCase.execute())
-            .thenThrow(Exception('Database error'));
+      test(
+        'Les erreurs sont loggées mais ne font pas crasher le service',
+        () async {
+          // Arrange
+          when(mockUseCase.execute()).thenThrow(Exception('Database error'));
 
-        // Act - Ne doit pas crasher
-        expect(() => service.start(), returnsNormally);
-        await Future.delayed(const Duration(milliseconds: 100));
+          // Act - Ne doit pas crasher
+          expect(() => service.start(), returnsNormally);
+          await Future.delayed(const Duration(milliseconds: 100));
 
-        // Assert - Le service continue de tourner même après erreur
-        expect(service.isRunning, true);
-      });
+          // Assert - Le service continue de tourner même après erreur
+          expect(service.isRunning, true);
+        },
+      );
     });
 
     group('forceUpdate()', () {
       test('forceUpdate() exécute immédiatement une mise à jour', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.dehydrated);
+        when(
+          mockUseCase.execute(),
+        ).thenAnswer((_) async => AvatarState.dehydrated);
 
         // Act
         await service.forceUpdate();
@@ -191,21 +187,23 @@ void main() {
         verify(mockUseCase.execute()).called(1);
       });
 
-      test('forceUpdate() peut être appelé sans avoir démarré le timer',
-          () async {
-        // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.fresh);
+      test(
+        'forceUpdate() peut être appelé sans avoir démarré le timer',
+        () async {
+          // Arrange
+          when(
+            mockUseCase.execute(),
+          ).thenAnswer((_) async => AvatarState.fresh);
 
-        // Act & Assert - Ne doit pas crasher
-        await expectLater(service.forceUpdate(), completes);
-        verify(mockUseCase.execute()).called(1);
-      });
+          // Act & Assert - Ne doit pas crasher
+          await expectLater(service.forceUpdate(), completes);
+          verify(mockUseCase.execute()).called(1);
+        },
+      );
 
       test('forceUpdate() gère les erreurs gracieusement', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenThrow(Exception('Network error'));
+        when(mockUseCase.execute()).thenThrow(Exception('Network error'));
 
         // Act & Assert - Ne doit pas crasher
         await expectLater(service.forceUpdate(), completes);
@@ -220,8 +218,7 @@ void main() {
 
       test('isRunning retourne true après start()', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.fresh);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
 
         // Act
         service.start();
@@ -233,8 +230,7 @@ void main() {
 
       test('isRunning retourne false après dispose()', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.fresh);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
         service.start();
         await Future.delayed(const Duration(milliseconds: 50));
 
@@ -249,8 +245,7 @@ void main() {
     group('Intégration avec différents états d\'avatar', () {
       test('Gère transition vers Fresh', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.fresh);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
 
         // Act
         await service.forceUpdate();
@@ -261,8 +256,7 @@ void main() {
 
       test('Gère transition vers Tired', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.tired);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.tired);
 
         // Act
         await service.forceUpdate();
@@ -273,8 +267,9 @@ void main() {
 
       test('Gère transition vers Dehydrated', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.dehydrated);
+        when(
+          mockUseCase.execute(),
+        ).thenAnswer((_) async => AvatarState.dehydrated);
 
         // Act
         await service.forceUpdate();
@@ -285,8 +280,7 @@ void main() {
 
       test('Gère transition vers Dead', () async {
         // Arrange
-        when(mockUseCase.execute())
-            .thenAnswer((_) async => AvatarState.dead);
+        when(mockUseCase.execute()).thenAnswer((_) async => AvatarState.dead);
 
         // Act
         await service.forceUpdate();

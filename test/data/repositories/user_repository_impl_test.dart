@@ -38,8 +38,7 @@ void main() {
 
     test('should return null when no profile exists', () async {
       // Arrange
-      when(mockLocalDataSource.getUserProfile())
-          .thenAnswer((_) async => null);
+      when(mockLocalDataSource.getUserProfile()).thenAnswer((_) async => null);
 
       // Act
       final result = await repository.getProfile();
@@ -51,8 +50,9 @@ void main() {
 
     test('should return User entity when profile exists', () async {
       // Arrange
-      when(mockLocalDataSource.getUserProfile())
-          .thenAnswer((_) async => testDto);
+      when(
+        mockLocalDataSource.getUserProfile(),
+      ).thenAnswer((_) async => testDto);
 
       // Act
       final result = await repository.getProfile();
@@ -70,20 +70,19 @@ void main() {
 
     test('should throw StorageException when data source fails', () async {
       // Arrange
-      when(mockLocalDataSource.getUserProfile())
-          .thenThrow(DataSourceException('DB error'));
+      when(
+        mockLocalDataSource.getUserProfile(),
+      ).thenThrow(DataSourceException('DB error'));
 
       // Act & Assert
-      expect(
-        () => repository.getProfile(),
-        throwsA(isA<StorageException>()),
-      );
+      expect(() => repository.getProfile(), throwsA(isA<StorageException>()));
     });
 
     test('should throw StorageException with correct error code', () async {
       // Arrange
-      when(mockLocalDataSource.getUserProfile())
-          .thenThrow(DataSourceException('DB error'));
+      when(
+        mockLocalDataSource.getUserProfile(),
+      ).thenThrow(DataSourceException('DB error'));
 
       // Act & Assert
       try {
@@ -110,8 +109,9 @@ void main() {
 
     test('should save user profile successfully', () async {
       // Arrange
-      when(mockLocalDataSource.saveUserProfile(any))
-          .thenAnswer((_) async => {});
+      when(
+        mockLocalDataSource.saveUserProfile(any),
+      ).thenAnswer((_) async => {});
 
       // Act
       await repository.saveProfile(testUser);
@@ -143,8 +143,9 @@ void main() {
 
     test('should throw StorageException when save fails', () async {
       // Arrange
-      when(mockLocalDataSource.saveUserProfile(any))
-          .thenThrow(DataSourceException('Save failed'));
+      when(
+        mockLocalDataSource.saveUserProfile(any),
+      ).thenThrow(DataSourceException('Save failed'));
 
       // Act & Assert
       expect(
@@ -153,23 +154,26 @@ void main() {
       );
     });
 
-    test('should throw StorageException with correct error code on failure',
-        () async {
-      // Arrange
-      when(mockLocalDataSource.saveUserProfile(any))
-          .thenThrow(DataSourceException('Save failed'));
+    test(
+      'should throw StorageException with correct error code on failure',
+      () async {
+        // Arrange
+        when(
+          mockLocalDataSource.saveUserProfile(any),
+        ).thenThrow(DataSourceException('Save failed'));
 
-      // Act & Assert
-      try {
-        await repository.saveProfile(testUser);
-        fail('Should have thrown StorageException');
-      } catch (e) {
-        expect(e, isA<StorageException>());
-        final exception = e as StorageException;
-        expect(exception.code, equals('SAVE_PROFILE_FAILED'));
-        expect(exception.message, contains('Failed to save user profile'));
-      }
-    });
+        // Act & Assert
+        try {
+          await repository.saveProfile(testUser);
+          fail('Should have thrown StorageException');
+        } catch (e) {
+          expect(e, isA<StorageException>());
+          final exception = e as StorageException;
+          expect(exception.code, equals('SAVE_PROFILE_FAILED'));
+          expect(exception.message, contains('Failed to save user profile'));
+        }
+      },
+    );
   });
 
   group('UserRepositoryImpl - updateProfile', () {
@@ -185,8 +189,9 @@ void main() {
     test('should update profile successfully when profile exists', () async {
       // Arrange
       when(mockLocalDataSource.hasUserProfile()).thenAnswer((_) async => true);
-      when(mockLocalDataSource.updateUserProfile(any))
-          .thenAnswer((_) async => {});
+      when(
+        mockLocalDataSource.updateUserProfile(any),
+      ).thenAnswer((_) async => {});
 
       // Act
       await repository.updateProfile(testUser);
@@ -196,26 +201,29 @@ void main() {
       verify(mockLocalDataSource.updateUserProfile(any)).called(1);
     });
 
-    test('should throw ProfileNotFoundException when profile does not exist',
-        () async {
-      // Arrange
-      when(mockLocalDataSource.hasUserProfile()).thenAnswer((_) async => false);
+    test(
+      'should throw ProfileNotFoundException when profile does not exist',
+      () async {
+        // Arrange
+        when(
+          mockLocalDataSource.hasUserProfile(),
+        ).thenAnswer((_) async => false);
 
-      // Act & Assert
-      expect(
-        () => repository.updateProfile(testUser),
-        throwsA(isA<ProfileNotFoundException>()),
-      );
-      verify(mockLocalDataSource.hasUserProfile()).called(1);
-      verifyNever(mockLocalDataSource.updateUserProfile(any));
-    });
+        // Act & Assert
+        expect(
+          () => repository.updateProfile(testUser),
+          throwsA(isA<ProfileNotFoundException>()),
+        );
+        verify(mockLocalDataSource.hasUserProfile()).called(1);
+        verifyNever(mockLocalDataSource.updateUserProfile(any));
+      },
+    );
 
     test('should convert entity to DTO correctly for update', () async {
       // Arrange
       UserDto? capturedDto;
       when(mockLocalDataSource.hasUserProfile()).thenAnswer((_) async => true);
-      when(mockLocalDataSource.updateUserProfile(any))
-          .thenAnswer((invocation) {
+      when(mockLocalDataSource.updateUserProfile(any)).thenAnswer((invocation) {
         capturedDto = invocation.positionalArguments[0] as UserDto;
         return Future.value();
       });
@@ -236,8 +244,9 @@ void main() {
     test('should throw StorageException when update fails', () async {
       // Arrange
       when(mockLocalDataSource.hasUserProfile()).thenAnswer((_) async => true);
-      when(mockLocalDataSource.updateUserProfile(any))
-          .thenThrow(DataSourceException('Update failed'));
+      when(
+        mockLocalDataSource.updateUserProfile(any),
+      ).thenThrow(DataSourceException('Update failed'));
 
       // Act & Assert
       expect(
@@ -246,24 +255,29 @@ void main() {
       );
     });
 
-    test('should throw StorageException with correct error code on failure',
-        () async {
-      // Arrange
-      when(mockLocalDataSource.hasUserProfile()).thenAnswer((_) async => true);
-      when(mockLocalDataSource.updateUserProfile(any))
-          .thenThrow(DataSourceException('Update failed'));
+    test(
+      'should throw StorageException with correct error code on failure',
+      () async {
+        // Arrange
+        when(
+          mockLocalDataSource.hasUserProfile(),
+        ).thenAnswer((_) async => true);
+        when(
+          mockLocalDataSource.updateUserProfile(any),
+        ).thenThrow(DataSourceException('Update failed'));
 
-      // Act & Assert
-      try {
-        await repository.updateProfile(testUser);
-        fail('Should have thrown StorageException');
-      } catch (e) {
-        expect(e, isA<StorageException>());
-        final exception = e as StorageException;
-        expect(exception.code, equals('UPDATE_PROFILE_FAILED'));
-        expect(exception.message, contains('Failed to update user profile'));
-      }
-    });
+        // Act & Assert
+        try {
+          await repository.updateProfile(testUser);
+          fail('Should have thrown StorageException');
+        } catch (e) {
+          expect(e, isA<StorageException>());
+          final exception = e as StorageException;
+          expect(exception.code, equals('UPDATE_PROFILE_FAILED'));
+          expect(exception.message, contains('Failed to update user profile'));
+        }
+      },
+    );
 
     test('should rethrow ProfileNotFoundException without wrapping', () async {
       // Arrange
@@ -283,8 +297,7 @@ void main() {
   group('UserRepositoryImpl - deleteProfile', () {
     test('should delete profile successfully', () async {
       // Arrange
-      when(mockLocalDataSource.deleteUserProfile())
-          .thenAnswer((_) async => {});
+      when(mockLocalDataSource.deleteUserProfile()).thenAnswer((_) async => {});
 
       // Act
       await repository.deleteProfile();
@@ -295,8 +308,9 @@ void main() {
 
     test('should throw StorageException when delete fails', () async {
       // Arrange
-      when(mockLocalDataSource.deleteUserProfile())
-          .thenThrow(DataSourceException('Delete failed'));
+      when(
+        mockLocalDataSource.deleteUserProfile(),
+      ).thenThrow(DataSourceException('Delete failed'));
 
       // Act & Assert
       expect(
@@ -305,23 +319,26 @@ void main() {
       );
     });
 
-    test('should throw StorageException with correct error code on failure',
-        () async {
-      // Arrange
-      when(mockLocalDataSource.deleteUserProfile())
-          .thenThrow(DataSourceException('Delete failed'));
+    test(
+      'should throw StorageException with correct error code on failure',
+      () async {
+        // Arrange
+        when(
+          mockLocalDataSource.deleteUserProfile(),
+        ).thenThrow(DataSourceException('Delete failed'));
 
-      // Act & Assert
-      try {
-        await repository.deleteProfile();
-        fail('Should have thrown StorageException');
-      } catch (e) {
-        expect(e, isA<StorageException>());
-        final exception = e as StorageException;
-        expect(exception.code, equals('DELETE_PROFILE_FAILED'));
-        expect(exception.message, contains('Failed to delete user profile'));
-      }
-    });
+        // Act & Assert
+        try {
+          await repository.deleteProfile();
+          fail('Should have thrown StorageException');
+        } catch (e) {
+          expect(e, isA<StorageException>());
+          final exception = e as StorageException;
+          expect(exception.code, equals('DELETE_PROFILE_FAILED'));
+          expect(exception.message, contains('Failed to delete user profile'));
+        }
+      },
+    );
   });
 
   group('UserRepositoryImpl - hasProfile', () {
@@ -351,33 +368,36 @@ void main() {
 
     test('should throw StorageException when check fails', () async {
       // Arrange
-      when(mockLocalDataSource.hasUserProfile())
-          .thenThrow(DataSourceException('Check failed'));
+      when(
+        mockLocalDataSource.hasUserProfile(),
+      ).thenThrow(DataSourceException('Check failed'));
 
       // Act & Assert
-      expect(
-        () => repository.hasProfile(),
-        throwsA(isA<StorageException>()),
-      );
+      expect(() => repository.hasProfile(), throwsA(isA<StorageException>()));
     });
 
-    test('should throw StorageException with correct error code on failure',
-        () async {
-      // Arrange
-      when(mockLocalDataSource.hasUserProfile())
-          .thenThrow(DataSourceException('Check failed'));
+    test(
+      'should throw StorageException with correct error code on failure',
+      () async {
+        // Arrange
+        when(
+          mockLocalDataSource.hasUserProfile(),
+        ).thenThrow(DataSourceException('Check failed'));
 
-      // Act & Assert
-      try {
-        await repository.hasProfile();
-        fail('Should have thrown StorageException');
-      } catch (e) {
-        expect(e, isA<StorageException>());
-        final exception = e as StorageException;
-        expect(exception.code, equals('HAS_PROFILE_FAILED'));
-        expect(
-            exception.message, contains('Failed to check profile existence'));
-      }
-    });
+        // Act & Assert
+        try {
+          await repository.hasProfile();
+          fail('Should have thrown StorageException');
+        } catch (e) {
+          expect(e, isA<StorageException>());
+          final exception = e as StorageException;
+          expect(exception.code, equals('HAS_PROFILE_FAILED'));
+          expect(
+            exception.message,
+            contains('Failed to check profile existence'),
+          );
+        }
+      },
+    );
   });
 }

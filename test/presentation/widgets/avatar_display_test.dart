@@ -12,10 +12,7 @@ void main() {
       return ProviderScope(
         child: MaterialApp(
           home: Scaffold(
-            body: AvatarDisplay(
-              personality: personality,
-              state: state,
-            ),
+            body: AvatarDisplay(personality: personality, state: state),
           ),
         ),
       );
@@ -27,9 +24,7 @@ void main() {
       );
 
       // Find container with default size
-      final container = tester.widget<Container>(
-        find.byType(Container).first,
-      );
+      final container = tester.widget<Container>(find.byType(Container).first);
 
       expect(container.constraints?.maxWidth, 150.0);
       expect(container.constraints?.maxHeight, 150.0);
@@ -50,9 +45,7 @@ void main() {
         ),
       );
 
-      final container = tester.widget<Container>(
-        find.byType(Container).first,
-      );
+      final container = tester.widget<Container>(find.byType(Container).first);
 
       expect(container.constraints?.maxWidth, 200.0);
       expect(container.constraints?.maxHeight, 200.0);
@@ -159,19 +152,16 @@ void main() {
         expect(find.text('👩😐'), findsOneWidget);
       });
 
-      testWidgets(
-        'should display mother dehydrated emoji',
-        (tester) async {
-          await tester.pumpWidget(
-            buildWidget(
-              AvatarPersonality.authoritarianMother,
-              AvatarState.dehydrated,
-            ),
-          );
+      testWidgets('should display mother dehydrated emoji', (tester) async {
+        await tester.pumpWidget(
+          buildWidget(
+            AvatarPersonality.authoritarianMother,
+            AvatarState.dehydrated,
+          ),
+        );
 
-          expect(find.text('👩😟'), findsOneWidget);
-        },
-      );
+        expect(find.text('👩😟'), findsOneWidget);
+      });
 
       testWidgets('should display mother dead emoji', (tester) async {
         await tester.pumpWidget(
@@ -236,8 +226,9 @@ void main() {
     });
 
     group('Background Colors', () {
-      testWidgets('should have green background for fresh state',
-          (tester) async {
+      testWidgets('should have green background for fresh state', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           buildWidget(AvatarPersonality.doctor, AvatarState.fresh),
         );
@@ -250,8 +241,9 @@ void main() {
         expect(decoration.color, const Color(0xFFE8F5E9)); // Light green
       });
 
-      testWidgets('should have yellow background for tired state',
-          (tester) async {
+      testWidgets('should have yellow background for tired state', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           buildWidget(AvatarPersonality.doctor, AvatarState.tired),
         );
@@ -264,8 +256,9 @@ void main() {
         expect(decoration.color, const Color(0xFFFFF9C4)); // Light yellow
       });
 
-      testWidgets('should have orange background for dehydrated state',
-          (tester) async {
+      testWidgets('should have orange background for dehydrated state', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           buildWidget(AvatarPersonality.doctor, AvatarState.dehydrated),
         );
@@ -291,8 +284,9 @@ void main() {
         expect(decoration.color, const Color(0xFFFFCDD2)); // Light red
       });
 
-      testWidgets('should have gray background for ghost state',
-          (tester) async {
+      testWidgets('should have gray background for ghost state', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           buildWidget(AvatarPersonality.doctor, AvatarState.ghost),
         );
@@ -305,8 +299,9 @@ void main() {
         expect(decoration.color, const Color(0xFFEEEEEE)); // Light gray
       });
 
-      testWidgets('should use custom background color when provided',
-          (tester) async {
+      testWidgets('should use custom background color when provided', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           ProviderScope(
             child: MaterialApp(
@@ -369,8 +364,9 @@ void main() {
         expect(text.textAlign, TextAlign.center);
       });
 
-      testWidgets('emoji font size should be 50% of container size',
-          (tester) async {
+      testWidgets('emoji font size should be 50% of container size', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           ProviderScope(
             child: MaterialApp(
@@ -392,8 +388,9 @@ void main() {
     });
 
     group('All 20 Combinations', () {
-      testWidgets('should render all 4 personalities × 5 states',
-          (tester) async {
+      testWidgets('should render all 4 personalities × 5 states', (
+        tester,
+      ) async {
         // Test all 20 combinations systematically
         final combinations = <String, dynamic>{};
 

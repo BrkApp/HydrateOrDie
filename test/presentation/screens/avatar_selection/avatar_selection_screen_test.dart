@@ -43,9 +43,7 @@ void main() {
     return ProviderScope(
       child: MaterialApp(
         home: const AvatarSelectionScreen(),
-        routes: {
-          '/home': (_) => const Scaffold(body: Text('Home Screen')),
-        },
+        routes: {'/home': (_) => const Scaffold(body: Text('Home Screen'))},
       ),
     );
   }
@@ -67,8 +65,9 @@ void main() {
       expect(find.textContaining('coach sportif'), findsWidgets);
     });
 
-    testWidgets('AC #3 - Each avatar shows name and description',
-        (tester) async {
+    testWidgets('AC #3 - Each avatar shows name and description', (
+      tester,
+    ) async {
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
 
@@ -77,8 +76,9 @@ void main() {
       expect(find.textContaining('coach sportif'), findsOneWidget);
     });
 
-    testWidgets('AC #4 - Tapping avatar should update selection',
-        (tester) async {
+    testWidgets('AC #4 - Tapping avatar should update selection', (
+      tester,
+    ) async {
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
 
@@ -99,8 +99,9 @@ void main() {
       expect(button.onPressed, isNotNull);
     });
 
-    testWidgets('AC #5 - Confirm button disabled when no selection',
-        (tester) async {
+    testWidgets('AC #5 - Confirm button disabled when no selection', (
+      tester,
+    ) async {
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
 
@@ -113,8 +114,9 @@ void main() {
       expect(button.onPressed, isNull);
     });
 
-    testWidgets('AC #5 - Confirm button enabled after selection',
-        (tester) async {
+    testWidgets('AC #5 - Confirm button enabled after selection', (
+      tester,
+    ) async {
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
 
@@ -131,14 +133,15 @@ void main() {
       expect(button.onPressed, isNotNull);
     });
 
-    testWidgets('AC #6 - Confirming should save and navigate to home',
-        (tester) async {
-      when(mockRepository.saveSelectedAvatar(any))
-          .thenAnswer((_) async => Future.value());
+    testWidgets('AC #6 - Confirming should save and navigate to home', (
+      tester,
+    ) async {
+      when(
+        mockRepository.saveSelectedAvatar(any),
+      ).thenAnswer((_) async => Future.value());
 
       // Mock getAvatar() pour retourner null (vérification après sauvegarde sera gérée)
-      when(mockRepository.getAvatar())
-          .thenAnswer((_) async => null);
+      when(mockRepository.getAvatar()).thenAnswer((_) async => null);
 
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
@@ -161,8 +164,9 @@ void main() {
       expect(find.text('Home Screen'), findsOneWidget);
     });
 
-    testWidgets('AC #8 - Only one avatar can be selected at a time',
-        (tester) async {
+    testWidgets('AC #8 - Only one avatar can be selected at a time', (
+      tester,
+    ) async {
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
 
@@ -196,16 +200,20 @@ void main() {
 
       // Vérifie instructions
       expect(
-          find.text('Sélectionne ton compagnon d\'hydratation'), findsOneWidget);
-      expect(find.text('Il te motivera (ou punira) tous les jours'),
-          findsOneWidget);
+        find.text('Sélectionne ton compagnon d\'hydratation'),
+        findsOneWidget,
+      );
+      expect(
+        find.text('Il te motivera (ou punira) tous les jours'),
+        findsOneWidget,
+      );
     });
 
     testWidgets('Should save correct avatar ID for doctor', (tester) async {
-      when(mockRepository.saveSelectedAvatar(any))
-          .thenAnswer((_) async => Future.value());
-      when(mockRepository.getAvatar())
-          .thenAnswer((_) async => null);
+      when(
+        mockRepository.saveSelectedAvatar(any),
+      ).thenAnswer((_) async => Future.value());
+      when(mockRepository.getAvatar()).thenAnswer((_) async => null);
 
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
@@ -220,10 +228,10 @@ void main() {
     });
 
     testWidgets('Should save correct avatar ID for coach', (tester) async {
-      when(mockRepository.saveSelectedAvatar(any))
-          .thenAnswer((_) async => Future.value());
-      when(mockRepository.getAvatar())
-          .thenAnswer((_) async => null);
+      when(
+        mockRepository.saveSelectedAvatar(any),
+      ).thenAnswer((_) async => Future.value());
+      when(mockRepository.getAvatar()).thenAnswer((_) async => null);
 
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
@@ -238,8 +246,9 @@ void main() {
     });
 
     testWidgets('Should not navigate if save fails', (tester) async {
-      when(mockRepository.saveSelectedAvatar(any))
-          .thenThrow(Exception('Save failed'));
+      when(
+        mockRepository.saveSelectedAvatar(any),
+      ).thenThrow(Exception('Save failed'));
 
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();

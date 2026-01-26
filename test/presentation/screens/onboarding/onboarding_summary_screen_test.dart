@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hydrate_or_die/core/di/injection.dart';
 import 'package:hydrate_or_die/domain/entities/activity_level.dart';
+import 'package:hydrate_or_die/domain/entities/avatar_personality.dart';
 import 'package:hydrate_or_die/domain/entities/gender.dart';
 import 'package:hydrate_or_die/domain/repositories/user_repository.dart';
 import 'package:hydrate_or_die/domain/use_cases/user/calculate_hydration_goal_use_case.dart';
@@ -45,17 +46,15 @@ void main() {
       overrides: [
         if (initialState != null)
           onboardingProvider.overrideWith(
-            (ref) => OnboardingNotifier()
-              ..state = initialState,
+            (ref) => OnboardingNotifier()..state = initialState,
           ),
       ],
-      child: const MaterialApp(
-        home: OnboardingSummaryScreen(),
-      ),
+      child: const MaterialApp(home: OnboardingSummaryScreen()),
     );
   }
 
   OnboardingState createValidState({
+    AvatarPersonality selectedAvatar = AvatarPersonality.doctor,
     double weight = 75.0,
     int age = 30,
     Gender gender = Gender.male,
@@ -63,19 +62,21 @@ void main() {
     String? location,
   }) {
     return OnboardingState(
+      selectedAvatar: selectedAvatar,
       weight: weight,
       age: age,
       gender: gender,
       activityLevel: activityLevel,
       location: location,
-      currentStep: 5,
+      currentStep: 6,
       isComplete: false,
     );
   }
 
   group('OnboardingSummaryScreen', () {
-    testWidgets('should display title "Ton objectif quotidien" (AC #2)',
-        (tester) async {
+    testWidgets('should display title "Ton objectif quotidien" (AC #2)', (
+      tester,
+    ) async {
       // Arrange
       final state = createValidState();
 
@@ -87,8 +88,9 @@ void main() {
       expect(find.text('Ton objectif quotidien'), findsOneWidget);
     });
 
-    testWidgets('should display calculated hydration goal in liters (AC #2)',
-        (tester) async {
+    testWidgets('should display calculated hydration goal in liters (AC #2)', (
+      tester,
+    ) async {
       // Arrange - 75kg male, 30 years, sedentary
       // Expected: 75 * 0.033 * 1.0 (activity) * 1.0 (gender) * 1.0 (age) = 2.5L
       final state = createValidState();
@@ -101,21 +103,24 @@ void main() {
       expect(find.textContaining('2.5 L'), findsOneWidget);
     });
 
-    testWidgets('should display subtitle "Basé sur ton profil personnel" (AC #2)',
-        (tester) async {
-      // Arrange
-      final state = createValidState();
+    testWidgets(
+      'should display subtitle "Basé sur ton profil personnel" (AC #2)',
+      (tester) async {
+        // Arrange
+        final state = createValidState();
 
-      // Act
-      await tester.pumpWidget(createSummaryScreen(initialState: state));
-      await tester.pumpAndSettle();
+        // Act
+        await tester.pumpWidget(createSummaryScreen(initialState: state));
+        await tester.pumpAndSettle();
 
-      // Assert
-      expect(find.text('Basé sur ton profil personnel'), findsOneWidget);
-    });
+        // Assert
+        expect(find.text('Basé sur ton profil personnel'), findsOneWidget);
+      },
+    );
 
-    testWidgets('should display profile recap with all fields (AC #3)',
-        (tester) async {
+    testWidgets('should display profile recap with all fields (AC #3)', (
+      tester,
+    ) async {
       // Arrange
       final state = createValidState(
         weight: 75.0,
@@ -148,26 +153,30 @@ void main() {
       expect(find.textContaining('France'), findsOneWidget);
     });
 
-    testWidgets('should display motivational message with avatar icon (AC #4)',
-        (tester) async {
-      // Arrange
-      final state = createValidState();
+    testWidgets(
+      'should display motivational message with avatar icon (AC #4)',
+      (tester) async {
+        // Arrange
+        final state = createValidState();
 
-      // Act
-      await tester.pumpWidget(createSummaryScreen(initialState: state));
-      await tester.pumpAndSettle();
+        // Act
+        await tester.pumpWidget(createSummaryScreen(initialState: state));
+        await tester.pumpAndSettle();
 
-      // Assert - Motivational message
-      expect(
-        find.textContaining('Prêt à commencer ton challenge hydratation'),
-        findsOneWidget,
-      );
+        // Assert - Motivational message
+        expect(
+          find.textContaining('Prêt à commencer ton challenge hydratation'),
+          findsOneWidget,
+        );
 
-      // Assert - Avatar icon (💧 emoji)
-      expect(find.text('💧'), findsOneWidget);
-    });
+        // Assert - Avatar icon (💧 emoji)
+        expect(find.text('💧'), findsOneWidget);
+      },
+    );
 
-    testWidgets('should display "C\'est parti!" button (AC #5)', (tester) async {
+    testWidgets('should display "C\'est parti!" button (AC #5)', (
+      tester,
+    ) async {
       // Arrange
       final state = createValidState();
 
@@ -181,50 +190,50 @@ void main() {
     });
 
     testWidgets(
-        'should save profile and navigate to home when button is tapped (AC #5, #6)',
-        (tester) async {
-      // Arrange
-      final state = createValidState();
-      when(mockUserRepository.saveProfile(any))
-          .thenAnswer((_) async => {});
+      'should save profile and navigate to home when button is tapped (AC #5, #6)',
+      (tester) async {
+        // Arrange
+        final state = createValidState();
+        when(mockUserRepository.saveProfile(any)).thenAnswer((_) async => {});
 
-      // Act
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            onboardingProvider.overrideWith(
-              (ref) => OnboardingNotifier()
-                ..state = state,
+        // Act
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              onboardingProvider.overrideWith(
+                (ref) => OnboardingNotifier()..state = state,
+              ),
+            ],
+            child: MaterialApp(
+              home: const OnboardingSummaryScreen(),
+              routes: {
+                '/home': (_) => const Scaffold(body: Text('Home Screen')),
+              },
             ),
-          ],
-          child: MaterialApp(
-            home: const OnboardingSummaryScreen(),
-            routes: {
-              '/home': (_) => const Scaffold(body: Text('Home Screen')),
-            },
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Act - Scroll to button and tap
-      await tester.ensureVisible(find.text('C\'est parti !'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('C\'est parti !'));
-      await tester.pumpAndSettle();
+        // Act - Scroll to button and tap
+        await tester.ensureVisible(find.text('C\'est parti !'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('C\'est parti !'));
+        await tester.pumpAndSettle();
 
-      // Assert - saveProfile was called
-      verify(mockUserRepository.saveProfile(any)).called(1);
+        // Assert - saveProfile was called
+        verify(mockUserRepository.saveProfile(any)).called(1);
 
-      // Assert - Navigation to /home occurred
-      expect(find.text('Home Screen'), findsOneWidget);
-    });
+        // Assert - Navigation to /home occurred
+        expect(find.text('Home Screen'), findsOneWidget);
+      },
+    );
 
     testWidgets('should show error SnackBar when save fails', (tester) async {
       // Arrange
       final state = createValidState();
-      when(mockUserRepository.saveProfile(any))
-          .thenThrow(Exception('Database error'));
+      when(
+        mockUserRepository.saveProfile(any),
+      ).thenThrow(Exception('Database error'));
 
       // Act
       await tester.pumpWidget(createSummaryScreen(initialState: state));
@@ -246,8 +255,9 @@ void main() {
       );
     });
 
-    testWidgets('should redirect to weight screen if state is incomplete',
-        (tester) async {
+    testWidgets('should redirect to weight screen if state is incomplete', (
+      tester,
+    ) async {
       // Arrange - Incomplete state (missing weight)
       final state = const OnboardingState(
         weight: null,
@@ -261,8 +271,7 @@ void main() {
         ProviderScope(
           overrides: [
             onboardingProvider.overrideWith(
-              (ref) => OnboardingNotifier()
-                ..state = state,
+              (ref) => OnboardingNotifier()..state = state,
             ),
           ],
           child: MaterialApp(
@@ -313,7 +322,9 @@ void main() {
       expect(find.textContaining('Localisation'), findsNothing);
     });
 
-    testWidgets('should translate all activity levels correctly', (tester) async {
+    testWidgets('should translate all activity levels correctly', (
+      tester,
+    ) async {
       // Test each activity level translation
       final activityTests = {
         ActivityLevel.sedentary: 'Sédentaire',
@@ -339,8 +350,7 @@ void main() {
     testWidgets('should show loading indicator while saving', (tester) async {
       // Arrange
       final state = createValidState();
-      when(mockUserRepository.saveProfile(any))
-          .thenAnswer((_) async {
+      when(mockUserRepository.saveProfile(any)).thenAnswer((_) async {
         await Future.delayed(const Duration(milliseconds: 500));
       });
 

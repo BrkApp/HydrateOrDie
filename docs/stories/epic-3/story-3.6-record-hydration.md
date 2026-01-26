@@ -18,15 +18,19 @@
 
 ## Acceptance Criteria
 
-1. Après confirmation photo, le use case `RecordHydrationUseCase` crée un `HydrationLog` avec timestamp actuel et photoPath
+1. Après sélection taille verre (Story 3.9 terminée), le use case `RecordHydrationUseCase` est appelé avec params: `photoPath` (String), `glassSize` (GlassSize enum)
+   - Le use case crée un `HydrationLog` avec timestamp actuel (`DateTime.now()`), photoPath, glassSize, validated = true
+   - Trigger exact: Navigation depuis `GlassSizeSelectionScreen` après tap sur option verre
 2. Le log est sauvegardé via `HydrationLogRepository.addLog()`
-3. Le `lastDrinkTime` de l'avatar est mis à jour via `AvatarRepository` (réinitialise le timer de déshydratation)
-4. L'état de l'avatar est immédiatement recalculé et retourne à `fresh` si déshydraté
-5. Le volume total du jour est recalculé via `getTotalVolumeForDate(today)`
-6. La progression vers l'objectif est calculée : `(volumeToday / dailyGoal) × 100%`
-7. Une analytics event est loggée : `hydration_validated` avec propriétés (timestamp, glassSize)
-8. Tests unitaires valident la séquence complète : save log → update avatar → recalcul progression
-9. Test d'intégration valide le flow end-to-end avec persistence réelle
+3. Le `lastDrinkTime` de l'avatar est mis à jour via `AvatarRepository.updateLastDrinkTime(DateTime.now())` (réinitialise le timer de déshydratation)
+4. L'état de l'avatar est immédiatement recalculé via `AvatarStateManager.recalculateState()` et retourne à `fresh` si déshydraté
+5. Le volume total du jour est recalculé via `HydrationLogRepository.getTotalVolumeForDate(DateTime.now())`
+6. La progression vers l'objectif est calculée : `(volumeToday / user.dailyGoal) × 100%` (plafonné à 100%)
+7. Une analytics event est loggée `hydration_validated` avec propriétés (timestamp, glassSize) SI Firebase Analytics disponible, sinon skip silencieusement (pas d'erreur)
+   - Implémentation: Wrapper try-catch autour `FirebaseAnalytics.logEvent()`, ignorer exception si Firebase mock/indisponible
+   - Log debug si skip: "Analytics skipped - Firebase not available"
+8. Tests unitaires valident la séquence complète : save log → update avatar → recalcul progression (avec mocks pour tous repositories)
+9. Test d'intégration valide le flow end-to-end avec persistence réelle (SQLite + SharedPreferences)
 
 ---
 
@@ -42,6 +46,7 @@
 ## Dependencies
 
 - Story 3.2 (HydrationLog repository) doit être complétée
+- Story 3.9 (Glass size selection) doit être complétée (fournit glassSize parameter)
 - Story 1.3 (Avatar repository) doit être complétée
 - Story 1.5 (Dehydration logic) doit être complétée
 

@@ -21,91 +21,99 @@ void main() {
       await userRepo.deleteProfile();
     });
 
-    testWidgets('Complete onboarding flow: new user → finish onboarding → home', (tester) async {
-      // Start app
-      app.main();
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+    testWidgets(
+      'Complete onboarding flow: new user → finish onboarding → home',
+      (tester) async {
+        // Start app
+        app.main();
+        await tester.pumpAndSettle(const Duration(seconds: 2));
 
-      // Should detect no user profile and navigate to onboarding
-      expect(find.text('Quel est ton poids ?'), findsOneWidget);
-      expect(find.text('Étape 1/6'), findsOneWidget);
+        // Should detect no user profile and navigate to onboarding
+        expect(find.text('Quel est ton poids ?'), findsOneWidget);
+        expect(find.text('Étape 1/6'), findsOneWidget);
 
-      // Step 1: Enter weight
-      final weightField = find.byType(TextField);
-      expect(weightField, findsOneWidget);
+        // Step 1: Enter weight
+        final weightField = find.byType(TextField);
+        expect(weightField, findsOneWidget);
 
-      await tester.enterText(weightField, '70');
-      await tester.pumpAndSettle();
+        await tester.enterText(weightField, '70');
+        await tester.pumpAndSettle();
 
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
+        await tester.pumpAndSettle();
 
-      // Step 2: Enter age
-      expect(find.text('Quel âge as-tu ?'), findsOneWidget);
-      expect(find.text('Étape 2/6'), findsOneWidget);
+        // Step 2: Enter age
+        expect(find.text('Quel âge as-tu ?'), findsOneWidget);
+        expect(find.text('Étape 2/6'), findsOneWidget);
 
-      final ageField = find.byType(TextField);
-      await tester.enterText(ageField, '30');
-      await tester.pumpAndSettle();
+        final ageField = find.byType(TextField);
+        await tester.enterText(ageField, '30');
+        await tester.pumpAndSettle();
 
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
+        await tester.pumpAndSettle();
 
-      // Step 3: Select gender
-      expect(find.text('Étape 3/6'), findsOneWidget);
+        // Step 3: Select gender
+        expect(find.text('Étape 3/6'), findsOneWidget);
 
-      // Tap Male button
-      final maleButton = find.widgetWithText(ElevatedButton, 'Homme');
-      await tester.tap(maleButton);
-      await tester.pumpAndSettle();
+        // Tap Male button
+        final maleButton = find.widgetWithText(ElevatedButton, 'Homme');
+        await tester.tap(maleButton);
+        await tester.pumpAndSettle();
 
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
+        await tester.pumpAndSettle();
 
-      // Step 4: Select activity level
-      expect(find.text('Étape 4/6'), findsOneWidget);
+        // Step 4: Select activity level
+        expect(find.text('Étape 4/6'), findsOneWidget);
 
-      // Tap Moderate activity
-      final moderateButton = find.text('Modérément actif');
-      await tester.tap(moderateButton);
-      await tester.pumpAndSettle();
+        // Tap Moderate activity
+        final moderateButton = find.text('Modérément actif');
+        await tester.tap(moderateButton);
+        await tester.pumpAndSettle();
 
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
+        await tester.pumpAndSettle();
 
-      // Step 5: Location (skip it)
-      expect(find.text('Étape 5/6'), findsOneWidget);
+        // Step 5: Location (skip it)
+        expect(find.text('Étape 5/6'), findsOneWidget);
 
-      await tester.tap(find.text('Passer cette étape'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.text('Passer cette étape'));
+        await tester.pumpAndSettle();
 
-      // Step 6: Summary screen
-      expect(find.text('Ton objectif quotidien'), findsOneWidget);
-      expect(find.text('Étape 6/6'), findsOneWidget);
+        // Step 6: Summary screen
+        expect(find.text('Ton objectif quotidien'), findsOneWidget);
+        expect(find.text('Étape 6/6'), findsOneWidget);
 
-      // Should show calculated goal
-      expect(find.textContaining('L'), findsWidgets);
+        // Should show calculated goal
+        expect(find.textContaining('L'), findsWidgets);
 
-      // Tap "C'est parti!" button
-      final startButton = find.widgetWithText(ElevatedButton, 'C\'est parti !');
-      await tester.tap(startButton);
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+        // Tap "C'est parti!" button
+        final startButton = find.widgetWithText(
+          ElevatedButton,
+          'C\'est parti !',
+        );
+        await tester.tap(startButton);
+        await tester.pumpAndSettle(const Duration(seconds: 2));
 
-      // Should navigate to Home screen
-      expect(find.text('Hydrate or Die'), findsOneWidget);
-      expect(find.byIcon(Icons.water_drop), findsWidgets);
+        // Should navigate to Home screen
+        expect(find.text('Hydrate or Die'), findsOneWidget);
+        expect(find.byIcon(Icons.water_drop), findsWidgets);
 
-      // Verify profile was saved
-      final userRepo = getIt<UserRepository>();
-      final savedProfile = await userRepo.getProfile();
-      expect(savedProfile, isNotNull);
-      expect(savedProfile!.weight, 70.0);
-      expect(savedProfile.age, 30);
-      expect(savedProfile.gender, Gender.male);
-      expect(savedProfile.activityLevel, ActivityLevel.moderate);
-    });
+        // Verify profile was saved
+        final userRepo = getIt<UserRepository>();
+        final savedProfile = await userRepo.getProfile();
+        expect(savedProfile, isNotNull);
+        expect(savedProfile!.weight, 70.0);
+        expect(savedProfile.age, 30);
+        expect(savedProfile.gender, Gender.male);
+        expect(savedProfile.activityLevel, ActivityLevel.moderate);
+      },
+    );
 
-    testWidgets('Existing user should skip onboarding and go to home', (tester) async {
+    testWidgets('Existing user should skip onboarding and go to home', (
+      tester,
+    ) async {
       // Create user profile first
       final userRepo = getIt<UserRepository>();
       await userRepo.saveProfile(
@@ -126,11 +134,16 @@ void main() {
       // Should skip onboarding and go to Home
       // (Note: Might go to avatar selection if no avatar selected - Epic 1)
       // For this test, we assume either Home or Avatar Selection is shown
-      final onboardingNotFound = find.text('Quel est ton poids ?').evaluate().isEmpty;
+      final onboardingNotFound = find
+          .text('Quel est ton poids ?')
+          .evaluate()
+          .isEmpty;
       expect(onboardingNotFound, isTrue);
     });
 
-    testWidgets('Navigation back/forward through onboarding works correctly', (tester) async {
+    testWidgets('Navigation back/forward through onboarding works correctly', (
+      tester,
+    ) async {
       app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
@@ -163,7 +176,9 @@ void main() {
       expect(find.text('Étape 2/6'), findsOneWidget);
     });
 
-    testWidgets('Skip location should work and proceed to summary', (tester) async {
+    testWidgets('Skip location should work and proceed to summary', (
+      tester,
+    ) async {
       app.main();
       await tester.pumpAndSettle(const Duration(seconds: 2));
 

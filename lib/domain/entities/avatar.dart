@@ -90,13 +90,13 @@ class Avatar extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        name,
-        personality,
-        currentState,
-        lastDrinkTime,
-        lastUpdated,
-      ];
+    id,
+    name,
+    personality,
+    currentState,
+    lastDrinkTime,
+    lastUpdated,
+  ];
 
   @override
   String toString() {

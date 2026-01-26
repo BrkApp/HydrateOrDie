@@ -12,17 +12,11 @@ void main() {
       });
 
       test('should return correct display name for sportsCoach', () {
-        expect(
-          AvatarPersonality.sportsCoach.displayName,
-          'Coach Sportif',
-        );
+        expect(AvatarPersonality.sportsCoach.displayName, 'Coach Sportif');
       });
 
       test('should return correct display name for doctor', () {
-        expect(
-          AvatarPersonality.doctor.displayName,
-          'Docteur',
-        );
+        expect(AvatarPersonality.doctor.displayName, 'Docteur');
       });
 
       test('should return correct display name for sarcasticFriend', () {

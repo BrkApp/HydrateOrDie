@@ -30,7 +30,8 @@ class EmbeddedOnboardingContext extends InheritedWidget {
 
   /// Get the nearest EmbeddedOnboardingContext from the widget tree
   static EmbeddedOnboardingContext? maybeOf(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<EmbeddedOnboardingContext>();
+    return context
+        .dependOnInheritedWidgetOfExactType<EmbeddedOnboardingContext>();
   }
 
   /// Get the nearest EmbeddedOnboardingContext, or return default (not embedded)
