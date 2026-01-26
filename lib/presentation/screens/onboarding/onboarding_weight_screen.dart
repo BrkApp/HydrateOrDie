@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hydrate_or_die/presentation/providers/onboarding_provider.dart';
+import 'package:hydrate_or_die/presentation/widgets/embedded_onboarding_context.dart';
 
 /// Onboarding Screen - Step 1: Weight Input
 ///
@@ -145,7 +146,134 @@ class _OnboardingWeightScreenState
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final embeddedContext = EmbeddedOnboardingContext.of(context);
+    final isEmbedded = embeddedContext.isEmbedded;
 
+    // Build the main content
+    final content = Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Progress indicator
+          Text(
+            'Étape 1 sur 5',
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 32),
+
+          // Title
+          Text(
+            'Quel est ton poids ?',
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+
+          // Subtitle
+          Text(
+            'Nécessaire pour calculer ton objectif d\'hydratation',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 48),
+
+          // Unit toggle (kg/lbs)
+          ToggleButtons(
+            isSelected: [_isKg, !_isKg],
+            onPressed: (index) {
+              _toggleUnit(index == 0);
+            },
+            borderRadius: BorderRadius.circular(8),
+            constraints: const BoxConstraints(minWidth: 100, minHeight: 48),
+            children: const [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Text('kg'),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Text('lbs'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+
+          // Weight input field
+          TextField(
+            controller: _weightController,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+            ],
+            decoration: InputDecoration(
+              labelText: 'Poids',
+              suffixText: _isKg ? 'kg' : 'lbs',
+              errorText: _errorMessage,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              filled: true,
+            ),
+            onChanged: (value) {
+              // Clear error when user starts typing
+              if (_errorMessage != null) {
+                setState(() {
+                  _errorMessage = null;
+                });
+              }
+
+              // Update provider in real-time for embedded flow validation
+              if (embeddedContext.isEmbedded) {
+                final weight = double.tryParse(value.trim());
+                if (weight != null) {
+                  final weightInKg = _isKg ? weight : _lbsToKg(weight);
+                  // Validate range before updating
+                  if (weightInKg >= 30 && weightInKg <= 300) {
+                    ref
+                        .read(onboardingProvider.notifier)
+                        .updateWeight(weightInKg);
+                  }
+                }
+              }
+            },
+          ),
+          const Spacer(),
+
+          // Next button (only show if NOT embedded in flow)
+          if (!isEmbedded) ...[
+            ElevatedButton(
+              onPressed: _handleNext,
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text(
+                'Suivant',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
+        ],
+      ),
+    );
+
+    // If embedded in flow, return content without Scaffold
+    if (isEmbedded) {
+      return SafeArea(child: content);
+    }
+
+    // If standalone, wrap in Scaffold with AppBar
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -155,116 +283,7 @@ class _OnboardingWeightScreenState
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Progress indicator
-              Text(
-                'Étape 1 sur 5',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 32),
-
-              // Title
-              Text(
-                'Quel est ton poids ?',
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 12),
-
-              // Subtitle
-              Text(
-                'Nécessaire pour calculer ton objectif d\'hydratation',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 48),
-
-              // Unit toggle (kg/lbs)
-              ToggleButtons(
-                isSelected: [_isKg, !_isKg],
-                onPressed: (index) {
-                  _toggleUnit(index == 0);
-                },
-                borderRadius: BorderRadius.circular(8),
-                constraints: const BoxConstraints(
-                  minWidth: 100,
-                  minHeight: 48,
-                ),
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: Text('kg'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: Text('lbs'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-
-              // Weight input field
-              TextField(
-                controller: _weightController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
-                ],
-                decoration: InputDecoration(
-                  labelText: 'Poids',
-                  suffixText: _isKg ? 'kg' : 'lbs',
-                  errorText: _errorMessage,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  filled: true,
-                ),
-                onChanged: (_) {
-                  // Clear error when user starts typing
-                  if (_errorMessage != null) {
-                    setState(() {
-                      _errorMessage = null;
-                    });
-                  }
-                },
-              ),
-              const Spacer(),
-
-              // Next button
-              ElevatedButton(
-                onPressed: _handleNext,
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text(
-                  'Suivant',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
-        ),
-      ),
+      body: SafeArea(child: content),
     );
   }
 }

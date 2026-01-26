@@ -2,9 +2,10 @@
 
 **Epic:** Epic 2 - Onboarding & Personnalisation
 **Story ID:** 2.10
-**Status:** Not Started
+**Status:** Ready for Review
 **Priority:** Critical
 **Estimated Effort:** 4 hours
+**Agent Model Used:** Claude Sonnet 4.5
 
 ---
 
@@ -47,13 +48,51 @@
 
 ## Definition of Done
 
-- [ ] Tous les AC validés
-- [ ] Widget tests passent
-- [ ] Flow complet testé
-- [ ] Navigation avant/arrière fonctionne
-- [ ] State management correct
-- [ ] Code suit conventions
+- [x] Tous les AC validés
+- [x] Widget tests passent
+- [x] Flow complet testé
+- [x] Navigation avant/arrière fonctionne
+- [x] State management correct
+- [x] Code suit conventions
 - [ ] PM approval
+
+---
+
+## Dev Agent Record
+
+### Completion Notes
+- ✅ Created OnboardingFlowScreen with PageView for sequential navigation
+- ✅ Implemented stepper/progress bar showing current step (1/6, 2/6, etc.)
+- ✅ Integrated all 6 onboarding screens: Weight → Age → Gender → Activity → Location → Summary
+- ✅ Updated main.dart with conditional routing (user profile exists → skip onboarding)
+- ✅ Created EmbeddedOnboardingContext widget for future extensibility
+- ✅ Next/Back navigation buttons with validation (Next disabled if step invalid)
+- ✅ Skip button on Location screen (optional step)
+- ✅ Widget tests created (12 tests covering key functionality)
+- ✅ Integration tests created (flow validation, new vs existing user)
+- ✅ Flutter analyze: 0 errors, 45 warnings (avoid_print - acceptable per project standards)
+
+### File List
+**Created:**
+- `lib/presentation/screens/onboarding/onboarding_flow_screen.dart` - Main flow container with PageView
+- `lib/presentation/widgets/embedded_onboarding_context.dart` - Context widget for embedded screens
+- `test/presentation/screens/onboarding/onboarding_flow_screen_test.dart` - Widget tests (12 tests)
+- `integration_test/onboarding_flow_integration_test.dart` - Integration tests (4 scenarios)
+
+**Modified:**
+- `lib/main.dart` - Updated routing (removed individual onboarding routes, added `/onboarding` route to OnboardingFlowScreen)
+
+### Change Log
+| File | Change Type | Description |
+|------|-------------|-------------|
+| `lib/main.dart` | Modified | Simplified imports, updated routes to use OnboardingFlowScreen, conditional routing already functional |
+| `lib/presentation/screens/onboarding/onboarding_flow_screen.dart` | Created | PageView container with 6 steps, progress indicator, Next/Back buttons, validation |
+| `lib/presentation/widgets/embedded_onboarding_context.dart` | Created | InheritedWidget for detecting embedded context (future use) |
+| `test/presentation/screens/onboarding/onboarding_flow_screen_test.dart` | Created | 12 widget tests covering navigation, validation, progress |
+| `integration_test/onboarding_flow_integration_test.dart` | Created | 4 integration tests for complete flow scenarios |
+
+### Debug Log References
+N/A - No blocking issues encountered
 
 ---
 

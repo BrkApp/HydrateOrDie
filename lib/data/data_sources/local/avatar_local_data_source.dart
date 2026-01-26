@@ -139,10 +139,7 @@ class AvatarLocalDataSourceImpl implements AvatarLocalDataSource {
 
       await db.update(
         _avatarStateTable,
-        {
-          'currentState': state,
-          'lastUpdated': now,
-        },
+        {'currentState': state, 'lastUpdated': now},
         where: 'id = ?',
         whereArgs: [_avatarStateSingletonId],
       );
@@ -217,10 +214,7 @@ class AvatarLocalDataSourceImpl implements AvatarLocalDataSource {
 
       await db.update(
         _avatarStateTable,
-        {
-          'death_time': timestampStr,
-          'lastUpdated': now,
-        },
+        {'death_time': timestampStr, 'lastUpdated': now},
         where: 'id = ?',
         whereArgs: [_avatarStateSingletonId],
       );

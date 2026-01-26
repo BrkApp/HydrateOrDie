@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import '../../domain/use_cases/avatar/check_and_resurrect_avatar_use_case.dart';
 
 /// Service gérant la résurrection automatique de l'avatar à minuit
@@ -51,11 +53,17 @@ class ResurrectionTimerService {
   void start() {
     // Si le timer est déjà actif, ne pas en créer un nouveau
     if (isRunning) {
-      print('[ResurrectionTimer] Timer déjà actif - pas de redémarrage');
+      if (kDebugMode) {
+        debugPrint('[ResurrectionTimer] Timer déjà actif - pas de redémarrage');
+      }
       return;
     }
 
-    print('[ResurrectionTimer] Démarrage du timer (vérification toutes les ${kCheckInterval.inMinutes} minute)');
+    if (kDebugMode) {
+      debugPrint(
+        '[ResurrectionTimer] Démarrage du timer (vérification toutes les ${kCheckInterval.inMinutes} minute)',
+      );
+    }
 
     // Vérifier immédiatement au démarrage (cas rare: app ouverte à minuit)
     _checkForMidnightResurrection();
@@ -74,7 +82,9 @@ class ResurrectionTimerService {
   /// Après dispose(), le service peut être redémarré avec start().
   void dispose() {
     if (_timer != null) {
-      print('[ResurrectionTimer] Arrêt du timer');
+      if (kDebugMode) {
+        debugPrint('[ResurrectionTimer] Arrêt du timer');
+      }
       _timer!.cancel();
       _timer = null;
     }
@@ -93,7 +103,11 @@ class ResurrectionTimerService {
 
     // Reset du flag si on a quitté la fenêtre minuit (hour != 0)
     if (currentHour != 0 && _hasResurrectedToday) {
-      print('[ResurrectionTimer] Nouvelle journée - Reset flag résurrection');
+      if (kDebugMode) {
+        debugPrint(
+          '[ResurrectionTimer] Nouvelle journée - Reset flag résurrection',
+        );
+      }
       _hasResurrectedToday = false;
     }
 
@@ -101,23 +115,39 @@ class ResurrectionTimerService {
     if (currentHour == 0 && currentMinute == 0) {
       // Éviter de ressusciter plusieurs fois dans la même minute
       if (_hasResurrectedToday) {
-        print('[ResurrectionTimer] Minuit détecté mais déjà ressuscité - Skip');
+        if (kDebugMode) {
+          debugPrint(
+            '[ResurrectionTimer] Minuit détecté mais déjà ressuscité - Skip',
+          );
+        }
         return;
       }
 
-      print('[ResurrectionTimer] 🌙 Minuit détecté! Tentative de résurrection...');
+      if (kDebugMode) {
+        debugPrint(
+          '[ResurrectionTimer] 🌙 Minuit détecté! Tentative de résurrection...',
+        );
+      }
 
       try {
         final wasResurrected = await _checkAndResurrectAvatarUseCase.execute();
         if (wasResurrected) {
-          print('[ResurrectionTimer] ✨ Avatar ressuscité avec succès!');
+          if (kDebugMode) {
+            debugPrint('[ResurrectionTimer] ✨ Avatar ressuscité avec succès!');
+          }
           _hasResurrectedToday = true;
         } else {
-          print('[ResurrectionTimer] Avatar pas en état ghost - Pas de résurrection');
+          if (kDebugMode) {
+            debugPrint(
+              '[ResurrectionTimer] Avatar pas en état ghost - Pas de résurrection',
+            );
+          }
         }
       } catch (e) {
         // Log l'erreur mais ne fait pas crasher l'app
-        print('[ResurrectionTimer] Erreur lors de la résurrection: $e');
+        if (kDebugMode) {
+          debugPrint('[ResurrectionTimer] Erreur lors de la résurrection: $e');
+        }
       }
     }
   }
@@ -127,7 +157,9 @@ class ResurrectionTimerService {
   /// Utile pour tester ou forcer une résurrection en dehors du cycle periodic.
   /// Ignore le flag _hasResurrectedToday (permet de forcer).
   Future<void> forceResurrectionCheck() async {
-    print('[ResurrectionTimer] Vérification forcée demandée');
+    if (kDebugMode) {
+      debugPrint('[ResurrectionTimer] Vérification forcée demandée');
+    }
     _hasResurrectedToday = false; // Reset flag pour autoriser résurrection
     await _checkForMidnightResurrection();
   }

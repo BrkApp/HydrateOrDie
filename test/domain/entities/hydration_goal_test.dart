@@ -20,31 +20,19 @@ void main() {
       });
 
       test('should throw ArgumentError if goal < minimum', () {
-        expect(
-          () => HydrationGoal(1.4),
-          throwsA(isA<ArgumentError>()),
-        );
+        expect(() => HydrationGoal(1.4), throwsA(isA<ArgumentError>()));
       });
 
       test('should throw ArgumentError if goal > maximum', () {
-        expect(
-          () => HydrationGoal(5.1),
-          throwsA(isA<ArgumentError>()),
-        );
+        expect(() => HydrationGoal(5.1), throwsA(isA<ArgumentError>()));
       });
 
       test('should throw ArgumentError if goal is 0', () {
-        expect(
-          () => HydrationGoal(0),
-          throwsA(isA<ArgumentError>()),
-        );
+        expect(() => HydrationGoal(0), throwsA(isA<ArgumentError>()));
       });
 
       test('should throw ArgumentError if goal is negative', () {
-        expect(
-          () => HydrationGoal(-1.0),
-          throwsA(isA<ArgumentError>()),
-        );
+        expect(() => HydrationGoal(-1.0), throwsA(isA<ArgumentError>()));
       });
     });
 

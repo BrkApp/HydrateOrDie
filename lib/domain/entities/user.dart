@@ -75,13 +75,13 @@ class User extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        weight,
-        age,
-        gender,
-        activityLevel,
-        dailyGoal,
-      ];
+    id,
+    weight,
+    age,
+    gender,
+    activityLevel,
+    dailyGoal,
+  ];
 
   @override
   String toString() {

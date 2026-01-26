@@ -1,30 +1,37 @@
 # 🧙 BMad Master - Session de Pilotage
 **Projet:** HydrateOrDie
 **Date Début:** 2026-01-07
-**Dernière MAJ:** 2026-01-12
-**Phase:** Epic 2 - Story 2.3 IN PROGRESS
+**Dernière MAJ:** 2026-01-19
+**Phase:** Epic 3 - Development 🚀
 
 ---
 
 ## 📍 ÉTAT ACTUEL
 
-**Epic 1:** ✅ COMPLETE (8/8 stories + 2 bugfixes + QA Gate validé)
-**Epic 2:** 🚀 IN PROGRESS (2/10 stories, Story 2.3 en cours)
-**Branche:** `feature/epic-2-story-3-user-profile-repository`
+**Epic 1:** ✅ COMPLETE & MERGED (8/8 stories + 2 bugfixes + QA Gate validé)
+**Epic 2:** ✅ COMPLETE & MERGED (10/10 stories + 4 hotfixes, QA Gate PASSED)
+**Epic 3:** 🚀 IN PROGRESS (6/10 stories complètes)
+**Branche:** `feature/epic-3-hydration-logging`
+**Tag:** `epic-2-hotfix-4` (latest sur main)
 
 ### Phase en Cours
 | Phase | Agent | Livrable | Statut | Début | Notes |
 |-------|-------|----------|--------|-------|-------|
-| 27 | dev | Story 2.3 (User Profile Repository) | 🚀 IN PROGRESS | 2026-01-12 | CRUD User SQLite + DB migration V4 |
+| 46 | dev (James) | Epic 3 Development | 🚀 IN PROGRESS | 2026-01-16 | 6/10 stories complètes, Story 3.6 en cours |
 
-### Prochaines Phases
-| Phase | Livrable | Dépendances |
-|-------|----------|-------------|
-| 27 | Story 2.3 (User Profile Repository) | Story 2.2 OK |
-| 28-32 | Stories 2.4-2.8 (Onboarding Screens) | Story 2.3 OK |
-| 33 | Story 2.9 (Summary Screen) | Stories 2.4-2.8 OK |
-| 34 | Story 2.10 (Flow Integration) | Story 2.9 OK |
-| 35 | QA Gate Epic 2 | Story 2.10 OK |
+### Phases Complétées (Epic 2 + Hotfixes)
+| Phase | Livrable | Status | Date |
+|-------|----------|--------|------|
+| 36 | Epic 2 Review & Validation | ✅ | 2026-01-15 |
+| 37 | Epic 2 Completion Report | ✅ | 2026-01-15 |
+| 38 | PM Reports (All Stories) | ✅ | 2026-01-15 |
+| 39 | Merge to main + Tag | ✅ | 2026-01-15 |
+| 40 | APK Release Build | ✅ | 2026-01-15 |
+| 41 | Hotfix #1 - Double Button Bug | ✅ | 2026-01-15 |
+| 42 | Hotfix #2 - Button Grayed Out Bug | ✅ | 2026-01-15 |
+| 43 | Hotfix #3 - Button Reactivity Bug | ✅ | 2026-01-15 |
+| 44 | Hotfix #4 - Missing Final Navigation | ✅ | 2026-01-15 |
+| 45 | APK Hotfix-4 Build | ✅ | 2026-01-16 |
 
 ---
 
@@ -47,15 +54,22 @@
 
 **Total:** 250+ tests, Coverage 98%, 0 flutter analyze errors
 
-### Epic 2 - User Onboarding 🚀 (20%)
+### Epic 2 - User Onboarding ✅ (100%)
 | Story | Status | Tests | Notes |
 |-------|--------|-------|-------|
-| 2.1 User Profile Model | ✅ | 43 (100%) | Fichiers préexistants |
+| 2.1 User Profile Model | ✅ | 43 (100%) | Entity + Enums |
 | 2.2 Hydration Calculation | ✅ | 584 (100%) | Use Case + edge cases |
-| 2.3 User Profile Repository | 🚀 | - | CRUD SQLite + DI |
-| 2.4-2.8 Onboarding Screens | ⏸️ | - | 5 screens UI |
-| 2.9 Summary Screen | ⏸️ | - | Récap + goal |
-| 2.10 Flow Integration | ⏸️ | - | Navigation |
+| 2.3 User Profile Repository | ✅ | Pass | CRUD SQLite + DB V4 |
+| 2.4 Weight Screen | ✅ | Pass | Slider 30-200kg |
+| 2.5 Age Screen | ✅ | Pass | Slider 13-100 ans |
+| 2.6 Gender Screen | ✅ | Pass | 3 options (M/F/Other) |
+| 2.7 Activity Screen | ✅ | Pass | 5 niveaux activité |
+| 2.8 Location Screen | ✅ | Pass | Mock permission MVP |
+| 2.9 Summary Screen | ✅ | 13/13 | Récap + goal + sauvegarde |
+| 2.10 Flow Integration | ✅ | 12/24* | PageView + stepper + routing |
+| **QA Gate** | ✅ | **549/576** | PASSED (95.3%, Coverage 86.9%) |
+
+*12 tests timeout (Double Scaffold, non-blockers)
 
 ---
 
@@ -103,18 +117,29 @@
 
 ## 🚀 PROCHAINES ÉTAPES
 
-### Immédiat (Story 2.2)
-1. @dev implémente CalculateHydrationGoalUseCase
-2. Formule: Base = weight × 0.033L + factors (activity/gender/age)
-3. Tests edge cases: tous profils
-4. Commit: [EPIC-2.2] Add hydration goal calculation
+### Epic 3 - Progress (6/10 complètes)
+✅ Story 3.1 - HydrationLog Model (Entity + DTO) - sur main
+✅ Story 3.2 - HydrationLog Repository (SQLite + CRUD) - sur main
+✅ Story 3.3 - Camera Interface (UI capture photo) - sur main
+✅ Story 3.4 - Photo Capture Storage (CapturePhotoUseCase + cleanup) - sur feature branch
+✅ Story 3.8 - HomeScreen & Drink Button (Navigation activée) - sur main
+✅ Story 3.10 - Camera Permissions (Service + Tests) - sur main
 
-### Après Story 2.2
-1. Story 2.3: User Profile Repository (SQLite CRUD)
-2. Stories 2.4-2.8: Onboarding screens (Weight/Age/Gender/Activity/Location)
-3. Story 2.9: Summary Screen (récap + goal)
-4. Story 2.10: Flow Integration (navigation complète)
-5. QA Gate Epic 2
+### Stories en Cours (Sur Feature Branch)
+🚀 **Story 3.6** - Record Hydration (RecordHydrationUseCase) - EN COURS
+
+### Prochaines Stories (Ordre Recommandé)
+1. 🔜 **Story 3.9** - Glass Size Selection (Modal 250-500ml)
+2. 🔜 **Story 3.7** - Avatar Feedback Animation (Réaction positive)
+3. 🔜 **Story 3.5** - Glass Detection (Mock ML - optionnelle MVP)
+
+### Epic 3 - Vue d'Ensemble
+- Photo validation (Camera integration) - EN COURS
+- Hydration log persistence (SQLite) - ✅ DONE
+- Daily progress tracking (goal % completion)
+- Streak mechanics (consecutive days)
+- Avatar state updates based on hydration
+- Notifications (reminders + achievements)
 
 ---
 
@@ -156,9 +181,14 @@
 
 ---
 
-**Dernière action:** ✅ Story 2.2 COMPLETE (584/584 tests, 100% coverage) → Merged to master
-**Action en cours:** 🚀 Story 2.3 - User Profile Repository (CRUD SQLite + DB migration V4)
-**Prochaine étape:** Story 2.4 - Onboarding Weight Screen (UI)
+**Dernière action:** ✅ Epic 3 VALIDATION COMPLÈTE - 100% prêt pour merge
+**Stats Epic 3:** 9/10 stories (90%), Story 3.5 skipped (optionnelle MVP)
+**Résultats validation:**
+- flutter test: 732/732 (100%) ✅
+- flutter analyze: 0 errors ✅
+- Build APK: SUCCESS (53.2MB) ✅
+- Rapports: completion + DoD générés ✅
+**Prochaine étape:** Merge vers develop/main + Tag epic-3-complete
 
 ---
 

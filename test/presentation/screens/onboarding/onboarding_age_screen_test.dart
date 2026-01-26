@@ -12,9 +12,8 @@ void main() {
         child: MaterialApp(
           home: const OnboardingAgeScreen(),
           routes: {
-            '/onboarding_gender': (_) => const Scaffold(
-                  body: Center(child: Text('Gender Screen')),
-                ),
+            '/onboarding_gender': (_) =>
+                const Scaffold(body: Center(child: Text('Gender Screen'))),
           },
         ),
       );
@@ -97,7 +96,9 @@ void main() {
       expect(find.text('L\'âge doit être entre 10 et 120 ans'), findsNothing);
     });
 
-    testWidgets('should accept maximum valid age (120) (AC #4)', (tester) async {
+    testWidgets('should accept maximum valid age (120) (AC #4)', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(createAgeScreen());
       await tester.pumpAndSettle();
@@ -112,7 +113,9 @@ void main() {
       expect(find.text('L\'âge doit être entre 10 et 120 ans'), findsNothing);
     });
 
-    testWidgets('should show error for age below minimum (AC #4, #5)', (tester) async {
+    testWidgets('should show error for age below minimum (AC #4, #5)', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(createAgeScreen());
       await tester.pumpAndSettle();
@@ -131,7 +134,9 @@ void main() {
       ); // AC #5
     });
 
-    testWidgets('should show error for age above maximum (AC #4, #5)', (tester) async {
+    testWidgets('should show error for age above maximum (AC #4, #5)', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(createAgeScreen());
       await tester.pumpAndSettle();
@@ -183,40 +188,46 @@ void main() {
       expect(find.text('Veuillez entrer votre âge'), findsOneWidget); // AC #5
     });
 
-    testWidgets('should not proceed when age is invalid on Next button press (AC #6)', (tester) async {
-      // Arrange
-      await tester.pumpWidget(createAgeScreen());
-      await tester.pumpAndSettle();
+    testWidgets(
+      'should not proceed when age is invalid on Next button press (AC #6)',
+      (tester) async {
+        // Arrange
+        await tester.pumpWidget(createAgeScreen());
+        await tester.pumpAndSettle();
 
-      // Act - Enter invalid age (below min)
-      await tester.enterText(find.byType(TextField), '9');
-      await tester.pumpAndSettle();
+        // Act - Enter invalid age (below min)
+        await tester.enterText(find.byType(TextField), '9');
+        await tester.pumpAndSettle();
 
-      // Tap Next button
-      await tester.tap(find.text('Suivant'));
-      await tester.pumpAndSettle();
+        // Tap Next button
+        await tester.tap(find.text('Suivant'));
+        await tester.pumpAndSettle();
 
-      // Assert - Should not navigate (still on age screen)
-      expect(find.text('Quel âge as-tu ?'), findsOneWidget);
-      expect(find.text('Gender Screen'), findsNothing); // AC #6
-    });
+        // Assert - Should not navigate (still on age screen)
+        expect(find.text('Quel âge as-tu ?'), findsOneWidget);
+        expect(find.text('Gender Screen'), findsNothing); // AC #6
+      },
+    );
 
-    testWidgets('should proceed when age is valid on Next button press (AC #6)', (tester) async {
-      // Arrange
-      await tester.pumpWidget(createAgeScreen());
-      await tester.pumpAndSettle();
+    testWidgets(
+      'should proceed when age is valid on Next button press (AC #6)',
+      (tester) async {
+        // Arrange
+        await tester.pumpWidget(createAgeScreen());
+        await tester.pumpAndSettle();
 
-      // Act - Enter valid age
-      await tester.enterText(find.byType(TextField), '25');
-      await tester.pumpAndSettle();
+        // Act - Enter valid age
+        await tester.enterText(find.byType(TextField), '25');
+        await tester.pumpAndSettle();
 
-      // Tap Next button
-      await tester.tap(find.text('Suivant'));
-      await tester.pumpAndSettle();
+        // Tap Next button
+        await tester.tap(find.text('Suivant'));
+        await tester.pumpAndSettle();
 
-      // Assert - Should navigate to gender screen
-      expect(find.text('Gender Screen'), findsOneWidget); // AC #6
-    });
+        // Assert - Should navigate to gender screen
+        expect(find.text('Gender Screen'), findsOneWidget); // AC #6
+      },
+    );
 
     testWidgets('should clear error when user starts typing', (tester) async {
       // Arrange
@@ -236,7 +247,9 @@ void main() {
       expect(find.text('Veuillez entrer votre âge'), findsNothing);
     });
 
-    testWidgets('should update provider state when valid age entered', (tester) async {
+    testWidgets('should update provider state when valid age entered', (
+      tester,
+    ) async {
       // Arrange
       late OnboardingState capturedState;
 
@@ -250,9 +263,8 @@ void main() {
               },
             ),
             routes: {
-              '/onboarding_gender': (_) => const Scaffold(
-                    body: Center(child: Text('Gender Screen')),
-                  ),
+              '/onboarding_gender': (_) =>
+                  const Scaffold(body: Center(child: Text('Gender Screen'))),
             },
           ),
         ),
@@ -277,15 +289,12 @@ void main() {
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [
-            onboardingProvider.overrideWith((ref) => testNotifier),
-          ],
+          overrides: [onboardingProvider.overrideWith((ref) => testNotifier)],
           child: MaterialApp(
             home: const OnboardingAgeScreen(),
             routes: {
-              '/onboarding_gender': (_) => const Scaffold(
-                    body: Center(child: Text('Gender Screen')),
-                  ),
+              '/onboarding_gender': (_) =>
+                  const Scaffold(body: Center(child: Text('Gender Screen'))),
             },
           ),
         ),
@@ -300,22 +309,25 @@ void main() {
       expect(controller.text, '25');
     });
 
-    testWidgets('should navigate to gender screen when Next pressed (AC #1, #8)', (tester) async {
-      // Arrange
-      await tester.pumpWidget(createAgeScreen());
-      await tester.pumpAndSettle();
+    testWidgets(
+      'should navigate to gender screen when Next pressed (AC #1, #8)',
+      (tester) async {
+        // Arrange
+        await tester.pumpWidget(createAgeScreen());
+        await tester.pumpAndSettle();
 
-      // Act - Enter valid age
-      await tester.enterText(find.byType(TextField), '25');
-      await tester.pumpAndSettle();
+        // Act - Enter valid age
+        await tester.enterText(find.byType(TextField), '25');
+        await tester.pumpAndSettle();
 
-      // Tap Next button
-      await tester.tap(find.text('Suivant'));
-      await tester.pumpAndSettle();
+        // Tap Next button
+        await tester.tap(find.text('Suivant'));
+        await tester.pumpAndSettle();
 
-      // Assert - Should navigate to gender screen
-      expect(find.text('Gender Screen'), findsOneWidget); // AC #8
-    });
+        // Assert - Should navigate to gender screen
+        expect(find.text('Gender Screen'), findsOneWidget); // AC #8
+      },
+    );
 
     testWidgets('should allow back navigation', (tester) async {
       // Arrange

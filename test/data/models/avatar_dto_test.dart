@@ -84,9 +84,13 @@ void main() {
         expect(deserialized.id, equals(validDto.id));
         expect(deserialized.name, equals(validDto.name));
         expect(
-            deserialized.personalityString, equals(validDto.personalityString));
-        expect(deserialized.currentStateString,
-            equals(validDto.currentStateString));
+          deserialized.personalityString,
+          equals(validDto.personalityString),
+        );
+        expect(
+          deserialized.currentStateString,
+          equals(validDto.currentStateString),
+        );
         expect(deserialized.lastDrinkTime, equals(validDto.lastDrinkTime));
         expect(deserialized.lastUpdated, equals(validDto.lastUpdated));
       });
@@ -157,10 +161,14 @@ void main() {
         expect(entity.name, equals(validEntity.name));
         expect(entity.personality, equals(validEntity.personality));
         expect(entity.currentState, equals(validEntity.currentState));
-        expect(entity.lastDrinkTime.toUtc(),
-            equals(validEntity.lastDrinkTime.toUtc()));
-        expect(entity.lastUpdated.toUtc(),
-            equals(validEntity.lastUpdated.toUtc()));
+        expect(
+          entity.lastDrinkTime.toUtc(),
+          equals(validEntity.lastDrinkTime.toUtc()),
+        );
+        expect(
+          entity.lastUpdated.toUtc(),
+          equals(validEntity.lastUpdated.toUtc()),
+        );
       });
 
       test('should throw ArgumentError for invalid personality', () {
@@ -170,7 +178,9 @@ void main() {
       });
 
       test('should throw ArgumentError for invalid state', () {
-        final invalidDto = validDto.copyWith(currentStateString: 'invalidState');
+        final invalidDto = validDto.copyWith(
+          currentStateString: 'invalidState',
+        );
 
         expect(() => invalidDto.toEntity(), throwsArgumentError);
       });

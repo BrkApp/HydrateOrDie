@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Prends en photo ton verre pour valider ton hydratation</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Sauvegarde tes photos de validation d'hydratation</string>
 </dict>
 </plist>

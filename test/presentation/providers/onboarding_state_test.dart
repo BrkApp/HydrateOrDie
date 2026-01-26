@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hydrate_or_die/domain/entities/activity_level.dart';
+import 'package:hydrate_or_die/domain/entities/avatar_personality.dart';
 import 'package:hydrate_or_die/domain/entities/gender.dart';
 import 'package:hydrate_or_die/presentation/providers/onboarding_state.dart';
 
@@ -85,7 +86,9 @@ void main() {
       const state = OnboardingState(activityLevel: ActivityLevel.sedentary);
 
       // Act
-      final updatedState = state.copyWith(activityLevel: ActivityLevel.veryActive);
+      final updatedState = state.copyWith(
+        activityLevel: ActivityLevel.veryActive,
+      );
 
       // Assert
       expect(updatedState.activityLevel, ActivityLevel.veryActive);
@@ -168,13 +171,16 @@ void main() {
         expect(state.isWeightValid, false);
       });
 
-      test('isWeightValid should return false for weight above max (301kg)', () {
-        // Arrange
-        const state = OnboardingState(weight: 301.0);
+      test(
+        'isWeightValid should return false for weight above max (301kg)',
+        () {
+          // Arrange
+          const state = OnboardingState(weight: 301.0);
 
-        // Act & Assert
-        expect(state.isWeightValid, false);
-      });
+          // Act & Assert
+          expect(state.isWeightValid, false);
+        },
+      );
 
       test('isWeightValid should return false when weight is null', () {
         // Arrange
@@ -248,34 +254,44 @@ void main() {
         expect(state.isGenderValid, false);
       });
 
-      test('isActivityLevelValid should return true when activityLevel is set', () {
-        // Arrange
-        const state = OnboardingState(activityLevel: ActivityLevel.moderate);
+      test(
+        'isActivityLevelValid should return true when activityLevel is set',
+        () {
+          // Arrange
+          const state = OnboardingState(activityLevel: ActivityLevel.moderate);
 
-        // Act & Assert
-        expect(state.isActivityLevelValid, true);
-      });
+          // Act & Assert
+          expect(state.isActivityLevelValid, true);
+        },
+      );
 
-      test('isActivityLevelValid should return false when activityLevel is null', () {
-        // Arrange
-        const state = OnboardingState();
+      test(
+        'isActivityLevelValid should return false when activityLevel is null',
+        () {
+          // Arrange
+          const state = OnboardingState();
 
-        // Act & Assert
-        expect(state.isActivityLevelValid, false);
-      });
+          // Act & Assert
+          expect(state.isActivityLevelValid, false);
+        },
+      );
 
-      test('canComplete should return true when all required fields are valid', () {
-        // Arrange
-        const state = OnboardingState(
-          weight: 70.0,
-          age: 25,
-          gender: Gender.male,
-          activityLevel: ActivityLevel.moderate,
-        );
+      test(
+        'canComplete should return true when all required fields are valid',
+        () {
+          // Arrange
+          const state = OnboardingState(
+            selectedAvatar: AvatarPersonality.doctor,
+            weight: 70.0,
+            age: 25,
+            gender: Gender.male,
+            activityLevel: ActivityLevel.moderate,
+          );
 
-        // Act & Assert
-        expect(state.canComplete, true);
-      });
+          // Act & Assert
+          expect(state.canComplete, true);
+        },
+      );
 
       test('canComplete should return false when weight is missing', () {
         // Arrange
@@ -325,19 +341,23 @@ void main() {
         expect(state.canComplete, false);
       });
 
-      test('canComplete should return true even when location is missing (optional)', () {
-        // Arrange
-        const state = OnboardingState(
-          weight: 70.0,
-          age: 25,
-          gender: Gender.male,
-          activityLevel: ActivityLevel.moderate,
-          location: null,
-        );
+      test(
+        'canComplete should return true even when location is missing (optional)',
+        () {
+          // Arrange
+          const state = OnboardingState(
+            selectedAvatar: AvatarPersonality.doctor,
+            weight: 70.0,
+            age: 25,
+            gender: Gender.male,
+            activityLevel: ActivityLevel.moderate,
+            location: null,
+          );
 
-        // Act & Assert
-        expect(state.canComplete, true);
-      });
+          // Act & Assert
+          expect(state.canComplete, true);
+        },
+      );
     });
 
     group('Equality', () {

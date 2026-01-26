@@ -25,13 +25,14 @@ void main() {
     });
 
     tearDown(() {
-      if (notifierCreated) {
-              }
+      if (notifierCreated) {}
     });
 
     test('should initialize with default state', () {
       // Arrange
-      when(mockUpdateUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
+      when(
+        mockUpdateUseCase.execute(),
+      ).thenAnswer((_) async => AvatarState.fresh);
       when(mockRepository.getAvatar()).thenAnswer((_) async => null);
 
       // Act
@@ -56,7 +57,9 @@ void main() {
         lastUpdated: DateTime.now(),
       );
 
-      when(mockUpdateUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
+      when(
+        mockUpdateUseCase.execute(),
+      ).thenAnswer((_) async => AvatarState.fresh);
       when(mockRepository.getAvatar()).thenAnswer((_) async => testAvatar);
 
       // Act
@@ -74,7 +77,9 @@ void main() {
 
     test('should use default personality when avatar is null', () async {
       // Arrange
-      when(mockUpdateUseCase.execute()).thenAnswer((_) async => AvatarState.tired);
+      when(
+        mockUpdateUseCase.execute(),
+      ).thenAnswer((_) async => AvatarState.tired);
       when(mockRepository.getAvatar()).thenAnswer((_) async => null);
 
       // Act
@@ -98,7 +103,9 @@ void main() {
         lastUpdated: DateTime.now(),
       );
 
-      when(mockUpdateUseCase.execute()).thenAnswer((_) async => AvatarState.tired);
+      when(
+        mockUpdateUseCase.execute(),
+      ).thenAnswer((_) async => AvatarState.tired);
       when(mockRepository.getAvatar()).thenAnswer((_) async => testAvatar);
 
       notifier = HomeNotifier(mockUpdateUseCase, mockRepository);
@@ -134,16 +141,18 @@ void main() {
           lastUpdated: DateTime.now(),
         );
 
-        when(mockUpdateUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
+        when(
+          mockUpdateUseCase.execute(),
+        ).thenAnswer((_) async => AvatarState.fresh);
         when(mockRepository.getAvatar()).thenAnswer((_) async => testAvatar);
 
         notifier = HomeNotifier(mockUpdateUseCase, mockRepository);
-      notifierCreated = true;
+        notifierCreated = true;
         await Future.delayed(const Duration(milliseconds: 100));
 
         expect(notifier.state.personality, personality);
 
-                reset(mockUpdateUseCase);
+        reset(mockUpdateUseCase);
         reset(mockRepository);
       }
     });
@@ -172,12 +181,12 @@ void main() {
         when(mockRepository.getAvatar()).thenAnswer((_) async => testAvatar);
 
         notifier = HomeNotifier(mockUpdateUseCase, mockRepository);
-      notifierCreated = true;
+        notifierCreated = true;
         await Future.delayed(const Duration(milliseconds: 100));
 
         expect(notifier.state.state, state);
 
-                reset(mockUpdateUseCase);
+        reset(mockUpdateUseCase);
         reset(mockRepository);
       }
     });
@@ -193,7 +202,9 @@ void main() {
         lastUpdated: DateTime.now(),
       );
 
-      when(mockUpdateUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
+      when(
+        mockUpdateUseCase.execute(),
+      ).thenAnswer((_) async => AvatarState.fresh);
       when(mockRepository.getAvatar()).thenAnswer((_) async => testAvatar);
 
       // Act
@@ -222,7 +233,9 @@ void main() {
 
     test('should call updateAvatarStateUseCase on refresh', () async {
       // Arrange
-      when(mockUpdateUseCase.execute()).thenAnswer((_) async => AvatarState.fresh);
+      when(
+        mockUpdateUseCase.execute(),
+      ).thenAnswer((_) async => AvatarState.fresh);
       when(mockRepository.getAvatar()).thenAnswer((_) async => null);
 
       notifier = HomeNotifier(mockUpdateUseCase, mockRepository);
@@ -232,7 +245,9 @@ void main() {
       reset(mockUpdateUseCase);
       reset(mockRepository);
 
-      when(mockUpdateUseCase.execute()).thenAnswer((_) async => AvatarState.tired);
+      when(
+        mockUpdateUseCase.execute(),
+      ).thenAnswer((_) async => AvatarState.tired);
       when(mockRepository.getAvatar()).thenAnswer((_) async => null);
 
       // Act

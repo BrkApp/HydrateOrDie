@@ -122,14 +122,16 @@ void main() {
       expect(retrieved.userId, equals('test-user-123')); // ID unchanged
     });
 
-    test('should throw DataSourceException when updating non-existent profile',
-        () async {
-      // Act & Assert
-      expect(
-        () => dataSource.updateUserProfile(testUserDto),
-        throwsA(isA<DataSourceException>()),
-      );
-    });
+    test(
+      'should throw DataSourceException when updating non-existent profile',
+      () async {
+        // Act & Assert
+        expect(
+          () => dataSource.updateUserProfile(testUserDto),
+          throwsA(isA<DataSourceException>()),
+        );
+      },
+    );
 
     test('should delete user profile successfully', () async {
       // Arrange - Save profile
@@ -257,7 +259,7 @@ void main() {
         'light',
         'moderate',
         'veryActive',
-        'extremelyActive'
+        'extremelyActive',
       ];
 
       for (final level in activityLevels) {

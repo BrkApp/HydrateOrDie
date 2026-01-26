@@ -1,9 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hydrate_or_die/domain/entities/avatar_personality.dart';
 import 'package:hydrate_or_die/domain/entities/avatar_state.dart';
 import 'package:hydrate_or_die/domain/repositories/avatar_repository.dart';
+import 'package:hydrate_or_die/presentation/providers/onboarding_provider.dart';
 import 'package:hydrate_or_die/presentation/widgets/avatar_display.dart';
+import 'package:hydrate_or_die/presentation/widgets/embedded_onboarding_context.dart';
 import 'package:hydrate_or_die/core/di/injection.dart';
 
 /// Écran de sélection d'avatar (premier lancement uniquement).
@@ -22,54 +25,72 @@ import 'package:hydrate_or_die/core/di/injection.dart';
 /// );
 /// ```
 class AvatarSelectionScreen extends ConsumerStatefulWidget {
-  const AvatarSelectionScreen({Key? key}) : super(key: key);
+  const AvatarSelectionScreen({super.key});
 
   @override
   ConsumerState<AvatarSelectionScreen> createState() =>
       _AvatarSelectionScreenState();
 }
 
-class _AvatarSelectionScreenState
-    extends ConsumerState<AvatarSelectionScreen> {
+class _AvatarSelectionScreenState extends ConsumerState<AvatarSelectionScreen> {
   AvatarPersonality? _selectedPersonality;
 
   Future<void> _confirmSelection() async {
     if (_selectedPersonality == null) return;
 
-    try {
-      final repository = getIt<AvatarRepository>();
-      // Convert enum to string ID for repository
-      final avatarId = _selectedPersonality!.name;
+    // Check if we're in embedded onboarding flow
+    final embeddedContext = EmbeddedOnboardingContext.maybeOf(context);
+    final isEmbedded = embeddedContext?.isEmbedded ?? false;
 
-      // Sauvegarde de l'avatar sélectionné
-      await repository.saveSelectedAvatar(avatarId);
+    if (isEmbedded) {
+      // In onboarding flow: update provider and continue to next step
+      ref.read(onboardingProvider.notifier).updateSelectedAvatar(_selectedPersonality!);
+      embeddedContext?.onNext?.call();
+    } else {
+      // Standalone mode: save to repository and navigate to home
+      try {
+        final repository = getIt<AvatarRepository>();
+        // Convert enum to string ID for repository
+        final avatarId = _selectedPersonality!.name;
 
-      // Vérification que la sauvegarde a réussi
-      final savedAvatar = await repository.getAvatar();
-      print('DEBUG: Avatar saved: ${savedAvatar?.personality}');
+        // Sauvegarde de l'avatar sélectionné
+        await repository.saveSelectedAvatar(avatarId);
 
-      if (!mounted) return;
+        // Vérification que la sauvegarde a réussi
+        final savedAvatar = await repository.getAvatar();
+        if (kDebugMode) {
+          debugPrint('DEBUG: Avatar saved: ${savedAvatar?.personality}');
+        }
 
-      // Navigation vers HomeScreen (AC #6)
-      Navigator.of(context).pushReplacementNamed('/home');
-    } catch (e) {
-      print('ERROR: Failed to save avatar: $e');
-      if (!mounted) return;
+        if (!mounted) return;
 
-      // Afficher erreur à l'utilisateur
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Erreur lors de la sauvegarde: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
+        // Navigation vers HomeScreen (AC #6)
+        Navigator.of(context).pushReplacementNamed('/home');
+      } catch (e) {
+        if (kDebugMode) {
+          debugPrint('ERROR: Failed to save avatar: $e');
+        }
+        if (!mounted) return;
+
+        // Afficher erreur à l'utilisateur
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erreur lors de la sauvegarde: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // Check if we're in embedded onboarding flow
+    final embeddedContext = EmbeddedOnboardingContext.maybeOf(context);
+    final isEmbedded = embeddedContext?.isEmbedded ?? false;
+
     return Scaffold(
-      appBar: AppBar(
+      appBar: isEmbedded ? null : AppBar(
         title: const Text('Choisis ton Avatar'),
         centerTitle: true,
       ),
@@ -86,9 +107,9 @@ class _AvatarSelectionScreenState
             const SizedBox(height: 8),
             Text(
               'Il te motivera (ou punira) tous les jours',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey[600],
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
@@ -108,33 +129,36 @@ class _AvatarSelectionScreenState
               ),
             ),
 
-            // Bouton de confirmation (AC #5)
-            SizedBox(
-              width: double.infinity,
-              height: 56,
-              child: ElevatedButton(
-                onPressed:
-                    _selectedPersonality != null ? _confirmSelection : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2196F3),
-                  disabledBackgroundColor: Colors.grey[300],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+            // Bouton de confirmation (AC #5) - Only show in standalone mode
+            if (!isEmbedded) ...[
+              SizedBox(
+                width: double.infinity,
+                height: 56,
+                child: ElevatedButton(
+                  onPressed: _selectedPersonality != null
+                      ? _confirmSelection
+                      : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF2196F3),
+                    disabledBackgroundColor: Colors.grey[300],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
-                ),
-                child: Text(
-                  'Confirmer mon choix',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: _selectedPersonality != null
-                        ? Colors.white
-                        : Colors.grey[600],
+                  child: Text(
+                    'Confirmer mon choix',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: _selectedPersonality != null
+                          ? Colors.white
+                          : Colors.grey[600],
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
+              const SizedBox(height: 16),
+            ],
           ],
         ),
       ),
@@ -143,12 +167,18 @@ class _AvatarSelectionScreenState
 
   Widget _buildAvatarCard(AvatarPersonality personality) {
     final isSelected = _selectedPersonality == personality;
+    final embeddedContext = EmbeddedOnboardingContext.maybeOf(context);
+    final isEmbedded = embeddedContext?.isEmbedded ?? false;
 
     return GestureDetector(
       onTap: () {
         setState(() {
           _selectedPersonality = personality;
         });
+        // In embedded mode, auto-confirm selection to continue flow
+        if (isEmbedded) {
+          _confirmSelection();
+        }
       },
       child: Container(
         decoration: BoxDecoration(
@@ -175,10 +205,7 @@ class _AvatarSelectionScreenState
             // Nom (AC #3)
             Text(
               _getAvatarName(personality),
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 2),
@@ -187,10 +214,7 @@ class _AvatarSelectionScreenState
             Flexible(
               child: Text(
                 _getAvatarDescription(personality),
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.grey[600],
-                ),
+                style: TextStyle(fontSize: 10, color: Colors.grey[600]),
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

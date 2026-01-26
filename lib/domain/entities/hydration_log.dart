@@ -70,13 +70,7 @@ class HydrationLog extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        id,
-        timestamp,
-        photoPath,
-        glassSize,
-        validated,
-      ];
+  List<Object?> get props => [id, timestamp, photoPath, glassSize, validated];
 
   @override
   String toString() {

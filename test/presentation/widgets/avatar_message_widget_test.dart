@@ -43,7 +43,9 @@ void main() {
         expect(textWidget.style?.color, const Color(0xFFFF9800)); // Orange
       });
 
-      testWidgets('should display dehydrated message for doctor', (tester) async {
+      testWidgets('should display dehydrated message for doctor', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           const MaterialApp(
             home: Scaffold(
@@ -55,7 +57,10 @@ void main() {
           ),
         );
 
-        expect(find.text('Déshydratation critique détectée ! ⚠️'), findsOneWidget);
+        expect(
+          find.text('Déshydratation critique détectée ! ⚠️'),
+          findsOneWidget,
+        );
 
         final textWidget = tester.widget<Text>(find.byType(Text));
         expect(textWidget.style?.color, const Color(0xFFF44336)); // Red
@@ -91,7 +96,10 @@ void main() {
           ),
         );
 
-        expect(find.text('Le patient est décédé... Résurrection prévue demain. 👻'), findsOneWidget);
+        expect(
+          find.text('Le patient est décédé... Résurrection prévue demain. 👻'),
+          findsOneWidget,
+        );
 
         final textWidget = tester.widget<Text>(find.byType(Text));
         expect(textWidget.style?.color, const Color(0xFF9E9E9E)); // Gray
@@ -114,7 +122,9 @@ void main() {
         expect(find.text('Super forme champion ! 💪'), findsOneWidget);
       });
 
-      testWidgets('should display tired message for coach (AC #3 example)', (tester) async {
+      testWidgets('should display tired message for coach (AC #3 example)', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           const MaterialApp(
             home: Scaffold(
@@ -126,10 +136,15 @@ void main() {
           ),
         );
 
-        expect(find.text('Allez champion, bois maintenant ! 💪'), findsOneWidget);
+        expect(
+          find.text('Allez champion, bois maintenant ! 💪'),
+          findsOneWidget,
+        );
       });
 
-      testWidgets('should display dehydrated message for coach', (tester) async {
+      testWidgets('should display dehydrated message for coach', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           const MaterialApp(
             home: Scaffold(
@@ -161,20 +176,23 @@ void main() {
         expect(find.text('Très bien mon petit ! 😊'), findsOneWidget);
       });
 
-      testWidgets('should display dehydrated message for mother (AC #3 example)', (tester) async {
-        await tester.pumpWidget(
-          const MaterialApp(
-            home: Scaffold(
-              body: AvatarMessageWidget(
-                personality: AvatarPersonality.authoritarianMother,
-                state: AvatarState.dehydrated,
+      testWidgets(
+        'should display dehydrated message for mother (AC #3 example)',
+        (tester) async {
+          await tester.pumpWidget(
+            const MaterialApp(
+              home: Scaffold(
+                body: AvatarMessageWidget(
+                  personality: AvatarPersonality.authoritarianMother,
+                  state: AvatarState.dehydrated,
+                ),
               ),
             ),
-          ),
-        );
+          );
 
-        expect(find.text('Tu veux que je m\'inquiète ?! 😟'), findsOneWidget);
-      });
+          expect(find.text('Tu veux que je m\'inquiète ?! 😟'), findsOneWidget);
+        },
+      );
     });
 
     group('Sarcastic Friend Personality', () {
@@ -193,7 +211,9 @@ void main() {
         expect(find.text('Nickel poto ! 😎'), findsOneWidget);
       });
 
-      testWidgets('should display dead message for friend (AC #3 example)', (tester) async {
+      testWidgets('should display dead message for friend (AC #3 example)', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           const MaterialApp(
             home: Scaffold(
@@ -210,7 +230,9 @@ void main() {
     });
 
     group('Text Styling', () {
-      testWidgets('should use correct font size (16px default)', (tester) async {
+      testWidgets('should use correct font size (16px default)', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           const MaterialApp(
             home: Scaffold(

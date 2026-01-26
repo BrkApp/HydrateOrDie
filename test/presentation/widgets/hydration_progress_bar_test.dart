@@ -9,10 +9,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: HydrationProgressBar(
-              currentVolume: 0,
-              goalVolume: 2500,
-            ),
+            body: HydrationProgressBar(currentVolume: 0, goalVolume: 2500),
           ),
         ),
       );
@@ -22,15 +19,14 @@ void main() {
       expect(find.text('0% • 0.0L / 2.5L'), findsOneWidget);
     });
 
-    testWidgets('should display progress bar with 50% progress', (tester) async {
+    testWidgets('should display progress bar with 50% progress', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: HydrationProgressBar(
-              currentVolume: 1250,
-              goalVolume: 2500,
-            ),
+            body: HydrationProgressBar(currentVolume: 1250, goalVolume: 2500),
           ),
         ),
       );
@@ -39,15 +35,14 @@ void main() {
       expect(find.text('50% • 1.3L / 2.5L'), findsOneWidget);
     });
 
-    testWidgets('should display progress bar with 100% progress', (tester) async {
+    testWidgets('should display progress bar with 100% progress', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: HydrationProgressBar(
-              currentVolume: 2500,
-              goalVolume: 2500,
-            ),
+            body: HydrationProgressBar(currentVolume: 2500, goalVolume: 2500),
           ),
         ),
       );
@@ -56,15 +51,14 @@ void main() {
       expect(find.text('100% • 2.5L / 2.5L'), findsOneWidget);
     });
 
-    testWidgets('should display progress bar with over 100% progress', (tester) async {
+    testWidgets('should display progress bar with over 100% progress', (
+      tester,
+    ) async {
       // Arrange
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: HydrationProgressBar(
-              currentVolume: 3000,
-              goalVolume: 2500,
-            ),
+            body: HydrationProgressBar(currentVolume: 3000, goalVolume: 2500),
           ),
         ),
       );
@@ -89,10 +83,12 @@ void main() {
 
       // Assert
       final container = tester.widget<Container>(
-        find.ancestor(
-          of: find.byType(AnimatedContainer),
-          matching: find.byType(Container),
-        ).first,
+        find
+            .ancestor(
+              of: find.byType(AnimatedContainer),
+              matching: find.byType(Container),
+            )
+            .first,
       );
       expect(container.constraints?.maxHeight, 60.0);
     });
@@ -102,10 +98,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: HydrationProgressBar(
-              currentVolume: 100,
-              goalVolume: 0,
-            ),
+            body: HydrationProgressBar(currentVolume: 100, goalVolume: 0),
           ),
         ),
       );
@@ -144,10 +137,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: HydrationProgressBar(
-              currentVolume: 1250,
-              goalVolume: 2500,
-            ),
+            body: HydrationProgressBar(currentVolume: 1250, goalVolume: 2500),
           ),
         ),
       );
@@ -162,7 +152,10 @@ void main() {
 
       final gradient = decoration.gradient as LinearGradient;
       expect(gradient.colors, contains(const Color(0xFF64B5F6))); // Light blue
-      expect(gradient.colors, contains(const Color(0xFF2196F3))); // Hydration blue
+      expect(
+        gradient.colors,
+        contains(const Color(0xFF2196F3)),
+      ); // Hydration blue
     });
 
     testWidgets('should have rounded corners (8px radius)', (tester) async {
@@ -170,20 +163,19 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: HydrationProgressBar(
-              currentVolume: 1000,
-              goalVolume: 2500,
-            ),
+            body: HydrationProgressBar(currentVolume: 1000, goalVolume: 2500),
           ),
         ),
       );
 
       // Assert
       final container = tester.widget<Container>(
-        find.ancestor(
-          of: find.byType(AnimatedContainer),
-          matching: find.byType(Container),
-        ).first,
+        find
+            .ancestor(
+              of: find.byType(AnimatedContainer),
+              matching: find.byType(Container),
+            )
+            .first,
       );
 
       final decoration = container.decoration as BoxDecoration;
@@ -195,10 +187,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: HydrationProgressBar(
-              currentVolume: 1000,
-              goalVolume: 2500,
-            ),
+            body: HydrationProgressBar(currentVolume: 1000, goalVolume: 2500),
           ),
         ),
       );
@@ -217,20 +206,19 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: HydrationProgressBar(
-              currentVolume: 500,
-              goalVolume: 2500,
-            ),
+            body: HydrationProgressBar(currentVolume: 500, goalVolume: 2500),
           ),
         ),
       );
 
       // Assert
       final container = tester.widget<Container>(
-        find.ancestor(
-          of: find.byType(AnimatedContainer),
-          matching: find.byType(Container),
-        ).first,
+        find
+            .ancestor(
+              of: find.byType(AnimatedContainer),
+              matching: find.byType(Container),
+            )
+            .first,
       );
 
       final decoration = container.decoration as BoxDecoration;
@@ -242,10 +230,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: HydrationProgressBar(
-              currentVolume: 1250,
-              goalVolume: 2500,
-            ),
+            body: HydrationProgressBar(currentVolume: 1250, goalVolume: 2500),
           ),
         ),
       );

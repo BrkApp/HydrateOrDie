@@ -53,7 +53,9 @@ void main() {
 
       test('should return true when activity level changes', () {
         final oldUser = testUser;
-        final newUser = testUser.copyWith(activityLevel: ActivityLevel.veryActive);
+        final newUser = testUser.copyWith(
+          activityLevel: ActivityLevel.veryActive,
+        );
         expect(newUser.needsGoalRecalculation(oldUser), true);
       });
 
@@ -79,7 +81,9 @@ void main() {
       });
 
       test('should create copy with updated activity level', () {
-        final updated = testUser.copyWith(activityLevel: ActivityLevel.veryActive);
+        final updated = testUser.copyWith(
+          activityLevel: ActivityLevel.veryActive,
+        );
         expect(updated.activityLevel, ActivityLevel.veryActive);
         expect(updated.weight, testUser.weight);
       });

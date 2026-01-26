@@ -32,8 +32,9 @@ void main() {
 
     test('should return null when no avatar selected', () async {
       // Arrange
-      when(mockLocalDataSource.getSelectedAvatarId())
-          .thenAnswer((_) async => null);
+      when(
+        mockLocalDataSource.getSelectedAvatarId(),
+      ).thenAnswer((_) async => null);
 
       // Act
       final result = await repository.getAvatar();
@@ -46,10 +47,12 @@ void main() {
 
     test('should return avatar when ID and state exist', () async {
       // Arrange
-      when(mockLocalDataSource.getSelectedAvatarId())
-          .thenAnswer((_) async => 'sportsCoach');
-      when(mockLocalDataSource.getAvatarState())
-          .thenAnswer((_) async => testDto);
+      when(
+        mockLocalDataSource.getSelectedAvatarId(),
+      ).thenAnswer((_) async => 'sportsCoach');
+      when(
+        mockLocalDataSource.getAvatarState(),
+      ).thenAnswer((_) async => testDto);
 
       // Act
       final result = await repository.getAvatar();
@@ -65,11 +68,13 @@ void main() {
 
     test('should create default state when ID exists but no state', () async {
       // Arrange
-      when(mockLocalDataSource.getSelectedAvatarId())
-          .thenAnswer((_) async => 'doctor');
+      when(
+        mockLocalDataSource.getSelectedAvatarId(),
+      ).thenAnswer((_) async => 'doctor');
       when(mockLocalDataSource.getAvatarState()).thenAnswer((_) async => null);
-      when(mockLocalDataSource.saveAvatarState(any))
-          .thenAnswer((_) async => {});
+      when(
+        mockLocalDataSource.saveAvatarState(any),
+      ).thenAnswer((_) async => {});
 
       // Act
       final result = await repository.getAvatar();
@@ -83,34 +88,37 @@ void main() {
       verify(mockLocalDataSource.saveAvatarState(any)).called(1);
     });
 
-    test('should throw StorageException when getSelectedAvatarId fails',
-        () async {
-      // Arrange
-      when(mockLocalDataSource.getSelectedAvatarId())
-          .thenThrow(DataSourceException('DB error'));
+    test(
+      'should throw StorageException when getSelectedAvatarId fails',
+      () async {
+        // Arrange
+        when(
+          mockLocalDataSource.getSelectedAvatarId(),
+        ).thenThrow(DataSourceException('DB error'));
 
-      // Act & Assert
-      expect(
-        () => repository.getAvatar(),
-        throwsA(isA<StorageException>()),
-      );
-    });
+        // Act & Assert
+        expect(() => repository.getAvatar(), throwsA(isA<StorageException>()));
+      },
+    );
   });
 
   group('AvatarRepositoryImpl - saveSelectedAvatar', () {
     test('should save avatar ID and initialize state', () async {
       // Arrange
-      when(mockLocalDataSource.saveSelectedAvatarId(any))
-          .thenAnswer((_) async => {});
-      when(mockLocalDataSource.saveAvatarState(any))
-          .thenAnswer((_) async => {});
+      when(
+        mockLocalDataSource.saveSelectedAvatarId(any),
+      ).thenAnswer((_) async => {});
+      when(
+        mockLocalDataSource.saveAvatarState(any),
+      ).thenAnswer((_) async => {});
 
       // Act
       await repository.saveSelectedAvatar('authoritarianMother');
 
       // Assert
-      verify(mockLocalDataSource.saveSelectedAvatarId('authoritarianMother'))
-          .called(1);
+      verify(
+        mockLocalDataSource.saveSelectedAvatarId('authoritarianMother'),
+      ).called(1);
       verify(mockLocalDataSource.saveAvatarState(any)).called(1);
     });
 
@@ -126,16 +134,18 @@ void main() {
 
     test('should accept all valid avatar IDs', () async {
       // Arrange
-      when(mockLocalDataSource.saveSelectedAvatarId(any))
-          .thenAnswer((_) async => {});
-      when(mockLocalDataSource.saveAvatarState(any))
-          .thenAnswer((_) async => {});
+      when(
+        mockLocalDataSource.saveSelectedAvatarId(any),
+      ).thenAnswer((_) async => {});
+      when(
+        mockLocalDataSource.saveAvatarState(any),
+      ).thenAnswer((_) async => {});
 
       final validIds = [
         'authoritarianMother',
         'sportsCoach',
         'doctor',
-        'sarcasticFriend'
+        'sarcasticFriend',
       ];
 
       // Act & Assert
@@ -147,8 +157,9 @@ void main() {
 
     test('should throw StorageException when save fails', () async {
       // Arrange
-      when(mockLocalDataSource.saveSelectedAvatarId(any))
-          .thenThrow(DataSourceException('Save failed'));
+      when(
+        mockLocalDataSource.saveSelectedAvatarId(any),
+      ).thenThrow(DataSourceException('Save failed'));
 
       // Act & Assert
       expect(
@@ -161,8 +172,9 @@ void main() {
   group('AvatarRepositoryImpl - updateAvatarState', () {
     test('should update avatar state to tired', () async {
       // Arrange
-      when(mockLocalDataSource.updateAvatarStateField(any))
-          .thenAnswer((_) async => {});
+      when(
+        mockLocalDataSource.updateAvatarStateField(any),
+      ).thenAnswer((_) async => {});
 
       // Act
       await repository.updateAvatarState(AvatarState.tired);
@@ -173,21 +185,24 @@ void main() {
 
     test('should update avatar state to dehydrated', () async {
       // Arrange
-      when(mockLocalDataSource.updateAvatarStateField(any))
-          .thenAnswer((_) async => {});
+      when(
+        mockLocalDataSource.updateAvatarStateField(any),
+      ).thenAnswer((_) async => {});
 
       // Act
       await repository.updateAvatarState(AvatarState.dehydrated);
 
       // Assert
-      verify(mockLocalDataSource.updateAvatarStateField('dehydrated'))
-          .called(1);
+      verify(
+        mockLocalDataSource.updateAvatarStateField('dehydrated'),
+      ).called(1);
     });
 
     test('should throw StorageException when update fails', () async {
       // Arrange
-      when(mockLocalDataSource.updateAvatarStateField(any))
-          .thenThrow(DataSourceException('Update failed'));
+      when(
+        mockLocalDataSource.updateAvatarStateField(any),
+      ).thenThrow(DataSourceException('Update failed'));
 
       // Act & Assert
       expect(
@@ -201,8 +216,9 @@ void main() {
     test('should update last drink time and reset state to fresh', () async {
       // Arrange
       final timestamp = DateTime.utc(2026, 1, 8, 14, 30, 0);
-      when(mockLocalDataSource.updateLastDrinkTime(any))
-          .thenAnswer((_) async => {});
+      when(
+        mockLocalDataSource.updateLastDrinkTime(any),
+      ).thenAnswer((_) async => {});
 
       // Act
       await repository.updateLastDrinkTime(timestamp);
@@ -214,8 +230,9 @@ void main() {
     test('should throw StorageException when update fails', () async {
       // Arrange
       final timestamp = DateTime.utc(2026, 1, 8, 14, 30, 0);
-      when(mockLocalDataSource.updateLastDrinkTime(any))
-          .thenThrow(DataSourceException('Update failed'));
+      when(
+        mockLocalDataSource.updateLastDrinkTime(any),
+      ).thenThrow(DataSourceException('Update failed'));
 
       // Act & Assert
       expect(
@@ -238,8 +255,9 @@ void main() {
 
     test('should return last drink time from state', () async {
       // Arrange
-      when(mockLocalDataSource.getAvatarState())
-          .thenAnswer((_) async => testDto);
+      when(
+        mockLocalDataSource.getAvatarState(),
+      ).thenAnswer((_) async => testDto);
 
       // Act
       final result = await repository.getLastDrinkTime();
@@ -264,8 +282,9 @@ void main() {
 
     test('should throw StorageException when get fails', () async {
       // Arrange
-      when(mockLocalDataSource.getAvatarState())
-          .thenThrow(DataSourceException('DB error'));
+      when(
+        mockLocalDataSource.getAvatarState(),
+      ).thenThrow(DataSourceException('DB error'));
 
       // Act & Assert
       expect(

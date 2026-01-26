@@ -33,8 +33,7 @@ class Streak extends Equatable {
   /// Returns new Streak with incremented current and updated longest if needed
   Streak incrementStreak(DateTime date) {
     final newCurrent = currentStreak + 1;
-    final newLongest =
-        newCurrent > longestStreak ? newCurrent : longestStreak;
+    final newLongest = newCurrent > longestStreak ? newCurrent : longestStreak;
 
     return Streak(
       currentStreak: newCurrent,
@@ -99,11 +98,11 @@ class Streak extends Equatable {
 
   @override
   List<Object?> get props => [
-        currentStreak,
-        longestStreak,
-        lastStreakDate,
-        streakActive,
-      ];
+    currentStreak,
+    longestStreak,
+    lastStreakDate,
+    streakActive,
+  ];
 
   @override
   String toString() {

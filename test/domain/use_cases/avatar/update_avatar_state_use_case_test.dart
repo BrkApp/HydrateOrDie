@@ -35,8 +35,9 @@ void main() {
           lastUpdated: now,
         );
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenAnswer((_) async => lastDrinkTime);
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
 
         // Act
@@ -61,8 +62,9 @@ void main() {
           lastUpdated: now,
         );
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenAnswer((_) async => lastDrinkTime);
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
 
         // Act
@@ -73,90 +75,109 @@ void main() {
         verifyNever(mockRepository.updateAvatarState(any));
       });
 
-      test('AC #2 - Transition Fresh → Tired (3h depuis dernier verre)',
-          () async {
-        // Arrange - Il y a 3 heures depuis le dernier verre
-        final now = DateTime.now();
-        final lastDrinkTime = now.subtract(const Duration(hours: 3));
-        final currentAvatar = Avatar(
-          id: 'avatar_singleton',
-          name: 'Docteur',
-          personality: AvatarPersonality.doctor,
-          currentState: AvatarState.fresh,
-          lastDrinkTime: lastDrinkTime,
-          lastUpdated: now,
-        );
+      test(
+        'AC #2 - Transition Fresh → Tired (3h depuis dernier verre)',
+        () async {
+          // Arrange - Il y a 3 heures depuis le dernier verre
+          final now = DateTime.now();
+          final lastDrinkTime = now.subtract(const Duration(hours: 3));
+          final currentAvatar = Avatar(
+            id: 'avatar_singleton',
+            name: 'Docteur',
+            personality: AvatarPersonality.doctor,
+            currentState: AvatarState.fresh,
+            lastDrinkTime: lastDrinkTime,
+            lastUpdated: now,
+          );
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
-        when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
-        when(mockRepository.updateAvatarState(AvatarState.tired))
-            .thenAnswer((_) async => {});
+          when(
+            mockRepository.getLastDrinkTime(),
+          ).thenAnswer((_) async => lastDrinkTime);
+          when(
+            mockRepository.getAvatar(),
+          ).thenAnswer((_) async => currentAvatar);
+          when(
+            mockRepository.updateAvatarState(AvatarState.tired),
+          ).thenAnswer((_) async => {});
 
-        // Act
-        final result = await useCase.execute();
+          // Act
+          final result = await useCase.execute();
 
-        // Assert
-        expect(result, AvatarState.tired);
-        verify(mockRepository.updateAvatarState(AvatarState.tired)).called(1);
-      });
+          // Assert
+          expect(result, AvatarState.tired);
+          verify(mockRepository.updateAvatarState(AvatarState.tired)).called(1);
+        },
+      );
 
-      test('AC #2 - Transition Tired → Dehydrated (5h depuis dernier verre)',
-          () async {
-        // Arrange - Il y a 5 heures depuis le dernier verre
-        final now = DateTime.now();
-        final lastDrinkTime = now.subtract(const Duration(hours: 5));
-        final currentAvatar = Avatar(
-          id: 'avatar_singleton',
-          name: 'Coach',
-          personality: AvatarPersonality.sportsCoach,
-          currentState: AvatarState.tired,
-          lastDrinkTime: lastDrinkTime,
-          lastUpdated: now,
-        );
+      test(
+        'AC #2 - Transition Tired → Dehydrated (5h depuis dernier verre)',
+        () async {
+          // Arrange - Il y a 5 heures depuis le dernier verre
+          final now = DateTime.now();
+          final lastDrinkTime = now.subtract(const Duration(hours: 5));
+          final currentAvatar = Avatar(
+            id: 'avatar_singleton',
+            name: 'Coach',
+            personality: AvatarPersonality.sportsCoach,
+            currentState: AvatarState.tired,
+            lastDrinkTime: lastDrinkTime,
+            lastUpdated: now,
+          );
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
-        when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
-        when(mockRepository.updateAvatarState(AvatarState.dehydrated))
-            .thenAnswer((_) async => {});
+          when(
+            mockRepository.getLastDrinkTime(),
+          ).thenAnswer((_) async => lastDrinkTime);
+          when(
+            mockRepository.getAvatar(),
+          ).thenAnswer((_) async => currentAvatar);
+          when(
+            mockRepository.updateAvatarState(AvatarState.dehydrated),
+          ).thenAnswer((_) async => {});
 
-        // Act
-        final result = await useCase.execute();
+          // Act
+          final result = await useCase.execute();
 
-        // Assert
-        expect(result, AvatarState.dehydrated);
-        verify(mockRepository.updateAvatarState(AvatarState.dehydrated))
-            .called(1);
-      });
+          // Assert
+          expect(result, AvatarState.dehydrated);
+          verify(
+            mockRepository.updateAvatarState(AvatarState.dehydrated),
+          ).called(1);
+        },
+      );
 
-      test('AC #2 - Transition Dehydrated → Dead (7h depuis dernier verre)',
-          () async {
-        // Arrange - Il y a 7 heures depuis le dernier verre
-        final now = DateTime.now();
-        final lastDrinkTime = now.subtract(const Duration(hours: 7));
-        final currentAvatar = Avatar(
-          id: 'avatar_singleton',
-          name: 'Maman',
-          personality: AvatarPersonality.authoritarianMother,
-          currentState: AvatarState.dehydrated,
-          lastDrinkTime: lastDrinkTime,
-          lastUpdated: now,
-        );
+      test(
+        'AC #2 - Transition Dehydrated → Dead (7h depuis dernier verre)',
+        () async {
+          // Arrange - Il y a 7 heures depuis le dernier verre
+          final now = DateTime.now();
+          final lastDrinkTime = now.subtract(const Duration(hours: 7));
+          final currentAvatar = Avatar(
+            id: 'avatar_singleton',
+            name: 'Maman',
+            personality: AvatarPersonality.authoritarianMother,
+            currentState: AvatarState.dehydrated,
+            lastDrinkTime: lastDrinkTime,
+            lastUpdated: now,
+          );
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
-        when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
-        when(mockRepository.updateAvatarState(AvatarState.dead))
-            .thenAnswer((_) async => {});
+          when(
+            mockRepository.getLastDrinkTime(),
+          ).thenAnswer((_) async => lastDrinkTime);
+          when(
+            mockRepository.getAvatar(),
+          ).thenAnswer((_) async => currentAvatar);
+          when(
+            mockRepository.updateAvatarState(AvatarState.dead),
+          ).thenAnswer((_) async => {});
 
-        // Act
-        final result = await useCase.execute();
+          // Act
+          final result = await useCase.execute();
 
-        // Assert
-        expect(result, AvatarState.dead);
-        verify(mockRepository.updateAvatarState(AvatarState.dead)).called(1);
-      });
+          // Assert
+          expect(result, AvatarState.dead);
+          verify(mockRepository.updateAvatarState(AvatarState.dead)).called(1);
+        },
+      );
 
       test('AC #2 - Seuil exact 2h (Fresh → Tired)', () async {
         // Arrange - Exactement 2 heures depuis le dernier verre
@@ -171,11 +192,13 @@ void main() {
           lastUpdated: now,
         );
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenAnswer((_) async => lastDrinkTime);
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
-        when(mockRepository.updateAvatarState(AvatarState.tired))
-            .thenAnswer((_) async => {});
+        when(
+          mockRepository.updateAvatarState(AvatarState.tired),
+        ).thenAnswer((_) async => {});
 
         // Act
         final result = await useCase.execute();
@@ -198,19 +221,22 @@ void main() {
           lastUpdated: now,
         );
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenAnswer((_) async => lastDrinkTime);
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
-        when(mockRepository.updateAvatarState(AvatarState.dehydrated))
-            .thenAnswer((_) async => {});
+        when(
+          mockRepository.updateAvatarState(AvatarState.dehydrated),
+        ).thenAnswer((_) async => {});
 
         // Act
         final result = await useCase.execute();
 
         // Assert
         expect(result, AvatarState.dehydrated);
-        verify(mockRepository.updateAvatarState(AvatarState.dehydrated))
-            .called(1);
+        verify(
+          mockRepository.updateAvatarState(AvatarState.dehydrated),
+        ).called(1);
       });
 
       test('AC #2 - Seuil exact 6h (Dehydrated → Dead)', () async {
@@ -226,11 +252,13 @@ void main() {
           lastUpdated: now,
         );
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenAnswer((_) async => lastDrinkTime);
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
-        when(mockRepository.updateAvatarState(AvatarState.dead))
-            .thenAnswer((_) async => {});
+        when(
+          mockRepository.updateAvatarState(AvatarState.dead),
+        ).thenAnswer((_) async => {});
 
         // Act
         final result = await useCase.execute();
@@ -246,11 +274,11 @@ void main() {
         // Arrange
         final lastDrinkTime = DateTime.now().subtract(const Duration(hours: 5));
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenAnswer((_) async => lastDrinkTime);
         when(mockRepository.getAvatar()).thenAnswer((_) async => null);
-        when(mockRepository.updateAvatarState(any))
-            .thenAnswer((_) async => {});
+        when(mockRepository.updateAvatarState(any)).thenAnswer((_) async => {});
 
         // Act
         final result = await useCase.execute();
@@ -287,11 +315,13 @@ void main() {
           lastUpdated: now,
         );
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenAnswer((_) async => lastDrinkTime);
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
-        when(mockRepository.updateAvatarState(AvatarState.tired))
-            .thenAnswer((_) async => {});
+        when(
+          mockRepository.updateAvatarState(AvatarState.tired),
+        ).thenAnswer((_) async => {});
 
         // Act
         await useCase.execute();
@@ -313,8 +343,9 @@ void main() {
           lastUpdated: now,
         );
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenAnswer((_) async => lastDrinkTime);
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
 
         // Act
@@ -329,14 +360,12 @@ void main() {
       test('Propage StorageException si getLastDrinkTime échoue', () async {
         // Arrange
         when(mockRepository.getAvatar()).thenAnswer((_) async => null);
-        when(mockRepository.getLastDrinkTime())
-            .thenThrow(StorageException('Database error'));
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenThrow(StorageException('Database error'));
 
         // Act & Assert
-        expect(
-          () => useCase.execute(),
-          throwsA(isA<StorageException>()),
-        );
+        expect(() => useCase.execute(), throwsA(isA<StorageException>()));
       });
 
       test('Propage StorageException si updateAvatarState échoue', () async {
@@ -352,17 +381,16 @@ void main() {
           lastUpdated: now,
         );
 
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenAnswer((_) async => lastDrinkTime);
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
-        when(mockRepository.updateAvatarState(any))
-            .thenThrow(StorageException('Update failed'));
+        when(
+          mockRepository.updateAvatarState(any),
+        ).thenThrow(StorageException('Update failed'));
 
         // Act & Assert
-        expect(
-          () => useCase.execute(),
-          throwsA(isA<StorageException>()),
-        );
+        expect(() => useCase.execute(), throwsA(isA<StorageException>()));
       });
     });
 
@@ -410,8 +438,9 @@ void main() {
 
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
         when(mockRepository.getDeathTime()).thenAnswer((_) async => deathTime);
-        when(mockRepository.updateAvatarState(AvatarState.ghost))
-            .thenAnswer((_) async => {});
+        when(
+          mockRepository.updateAvatarState(AvatarState.ghost),
+        ).thenAnswer((_) async => {});
 
         // Act
         final result = await useCase.execute();
@@ -438,8 +467,9 @@ void main() {
 
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
         when(mockRepository.getDeathTime()).thenAnswer((_) async => deathTime);
-        when(mockRepository.updateAvatarState(AvatarState.ghost))
-            .thenAnswer((_) async => {});
+        when(
+          mockRepository.updateAvatarState(AvatarState.ghost),
+        ).thenAnswer((_) async => {});
 
         // Act
         final result = await useCase.execute();
@@ -489,10 +519,12 @@ void main() {
         );
 
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
-        when(mockRepository.updateAvatarState(AvatarState.dead))
-            .thenAnswer((_) async => {});
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenAnswer((_) async => lastDrinkTime);
+        when(
+          mockRepository.updateAvatarState(AvatarState.dead),
+        ).thenAnswer((_) async => {});
         when(mockRepository.updateDeathTime(any)).thenAnswer((_) async => {});
 
         // Act
@@ -519,10 +551,12 @@ void main() {
         );
 
         when(mockRepository.getAvatar()).thenAnswer((_) async => currentAvatar);
-        when(mockRepository.getDeathTime())
-            .thenAnswer((_) async => null); // Pas de deathTime
-        when(mockRepository.getLastDrinkTime())
-            .thenAnswer((_) async => lastDrinkTime);
+        when(
+          mockRepository.getDeathTime(),
+        ).thenAnswer((_) async => null); // Pas de deathTime
+        when(
+          mockRepository.getLastDrinkTime(),
+        ).thenAnswer((_) async => lastDrinkTime);
 
         // Act
         final result = await useCase.execute();
@@ -545,7 +579,9 @@ void main() {
       test('Story 1.7 - Constante kDeadToGhostDelay définie', () {
         // Assert
         expect(
-            UpdateAvatarStateUseCase.kDeadToGhostDelay, const Duration(seconds: 10));
+          UpdateAvatarStateUseCase.kDeadToGhostDelay,
+          const Duration(seconds: 10),
+        );
       });
     });
   });

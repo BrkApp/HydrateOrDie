@@ -35,8 +35,7 @@ void main() {
 
         when(mockRepository.getAvatar()).thenAnswer((_) async => ghostAvatar);
         when(mockRepository.updateAvatarState(any)).thenAnswer((_) async {});
-        when(mockRepository.updateLastDrinkTime(any))
-            .thenAnswer((_) async {});
+        when(mockRepository.updateLastDrinkTime(any)).thenAnswer((_) async {});
         when(mockRepository.updateDeathTime(any)).thenAnswer((_) async {});
 
         // Act
@@ -105,68 +104,79 @@ void main() {
         verifyNever(mockRepository.updateAvatarState(any));
       });
 
-      test('AC #6 - Should reset lastDrinkTime to current time on resurrection',
-          () async {
-        // Arrange
-        final ghostAvatar = Avatar(
-          id: 'test-id',
-          name: 'Test Avatar',
-          personality: AvatarPersonality.sportsCoach,
-          currentState: AvatarState.ghost,
-          lastDrinkTime: DateTime(2024, 1, 1, 6, 0), // Old timestamp
-          lastUpdated: DateTime(2024, 1, 1, 12, 0),
-        );
+      test(
+        'AC #6 - Should reset lastDrinkTime to current time on resurrection',
+        () async {
+          // Arrange
+          final ghostAvatar = Avatar(
+            id: 'test-id',
+            name: 'Test Avatar',
+            personality: AvatarPersonality.sportsCoach,
+            currentState: AvatarState.ghost,
+            lastDrinkTime: DateTime(2024, 1, 1, 6, 0), // Old timestamp
+            lastUpdated: DateTime(2024, 1, 1, 12, 0),
+          );
 
-        when(mockRepository.getAvatar()).thenAnswer((_) async => ghostAvatar);
-        when(mockRepository.updateAvatarState(any)).thenAnswer((_) async {});
-        when(mockRepository.updateLastDrinkTime(any)).thenAnswer((_) async {});
-        when(mockRepository.updateDeathTime(any)).thenAnswer((_) async {});
+          when(mockRepository.getAvatar()).thenAnswer((_) async => ghostAvatar);
+          when(mockRepository.updateAvatarState(any)).thenAnswer((_) async {});
+          when(
+            mockRepository.updateLastDrinkTime(any),
+          ).thenAnswer((_) async {});
+          when(mockRepository.updateDeathTime(any)).thenAnswer((_) async {});
 
-        final beforeExecution = DateTime.now();
+          final beforeExecution = DateTime.now();
 
-        // Act
-        await useCase.execute();
+          // Act
+          await useCase.execute();
 
-        final afterExecution = DateTime.now();
+          final afterExecution = DateTime.now();
 
-        // Assert - Verify lastDrinkTime was updated (captured by 'any' matcher)
-        final captured = verify(mockRepository.updateLastDrinkTime(captureAny))
-            .captured
-            .single as DateTime;
-        expect(
-          captured
-              .isAfter(beforeExecution.subtract(const Duration(seconds: 1))),
-          true,
-        );
-        expect(
-          captured.isBefore(afterExecution.add(const Duration(seconds: 1))),
-          true,
-        );
-      });
+          // Assert - Verify lastDrinkTime was updated (captured by 'any' matcher)
+          final captured =
+              verify(
+                    mockRepository.updateLastDrinkTime(captureAny),
+                  ).captured.single
+                  as DateTime;
+          expect(
+            captured.isAfter(
+              beforeExecution.subtract(const Duration(seconds: 1)),
+            ),
+            true,
+          );
+          expect(
+            captured.isBefore(afterExecution.add(const Duration(seconds: 1))),
+            true,
+          );
+        },
+      );
 
-      test('AC #6 - Should clear deathTime (set to null) on resurrection',
-          () async {
-        // Arrange
-        final ghostAvatar = Avatar(
-          id: 'test-id',
-          name: 'Test Avatar',
-          personality: AvatarPersonality.authoritarianMother,
-          currentState: AvatarState.ghost,
-          lastDrinkTime: DateTime(2024, 1, 1, 12, 0),
-          lastUpdated: DateTime(2024, 1, 1, 12, 0),
-        );
+      test(
+        'AC #6 - Should clear deathTime (set to null) on resurrection',
+        () async {
+          // Arrange
+          final ghostAvatar = Avatar(
+            id: 'test-id',
+            name: 'Test Avatar',
+            personality: AvatarPersonality.authoritarianMother,
+            currentState: AvatarState.ghost,
+            lastDrinkTime: DateTime(2024, 1, 1, 12, 0),
+            lastUpdated: DateTime(2024, 1, 1, 12, 0),
+          );
 
-        when(mockRepository.getAvatar()).thenAnswer((_) async => ghostAvatar);
-        when(mockRepository.updateAvatarState(any)).thenAnswer((_) async {});
-        when(mockRepository.updateLastDrinkTime(any)).thenAnswer((_) async {});
-        when(mockRepository.updateDeathTime(any)).thenAnswer((_) async {});
+          when(mockRepository.getAvatar()).thenAnswer((_) async => ghostAvatar);
+          when(mockRepository.updateAvatarState(any)).thenAnswer((_) async {});
+          when(
+            mockRepository.updateLastDrinkTime(any),
+          ).thenAnswer((_) async {});
+          when(mockRepository.updateDeathTime(any)).thenAnswer((_) async {});
 
-        // Act
-        await useCase.execute();
+          // Act
+          await useCase.execute();
 
-        // Assert
-        verify(mockRepository.updateDeathTime(null)).called(1);
-      });
+          // Assert
+          verify(mockRepository.updateDeathTime(null)).called(1);
+        },
+      );
 
       test('Should throw StorageException when repository fails', () async {
         // Arrange
@@ -180,18 +190,12 @@ void main() {
         );
 
         when(mockRepository.getAvatar()).thenAnswer((_) async => ghostAvatar);
-        when(mockRepository.updateAvatarState(any)).thenThrow(
-          StorageException(
-            'Database error',
-            code: 'DB_ERROR',
-          ),
-        );
+        when(
+          mockRepository.updateAvatarState(any),
+        ).thenThrow(StorageException('Database error', code: 'DB_ERROR'));
 
         // Act & Assert
-        expect(
-          () => useCase.execute(),
-          throwsA(isA<StorageException>()),
-        );
+        expect(() => useCase.execute(), throwsA(isA<StorageException>()));
       });
     });
   });

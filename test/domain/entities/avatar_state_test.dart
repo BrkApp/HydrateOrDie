@@ -52,26 +52,28 @@ void main() {
 
     group('getAssetPath', () {
       test('should return correct path for sports coach fresh', () {
-        final path = AvatarState.fresh
-            .getAssetPath(AvatarPersonality.sportsCoach);
+        final path = AvatarState.fresh.getAssetPath(
+          AvatarPersonality.sportsCoach,
+        );
         expect(path, 'assets/images/avatars/sportsCoach/fresh.png');
       });
 
       test('should return correct path for doctor tired', () {
-        final path = AvatarState.tired
-            .getAssetPath(AvatarPersonality.doctor);
+        final path = AvatarState.tired.getAssetPath(AvatarPersonality.doctor);
         expect(path, 'assets/images/avatars/doctor/tired.png');
       });
 
       test('should return correct path for authoritarian mother dead', () {
-        final path = AvatarState.dead
-            .getAssetPath(AvatarPersonality.authoritarianMother);
+        final path = AvatarState.dead.getAssetPath(
+          AvatarPersonality.authoritarianMother,
+        );
         expect(path, 'assets/images/avatars/authoritarianMother/dead.png');
       });
 
       test('should return correct path for sarcastic friend ghost', () {
-        final path = AvatarState.ghost
-            .getAssetPath(AvatarPersonality.sarcasticFriend);
+        final path = AvatarState.ghost.getAssetPath(
+          AvatarPersonality.sarcasticFriend,
+        );
         expect(path, 'assets/images/avatars/sarcasticFriend/ghost.png');
       });
     });

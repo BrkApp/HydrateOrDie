@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hydrate_or_die/domain/entities/avatar_personality.dart';
 import 'package:hydrate_or_die/domain/entities/avatar_state.dart';
@@ -48,13 +49,13 @@ class HomeNotifier extends StateNotifier<HomeState> {
   final AvatarRepository _avatarRepository;
   Timer? _refreshTimer;
 
-  HomeNotifier(
-    this._updateAvatarStateUseCase,
-    this._avatarRepository,
-  ) : super(const HomeState(
+  HomeNotifier(this._updateAvatarStateUseCase, this._avatarRepository)
+    : super(
+        const HomeState(
           personality: AvatarPersonality.doctor, // Default
           state: AvatarState.fresh,
-        )) {
+        ),
+      ) {
     _init();
   }
 
@@ -74,18 +75,18 @@ class HomeNotifier extends StateNotifier<HomeState> {
       final avatar = await _avatarRepository.getAvatar();
 
       state = state.copyWith(
-        personality: avatar?.personality ?? AvatarPersonality.doctor, // Default if null
+        personality:
+            avatar?.personality ?? AvatarPersonality.doctor, // Default if null
         state: newState,
         lastDrinkTime: avatar?.lastDrinkTime,
         isLoading: false,
         errorMessage: null,
       );
     } catch (e) {
-      print('[HomeProvider] Error refreshing state: $e');
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: e.toString(),
-      );
+      if (kDebugMode) {
+        debugPrint('[HomeProvider] Error refreshing state: $e');
+      }
+      state = state.copyWith(isLoading: false, errorMessage: e.toString());
     }
   }
 
@@ -93,22 +94,25 @@ class HomeNotifier extends StateNotifier<HomeState> {
   void _startAutoRefresh() {
     _refreshTimer?.cancel(); // Cancel existing timer if any
 
-    _refreshTimer = Timer.periodic(
-      const Duration(seconds: 60),
-      (_) async {
-        print('[HomeProvider] Auto-refresh triggered (60s interval)');
-        await refresh();
-      },
-    );
+    _refreshTimer = Timer.periodic(const Duration(seconds: 60), (_) async {
+      if (kDebugMode) {
+        debugPrint('[HomeProvider] Auto-refresh triggered (60s interval)');
+      }
+      await refresh();
+    });
 
-    print('[HomeProvider] Auto-refresh timer started (60s interval)');
+    if (kDebugMode) {
+      debugPrint('[HomeProvider] Auto-refresh timer started (60s interval)');
+    }
   }
 
   /// Stop automatic refresh timer - called on dispose
   void _stopAutoRefresh() {
     _refreshTimer?.cancel();
     _refreshTimer = null;
-    print('[HomeProvider] Auto-refresh timer stopped');
+    if (kDebugMode) {
+      debugPrint('[HomeProvider] Auto-refresh timer stopped');
+    }
   }
 
   @override
@@ -123,8 +127,5 @@ final homeProvider = StateNotifierProvider<HomeNotifier, HomeState>((ref) {
   final updateAvatarStateUseCase = getIt<UpdateAvatarStateUseCase>();
   final avatarRepository = getIt<AvatarRepository>();
 
-  return HomeNotifier(
-    updateAvatarStateUseCase,
-    avatarRepository,
-  );
+  return HomeNotifier(updateAvatarStateUseCase, avatarRepository);
 });

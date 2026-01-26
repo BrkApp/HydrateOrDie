@@ -50,7 +50,9 @@ class HydrationProgressBar extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         color: const Color(0xFFE0E0E0), // Background gray (spec ligne 1262)
-        borderRadius: BorderRadius.circular(8.0), // Radius 8px (spec ligne 1261)
+        borderRadius: BorderRadius.circular(
+          8.0,
+        ), // Radius 8px (spec ligne 1261)
       ),
       child: Stack(
         children: [

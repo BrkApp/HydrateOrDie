@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hydrate_or_die/presentation/providers/onboarding_provider.dart';
+import 'package:hydrate_or_die/presentation/widgets/embedded_onboarding_context.dart';
 
 /// Onboarding Screen - Step 2: Age Input
 ///
@@ -98,7 +99,108 @@ class _OnboardingAgeScreenState extends ConsumerState<OnboardingAgeScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final embeddedContext = EmbeddedOnboardingContext.of(context);
+    final isEmbedded = embeddedContext.isEmbedded;
 
+    // Build the main content
+    final content = Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Progress indicator
+          Text(
+            'Étape 2 sur 5',
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 32),
+
+          // Title
+          Text(
+            'Quel âge as-tu ?',
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+
+          // Subtitle
+          Text(
+            'Ton besoin en eau varie selon l\'âge',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 48),
+
+          // Age input field
+          TextField(
+            controller: _ageController,
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: InputDecoration(
+              labelText: 'Âge',
+              suffixText: 'ans',
+              errorText: _errorMessage,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              filled: true,
+            ),
+            onChanged: (value) {
+              // Clear error when user starts typing
+              if (_errorMessage != null) {
+                setState(() {
+                  _errorMessage = null;
+                });
+              }
+
+              // Update provider in real-time for embedded flow validation
+              if (embeddedContext.isEmbedded) {
+                final age = int.tryParse(value.trim());
+                if (age != null) {
+                  // Validate range before updating (10-120 years)
+                  if (age >= 10 && age <= 120) {
+                    ref.read(onboardingProvider.notifier).updateAge(age);
+                  }
+                }
+              }
+            },
+          ),
+          const Spacer(),
+
+          // Next button (only show if NOT embedded in flow)
+          if (!isEmbedded) ...[
+            ElevatedButton(
+              onPressed: _handleNext,
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text(
+                'Suivant',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
+        ],
+      ),
+    );
+
+    // If embedded in flow, return content without Scaffold
+    if (isEmbedded) {
+      return SafeArea(child: content);
+    }
+
+    // If standalone, wrap in Scaffold with AppBar
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -108,91 +210,7 @@ class _OnboardingAgeScreenState extends ConsumerState<OnboardingAgeScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Progress indicator
-              Text(
-                'Étape 2 sur 5',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 32),
-
-              // Title
-              Text(
-                'Quel âge as-tu ?',
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 12),
-
-              // Subtitle
-              Text(
-                'Ton besoin en eau varie selon l\'âge',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 48),
-
-              // Age input field
-              TextField(
-                controller: _ageController,
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-                decoration: InputDecoration(
-                  labelText: 'Âge',
-                  suffixText: 'ans',
-                  errorText: _errorMessage,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  filled: true,
-                ),
-                onChanged: (_) {
-                  // Clear error when user starts typing
-                  if (_errorMessage != null) {
-                    setState(() {
-                      _errorMessage = null;
-                    });
-                  }
-                },
-              ),
-              const Spacer(),
-
-              // Next button
-              ElevatedButton(
-                onPressed: _handleNext,
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text(
-                  'Suivant',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
-        ),
-      ),
+      body: SafeArea(child: content),
     );
   }
 }

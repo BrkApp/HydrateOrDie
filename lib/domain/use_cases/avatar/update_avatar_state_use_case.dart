@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../../entities/avatar_state.dart';
 import '../../repositories/avatar_repository.dart';
 
@@ -25,11 +27,10 @@ import '../../repositories/avatar_repository.dart';
 class UpdateAvatarStateUseCase {
   final AvatarRepository _avatarRepository;
 
-  /// Seuils de transition (en heures pour prod, en minutes pour tests Epic 1)
-  /// TODO Epic 1: Remettre en heures après validation (2h/4h/6h)
-  static const int kFreshToTired = 2; // minutes pour tests (sera 2h en prod)
-  static const int kTiredToDehydrated = 4; // minutes pour tests (sera 4h en prod)
-  static const int kDehydratedToDead = 6; // minutes pour tests (sera 6h en prod)
+  /// Seuils de transition en heures
+  static const int kFreshToTired = 2; // heures
+  static const int kTiredToDehydrated = 4; // heures
+  static const int kDehydratedToDead = 6; // heures
 
   /// Durée après laquelle dead → ghost (10 secondes)
   static const Duration kDeadToGhostDelay = Duration(seconds: 10);
@@ -55,7 +56,11 @@ class UpdateAvatarStateUseCase {
 
       // 2. Si déjà ghost, rester ghost (résurrection gérée par CheckAndResurrectAvatarUseCase)
       if (currentState == AvatarState.ghost) {
-        print('[UpdateAvatarState] État ghost - Aucune mise à jour (résurrection à minuit)');
+        if (kDebugMode) {
+          debugPrint(
+            '[UpdateAvatarState] État ghost - Aucune mise à jour (résurrection à minuit)',
+          );
+        }
         return AvatarState.ghost;
       }
 
@@ -69,11 +74,19 @@ class UpdateAvatarStateUseCase {
           if (timeSinceDeath >= kDeadToGhostDelay) {
             // Transition dead → ghost
             await _avatarRepository.updateAvatarState(AvatarState.ghost);
-            print('[UpdateAvatarState] Transition: dead → ghost (${timeSinceDeath.inSeconds}s depuis mort)');
+            if (kDebugMode) {
+              debugPrint(
+                '[UpdateAvatarState] Transition: dead → ghost (${timeSinceDeath.inSeconds}s depuis mort)',
+              );
+            }
             return AvatarState.ghost;
           } else {
             // Encore en dead, pas assez de temps écoulé
-            print('[UpdateAvatarState] État dead - ${kDeadToGhostDelay.inSeconds - timeSinceDeath.inSeconds}s avant transition ghost');
+            if (kDebugMode) {
+              debugPrint(
+                '[UpdateAvatarState] État dead - ${kDeadToGhostDelay.inSeconds - timeSinceDeath.inSeconds}s avant transition ghost',
+              );
+            }
             return AvatarState.dead;
           }
         }
@@ -84,7 +97,11 @@ class UpdateAvatarStateUseCase {
 
       // Si pas de lastDrinkTime, considérer l'avatar comme Fresh par défaut
       if (lastDrinkTime == null) {
-        print('[UpdateAvatarState] Aucun lastDrinkTime trouvé - État par défaut: fresh');
+        if (kDebugMode) {
+          debugPrint(
+            '[UpdateAvatarState] Aucun lastDrinkTime trouvé - État par défaut: fresh',
+          );
+        }
         return AvatarState.fresh;
       }
 
@@ -98,43 +115,54 @@ class UpdateAvatarStateUseCase {
       // 7. Mettre à jour si l'état a changé
       if (currentState != newState) {
         await _avatarRepository.updateAvatarState(newState);
-        print('[UpdateAvatarState] Transition: $currentState → $newState (${elapsed.inMinutes}min depuis dernier verre)');
+        if (kDebugMode) {
+          debugPrint(
+            '[UpdateAvatarState] Transition: $currentState → $newState (${elapsed.inHours}min depuis dernier verre)',
+          );
+        }
 
         // Si transition vers dead, enregistrer le deathTime
         if (newState == AvatarState.dead) {
           await _avatarRepository.updateDeathTime(now);
-          print('[UpdateAvatarState] Death time enregistré: $now');
+          if (kDebugMode) {
+            debugPrint('[UpdateAvatarState] Death time enregistré: $now');
+          }
         }
       } else {
-        print('[UpdateAvatarState] État inchangé: $currentState (${elapsed.inMinutes}min depuis dernier verre)');
+        if (kDebugMode) {
+          debugPrint(
+            '[UpdateAvatarState] État inchangé: $currentState (${elapsed.inHours}min depuis dernier verre)',
+          );
+        }
       }
 
       return newState;
     } catch (e) {
-      print('[UpdateAvatarState] Erreur lors de la mise à jour: $e');
+      if (kDebugMode) {
+        debugPrint('[UpdateAvatarState] Erreur lors de la mise à jour: $e');
+      }
       rethrow;
     }
   }
 
   /// Calcule l'état de l'avatar basé sur le temps écoulé depuis le dernier verre
   ///
-  /// Règles de transition (TEMP pour tests Epic 1 - en MINUTES):
-  /// - 0-2min: Fresh (😊) [sera 0-2h en prod]
-  /// - 2-4min: Tired (😐) [sera 2-4h en prod]
-  /// - 4-6min: Dehydrated (😟) [sera 4-6h en prod]
-  /// - 6min+: Dead (💀) [sera 6h+ en prod]
+  /// Règles de transition en heures:
+  /// - 0-2h: Fresh (😊)
+  /// - 2-4h: Tired (😐)
+  /// - 4-6h: Dehydrated (😟)
+  /// - 6h+: Dead (💀)
   ///
   /// [timeSinceLastDrink] Durée écoulée depuis le dernier verre validé
   /// Retourne le nouvel [AvatarState] correspondant
   AvatarState _calculateState(Duration timeSinceLastDrink) {
-    // TEMP: Utiliser minutes au lieu d'heures pour tests Epic 1
-    final minutes = timeSinceLastDrink.inMinutes;
+    final hours = timeSinceLastDrink.inHours;
 
-    if (minutes < kFreshToTired) {
+    if (hours < kFreshToTired) {
       return AvatarState.fresh;
-    } else if (minutes < kTiredToDehydrated) {
+    } else if (hours < kTiredToDehydrated) {
       return AvatarState.tired;
-    } else if (minutes < kDehydratedToDead) {
+    } else if (hours < kDehydratedToDead) {
       return AvatarState.dehydrated;
     } else {
       return AvatarState.dead;

@@ -2,9 +2,10 @@
 
 **Epic:** Epic 2 - Onboarding & Personnalisation
 **Story ID:** 2.9
-**Status:** Not Started
+**Status:** Ready for Review
 **Priority:** Critical
 **Estimated Effort:** 5 hours
+**Actual Effort:** 3 hours
 
 ---
 
@@ -48,12 +49,12 @@
 
 ## Definition of Done
 
-- [ ] Tous les AC validés
-- [ ] Widget tests passent
-- [ ] Integration test passe
-- [ ] Calcul objectif correct
-- [ ] Sauvegarde fonctionne
-- [ ] Navigation finale OK
+- [x] Tous les AC validés (7/8, AC8 optionnel)
+- [x] Widget tests passent (13/13)
+- [ ] Integration test passe (Optionnel - Story 2.10)
+- [x] Calcul objectif correct
+- [x] Sauvegarde fonctionne
+- [x] Navigation finale OK
 - [ ] PM approval
 
 ---

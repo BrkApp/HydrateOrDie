@@ -2,9 +2,9 @@
 
 **Epic:** Epic 3 - Validation Photo & Feedback Positif
 **Story ID:** 3.5
-**Status:** Not Started
-**Priority:** Medium
-**Estimated Effort:** 6 hours
+**Status:** DEFERRED TO V2 (PM Decision 2026-01-16)
+**Priority:** Low (V2)
+**Estimated Effort:** 6 hours (si V2)
 
 ---
 
@@ -30,13 +30,36 @@
 
 ---
 
-## Technical Notes
+## PM Decision (2026-01-16)
+
+**DÉCISION: Story déférée en V2**
+
+**Raisons:**
+1. **AC trop vagues:** AC #2 "OpenCV basic" non défini (HoughCircles? Contours? ML Kit modèle?)
+2. **Complexité vs Valeur:** 6h dev + intégration package externe pour anti-triche basique
+3. **MVP Scope:** Flow MVP fonctionne sans (3.4 capture → 3.9 sélection taille → 3.6 enregistrement)
+4. **Fallback existe:** AC #4 "Oui je confirme" permet bypass = détection devient cosmétique
+
+**Flow MVP sans Story 3.5:**
+- User tape "Je bois" (3.8)
+- Permissions caméra (3.10)
+- Interface caméra (3.3)
+- Capture + sauvegarde photo (3.4)
+- **→ Direct à sélection taille verre (3.9)** (pas de détection)
+- Enregistrement hydration (3.6)
+- Feedback avatar (3.7)
+
+**Pour V2 (si nécessaire):**
+- Créer spike technique 2h: Tester ML Kit Object Detection API + Google Vision API
+- Si concluant: Implémenter avec specs précises algorithme
+- Si non concluant: Abandonner feature
+
+## Technical Notes (V2 si implémentée)
 
 - Location: `lib/domain/usecases/validate_photo_usecase.dart`
-- Options: OpenCV or Google ML Kit for detection
+- Options: OpenCV or Google ML Kit for detection (TBD après spike)
 - Fallback: Always allow validation if detection fails
 - Tests: `test/domain/usecases/validate_photo_usecase_test.dart`
-- **OPTIONAL**: Can be deferred to V2
 
 ---
 

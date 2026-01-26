@@ -165,13 +165,15 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   /// Map database row (snake_case) to JSON (camelCase)
   Map<String, dynamic> _mapDbRowToJson(Map<String, dynamic> dbRow) {
     return {
-      'userId': dbRow['user_id'], // Note: Use user_id column, not id (which is singleton key)
+      'userId':
+          dbRow['user_id'], // Note: Use user_id column, not id (which is singleton key)
       'weight': dbRow['weight'],
       'age': dbRow['age'],
       'gender': dbRow['gender'],
       'activityLevel': dbRow['activity_level'],
-      'locationPermissionGranted':
-          dbRow['location_permission_granted'] == 1 ? true : false,
+      'locationPermissionGranted': dbRow['location_permission_granted'] == 1
+          ? true
+          : false,
       'dailyGoalLiters': dbRow['daily_goal_liters'],
       'createdAt': dbRow['created_at'],
       'updatedAt': dbRow['updated_at'],
@@ -185,10 +187,13 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       'user_id': json['userId'], // Store actual user UUID
       'weight': json['weight'],
       'age': json['age'],
-      'gender': json['gender'], // Note: JSON key is 'gender', not 'genderString'
-      'activity_level': json['activityLevel'], // Note: JSON key is 'activityLevel', not 'activityLevelString'
-      'location_permission_granted':
-          json['locationPermissionGranted'] == true ? 1 : 0,
+      'gender':
+          json['gender'], // Note: JSON key is 'gender', not 'genderString'
+      'activity_level':
+          json['activityLevel'], // Note: JSON key is 'activityLevel', not 'activityLevelString'
+      'location_permission_granted': json['locationPermissionGranted'] == true
+          ? 1
+          : 0,
       'daily_goal_liters': json['dailyGoalLiters'],
       'created_at': json['createdAt'],
       'updated_at': json['updatedAt'],

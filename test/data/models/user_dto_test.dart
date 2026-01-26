@@ -82,7 +82,10 @@ void main() {
       test('should serialize to valid JSON', () {
         final result = validDto.toJson();
 
-        expect(result['userId'], equals('550e8400-e29b-41d4-a716-446655440000'));
+        expect(
+          result['userId'],
+          equals('550e8400-e29b-41d4-a716-446655440000'),
+        );
         expect(result['weight'], equals(75.0));
         expect(result['age'], equals(30));
         expect(result['gender'], equals('male'));
@@ -101,8 +104,10 @@ void main() {
         expect(deserialized.weight, equals(validDto.weight));
         expect(deserialized.age, equals(validDto.age));
         expect(deserialized.genderString, equals(validDto.genderString));
-        expect(deserialized.activityLevelString,
-            equals(validDto.activityLevelString));
+        expect(
+          deserialized.activityLevelString,
+          equals(validDto.activityLevelString),
+        );
         expect(deserialized.dailyGoalLiters, equals(validDto.dailyGoalLiters));
       });
     });
@@ -165,8 +170,9 @@ void main() {
       });
 
       test('should throw ArgumentError for invalid activity level', () {
-        final invalidDto =
-            validDto.copyWith(activityLevelString: 'invalidLevel');
+        final invalidDto = validDto.copyWith(
+          activityLevelString: 'invalidLevel',
+        );
 
         expect(() => invalidDto.toEntity(), throwsArgumentError);
       });
@@ -180,8 +186,10 @@ void main() {
         expect(entity.age, equals(validEntity.age));
         expect(entity.gender, equals(validEntity.gender));
         expect(entity.activityLevel, equals(validEntity.activityLevel));
-        expect(entity.dailyGoal.targetLiters,
-            equals(validEntity.dailyGoal.targetLiters));
+        expect(
+          entity.dailyGoal.targetLiters,
+          equals(validEntity.dailyGoal.targetLiters),
+        );
       });
     });
 
@@ -269,7 +277,10 @@ void main() {
         expect(result.weight, equals(validDto.weight));
         expect(result.age, equals(validDto.age));
         expect(result.genderString, equals(validDto.genderString));
-        expect(result.activityLevelString, equals(validDto.activityLevelString));
+        expect(
+          result.activityLevelString,
+          equals(validDto.activityLevelString),
+        );
         expect(result.dailyGoalLiters, equals(validDto.dailyGoalLiters));
       });
     });

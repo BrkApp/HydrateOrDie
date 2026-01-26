@@ -46,10 +46,7 @@ void main() {
 
       test('should return ghost emoji for any personality in ghost state', () {
         for (final personality in AvatarPersonality.values) {
-          final result = provider.getEmojiAsset(
-            personality,
-            AvatarState.ghost,
-          );
+          final result = provider.getEmojiAsset(personality, AvatarState.ghost);
           expect(result, '👻', reason: 'Ghost state for ${personality.name}');
         }
       });
@@ -148,79 +145,82 @@ void main() {
     });
 
     group('Edge cases', () {
-      test('getEmojiAsset should handle all personality/state combinations', () {
-        // Test authoritarianMother
-        expect(
-          provider.getEmojiAsset(
-            AvatarPersonality.authoritarianMother,
-            AvatarState.fresh,
-          ),
-          '👩😊',
-        );
-        expect(
-          provider.getEmojiAsset(
-            AvatarPersonality.authoritarianMother,
-            AvatarState.tired,
-          ),
-          '👩😐',
-        );
-        expect(
-          provider.getEmojiAsset(
-            AvatarPersonality.authoritarianMother,
-            AvatarState.dehydrated,
-          ),
-          '👩😟',
-        );
-        expect(
-          provider.getEmojiAsset(
-            AvatarPersonality.authoritarianMother,
-            AvatarState.dead,
-          ),
-          '👩💀',
-        );
+      test(
+        'getEmojiAsset should handle all personality/state combinations',
+        () {
+          // Test authoritarianMother
+          expect(
+            provider.getEmojiAsset(
+              AvatarPersonality.authoritarianMother,
+              AvatarState.fresh,
+            ),
+            '👩😊',
+          );
+          expect(
+            provider.getEmojiAsset(
+              AvatarPersonality.authoritarianMother,
+              AvatarState.tired,
+            ),
+            '👩😐',
+          );
+          expect(
+            provider.getEmojiAsset(
+              AvatarPersonality.authoritarianMother,
+              AvatarState.dehydrated,
+            ),
+            '👩😟',
+          );
+          expect(
+            provider.getEmojiAsset(
+              AvatarPersonality.authoritarianMother,
+              AvatarState.dead,
+            ),
+            '👩💀',
+          );
 
-        // Test sportsCoach
-        expect(
-          provider.getEmojiAsset(
-            AvatarPersonality.sportsCoach,
-            AvatarState.fresh,
-          ),
-          '💪😊',
-        );
-        expect(
-          provider.getEmojiAsset(
-            AvatarPersonality.sportsCoach,
-            AvatarState.dehydrated,
-          ),
-          '💪😟',
-        );
+          // Test sportsCoach
+          expect(
+            provider.getEmojiAsset(
+              AvatarPersonality.sportsCoach,
+              AvatarState.fresh,
+            ),
+            '💪😊',
+          );
+          expect(
+            provider.getEmojiAsset(
+              AvatarPersonality.sportsCoach,
+              AvatarState.dehydrated,
+            ),
+            '💪😟',
+          );
 
-        // Test doctor
-        expect(
-          provider.getEmojiAsset(AvatarPersonality.doctor, AvatarState.fresh),
-          '🧑‍⚕️😊',
-        );
-        expect(
-          provider.getEmojiAsset(AvatarPersonality.doctor, AvatarState.dead),
-          '🧑‍⚕️💀',
-        );
+          // Test doctor
+          expect(
+            provider.getEmojiAsset(AvatarPersonality.doctor, AvatarState.fresh),
+            '🧑‍⚕️😊',
+          );
+          expect(
+            provider.getEmojiAsset(AvatarPersonality.doctor, AvatarState.dead),
+            '🧑‍⚕️💀',
+          );
 
-        // Test sarcasticFriend
-        expect(
-          provider.getEmojiAsset(
-            AvatarPersonality.sarcasticFriend,
-            AvatarState.fresh,
-          ),
-          '🤝😊',
-        );
-        expect(
-          provider.getEmojiAsset(
-            AvatarPersonality.sarcasticFriend,
-            AvatarState.dehydrated,
-          ),
-          '🤝😟',
-        );
-      });
+          // Test sarcasticFriend
+          expect(
+            provider.getEmojiAsset(
+              AvatarPersonality.sarcasticFriend,
+              AvatarState.fresh,
+            ),
+            '🤝😊',
+          );
+          expect(
+            provider.getEmojiAsset(
+              AvatarPersonality.sarcasticFriend,
+              AvatarState.dehydrated,
+            ),
+            '🤝😟',
+          );
+        },
+      );
 
       test('should have unique emojis for each personality (except ghost)', () {
         final emojis = <String>{};
@@ -228,8 +228,7 @@ void main() {
         for (final personality in AvatarPersonality.values) {
           for (final state in AvatarState.values) {
             if (state != AvatarState.ghost) {
-              final emoji =
-                  provider.getEmojiAsset(personality, state);
+              final emoji = provider.getEmojiAsset(personality, state);
               expect(
                 emojis.contains(emoji),
                 false,
