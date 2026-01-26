@@ -3,18 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hydrate_or_die/presentation/providers/onboarding_provider.dart';
 import 'package:hydrate_or_die/presentation/screens/onboarding/onboarding_flow_screen.dart';
-import 'package:hydrate_or_die/domain/entities/gender.dart';
-import 'package:hydrate_or_die/domain/entities/activity_level.dart';
 
 void main() {
   group('OnboardingFlowScreen', () {
     testWidgets('should create OnboardingFlowScreen widget', (tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
-        ),
+        const ProviderScope(child: MaterialApp(home: OnboardingFlowScreen())),
       );
 
       // Should create the widget without errors
@@ -23,28 +17,19 @@ void main() {
 
     testWidgets('should display step counter', (tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
-        ),
+        const ProviderScope(child: MaterialApp(home: OnboardingFlowScreen())),
       );
 
       // Wait for initial render
       await tester.pump();
 
-      // Should show step counter
-      expect(find.textContaining('Étape'), findsOneWidget);
-      expect(find.textContaining('/6'), findsOneWidget);
+      // Should show step counter in flow format (not the individual screen format)
+      expect(find.text('Étape 1/7'), findsOneWidget);
     });
 
-    testWidgets('should have PageView with 6 screens', (tester) async {
+    testWidgets('should have PageView with 7 screens', (tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
-        ),
+        const ProviderScope(child: MaterialApp(home: OnboardingFlowScreen())),
       );
 
       await tester.pump();
@@ -55,17 +40,13 @@ void main() {
 
     testWidgets('should have Next button', (tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
-        ),
+        const ProviderScope(child: MaterialApp(home: OnboardingFlowScreen())),
       );
 
       await tester.pump();
 
-      // Should find Next button
-      expect(find.widgetWithText(ElevatedButton, 'Suivant'), findsWidgets);
+      // Should find Next button (only one button in flow)
+      expect(find.widgetWithText(ElevatedButton, 'Suivant'), findsOneWidget);
     });
 
     testWidgets('should reset onboarding state on init', (tester) async {
@@ -79,9 +60,7 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
+          child: const MaterialApp(home: OnboardingFlowScreen()),
         ),
       );
 
@@ -96,16 +75,12 @@ void main() {
 
     testWidgets('should show progress indicator', (tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
-        ),
+        const ProviderScope(child: MaterialApp(home: OnboardingFlowScreen())),
       );
 
       await tester.pump();
 
-      // Should show progress dots (6 containers in the progress bar)
+      // Should show progress dots (7 containers in the progress bar)
       final progressContainers = find.descendant(
         of: find.byType(AppBar),
         matching: find.byType(Container),
@@ -117,11 +92,7 @@ void main() {
 
     testWidgets('should not show Back button on first step', (tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
-        ),
+        const ProviderScope(child: MaterialApp(home: OnboardingFlowScreen())),
       );
 
       await tester.pump();
@@ -131,49 +102,54 @@ void main() {
       expect(appBar.leading, isNull);
     });
 
-    testWidgets('should navigate to next page when data is valid', (tester) async {
+    testWidgets('should navigate to next page when data is valid', (
+      tester,
+    ) async {
       final container = ProviderContainer();
       addTearDown(container.dispose);
-
-      // Pre-fill weight to make first step valid
-      container.read(onboardingProvider.notifier).updateWeight(70.0);
 
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
+          child: const MaterialApp(home: OnboardingFlowScreen()),
         ),
       );
 
-      await tester.pump();
+      // Wait for postFrameCallback to complete (state reset)
+      await tester.pumpAndSettle();
 
       // Should start at step 1
-      expect(find.text('Étape 1/6'), findsOneWidget);
+      expect(find.text('Étape 1/7'), findsOneWidget);
+
+      // Enter weight to make first step valid
+      final textField = find.byType(TextField);
+      await tester.enterText(textField, '70');
+      await tester.pumpAndSettle();
 
       // Find and tap Next button
       final nextButton = find.widgetWithText(ElevatedButton, 'Suivant');
       expect(nextButton, findsOneWidget);
 
       final button = tester.widget<ElevatedButton>(nextButton);
-      expect(button.onPressed, isNotNull, reason: 'Next button should be enabled when weight is set');
+      expect(
+        button.onPressed,
+        isNotNull,
+        reason: 'Next button should be enabled when weight is set',
+      );
 
       // Tap Next
       await tester.tap(nextButton);
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
       // Should now be at step 2
-      expect(find.text('Étape 2/6'), findsOneWidget);
+      expect(find.text('Étape 2/7'), findsOneWidget);
     });
 
-    testWidgets('Next button should be disabled when step data is invalid', (tester) async {
+    testWidgets('Next button should be disabled when step data is invalid', (
+      tester,
+    ) async {
       await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
-        ),
+        const ProviderScope(child: MaterialApp(home: OnboardingFlowScreen())),
       );
 
       await tester.pump();
@@ -184,26 +160,32 @@ void main() {
 
       // Button should be disabled (no weight entered yet)
       final button = tester.widget<ElevatedButton>(nextButton);
-      expect(button.onPressed, isNull, reason: 'Next button should be disabled when no weight is entered');
+      expect(
+        button.onPressed,
+        isNull,
+        reason: 'Next button should be disabled when no weight is entered',
+      );
     });
 
-    testWidgets('should show Back button after navigating forward', (tester) async {
+    testWidgets('should show Back button after navigating forward', (
+      tester,
+    ) async {
       final container = ProviderContainer();
       addTearDown(container.dispose);
-
-      // Pre-fill weight
-      container.read(onboardingProvider.notifier).updateWeight(70.0);
 
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
+          child: const MaterialApp(home: OnboardingFlowScreen()),
         ),
       );
 
-      await tester.pump();
+      await tester.pumpAndSettle();
+
+      // Enter weight to make first step valid
+      final textField = find.byType(TextField);
+      await tester.enterText(textField, '70');
+      await tester.pumpAndSettle();
 
       // Navigate to step 2
       await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
@@ -213,68 +195,83 @@ void main() {
       expect(find.byIcon(Icons.arrow_back), findsOneWidget);
     });
 
-    testWidgets('should navigate back when Back button is tapped', (tester) async {
+    testWidgets('should navigate back when Back button is tapped', (
+      tester,
+    ) async {
       final container = ProviderContainer();
       addTearDown(container.dispose);
-
-      // Pre-fill weight and age
-      container.read(onboardingProvider.notifier).updateWeight(70.0);
-      container.read(onboardingProvider.notifier).updateAge(30);
 
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
+          child: const MaterialApp(home: OnboardingFlowScreen()),
         ),
       );
 
-      await tester.pump();
+      await tester.pumpAndSettle();
+
+      // Enter weight to make first step valid
+      final weightField = find.byType(TextField);
+      await tester.enterText(weightField, '70');
+      await tester.pumpAndSettle();
 
       // Navigate to step 2
       await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
-      expect(find.text('Étape 2/6'), findsOneWidget);
+      expect(find.text('Étape 2/7'), findsOneWidget);
 
       // Tap Back button
       await tester.tap(find.byIcon(Icons.arrow_back));
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
       // Should be back at step 1
-      expect(find.text('Étape 1/6'), findsOneWidget);
+      expect(find.text('Étape 1/7'), findsOneWidget);
     });
 
     testWidgets('should enable Skip button on Location step', (tester) async {
       final container = ProviderContainer();
       addTearDown(container.dispose);
 
-      // Pre-fill all required fields up to step 4
-      container.read(onboardingProvider.notifier).updateWeight(70.0);
-      container.read(onboardingProvider.notifier).updateAge(30);
-      container.read(onboardingProvider.notifier).updateGender(Gender.male);
-      container.read(onboardingProvider.notifier).updateActivityLevel(ActivityLevel.moderate);
+      // Set larger screen size to avoid overflow during multi-step navigation
+      await tester.binding.setSurfaceSize(const Size(800, 1200));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
 
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            home: OnboardingFlowScreen(),
-          ),
+          child: const MaterialApp(home: OnboardingFlowScreen()),
         ),
       );
 
-      await tester.pump();
+      await tester.pumpAndSettle();
 
-      // Navigate through 4 steps to reach Location (step 5)
-      for (int i = 0; i < 4; i++) {
-        await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
-        await tester.pumpAndSettle(const Duration(milliseconds: 500));
-      }
+      // Step 1: Enter weight
+      await tester.enterText(find.byType(TextField), '70');
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+      // Step 2: Enter age
+      await tester.enterText(find.byType(TextField), '30');
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+      // Step 3: Select gender
+      await tester.tap(find.text('Homme'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+      // Step 4: Select activity level
+      await tester.tap(find.text('Modéré'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Suivant'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
       // Should be at step 5 (Location)
-      expect(find.text('Étape 5/6'), findsOneWidget);
+      expect(find.text('Étape 6/7'), findsOneWidget);
 
       // Should show Skip button
       expect(find.text('Passer cette étape'), findsOneWidget);

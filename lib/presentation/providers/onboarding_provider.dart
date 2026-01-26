@@ -1,22 +1,29 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hydrate_or_die/domain/entities/activity_level.dart';
+import 'package:hydrate_or_die/domain/entities/avatar_personality.dart';
 import 'package:hydrate_or_die/domain/entities/gender.dart';
 import 'package:hydrate_or_die/presentation/providers/onboarding_state.dart';
 
 /// Provider for Onboarding flow state management
 ///
 /// Manages the multi-step onboarding process where users input:
-/// - Step 1: Weight (30-300kg)
-/// - Step 2: Age (13-100 years)
-/// - Step 3: Gender (male/female/other)
-/// - Step 4: Activity Level (sedentary/light/moderate/veryActive/extremelyActive)
-/// - Step 5: Location (optional)
+/// - Step 1: Avatar Selection
+/// - Step 2: Weight (30-300kg)
+/// - Step 3: Age (13-100 years)
+/// - Step 4: Gender (male/female/other)
+/// - Step 5: Activity Level (sedentary/light/moderate/veryActive/extremelyActive)
+/// - Step 6: Location (optional)
 ///
 /// State persists across steps and is saved at the end of the flow.
 class OnboardingNotifier extends StateNotifier<OnboardingState> {
   OnboardingNotifier() : super(const OnboardingState());
 
-  /// Update weight (Step 1)
+  /// Update selected avatar (Step 1)
+  void updateSelectedAvatar(AvatarPersonality personality) {
+    state = state.copyWith(selectedAvatar: personality, errorMessage: null);
+  }
+
+  /// Update weight (Step 2)
   ///
   /// [weightInKg] must be between 30 and 300 kg
   void updateWeight(double weightInKg) {
@@ -27,10 +34,7 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
       return;
     }
 
-    state = state.copyWith(
-      weight: weightInKg,
-      errorMessage: null,
-    );
+    state = state.copyWith(weight: weightInKg, errorMessage: null);
   }
 
   /// Update age (Step 2)
@@ -44,31 +48,23 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
       return;
     }
 
-    state = state.copyWith(
-      age: age,
-      errorMessage: null,
-    );
+    state = state.copyWith(age: age, errorMessage: null);
   }
 
   /// Update gender (Step 3)
   void updateGender(Gender gender) {
-    state = state.copyWith(
-      gender: gender,
-      errorMessage: null,
-    );
+    state = state.copyWith(gender: gender, errorMessage: null);
   }
 
   /// Update activity level (Step 4)
   void updateActivityLevel(ActivityLevel activityLevel) {
-    state = state.copyWith(
-      activityLevel: activityLevel,
-      errorMessage: null,
-    );
+    state = state.copyWith(activityLevel: activityLevel, errorMessage: null);
   }
 
-  /// Update location (Step 5 - optional)
+  /// Update location (Step 6 - optional)
   void updateLocation(String? location) {
     state = OnboardingState(
+      selectedAvatar: state.selectedAvatar,
       weight: state.weight,
       age: state.age,
       gender: state.gender,
@@ -83,25 +79,21 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
 
   /// Move to next step
   void nextStep() {
-    if (state.currentStep < 5) {
-      state = state.copyWith(
-        currentStep: state.currentStep + 1,
-      );
+    if (state.currentStep < 6) {
+      state = state.copyWith(currentStep: state.currentStep + 1);
     }
   }
 
   /// Move to previous step
   void previousStep() {
     if (state.currentStep > 1) {
-      state = state.copyWith(
-        currentStep: state.currentStep - 1,
-      );
+      state = state.copyWith(currentStep: state.currentStep - 1);
     }
   }
 
   /// Skip current step (only for optional steps like location)
   void skipStep() {
-    if (state.currentStep == 5) {
+    if (state.currentStep == 6) {
       // Location is optional, can be skipped
       nextStep();
     }
@@ -119,10 +111,7 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
       return false;
     }
 
-    state = state.copyWith(
-      isComplete: true,
-      errorMessage: null,
-    );
+    state = state.copyWith(isComplete: true, errorMessage: null);
 
     return true;
   }
@@ -135,6 +124,7 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
   /// Clear error message
   void clearError() {
     state = OnboardingState(
+      selectedAvatar: state.selectedAvatar,
       weight: state.weight,
       age: state.age,
       gender: state.gender,
@@ -151,5 +141,5 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
 /// Riverpod provider for OnboardingNotifier
 final onboardingProvider =
     StateNotifierProvider<OnboardingNotifier, OnboardingState>((ref) {
-  return OnboardingNotifier();
-});
+      return OnboardingNotifier();
+    });
